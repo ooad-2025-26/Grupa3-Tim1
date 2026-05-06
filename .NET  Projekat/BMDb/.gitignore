@@ -1,0 +1,17 @@
+# --- Korisnički fajlovi i lozinke ---
+appsettings.json
+appsettings.Development.json
+appsettings.Production.json
+
+# --- Visual Studio fajlovi ---
+.vs/
+[Bb]in/
+[Oo]bj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# --- Web resursi ---
+lib/
+node_modules/
