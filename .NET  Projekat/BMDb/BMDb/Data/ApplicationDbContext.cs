@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BMDb.Data
 {
-    public class ApplicationDbContext : IdentityDbContext<Osoba, IdentityRole<int>, int>
+    public class ApplicationDbContext : IdentityDbContext<Osoba>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)

@@ -1,7 +1,7 @@
 ﻿using BMDb.Models;
 using Microsoft.AspNetCore.Identity;
 
-public class Osoba : IdentityUser<int>
+public class Osoba : IdentityUser
 {
     public string Nadimak { get; set; }
     public string Ime { get; set; }
