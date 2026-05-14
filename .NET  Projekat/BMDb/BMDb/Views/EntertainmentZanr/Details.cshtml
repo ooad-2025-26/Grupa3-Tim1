@@ -1,0 +1,30 @@
+﻿@model BMDb.Models.EntertainmentZanr
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>EntertainmentZanr</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.EntertainmentId)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.EntertainmentId)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ZanrId)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ZanrId)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.IDVeze">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

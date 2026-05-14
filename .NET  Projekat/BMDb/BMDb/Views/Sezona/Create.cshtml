@@ -1,0 +1,53 @@
+﻿@model BMDb.Models.Sezona
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Sezona</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="IdSerije" class="control-label"></label>
+                <input asp-for="IdSerije" class="form-control" />
+                <span asp-validation-for="IdSerije" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RedniBrojSezone" class="control-label"></label>
+                <input asp-for="RedniBrojSezone" class="form-control" />
+                <span asp-validation-for="RedniBrojSezone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BrojEpizoda" class="control-label"></label>
+                <input asp-for="BrojEpizoda" class="form-control" />
+                <span asp-validation-for="BrojEpizoda" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DatumPremijere" class="control-label"></label>
+                <input asp-for="DatumPremijere" class="form-control" />
+                <span asp-validation-for="DatumPremijere" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PosterSezone" class="control-label"></label>
+                <input asp-for="PosterSezone" class="form-control" />
+                <span asp-validation-for="PosterSezone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

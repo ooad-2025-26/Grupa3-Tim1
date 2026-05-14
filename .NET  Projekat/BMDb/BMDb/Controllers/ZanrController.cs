@@ -22,7 +22,7 @@ namespace BMDb.Controllers
         // GET: Zanr
         public async Task<IActionResult> Index()
         {
-            return View(await _context.EntertainmentZanr.ToListAsync());
+            return View(await _context.Zanr.ToListAsync());
         }
 
         // GET: Zanr/Details/5
@@ -33,14 +33,14 @@ namespace BMDb.Controllers
                 return NotFound();
             }
 
-            var entertainmentZanr = await _context.EntertainmentZanr
-                .FirstOrDefaultAsync(m => m.IDVeze == id);
-            if (entertainmentZanr == null)
+            var zanr = await _context.Zanr
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (zanr == null)
             {
                 return NotFound();
             }
 
-            return View(entertainmentZanr);
+            return View(zanr);
         }
 
         // GET: Zanr/Create
@@ -54,15 +54,15 @@ namespace BMDb.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IDVeze,EntertainmentId,ZanrId")] EntertainmentZanr entertainmentZanr)
+        public async Task<IActionResult> Create([Bind("Id,Naziv")] Zanr zanr)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(entertainmentZanr);
+                _context.Add(zanr);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(entertainmentZanr);
+            return View(zanr);
         }
 
         // GET: Zanr/Edit/5
@@ -73,12 +73,12 @@ namespace BMDb.Controllers
                 return NotFound();
             }
 
-            var entertainmentZanr = await _context.EntertainmentZanr.FindAsync(id);
-            if (entertainmentZanr == null)
+            var zanr = await _context.Zanr.FindAsync(id);
+            if (zanr == null)
             {
                 return NotFound();
             }
-            return View(entertainmentZanr);
+            return View(zanr);
         }
 
         // POST: Zanr/Edit/5
@@ -86,9 +86,9 @@ namespace BMDb.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IDVeze,EntertainmentId,ZanrId")] EntertainmentZanr entertainmentZanr)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Naziv")] Zanr zanr)
         {
-            if (id != entertainmentZanr.IDVeze)
+            if (id != zanr.Id)
             {
                 return NotFound();
             }
@@ -97,12 +97,12 @@ namespace BMDb.Controllers
             {
                 try
                 {
-                    _context.Update(entertainmentZanr);
+                    _context.Update(zanr);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!EntertainmentZanrExists(entertainmentZanr.IDVeze))
+                    if (!ZanrExists(zanr.Id))
                     {
                         return NotFound();
                     }
@@ -113,7 +113,7 @@ namespace BMDb.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(entertainmentZanr);
+            return View(zanr);
         }
 
         // GET: Zanr/Delete/5
@@ -124,14 +124,14 @@ namespace BMDb.Controllers
                 return NotFound();
             }
 
-            var entertainmentZanr = await _context.EntertainmentZanr
-                .FirstOrDefaultAsync(m => m.IDVeze == id);
-            if (entertainmentZanr == null)
+            var zanr = await _context.Zanr
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (zanr == null)
             {
                 return NotFound();
             }
 
-            return View(entertainmentZanr);
+            return View(zanr);
         }
 
         // POST: Zanr/Delete/5
@@ -139,19 +139,19 @@ namespace BMDb.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var entertainmentZanr = await _context.EntertainmentZanr.FindAsync(id);
-            if (entertainmentZanr != null)
+            var zanr = await _context.Zanr.FindAsync(id);
+            if (zanr != null)
             {
-                _context.EntertainmentZanr.Remove(entertainmentZanr);
+                _context.Zanr.Remove(zanr);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool EntertainmentZanrExists(int id)
+        private bool ZanrExists(int id)
         {
-            return _context.EntertainmentZanr.Any(e => e.IDVeze == id);
+            return _context.Zanr.Any(e => e.Id == id);
         }
     }
 }
