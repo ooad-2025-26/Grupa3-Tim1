@@ -1,0 +1,101 @@
+﻿@{
+    Layout = "_AdminLayout";
+}
+
+@section StranicaStilovi {
+    <style>
+        .admin-section {
+            padding: 50px 0;
+            background: #020d18;
+            color: white;
+            min-height: 80vh;
+        }
+
+        .admin-tabs {
+            margin-bottom: 30px;
+            border-bottom: 1px solid #1c3d5d;
+        }
+
+            .admin-tabs a {
+                color: #abb7c4;
+                padding: 10px 20px;
+                display: inline-block;
+                font-weight: bold;
+            }
+
+                .admin-tabs a.active {
+                    color: #fbb124;
+                    border-bottom: 2px solid #fbb124;
+                }
+
+        .table-custom {
+            width: 100%;
+            border-collapse: collapse;
+            background: #0b1a2a;
+        }
+
+            .table-custom th, .table-custom td {
+                padding: 15px;
+                border: 1px solid #1c3d5d;
+                text-align: left;
+            }
+
+        .action-btn {
+            padding: 5px 12px;
+            border-radius: 3px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-del {
+            background: #dd163b;
+            color: white;
+        }
+    </style>
+}
+
+
+    <section class="admin-section">
+        <div class="container">
+            <div class="admin-tabs">
+                <a href="upravljanje_korisnicima.html" class="active">KORISNICI</a>
+
+            </div>
+
+            <h3>Lista korisnika sistema</h3>
+        <div class="top-search">
+
+            <input type="text" placeholder="Pretražite filmove i TV serije zelite promijeniti">
+        </div>
+            <table class="table-custom">
+                <thead>
+                    <tr>
+                        <th>Ime i prezime</th>
+                        <th>Email</th>
+                        <th>Uloga</th>
+                        <th>Akcije</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Hugh Jackman</td>
+                        <td>hugh@bmdb.com</td>
+                        <td>Admin</td>
+                        <td><button class="action-btn btn-del">Ukloni</button></td>
+                    </tr>
+                    <tr>
+                        <td>Mujo Mujić</td>
+                        <td>mmujic@bmdb.com</td>
+                        <td>Moderator</td>
+                        <td><button class="action-btn btn-del">Ukloni</button></td>
+                    </tr>
+                    <tr>
+                        <td>Hamo Hamić</td>
+                        <td>hhamic@bmdb.com</td>
+                        <td>Korisnik</td>
+                        <td><button class="action-btn btn-del">Ukloni</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>

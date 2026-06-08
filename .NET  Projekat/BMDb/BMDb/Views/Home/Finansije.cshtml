@@ -1,0 +1,150 @@
+﻿
+@{
+    Layout = "_AdminLayout";
+}
+
+
+@section StranicaStilovi {
+    <style>
+        .admin-section {
+            padding: 50px 0;
+            background: #020d18;
+            color: white;
+            min-height: 70vh;
+        }
+
+
+        .finance-cards {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .finance-card {
+            background: #0b1a2a;
+            border: 1px solid #1c3d5d;
+            padding: 20px;
+            flex: 1;
+            min-width: 200px;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+            .finance-card h4 {
+                color: #abb7c4;
+                font-size: 14px;
+                text-transform: uppercase;
+                margin-bottom: 10px;
+            }
+
+            .finance-card .amount {
+                color: #fbb124;
+                font-size: 24px;
+                font-weight: bold;
+            }
+
+
+        .table-custom {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: #0b1a2a;
+        }
+
+            .table-custom th, .table-custom td {
+                padding: 15px;
+                border: 1px solid #1c3d5d;
+                text-align: left;
+            }
+
+            .table-custom th {
+                background: #06121e;
+                color: #fbb124;
+            }
+
+        .trending-up {
+            color: #2ecc71;
+            font-weight: bold;
+        }
+    </style>
+    }
+
+    <div class="hero common-hero">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="hero-ct">
+                        <h1>Pregled primanja i reklama</h1>
+                        <ul class="breadcumb">
+                            <li><a href="admin.html">Admin</a></li>
+                            <li> <span class="ion-ios-arrow-right"></span> Finansije</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="admin-section">
+        <div class="container">
+            <div class="finance-cards">
+                <div class="finance-card">
+                    <h4>Danas</h4>
+                    <div class="amount">145.50 KM</div>
+                </div>
+                <div class="finance-card">
+                    <h4>Ova sedmica</h4>
+                    <div class="amount">1,020.00 KM</div>
+                </div>
+                <div class="finance-card">
+                    <h4>Ovaj mjesec</h4>
+                    <div class="amount">4,350.00 KM</div>
+                </div>
+                <div class="finance-card">
+                    <h4>Ova godina</h4>
+                    <div class="amount">52,210.00 KM</div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <h3>Detaljan izvještaj po reklamama</h3>
+                    <table class="table-custom">
+                        <thead>
+                            <tr>
+                                <th>Naziv reklame / Kampanja</th>
+                                <th>Dnevno</th>
+                                <th>Sedmično</th>
+                                <th>Mjesečno</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Google AdSense - Sidebar</strong></td>
+                                <td>45.20 KM</td>
+                                <td>315.00 KM</td>
+                                <td>1,260.00 KM</td>
+                                <td class="trending-up">Aktivan</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Coca-Cola Video Pre-roll</strong></td>
+                                <td>80.00 KM</td>
+                                <td>560.00 KM</td>
+                                <td>2,400.00 KM</td>
+                                <td class="trending-up">Aktivan</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Banners - Movie Page</strong></td>
+                                <td>20.30 KM</td>
+                                <td>145.00 KM</td>
+                                <td>690.00 KM</td>
+                                <td class="trending-up">Aktivan</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>

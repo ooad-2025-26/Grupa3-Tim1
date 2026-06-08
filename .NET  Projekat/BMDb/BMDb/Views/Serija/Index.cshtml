@@ -1,101 +1,316 @@
-﻿@model IEnumerable<BMDb.Models.Serija>
+﻿
+    <div class="hero common-hero">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="hero-ct">
+                        <h1> TV serije </h1>
+                        <ul class="breadcumb">
+                            <li class="active"><a href="#">Početna</a></li>
+                            <li> <span class="ion-ios-arrow-right"></span> TV Serije</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="page-single">
+        <div class="container">
+            <div class="row ipad-width">
+                <div class="col-md-8 col-sm-12 col-xs-12">
+                    <div class="topbar-filter">
+                        <p>Pronađeno <span>1,608 TV serija </span> ukupno</p>
+                        <label>Poredaj po:</label>
+                        <select>
+                            <option value="rating">Ocjena (opadajuće)</option>
+                            <option value="rating">Ocjena (rastuće)</option>
+                            <option value="date">Datum izlaska (opadajuće)</option>
+                            <option value="date">Datum izlaska (rastuće)</option>
+                        </select>
+                    </div>
+                    <div class="flex-wrap-movielist">
+                        <div class="movie-item-style-2 movie-item-style-1">
+                            <img src="images/uploads/friends.jpg" alt="">
+                            <div class="hvr-inner">
+                                <a href="seriessingle.html">Vidi više<i class="ion-android-arrow-dropright"></i> </a>
+                            </div>
+                            <div class="mv-item-infor">
+                                <h6><a href="#">Prijatelji</a></h6>
+                                <p class="rate"><i class="ion-android-star"></i><span>8.1</span> /10</p>
+                            </div>
+                        </div>
+                        <div class="movie-item-style-2 movie-item-style-1">
+                            <img src="images/uploads/mandalkirian.jpg" alt="">
+                            <div class="hvr-inner">
+                                <a href="seriessingle.html"> Vidi više <i class="ion-android-arrow-dropright"></i> </a>
+                            </div>
+                            <div class="mv-item-infor">
+                                <h6><a href="#">Mandalorac</a></h6>
+                                <p class="rate"><i class="ion-android-star"></i><span>7.8</span> /10</p>
+                            </div>
+                        </div>
 
-@{
-    ViewData["Title"] = "Index";
-}
 
-<h1>Index</h1>
+                        <div class="movie-item-style-2 movie-item-style-1">
+                            <img src="images/uploads/bcs.jpg" alt="">
+                            <div class="hvr-inner">
+                                <a href="seriessingle.html"> Vidi više <i class="ion-android-arrow-dropright"></i> </a>
+                            </div>
+                            <div class="mv-item-infor">
+                                <h6><a href="#">Nazovi Saula</a></h6>
+                                <p class="rate"><i class="ion-android-star"></i><span>7.4</span> /10</p>
+                            </div>
+                        </div>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.IDSerije)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.BrojSezona)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.BrojEpizoda)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ZavrsenoEmitovanje)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Naziv)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Opis)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProsjecnaOcjena)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Reditelj)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.GodinaIzlaska)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.YoutubeLink)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Trajanje)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PosterLink)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.IDSerije)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BrojSezona)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BrojEpizoda)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ZavrsenoEmitovanje)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Naziv)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Opis)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProsjecnaOcjena)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Reditelj)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.GodinaIzlaska)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.YoutubeLink)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Trajanje)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PosterLink)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+
+                        <div class="movie-item-style-2 movie-item-style-1">
+                            <img src="images/uploads/pb.jpg" alt="">
+                            <div class="hvr-inner">
+                                <a href="seriessingle.html"> Vidi više <i class="ion-android-arrow-dropright"></i> </a>
+                            </div>
+                            <div class="mv-item-infor">
+                                <h6><a href="#">Peaky Blinders</a></h6>
+                                <p class="rate"><i class="ion-android-star"></i><span>7.4</span> /10</p>
+                            </div>
+                        </div>
+                        <div class="movie-item-style-2 movie-item-style-1">
+                            <img src="images/uploads/lcdp.jpg" alt="">
+                            <div class="hvr-inner">
+                                <a href="seriessingle.html"> Vidi više <i class="ion-android-arrow-dropright"></i> </a>
+                            </div>
+                            <div class="mv-item-infor">
+                                <h6><a href="#">Kuća od papira</a></h6>
+                                <p class="rate"><i class="ion-android-star"></i><span>7.3</span> /10</p>
+                            </div>
+                        </div>
+                        <div class="movie-item-style-2 movie-item-style-1">
+                            <img src="images/uploads/narcos.jpg" alt="">
+                            <div class="hvr-inner">
+                                <a href="seriessingle.html"> Vidi više <i class="ion-android-arrow-dropright"></i> </a>
+                            </div>
+                            <div class="mv-item-infor">
+                                <h6><a href="#">Narkos</a></h6>
+                                <p class="rate"><i class="ion-android-star"></i><span>7.2</span> /10</p>
+                            </div>
+                        </div>
+                        <div class="movie-item-style-2 movie-item-style-1">
+                            <img src="images/uploads/tbbt.jpg" alt="">
+                            <div class="hvr-inner">
+                                <a href="seriessingle.html"> Vidi više <i class="ion-android-arrow-dropright"></i> </a>
+                            </div>
+                            <div class="mv-item-infor">
+                                <h6><a href="#">Teorija velikog praska</a></h6>
+                                <p class="rate"><i class="ion-android-star"></i><span>7.0</span> /10</p>
+                            </div>
+                        </div>
+                        <div class="movie-item-style-2 movie-item-style-1">
+                            <img src="images/uploads/truedetective.jpg" alt="">
+                            <div class="hvr-inner">
+                                <a href="seriessingle.html"> Vidi više <i class="ion-android-arrow-dropright"></i> </a>
+                            </div>
+                            <div class="mv-item-infor">
+                                <h6><a href="#">Pravi detektiv</a></h6>
+                                <p class="rate"><i class="ion-android-star"></i><span>7.4</span> /10</p>
+                            </div>
+                        </div>
+                        <div class="movie-item-style-2 movie-item-style-1">
+                            <img src="images/uploads/dexter.jpg" alt="">
+                            <div class="hvr-inner">
+                                <a href="seriessingle.html"> Vidi više <i class="ion-android-arrow-dropright"></i> </a>
+                            </div>
+                            <div class="mv-item-infor">
+                                <h6><a href="#">Dekster</a></h6>
+                                <p class="rate"><i class="ion-android-star"></i><span>7.4</span> /10</p>
+                            </div>
+                        </div>
+                        <div class="movie-item-style-2 movie-item-style-1">
+                            <img src="images/uploads/chernobyl.jpg" alt="">
+                            <div class="hvr-inner">
+                                <a href="seriessingle.html"> Vidi više <i class="ion-android-arrow-dropright"></i> </a>
+                            </div>
+                            <div class="mv-item-infor">
+                                <h6><a href="#">Černobil</a></h6>
+                                <p class="rate"><i class="ion-android-star"></i><span>7.4</span> /10</p>
+                            </div>
+                        </div>
+                        <div class="movie-item-style-2 movie-item-style-1">
+                            <img src="images/uploads/community.jpg" alt="">
+                            <div class="hvr-inner">
+                                <a href="seriessingle.html"> Vidi više <i class="ion-android-arrow-dropright"></i> </a>
+                            </div>
+                            <div class="mv-item-infor">
+                                <h6><a href="#">Koledž</a></h6>
+                                <p class="rate"><i class="ion-android-star"></i><span>7.4</span> /10</p>
+                            </div>
+                        </div>
+                        <div class="movie-item-style-2 movie-item-style-1">
+                            <img src="images/uploads/dark.jpg" alt="">
+                            <div class="hvr-inner">
+                                <a href="seriessingle.html"> Vidi više <i class="ion-android-arrow-dropright"></i> </a>
+                            </div>
+                            <div class="mv-item-infor">
+                                <h6><a href="#">Tamno</a></h6>
+                                <p class="rate"><i class="ion-android-star"></i><span>7.4</span> /10</p>
+                            </div>
+                        </div>
+                        <div class="movie-item-style-2 movie-item-style-1">
+                            <img src="images/uploads/boys.jpg" alt="">
+                            <div class="hvr-inner">
+                                <a href="seriessingle.html"> Vidi više <i class="ion-android-arrow-dropright"></i> </a>
+                            </div>
+                            <div class="mv-item-infor">
+                                <h6><a href="#">Momci</a></h6>
+                                <p class="rate"><i class="ion-android-star"></i><span>7.4</span> /10</p>
+                            </div>
+                        </div>
+                        <div class="movie-item-style-2 movie-item-style-1">
+                            <img src="images/uploads/invincible.jpg" alt="">
+                            <div class="hvr-inner">
+                                <a href="seriessingle.html"> Vidi više <i class="ion-android-arrow-dropright"></i> </a>
+                            </div>
+                            <div class="mv-item-infor">
+                                <h6><a href="#">Invincible</a></h6>
+                                <p class="rate"><i class="ion-android-star"></i><span>7.4</span> /10</p>
+                            </div>
+                        </div>
+                        <div class="movie-item-style-2 movie-item-style-1">
+                            <img src="images/uploads/bb.jpg" alt="">
+                            <div class="hvr-inner">
+                                <a href="seriessingle.html"> Vidi više <i class="ion-android-arrow-dropright"></i> </a>
+                            </div>
+                            <div class="mv-item-infor">
+                                <h6><a href="#">Na putu ka dolje</a></h6>
+                                <p class="rate"><i class="ion-android-star"></i><span>7.4</span> /10</p>
+                            </div>
+                        </div>
+                        <div class="movie-item-style-2 movie-item-style-1">
+                            <img src="images/uploads/severance.jpg" alt="">
+                            <div class="hvr-inner">
+                                <a href="seriessingle.html"> Vidi više <i class="ion-android-arrow-dropright"></i> </a>
+                            </div>
+                            <div class="mv-item-infor">
+                                <h6><a href="#">Razdvajanje</a></h6>
+                                <p class="rate"><i class="ion-android-star"></i><span>7.4</span> /10</p>
+                            </div>
+                        </div>
+                        <div class="movie-item-style-2 movie-item-style-1">
+                            <img src="images/uploads/daredevil.jpg" alt="">
+                            <div class="hvr-inner">
+                                <a href="seriessingle.html"> Vidi više <i class="ion-android-arrow-dropright"></i> </a>
+                            </div>
+                            <div class="mv-item-infor">
+                                <h6><a href="#">Daredevil: Neustrašivi</a></h6>
+                                <p class="rate"><i class="ion-android-star"></i><span>7.4</span> /10</p>
+                            </div>
+                        </div>
+                        <div class="movie-item-style-2 movie-item-style-1">
+                            <img src="images/uploads/office.jpg" alt="">
+                            <div class="hvr-inner">
+                                <a href="seriessingle.html"> Vidi više <i class="ion-android-arrow-dropright"></i> </a>
+                            </div>
+                            <div class="mv-item-infor">
+                                <h6><a href="#">U uredu</a></h6>
+                                <p class="rate"><i class="ion-android-star"></i><span>7.4</span> /10</p>
+                            </div>
+                        </div>
+                        <div class="movie-item-style-2 movie-item-style-1">
+                            <img src="images/uploads/familyguy.jpg" alt="">
+                            <div class="hvr-inner">
+                                <a href="seriessingle.html"> Vidi više <i class="ion-android-arrow-dropright"></i> </a>
+                            </div>
+                            <div class="mv-item-infor">
+                                <h6><a href="#">Porodični čovjek</a></h6>
+                                <p class="rate"><i class="ion-android-star"></i><span>7.4</span> /10</p>
+                            </div>
+                        </div>
+                        <div class="movie-item-style-2 movie-item-style-1">
+                            <img src="images/uploads/arresteddev.jpg" alt="">
+                            <div class="hvr-inner">
+                                <a href="seriessingle.html"> Vidi više <i class="ion-android-arrow-dropright"></i> </a>
+                            </div>
+                            <div class="mv-item-infor">
+                                <h6><a href="#">Ometeni u razvoju</a></h6>
+                                <p class="rate"><i class="ion-android-star"></i><span>7.4</span> /10</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="topbar-filter">
+                        <label>TV serija po stranici:</label>
+                        <select>
+                            <option value="range">20 TV serija</option>
+                            <option value="saab">10 TV serija</option>
+                        </select>
+
+                        <div class="pagination2">
+                            <span>Stranica 1 od 2:</span>
+                            <a class="active" href="#">1</a>
+                            <a href="#">2</a>
+                            <a href="#">3</a>
+                            <a href="#">...</a>
+                            <a href="#">78</a>
+                            <a href="#">79</a>
+                            <a href="#"><i class="ion-arrow-right-b"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-12 col-xs-12">
+                    <div class="sidebar">
+                        <div class="searh-form">
+                            <h4 class="sb-title">Pretraga TV serija</h4>
+                            <form class="form-style-1" action="#">
+                                <div class="row">
+                                    <div class="col-md-12 form-it">
+                                        <label>Naziv serije</label>
+                                        <input type="text" placeholder="Unesite ključne riječi">
+                                    </div>
+                                    <div class="col-md-12 form-it">
+                                        <label>Žanrovi</label>
+                                        <div class="group-ip">
+                                            <select name="skills" multiple="" class="ui fluid dropdown">
+                                                <option value="">Odaberite žanrove</option>
+                                                <option value="Action1">Akcija</option>
+                                                <option value="Action2">Sitcom</option>
+                                                <option value="Action3">Sci-fi</option>
+                                                <option value="Action4">Avantura</option>
+                                                <option value="Action5">Romantika</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 form-it">
+                                        <label>Raspon ocjena</label>
+                                        <select>
+                                            <option value="range">-- Odaberite raspon ocjena ispod --</option>
+                                            <option value="saab">-- Odaberite raspon ocjena ispod --</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-12 form-it">
+                                        <label>Godina izdanja</label>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <select>
+                                                    <option value="range">Od</option>
+                                                    <option value="number">10</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <select>
+                                                    <option value="range">Do</option>
+                                                    <option value="number">20</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 ">
+                                        <input class="submit" type="submit" value="pretraži">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="ads">
+                            <img src="images/uploads/ads1.png" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

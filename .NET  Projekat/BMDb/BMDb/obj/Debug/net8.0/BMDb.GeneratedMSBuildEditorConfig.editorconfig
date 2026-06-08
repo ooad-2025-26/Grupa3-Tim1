@@ -15,397 +15,427 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property._SupportedPlatformList = Linux,macOS,Windows
-build_property.TargetFrameworkIdentifier = .NETCoreApp
-build_property.TargetFrameworkVersion = v8.0
 build_property.RootNamespace = BMDb
 build_property.RootNamespace = BMDb
-build_property.ProjectDir = C:\Users\ajdin\Desktop\etf\OAD\projekat\Grupa3-Tim1\.NET  Projekat\BMDb\BMDb\
+build_property.ProjectDir = D:\Projekat\Grupa3-Tim1\.NET  Projekat\BMDb\BMDb\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\ajdin\Desktop\etf\OAD\projekat\Grupa3-Tim1\.NET  Projekat\BMDb\BMDb
+build_property.MSBuildProjectDirectory = D:\Projekat\Grupa3-Tim1\.NET  Projekat\BMDb\BMDb
 build_property._RazorSourceGeneratorDebug = 
 build_property.EffectiveAnalysisLevelStyle = 8.0
 build_property.EnableCodeStyleSeverity = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Areas/Identity/Pages/Account/AccessDenied.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Areas/Identity/Pages/Account/AccessDenied.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxBY2Nlc3NEZW5pZWQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Areas/Identity/Pages/Account/Login.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Areas/Identity/Pages/Account/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Areas/Identity/Pages/Account/Logout.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Areas/Identity/Pages/Account/Logout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxMb2dvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Areas/Identity/Pages/Account/Manage/ChangePassword.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Areas/Identity/Pages/Account/Manage/ChangePassword.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxNYW5hZ2VcQ2hhbmdlUGFzc3dvcmQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Areas/Identity/Pages/Account/Manage/Index.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Areas/Identity/Pages/Account/Manage/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxNYW5hZ2VcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Areas/Identity/Pages/Account/Manage/_ManageNav.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Areas/Identity/Pages/Account/Manage/_ManageNav.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxNYW5hZ2VcX01hbmFnZU5hdi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Areas/Identity/Pages/Account/Manage/_ViewImports.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Areas/Identity/Pages/Account/Manage/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxNYW5hZ2VcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Areas/Identity/Pages/Account/Register.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Areas/Identity/Pages/Account/Register.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxSZWdpc3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Areas/Identity/Pages/Account/_ViewImports.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Areas/Identity/Pages/Account/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxfVmlld0ltcG9ydHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Areas/Identity/Pages/_ValidationScriptsPartial.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Areas/Identity/Pages/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZhbGlkYXRpb25TY3JpcHRzUGFydGlhbC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Areas/Identity/Pages/_ViewImports.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Areas/Identity/Pages/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Areas/Identity/Pages/_ViewStart.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Areas/Identity/Pages/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/EntertainmentZanr/Create.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/EntertainmentZanr/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW50ZXJ0YWlubWVudFphbnJcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/EntertainmentZanr/Delete.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/EntertainmentZanr/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW50ZXJ0YWlubWVudFphbnJcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/EntertainmentZanr/Details.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/EntertainmentZanr/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW50ZXJ0YWlubWVudFphbnJcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/EntertainmentZanr/Edit.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/EntertainmentZanr/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW50ZXJ0YWlubWVudFphbnJcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/EntertainmentZanr/Index.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/EntertainmentZanr/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW50ZXJ0YWlubWVudFphbnJcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Entertainment/Create.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Entertainment/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW50ZXJ0YWlubWVudFxDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Entertainment/Delete.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Entertainment/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW50ZXJ0YWlubWVudFxEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Entertainment/Details.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Entertainment/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW50ZXJ0YWlubWVudFxEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Entertainment/Edit.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Entertainment/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW50ZXJ0YWlubWVudFxFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Entertainment/Index.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Entertainment/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW50ZXJ0YWlubWVudFxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Film/Create.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Film/ComingSoon.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmlsbVxDb21pbmdTb29uLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Film/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmlsbVxDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Film/Delete.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Film/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmlsbVxEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Film/Details.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Film/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmlsbVxEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Film/Edit.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Film/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmlsbVxFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Film/Index.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Film/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmlsbVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/GalerijaSlikas/Create.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/GalerijaSlikas/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2FsZXJpamFTbGlrYXNcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/GalerijaSlikas/Delete.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/GalerijaSlikas/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2FsZXJpamFTbGlrYXNcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/GalerijaSlikas/Details.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/GalerijaSlikas/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2FsZXJpamFTbGlrYXNcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/GalerijaSlikas/Edit.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/GalerijaSlikas/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2FsZXJpamFTbGlrYXNcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/GalerijaSlikas/Index.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/GalerijaSlikas/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2FsZXJpamFTbGlrYXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/GalerijaSlika/Create.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/GalerijaSlika/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2FsZXJpamFTbGlrYVxDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/GalerijaSlika/Delete.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/GalerijaSlika/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2FsZXJpamFTbGlrYVxEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/GalerijaSlika/Details.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/GalerijaSlika/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2FsZXJpamFTbGlrYVxEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/GalerijaSlika/Edit.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/GalerijaSlika/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2FsZXJpamFTbGlrYVxFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/GalerijaSlika/Index.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/GalerijaSlika/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2FsZXJpamFTbGlrYVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/GledaoSam/Create.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/GledaoSam/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2xlZGFvU2FtXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/GledaoSam/Delete.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/GledaoSam/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2xlZGFvU2FtXERlbGV0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/GledaoSam/Details.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/GledaoSam/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2xlZGFvU2FtXERldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/GledaoSam/Edit.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/GledaoSam/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2xlZGFvU2FtXEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/GledaoSam/Index.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/GledaoSam/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2xlZGFvU2FtXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/GledatCu/Create.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/GledatCu/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2xlZGF0Q3VcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/GledatCu/Delete.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/GledatCu/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2xlZGF0Q3VcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/GledatCu/Details.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/GledatCu/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2xlZGF0Q3VcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/GledatCu/Edit.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/GledatCu/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2xlZGF0Q3VcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/GledatCu/Index.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/GledatCu/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2xlZGF0Q3VcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Glumac/Create.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Glumac/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2x1bWFjXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Glumac/Delete.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Glumac/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2x1bWFjXERlbGV0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Glumac/Details.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Glumac/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2x1bWFjXERldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Glumac/Edit.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Glumac/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2x1bWFjXEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Glumac/Index.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Glumac/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2x1bWFjXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Home/Index.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Home/AdminDashboard.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxBZG1pbkRhc2hib2FyZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Home/AdminLista.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxBZG1pbkxpc3RhLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Home/Finansije.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxGaW5hbnNpamUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Home/Glavna.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxHbGF2bmEuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Home/Privacy.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Notifikacija/Create.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Notifikacija/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTm90aWZpa2FjaWphXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Notifikacija/Delete.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Notifikacija/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTm90aWZpa2FjaWphXERlbGV0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Notifikacija/Details.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Notifikacija/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTm90aWZpa2FjaWphXERldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Notifikacija/Edit.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Notifikacija/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTm90aWZpa2FjaWphXEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Notifikacija/Index.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Notifikacija/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTm90aWZpa2FjaWphXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Oglas/Create.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Oglas/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT2dsYXNcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Oglas/Delete.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Oglas/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT2dsYXNcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Oglas/Details.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Oglas/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT2dsYXNcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Oglas/Edit.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Oglas/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT2dsYXNcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Oglas/Index.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Oglas/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT2dsYXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Recenzija/Create.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Osoba/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3NvYmFcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Osoba/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3NvYmFcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Recenzija/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVjZW56aWphXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Recenzija/Delete.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Recenzija/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVjZW56aWphXERlbGV0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Recenzija/Details.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Recenzija/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVjZW56aWphXERldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Recenzija/Edit.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Recenzija/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVjZW56aWphXEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Recenzija/Index.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Recenzija/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVjZW56aWphXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Serija/Create.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Serija/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VyaWphXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Serija/Delete.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Serija/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VyaWphXERlbGV0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Serija/Details.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Serija/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VyaWphXERldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Serija/Edit.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Serija/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VyaWphXEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Serija/Index.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Serija/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VyaWphXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Sezona/Create.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Sezona/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2V6b25hXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Sezona/Delete.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Sezona/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2V6b25hXERlbGV0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Sezona/Details.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Sezona/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2V6b25hXERldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Sezona/Edit.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Sezona/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2V6b25hXEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Sezona/Index.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Sezona/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2V6b25hXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Shared/Error.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Shared/_LoginPartial.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Shared/_AdminLayout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9BZG1pbkxheW91dC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Shared/_LoginPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Mb2dpblBhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Shared/_ValidationScriptsPartial.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Uloga/Create.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Uloga/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVWxvZ2FcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Uloga/Delete.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Uloga/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVWxvZ2FcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Uloga/Details.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Uloga/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVWxvZ2FcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Uloga/Edit.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Uloga/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVWxvZ2FcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Uloga/Index.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Uloga/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVWxvZ2FcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Zanr/Create.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Zanr/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcWmFuclxDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Zanr/Delete.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Zanr/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcWmFuclxEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Zanr/Details.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Zanr/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcWmFuclxEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Zanr/Edit.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Zanr/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcWmFuclxFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Zanr/Index.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Zanr/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcWmFuclxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/_ViewImports.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/_ViewStart.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ajdin/Desktop/etf/OAD/projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Shared/_Layout.cshtml]
+[D:/Projekat/Grupa3-Tim1/.NET  Projekat/BMDb/BMDb/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-pmrqqgnu21

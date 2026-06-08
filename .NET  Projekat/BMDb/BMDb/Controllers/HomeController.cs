@@ -15,13 +15,22 @@ namespace BMDb.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            return View(); // Ovo otvara Views/Home/Index.cshtml
         }
 
+        public IActionResult Glavna()
+        {
+            return View(); // Ovo otvara Views/Home/Glavna.cshtml
+        }
         public IActionResult Privacy()
         {
             return View();
         }
+
+        public IActionResult AdminDashboard() { return View(); }
+        public IActionResult Finansije() { return View(); }
+        public IActionResult AdminLista() { return View(); }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

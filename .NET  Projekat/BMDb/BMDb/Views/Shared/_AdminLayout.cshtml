@@ -1,0 +1,93 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject UserManager<Osoba> UserManager
+
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+    <title>BMDb - Admin Panel</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href='http://fonts.googleapis.com/css?family=Dosis:400,700,500|Nunito:300,400,600' />
+    <link rel="stylesheet" href="~/css/plugins.css">
+    <link rel="stylesheet" href="~/css/style.css">
+
+    @RenderSection("StranicaStilovi", required: false)
+</head>
+<body>
+
+    <div id="preloader">
+        <img class="logo" src="images/logo1.png" alt="" width="119" height="58">
+        <div id="status"><span></span><span></span></div>
+    </div>
+
+    <header class="ht-header">
+        <div class="container">
+            <nav class="navbar navbar-default navbar-custom">
+                <div class="navbar-header logo">
+                    <div class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Prikaži navigaciju</span>
+                        <div id="nav-icon1"><span></span><span></span><span></span></div>
+                    </div>
+                    <a href="#"><img class="logo" src="images/logo1.png" alt="" width="119" height="58"></a>
+                </div>
+                <div class="collapse navbar-collapse flex-parent" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav flex-child-menu menu-left">
+                        <li><a href="index.html">Početna</a></li>
+                        <li><a href="upravljanje_korisnicima.html">Korisnici</a></li>
+                        <li><a href="finansije.html">Finansije</a></li>
+                        <li class="dropdown first">
+                            <a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown" data-hover="dropdown">
+                                Sadržaj<i class="fa fa-angle-down" aria-hidden="true"></i>
+                            </a>
+                            <ul class="dropdown-menu level1">
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dodaj<i class="ion-ios-arrow-forward"></i></a>
+                                    <ul class="dropdown-menu level2">
+                                        <li><a href="dodaj_film.html">Film</a></li>
+                                        <li><a href="dodaj_seriju.html">TV Serija</a></li>
+                                    </ul>
+                                </li>
+                                <li class="it-last"><a href="lista.html">Lista</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav flex-child-menu menu-right">
+                        <li class="btn signupLink" style="background-color: #dd4b39 !important; border: none; padding: 0; display: inline-block;">
+                            <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" method="post" style="display: inline;">
+                                <button type="submit" style="background: none; border: none; color: #ffffff; padding: 11px 25px; cursor: pointer; font-family: 'Dosis', sans-serif; font-size: 14px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px;">
+                                    Odjavi se
+                                </button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    @RenderBody()
+
+    <footer class="ht-footer">
+        <div class="container">
+            <div class="flex-parent-ft">
+                <div class="flex-child-ft item1">
+                    <a href="admin.html"><img class="logo" src="images/logo1.png" alt=""></a>
+                    <p>Admin Panel Sektor</p>
+                </div>
+                <div class="flex-child-ft item5">
+                    <h4>Brzi alati</h4>
+                    <a href="upravljanje_korisnicima.html" class="btn">Upravljaj korisnicima</a>
+                    <br><br>
+
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/jquery.js"></script>
+    <script src="js/plugins.js"></script>
+    <script src="js/plugins2.js"></script>
+    <script src="js/custom.js"></script>
+
+</body>
+</html>

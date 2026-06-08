@@ -1,12 +1,54 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "D:\\Projekat\\Grupa3-Tim1\\.NET  Projekat\\BMDb\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{08397937-14F8-4F36-BD2B-41C277992A07}|BMDb\\BMDb.csproj|d:\\projekat\\grupa3-tim1\\.net  projekat\\bmdb\\bmdb\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{08397937-14F8-4F36-BD2B-41C277992A07}|BMDb\\BMDb.csproj|solutionrelative:bmdb\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{08397937-14F8-4F36-BD2B-41C277992A07}|BMDb\\BMDb.csproj|d:\\projekat\\grupa3-tim1\\.net  projekat\\bmdb\\bmdb\\controllers\\filmcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{08397937-14F8-4F36-BD2B-41C277992A07}|BMDb\\BMDb.csproj|solutionrelative:bmdb\\controllers\\filmcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": []
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "FilmController.cs",
+              "DocumentMoniker": "D:\\Projekat\\Grupa3-Tim1\\.NET  Projekat\\BMDb\\BMDb\\Controllers\\FilmController.cs",
+              "RelativeDocumentMoniker": "BMDb\\Controllers\\FilmController.cs",
+              "ToolTip": "D:\\Projekat\\Grupa3-Tim1\\.NET  Projekat\\BMDb\\BMDb\\Controllers\\FilmController.cs",
+              "RelativeToolTip": "BMDb\\Controllers\\FilmController.cs",
+              "ViewState": "AgIAACMAAAAAAAAAAAAwwDMAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-08T19:18:32.754Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\Projekat\\Grupa3-Tim1\\.NET  Projekat\\BMDb\\BMDb\\appsettings.json",
+              "RelativeDocumentMoniker": "BMDb\\appsettings.json",
+              "ToolTip": "D:\\Projekat\\Grupa3-Tim1\\.NET  Projekat\\BMDb\\BMDb\\appsettings.json",
+              "RelativeToolTip": "BMDb\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAADAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-06-08T19:02:59.06Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
     }
   ]
 }

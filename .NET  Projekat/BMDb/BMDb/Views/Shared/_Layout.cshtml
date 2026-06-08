@@ -1,50 +1,318 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<Osoba> SignInManager
+@inject UserManager<Osoba> UserManager
+
+<!DOCTYPE html>
+
+<html lang="en" class="no-js">
+
+
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - BMDb</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/BMDb.styles.css" asp-append-version="true" />
+    <!-- Basic need -->
+    <title>BMDb</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="author" content="">
+    <link rel="profile" href="#">
+
+    <!--Google Font-->
+    <link rel="stylesheet" href='http://fonts.googleapis.com/css?family=Dosis:400,700,500|Nunito:300,400,600' />
+    <!-- Mobile specific meta -->
+    <meta name=viewport content="width=device-width, initial-scale=1">
+    <meta name="format-detection" content="telephone-no">
+
+    <!-- CSS files -->
+    <link rel="stylesheet" href="~/css/plugins.css">
+    <link rel="stylesheet" href="~/css/style.css">
+
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">BMDb</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                    <partial name="_LoginPartial" />
+    <!--preloading-->
+    <div id="preloader">
+        <img class="logo" src="~/images/logo1.png" alt="" width="119" height="58">
+        <div id="status">
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+    <!--end of preloading-->
+    <!--login form popup-->
+    <div class="login-wrapper" id="login-content">
+        <div class="login-content">
+            <a href="#" class="close">x</a>
+            <h3>PRIJAVA</h3>
+            <form asp-area="Identity" asp-page="/Account/Login" method="post">
+                <div class="row">
+                    <label for="username">
+                        Korisničko ime:
+                        <input type="text" name="Input.Email" id="username" required="required" />
+                    </label>
+                </div>
+
+                <div class="row">
+                    <label for="password">
+                        Lozinka:
+                        <input type="password" name="Input.Password" id="password" required="required" />
+                    </label>
+                </div>
+                <div class="row">
+                    <div class="remember">
+                        <div>
+                            <input type="checkbox" name="Input.RememberMe" value="true"><span>Zapamti me</span>
+                        </div>
+                        <a href="#">Zaboravili ste lozinku?</a>
+                    </div>
+                </div>
+                <div class="row">
+                    <button type="submit">PRIJAVI SE</button>
+                </div>
+            </form>
+            <div class="row">
+                <p>Ili putem društvenih mreža</p>
+                <div class="social-btn-2">
+                    <a class="fb" href="#"><i class="ion-social-facebook"></i>Facebook</a>
+                    <a class="tw" href="#"><i class="ion-social-twitter"></i>twitter</a>
                 </div>
             </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+        </div>
     </div>
+    <!--end of login form popup-->
+    <!--signup form popup-->
+    <div class="login-wrapper" id="signup-content">
+        <div class="login-content">
+            <a href="#" class="close">x</a>
+            <h3>REGISTRACIJA</h3>
+            <form asp-area="Identity" asp-page="/Account/Register" method="post">
 
-    <footer class="border-top footer text-muted">
+                <div class="row">
+                    <label for="ime">
+                        Ime:
+                        <input type="text" name="Input.Ime" id="ime" required="required" />
+                    </label>
+                </div>
+
+                <div class="row">
+                    <label for="prezime">
+                        Prezime:
+                        <input type="text" name="Input.Prezime" id="prezime" required="required" />
+                    </label>
+                </div>
+
+                <div class="row">
+                    <label for="nadimak">
+                        Nadimak:
+                        <input type="text" name="Input.Nadimak" id="nadimak" required="required" />
+                    </label>
+                </div>
+
+                <div class="row">
+                    <label for="email-2">
+                        Vaš e-mail:
+                        <input type="email" name="Input.Email" id="email-2" required="required" />
+                    </label>
+                </div>
+
+                <div class="row">
+                    <label for="password-2">
+                        Lozinka:
+                        <input type="password" name="Input.Password" id="password-2" required="required" />
+                    </label>
+                </div>
+
+                <div class="row">
+                    <label for="repassword-2">
+                        Ponovite lozinku:
+                        <input type="password" name="Input.ConfirmPassword" id="repassword-2"  required="required" />
+                    </label>
+                </div>
+
+                <div class="row">
+                    <button type="submit">REGISTRUJ SE</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!--end of signup form popup-->
+    <!-- BEGIN | Header -->
+    <header class="ht-header">
         <div class="container">
-            &copy; 2026 - BMDb - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            <nav class="navbar navbar-default navbar-custom">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header logo">
+                    <div class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Prikaži navigaciju</span>
+                        <div id="nav-icon1">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <a href="index.html"><img class="logo" src="~/images/logo1.png" alt="" width="119" height="58"></a>
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse flex-parent" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav flex-child-menu menu-left">
+                        <li class="hidden"><a href="#page-top"></a></li>
+                        <li><a asp-controller="Home" asp-action="Glavna">Početna</a></li>
+
+                        <li class="dropdown first">
+                            <a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown" data-hover="dropdown">
+                                Naslovi<i class="fa fa-angle-down" aria-hidden="true"></i>
+                            </a>
+                            <ul class="dropdown-menu level1">
+                                <li><a asp-controller="Film" asp-action="Index">Filmovi</a></li>
+                                <li class="it-last"><a asp-controller="Serija" asp-action="Index">Serije</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="dropdown first">
+                            <a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown" data-hover="dropdown">
+                                Novosti <i class="fa fa-angle-down" aria-hidden="true"></i>
+                            </a>
+                            <ul class="dropdown-menu level1">
+                                <li><a asp-controller="Notifikacija" asp-action="Index">Vijesti</a></li>
+                                <li><a asp-controller="Film" asp-action="ComingSoon">Uskoro u kinu</a></li>
+                            </ul>
+                        </li>
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                            <li class="dropdown first">
+                                <a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown" data-hover="dropdown">
+                                    Profil<i class="fa fa-angle-down" aria-hidden="true"></i>
+                                </a>
+                                <ul class="dropdown-menu level1">
+                                    <li><a asp-controller="GledatCu" asp-action="Index">gledat ću</a></li>
+                                    <li><a asp-controller="GledaoSam" asp-action="Index">gledao sam</a></li>
+                                    <li><a asp-controller="Osoba" asp-action="Details">profil</a></li>
+                                    <li class="it-last"><a asp-controller="Recenzija" asp-action="Index">recenzije</a></li>
+                                </ul>
+                            </li>
+                        }
+                    </ul>
+
+                    <ul class="nav navbar-nav flex-child-menu menu-right">
+                        <li><a href="#">Pomoć</a></li>
+
+                        @if (!SignInManager.IsSignedIn(User))
+                        {
+                            <li class="loginLink"><a href="#">Prijavi se</a></li>
+                            <li class="btn signupLink"><a href="#">Registruj se</a></li>
+                        }
+                        else
+                        {
+                            <li><a style="color: #f5b50a; font-weight: bold; padding: 15px 10px;">Zdravo, @UserManager.GetUserName(User)!</a></li>
+                            <li class="btn signupLink" style="background-color: #dd4b39 !important; border: none; padding: 0;">
+                                <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Glavna", "Home", new { area = "" })" method="post" style="display: inline;">
+                                    <button type="submit" style="background: none; border: none; color: #ffffff; padding: 11px 25px; cursor: pointer; font-family: 'Dosis', sans-serif; font-size: 14px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px;">
+                                        Odjavi se
+                                    </button>
+                                </form>
+                            </li>
+                        }
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+            </nav>
+
+            <!-- top search form -->
+            <div class="top-search">
+                <input type="text" placeholder="Pretražite filmove i TV serije koji vas zanimaju
+
+">
+            </div>
+        </div>
+    </header>
+    <!-- END | Header -->
+    @RenderBody()
+
+
+    <!-- footer section-->
+    <footer class="ht-footer">
+        <div class="container">
+            <div class="flex-parent-ft">
+                <div class="flex-child-ft item1">
+                    <a asp-controller="Home" asp-action="Glavna"><img class="logo" src="~/images/logo1.png" alt=""></a>
+                    <p>
+                        Zmaja od Bosne bb<br>
+                        Sarajevo, KS 71000
+                    </p>
+                    <p>Kontaktirajte nas: <a href="mailto:bmdb@gmail.com">bmdb@gmail.com</a></p>
+                </div>
+
+                <div class="flex-child-ft item2">
+                    <h4>Informacije</h4>
+                    <ul>
+                        <li><a href="#">O nama</a></li>
+                        <li><a href="#">Kontakt</a></li>
+                        <li><a asp-controller="Notifikacija" asp-action="Index">Vijesti</a></li>
+                    </ul>
+                </div>
+
+                <div class="flex-child-ft item3">
+                    <h4>Pravne informacije</h4>
+                    <ul>
+                        <li><a href="#">Uslovi korištenja</a></li>
+                        <li><a href="#">Politika privatnosti</a></li>
+                        <li><a href="#">Sigurnost</a></li>
+                    </ul>
+                </div>
+
+                @if (SignInManager.IsSignedIn(User))
+                        {
+                <div class="flex-child-ft item4">
+                    <h4>Profil</h4>
+                    <ul>
+                       
+                            <li><a asp-controller="Osoba" asp-action="Details">Moj profil</a></li>
+                            <li><a asp-controller="GledaoSam" asp-action="Index">Gledao sam</a></li>
+                            <li><a asp-controller="GledatCu" asp-action="Index">Gledat ću</a></li>  
+                        
+                    </ul>
+                </div>
+                }
+                <div class="flex-child-ft item5">
+                    @if (SignInManager.IsSignedIn(User) && (User.IsInRole("Admin") || User.IsInRole("Moderator") || User.IsInRole("1") || User.IsInRole("2")))
+                    {
+                        <h4>Admin / Moderator alati</h4>
+                        <a asp-controller="Home" asp-action="AdminDashboard" class="btn">Admin opcije <i class="ion-ios-arrow-forward"></i></a>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="ft-copyright">
+            <div class="ft-left">
+                <p><a target="_blank" ref="https://github.com/ooad-2025-26/Grupa3-Tim1">&copy; 2026 BMDb. Sva prava zadržana.</a></p>
+            </div>
+            <div class="backtotop">
+                <p><a href="#" id="back-to-top">Natrag na vrh  <i class="ion-ios-arrow-thin-up"></i></a></p>
+            </div>
         </div>
     </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+    <!-- end of footer section-->
+
+    <script src="~/js/jquery.js"></script>
+    <script src="~/js/plugins.js"></script>
+    <script src="~/js/plugins2.js"></script>
+    <script src="~/js/custom.js"></script>
+    <!-- force skok na vrh-->
+    <script>
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+        function forceScrollToTop() {
+            window.scrollTo(0, 0);
+            document.documentElement.scrollTop = 0;
+            document.body.scrollTop = 0;
+        }
+        forceScrollToTop();
+        let scrollInterval = setInterval(forceScrollToTop, 10);
+        setTimeout(function() {
+            clearInterval(scrollInterval);
+        }, 2000);
+        window.addEventListener('load', forceScrollToTop);
+    </script>
 </body>
+
+
 </html>

@@ -1,78 +1,310 @@
-﻿@model BMDb.Models.Film
-
-@{
-    ViewData["Title"] = "Details";
-}
-
-<h1>Details</h1>
-
-<div>
-    <h4>Film</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IDFilma)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IDFilma)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.BoxOffice)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.BoxOffice)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Naziv)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Naziv)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Opis)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Opis)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ProsjecnaOcjena)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ProsjecnaOcjena)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Reditelj)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Reditelj)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.GodinaIzlaska)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.GodinaIzlaska)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.YoutubeLink)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.YoutubeLink)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Trajanje)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Trajanje)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PosterLink)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PosterLink)
-        </dd>
-    </dl>
+﻿<div class="hero mv-single-hero">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+			</div>
+		</div>
+	</div>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+<div class="page-single movie-single movie_single">
+	<div class="container">
+		<div class="row ipad-width2">
+			<div class="col-md-4 col-sm-12 col-xs-12">
+				<div class="movie-img sticky-sb">
+					<img src="images/uploads/movie-single.jpg" alt="">
+					<div class="movie-btn">
+						<div class="btn-transform transform-vertical red">
+							<div>
+								<a href="https://www.youtube.com/embed/6kw1UVovByw" class="item item-1 redbtn bmd-trigger">
+									<i class="ion-play"></i> Pogledaj trailer
+								</a>
+							</div>
+							<div>
+								<a href="https://www.youtube.com/embed/6kw1UVovByw" class="item item-2 redbtn hvr-grow bmd-trigger">
+									<i class="ion-play"></i>
+								</a>
+							</div>
+						</div>
+
+						<div id="bmd-trailer-popup" class="bmd-modal-overlay">
+							<div class="bmd-modal-content">
+								<a href="#!" id="bmd-close" class="bmd-close-btn">&times;</a>
+								<div class="bmd-video-wrapper">
+									<iframe id="bmd-video-iframe"
+											src=""
+											frameborder="0"
+											allowfullscreen>
+									</iframe>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+			<div class="col-md-8 col-sm-12 col-xs-12">
+				<div class="movie-single-ct main-content">
+					<h1 class="bd-hd">Skyfall <span>2012</span></h1>
+					<div class="social-btn">
+						<a href="#" class="parent-btn" style="color: #add8e6; margin-left: 20px;">
+							<i class="ion-ios-play"></i> Gledat ću
+						</a>
+						<a href="#" class="parent-btn" style="color: #add8e6;">
+							<i class="ion-checkmark-circled"></i> Gledao sam
+						</a>
+					</div>
+					<div class="movie-rate">
+						<div class="rate">
+							<i class="ion-android-star"></i>
+							<p>
+								<span>6.8</span> /10<br>
+								<span class="rv">56 Recenzija</span>
+							</p>
+						</div>
+						<div class="rate-star">
+							<p>Ocijenite film: </p>
+							<i class="ion-ios-star"></i>
+							<i class="ion-ios-star"></i>
+							<i class="ion-ios-star"></i>
+							<i class="ion-ios-star"></i>
+							<i class="ion-ios-star"></i>
+							<i class="ion-ios-star"></i>
+							<i class="ion-ios-star"></i>
+							<i class="ion-ios-star"></i>
+							<i class="ion-ios-star-outline"></i>
+						</div>
+					</div>
+					<div class="movie-tabs">
+						<div class="tabs">
+							<ul class="tab-links tabs-mv">
+								<li class="active"><a href="#overview">Pregled</a></li>
+								<li><a href="#reviews"> Recenzije</a></li>
+								<li><a href="#reviews"> Verifikovane Recenzije</a></li>
+								<li><a href="#media"> Galerija</a></li>
+							</ul>
+							<div class="tab-content">
+								<div id="overview" class="tab active">
+									<div class="row">
+										<div class="col-md-8 col-sm-12 col-xs-12">
+											<p>Zagonetna poruka iz prošlosti šalje Jamesa Bonda na tajnu misiju u Mexico City, a zatim u Rim, gdje upoznaje Luciju Sciarru, prelijepu i zabranjenu udovicu ozloglašenog kriminalca. Bond se infiltrira na tajni sastanak i otkriva postojanje zlokobne organizacije poznate kao Skyfall. Kako se on približava srcu organizacije, otkriva zastrašujuću vezu između sebe i neprijatelja kojeg traži.</p>
+											<div class="title-hd-sm">
+												<h4>Fotografije</h4>
+												<a href="#" class="time">Sve fotografije <i class="ion-ios-arrow-right"></i></a>
+											</div>
+											<div class="mvsingle-item ov-item">
+												<a class="img-lightbox" data-fancybox-group="gallery" href="images/uploads/image11.jpg"><img src="images/uploads/image1.jpg" alt=""></a>
+												<a class="img-lightbox" data-fancybox-group="gallery" href="images/uploads/image21.jpg"><img src="images/uploads/image2.jpg" alt=""></a>
+												<a class="img-lightbox" data-fancybox-group="gallery" href="images/uploads/image31.jpg"><img src="images/uploads/image3.jpg" alt=""></a>
+												<a class="img-lightbox" data-fancybox-group="gallery" href="images/uploads/image111.jpg"><img src="images/uploads/image1-1.jpg" alt=""></a>
+											</div>
+											<div class="title-hd-sm">
+												<h4>Uloge</h4>
+												<a href="#" class="time">Cijela postava <i class="ion-ios-arrow-right"></i></a>
+											</div>
+											<div class="mvcast-item">
+												<div class="cast-it">
+													<div class="cast-left">
+														<img src="images/uploads/cast1.jpg" alt="">
+														<a href="#">Daniel Craig</a>
+													</div>
+													<p>... James Bond</p>
+												</div>
+												<div class="cast-it">
+													<div class="cast-left">
+														<img src="images/uploads/cast2.jpg" alt="">
+														<a href="#">Christoph Waltz</a>
+													</div>
+													<p>... Ernst Stavro Blofeld</p>
+												</div>
+												<div class="cast-it">
+													<div class="cast-left">
+														<img src="images/uploads/cast3.jpg" alt="">
+														<a href="#">Léa Seydoux</a>
+													</div>
+													<p>... Madeleine Swann</p>
+												</div>
+												<div class="cast-it">
+													<div class="cast-left">
+														<img src="images/uploads/cast4.jpg" alt="">
+														<a href="#">Ralph Fiennes</a>
+													</div>
+													<p>... M</p>
+												</div>
+												<div class="cast-it">
+													<div class="cast-left">
+														<img src="images/uploads/cast5.jpg" alt="">
+														<a href="#">Monica Bellucci</a>
+													</div>
+													<p>... Lucia Sciarra</p>
+												</div>
+												<div class="cast-it">
+													<div class="cast-left">
+														<img src="images/uploads/cast6.jpg" alt="">
+														<a href="#">Ben Whishaw</a>
+													</div>
+													<p>... Q</p>
+												</div>
+												<div class="cast-it">
+													<div class="cast-left">
+														<img src="images/uploads/cast7.jpg" alt="">
+														<a href="#">Naomie Harris</a>
+													</div>
+													<p>... Eve Moneypenny</p>
+												</div>
+												<div class="cast-it">
+													<div class="cast-left">
+														<img src="images/uploads/cast9.jpg" alt="">
+														<a href="#">Dave Bautista</a>
+													</div>
+													<p>... Gospodin Hinx</p>
+												</div>
+											</div>
+										</div>
+										<div class="col-md-4 col-xs-12 col-sm-12">
+											<div class="sb-it">
+												<h6>Režiser: </h6>
+												<p><a href="#">Sam Mendes</a></p>
+											</div>
+											<div class="sb-it">
+												<h6>BoxOffice: </h6>
+												<p><a href="#">$1,108,594,137</a></p>
+											</div>
+											<div class="sb-it">
+												<h6>Zvijezde: </h6>
+												<p><a href="#">Daniel Craig,</a> <a href="#">Christoph Waltz,</a> <a href="#">Léa Seydoux</a></p>
+											</div>
+											<div class="sb-it">
+												<h6>Žanrovi:</h6>
+												<p><a href="#">Akcija, </a> <a href="#"> Avantura,</a> <a href="#">Triler</a></p>
+											</div>
+											<div class="sb-it">
+												<h6>Datum izlaska:</h6>
+												<p>6. novembar 2015. (SAD)</p>
+											</div>
+											<div class="sb-it">
+												<h6>Trajanje:</h6>
+												<p>148 min</p>
+											</div>
+											<div class="sb-it">
+												<h6>MMPA rejting:</h6>
+												<p>PG-13</p>
+											</div>
+											<div class="sb-it">
+												<h6>Ključne riječi:</h6>
+												<p class="tags">
+													<span class="time"><a href="#">špijun</a></span>
+													<span class="time"><a href="#">tajni agent</a></span>
+													<span class="time"><a href="#">007</a></span>
+													<span class="time"><a href="#">blockbuster</a></span>
+												</p>
+											</div>
+											<div class="ads">
+												<img src="images/uploads/ads1.png" alt="">
+											</div>
+										</div>
+									</div>
+								</div>
+								<div id="reviews" class="tab review">
+									<div class="row">
+										<div class="rv-hd" style="margin-bottom: 20px;">
+											<a href="#" class="redbtn">Napiši recenziju</a>
+										</div>
+										<div class="topbar-filter">
+											<p>Pronađeno <span>56 recenzija</span> ukupno</p>
+											<label>Sortiraj po:</label>
+											<select>
+												<option value="popularity">Popularnosti (opadajuće)</option>
+												<option value="popularity">Popularnosti (rastuće)</option>
+												<option value="rating">Ocjeni (opadajuće)</option>
+												<option value="rating">Ocjeni (rastuće)</option>
+												<option value="date">Datumu izlaska (opadajuće)</option>
+												<option value="date">Datumu izlaska (rastuće)</option>
+											</select>
+										</div>
+										<div class="mv-user-review-item">
+											<div class="user-infor">
+												<img src="images/uploads/userava1.jpg" alt="">
+												<div>
+													<h3>Najbolji Craigov Bond nakon Skyfalla</h3>
+													<div class="no-star">
+														<i class="ion-android-star"></i>
+														<i class="ion-android-star"></i>
+														<i class="ion-android-star"></i>
+														<i class="ion-android-star"></i>
+														<i class="ion-android-star"></i>
+														<i class="ion-android-star"></i>
+														<i class="ion-android-star"></i>
+														<i class="ion-android-star"></i>
+														<i class="ion-android-star"></i>
+														<i class="ion-android-star last"></i>
+													</div>
+													<p class="time">
+														17. decembar 2016. napisao <a href="#"> amina_m</a>
+													</p>
+												</div>
+											</div>
+											<p>Kao ljubitelj Bonda, Skyfall mi je bio pravo uživanje. Lik Madeleine Swann je osvježavajući, a hemija između nje i Bonda je vidljiva. Akcija je fenomenalna, naročito potjera u Rimu.</p>
+										</div>
+										<div class="topbar-filter">
+											<label>Recenzija po stranici:</label>
+											<select>
+												<option value="range">5 recenzija</option>
+												<option value="saab">10 recenzija</option>
+											</select>
+											<div class="pagination2">
+												<span>Stranica 1 od 6:</span>
+												<a class="active" href="#">1</a>
+												<a href="#">2</a>
+												<a href="#">3</a>
+												<a href="#">4</a>
+												<a href="#">5</a>
+												<a href="#">6</a>
+												<a href="#"><i class="ion-arrow-right-b"></i></a>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div id="media" class="tab">
+									<div class="row">
+										<div class="rv-hd">
+											<div>
+												<h3>Slike iz filma</h3>
+												<h2>Skyfall</h2>
+											</div>
+										</div>
+										<div class="title-hd-sm">
+											<h4>Fotografije <span> (21)</span></h4>
+										</div>
+										<div class="mvsingle-item">
+											<a class="img-lightbox" data-fancybox-group="gallery" href="images/uploads/image11.jpg"><img src="images/uploads/image1.jpg" alt=""></a>
+											<a class="img-lightbox" data-fancybox-group="gallery" href="images/uploads/image21.jpg"><img src="images/uploads/image2.jpg" alt=""></a>
+											<a class="img-lightbox" data-fancybox-group="gallery" href="images/uploads/image31.jpg"><img src="images/uploads/image3.jpg" alt=""></a>
+											<a class="img-lightbox" data-fancybox-group="gallery" href="images/uploads/image41.jpg"><img src="images/uploads/image4.jpg" alt=""></a>
+											<a class="img-lightbox" data-fancybox-group="gallery" href="images/uploads/image51.jpg"><img src="images/uploads/image5.jpg" alt=""></a>
+											<a class="img-lightbox" data-fancybox-group="gallery" href="images/uploads/image61.jpg"><img src="images/uploads/image6.jpg" alt=""></a>
+											<a class="img-lightbox" data-fancybox-group="gallery" href="images/uploads/image71.jpg"><img src="images/uploads/image7.jpg" alt=""></a>
+											<a class="img-lightbox" data-fancybox-group="gallery" href="images/uploads/image81.jpg"><img src="images/uploads/image8.jpg" alt=""></a>
+											<a class="img-lightbox" data-fancybox-group="gallery" href="images/uploads/image91.jpg"><img src="images/uploads/image9.jpg" alt=""></a>
+											<a class="img-lightbox" data-fancybox-group="gallery" href="images/uploads/image101.jpg"><img src="images/uploads/image10.jpg" alt=""></a>
+											<a class="img-lightbox" data-fancybox-group="gallery" href="images/uploads/image111.jpg"><img src="images/uploads/image1-1.jpg" alt=""></a>
+											<a class="img-lightbox" data-fancybox-group="gallery" href="images/uploads/image121.jpg"><img src="images/uploads/image12.jpg" alt=""></a>
+											<a class="img-lightbox" data-fancybox-group="gallery" href="images/uploads/image131.jpg"><img src="images/uploads/image13.jpg" alt=""></a>
+											<a class="img-lightbox" data-fancybox-group="gallery" href="images/uploads/image141.jpg"><img src="images/uploads/image14.jpg" alt=""></a>
+											<a class="img-lightbox" data-fancybox-group="gallery" href="images/uploads/image151.jpg"><img src="images/uploads/image15.jpg" alt=""></a>
+											<a class="img-lightbox" data-fancybox-group="gallery" href="images/uploads/image161.jpg"><img src="images/uploads/image16.jpg" alt=""></a>
+											<a class="img-lightbox" data-fancybox-group="gallery" href="images/uploads/image171.jpg"><img src="images/uploads/image17.jpg" alt=""></a>
+											<a class="img-lightbox" data-fancybox-group="gallery" href="images/uploads/image181.jpg"><img src="images/uploads/image18.jpg" alt=""></a>
+											<a class="img-lightbox" data-fancybox-group="gallery" href="images/uploads/image191.jpg"><img src="images/uploads/image19.jpg" alt=""></a>
+											<a class="img-lightbox" data-fancybox-group="gallery" href="images/uploads/image201.jpg"><img src="images/uploads/image20.jpg" alt=""></a>
+											<a class="img-lightbox" data-fancybox-group="gallery" href="images/uploads/image211.jpg"><img src="images/uploads/image2-1.jpg" alt=""></a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>

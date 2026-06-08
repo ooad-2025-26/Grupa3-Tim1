@@ -1,78 +1,116 @@
-﻿@model BMDb.Models.Film
-
-@{
-    ViewData["Title"] = "Create";
+﻿@{
+    Layout = "_AdminLayout";
 }
+@section StranicaStilovi {
+    <style>
+        .admin-section {
+            padding: 50px 0;
+            background: #020d18;
+            color: white;
+            min-height: 70vh;
+        }
 
-<h1>Create</h1>
+        .form-container {
+            background: #0b1a2a;
+            padding: 30px;
+            border: 1px solid #1c3d5d;
+            border-radius: 5px;
+        }
 
-<h4>Film</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="IDFilma" class="control-label"></label>
-                <input asp-for="IDFilma" class="form-control" />
-                <span asp-validation-for="IDFilma" class="text-danger"></span>
+            .form-container input, .form-container select, .form-container textarea {
+                width: 100%;
+                padding: 12px;
+                margin: 10px 0;
+                background: #020d18;
+                border: 1px solid #1c3d5d;
+                color: white;
+                border-radius: 3px;
+            }
+
+            .form-container label {
+                color: #fbb124;
+                font-weight: bold;
+                margin-top: 15px;
+                display: block;
+            }
+
+        .btn-submit {
+            background: #fbb124;
+            color: black;
+            font-weight: bold;
+            text-transform: uppercase;
+            border: none;
+            padding: 15px 30px;
+            margin-top: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+            .btn-submit:hover {
+                background: #ffffff;
+            }
+    </style>
+    }
+
+    <div class="hero common-hero">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="hero-ct">
+                        <h1>Dodaj novi film ili seriju</h1>
+                        <ul class="breadcumb">
+                            <li><a href="admin.html">Admin</a></li>
+                            <li> <span class="ion-ios-arrow-right"></span> Sadržaj</li>
+                            <li> <span class="ion-ios-arrow-right"></span> Dodaj</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="BoxOffice" class="control-label"></label>
-                <input asp-for="BoxOffice" class="form-control" />
-                <span asp-validation-for="BoxOffice" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Naziv" class="control-label"></label>
-                <input asp-for="Naziv" class="form-control" />
-                <span asp-validation-for="Naziv" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Opis" class="control-label"></label>
-                <input asp-for="Opis" class="form-control" />
-                <span asp-validation-for="Opis" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ProsjecnaOcjena" class="control-label"></label>
-                <input asp-for="ProsjecnaOcjena" class="form-control" />
-                <span asp-validation-for="ProsjecnaOcjena" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Reditelj" class="control-label"></label>
-                <input asp-for="Reditelj" class="form-control" />
-                <span asp-validation-for="Reditelj" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="GodinaIzlaska" class="control-label"></label>
-                <input asp-for="GodinaIzlaska" class="form-control" />
-                <span asp-validation-for="GodinaIzlaska" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="YoutubeLink" class="control-label"></label>
-                <input asp-for="YoutubeLink" class="form-control" />
-                <span asp-validation-for="YoutubeLink" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Trajanje" class="control-label"></label>
-                <input asp-for="Trajanje" class="form-control" />
-                <span asp-validation-for="Trajanje" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PosterLink" class="control-label"></label>
-                <input asp-for="PosterLink" class="form-control" />
-                <span asp-validation-for="PosterLink" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
-</div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+    <section class="admin-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-container">
+                        <form action="#">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Naslov filma</label>
+                                    <input type="text" placeholder="Npr. The Godfather" required>
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+                                    <label>Žanr</label>
+                                    <input type="text" placeholder="Npr. Drama, Krimi">
+
+                                    <label>Godina izdanja</label>
+                                    <input type="number" placeholder="2024">
+
+                                    <label>Trajanje (minuta)</label>
+                                    <input type="text" placeholder="Npr. 145 min">
+                                </div>
+                                <div class="col-md-6">
+                                    <label>URL Postera (putanja)</label>
+                                    <input type="text" placeholder="images/uploads/novi_film.jpg">
+
+                                    <label>Režiser</label>
+                                    <input type="text" placeholder="Npr. Francis Ford Coppola">
+
+                                    <label>Glavne uloge</label>
+                                    <input type="text" placeholder="Npr. Marlon Brando, Al Pacino">
+
+                                </div>
+                                <div class="col-md-12">
+                                    <label>Sinopsis (Kratak sadržaj)</label>
+                                    <textarea rows="6" placeholder="Unesite opis filma ovdje..."></textarea>
+
+                                    <button type="submit" class="btn-submit">Sačuvaj u bazu podataka</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
