@@ -2,9 +2,11 @@ namespace BMDb.ViewModels
 {
     public class HomeGlavnaViewModel
     {
+        public IReadOnlyList<HomeMediaItemViewModel> RandomMediaItems { get; set; } = [];
         public IReadOnlyList<HomeMediaItemViewModel> TopRatedFilms { get; set; } = [];
         public IReadOnlyList<HomeMediaItemViewModel> TopRatedSeries { get; set; } = [];
         public IReadOnlyList<HomeMediaItemViewModel> RecommendedItems { get; set; } = [];
+        public bool ShowRecommendations { get; set; }
         public IReadOnlyList<HomeMediaItemViewModel> ComingSoonFilms { get; set; } = [];
     }
 

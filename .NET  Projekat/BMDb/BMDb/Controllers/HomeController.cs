@@ -46,6 +46,22 @@ namespace BMDb.Controllers
 
         public async Task<IActionResult> Glavna()
         {
+            var randomFilmovi = await _context.Film
+                .AsNoTracking()
+                .Select(x => (Entertainment)x)
+                .ToListAsync();
+
+            var randomSerije = await _context.Serija
+                .AsNoTracking()
+                .Select(x => (Entertainment)x)
+                .ToListAsync();
+
+            var randomSadrzaj = randomFilmovi
+                .Concat(randomSerije)
+                .OrderBy(_ => Random.Shared.Next())
+                .Take(8)
+                .ToList();
+
             var topFilmovi = await _context.Film
                 .AsNoTracking()
                 .OrderByDescending(x => x.ProsjecnaOcjena)
@@ -86,7 +102,8 @@ namespace BMDb.Controllers
                 .Take(5)
                 .ToList();
 
-            var sviIds = topFilmovi.Select(x => x.Id)
+            var sviIds = randomSadrzaj.Select(x => x.Id)
+                .Concat(topFilmovi.Select(x => x.Id))
                 .Concat(topSerije.Select(x => x.Id))
                 .Concat(preporuke.Select(x => x.Id))
                 .Concat(comingSoon.Select(x => x.Film.Id))
@@ -97,9 +114,11 @@ namespace BMDb.Controllers
 
             var model = new HomeGlavnaViewModel
             {
+                RandomMediaItems = randomSadrzaj.Select(x => MapMediaItem(x, zanrovi)).ToList(),
                 TopRatedFilms = topFilmovi.Select(x => MapMediaItem(x, zanrovi)).ToList(),
                 TopRatedSeries = topSerije.Select(x => MapMediaItem(x, zanrovi)).ToList(),
                 RecommendedItems = preporuke.Select(x => MapMediaItem(x, zanrovi)).ToList(),
+                ShowRecommendations = preporuke.Count > 0,
                 ComingSoonFilms = comingSoon.Select(x => MapMediaItem(x.Film, zanrovi, x.TrailerEmbedUrl)).ToList()
             };
 
