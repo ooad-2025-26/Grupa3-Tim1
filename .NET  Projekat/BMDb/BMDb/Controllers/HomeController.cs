@@ -77,14 +77,26 @@ namespace BMDb.Controllers
                 .ToListAsync();
 
             IReadOnlyList<Entertainment> preporuke = [];
-            if (User.Identity?.IsAuthenticated == true &&
+            var prikaziPreporuke = false;
+            var osobaId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var korisnikMozeDobitiPreporuke = User.Identity?.IsAuthenticated == true &&
+                !string.IsNullOrWhiteSpace(osobaId) &&
                 (User.IsInRole("Korisnik") || User.IsInRole("VerifikovaniRecenzent")) &&
                 !User.IsInRole("Admin") &&
-                !User.IsInRole("Moderator"))
+                !User.IsInRole("Moderator");
+
+            if (korisnikMozeDobitiPreporuke)
             {
-                var osobaId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-                var gledaoSamOsobaId = _userKeyService.GetCurrentUserKey(User);
-                preporuke = await _recommendationService.PersonalizovanePreporukeAsync(osobaId, gledaoSamOsobaId, 10);
+                var korisnikImaPreferiraneZanrove = await _context.OsobaZanr
+                    .AsNoTracking()
+                    .AnyAsync(x => x.OsobaId == osobaId);
+
+                if (korisnikImaPreferiraneZanrove)
+                {
+                    var gledaoSamOsobaId = _userKeyService.GetCurrentUserKey(User);
+                    preporuke = await _recommendationService.PersonalizovanePreporukeAsync(osobaId, gledaoSamOsobaId, 10);
+                    prikaziPreporuke = preporuke.Count > 0;
+                }
             }
 
             var trenutnaGodina = DateTime.UtcNow.Year;
@@ -118,7 +130,7 @@ namespace BMDb.Controllers
                 TopRatedFilms = topFilmovi.Select(x => MapMediaItem(x, zanrovi)).ToList(),
                 TopRatedSeries = topSerije.Select(x => MapMediaItem(x, zanrovi)).ToList(),
                 RecommendedItems = preporuke.Select(x => MapMediaItem(x, zanrovi)).ToList(),
-                ShowRecommendations = preporuke.Count > 0,
+                ShowRecommendations = prikaziPreporuke,
                 ComingSoonFilms = comingSoon.Select(x => MapMediaItem(x.Film, zanrovi, x.TrailerEmbedUrl)).ToList()
             };
 

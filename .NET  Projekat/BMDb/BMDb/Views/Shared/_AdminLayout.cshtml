@@ -28,7 +28,7 @@
                         <span class="sr-only">Prikaži navigaciju</span>
                         <div id="nav-icon1"><span></span><span></span><span></span></div>
                     </div>
-                    <a href="#"><img class="logo" src="~/images/logo1.png" alt="" width="119" height="58"></a>
+                    <a asp-controller="Home" asp-action="Glavna"><img class="logo" src="~/images/logo1.png" alt="" width="119" height="58"></a>
                 </div>
                 <div class="collapse navbar-collapse flex-parent" id="bs-example-navbar-collapse-1">
                     @if (User.IsInRole("Admin") || User.IsInRole("Moderator"))
@@ -74,7 +74,7 @@
         <div class="container">
             <div class="flex-parent-ft">
                 <div class="flex-child-ft item1">
-                    <a asp-controller="Home" asp-action="AdminDashboard"><img class="logo" src="~/images/logo1.png" alt=""></a>
+                    <a asp-controller="Home" asp-action="Glavna"><img class="logo" src="~/images/logo1.png" alt=""></a>
                     <p>Admin Panel Sektor</p>
                 </div>
                 <div class="flex-child-ft item5">
