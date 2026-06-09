@@ -863,4 +863,3 @@ C:\Users\DT User\Desktop\Grupa3-Tim1\.NET  Projekat\BMDb\BMDb\obj\Debug\net8.0\r
 C:\Users\DT User\Desktop\Grupa3-Tim1\.NET  Projekat\BMDb\BMDb\obj\Debug\net8.0\BMDb.pdb
 C:\Users\DT User\Desktop\Grupa3-Tim1\.NET  Projekat\BMDb\BMDb\obj\Debug\net8.0\BMDb.genruntimeconfig.cache
 C:\Users\DT User\Desktop\Grupa3-Tim1\.NET  Projekat\BMDb\BMDb\obj\Debug\net8.0\ref\BMDb.dll
-C:\Users\ajdin\Desktop\etf\OAD\projekat\Grupa3-Tim1\.NET  Projekat\BMDb\BMDb\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt

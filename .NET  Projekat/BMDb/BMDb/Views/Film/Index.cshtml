@@ -1,4 +1,5 @@
 @model BMDb.ViewModels.MediaIndexViewModel<BMDb.Models.Film>
+@inject BMDb.Services.IMediaImageService MediaImageService
 
 <div class="hero common-hero">
     <div class="container">
@@ -32,7 +33,7 @@
                     <div class="flex-wrap-movielist">
                         @foreach (var film in Model.Items)
                         {
-                            var poster = string.IsNullOrWhiteSpace(film.PosterLink) ? Url.Content("~/images/uploads/movie-single.jpg") : film.PosterLink;
+                            var poster = MediaImageService.ResolvePosterUrl(film.PosterLink);
                             <div class="movie-item-style-2 movie-item-style-1">
                                 <img src="@poster" alt="@film.Naziv">
                                 <div class="hvr-inner">

@@ -37,6 +37,7 @@ builder.Services.AddScoped<IOglasService, OglasService>();
 builder.Services.AddScoped<IMediaSearchService, MediaSearchService>();
 builder.Services.AddScoped<IRecommendationService, RecommendationService>();
 builder.Services.AddScoped<IFileValidationService, FileValidationService>();
+builder.Services.AddScoped<IMediaImageService, MediaImageService>();
 builder.Services.AddScoped<KatalogFacade>();
 builder.Services.AddScoped<MediaFactory>();
 

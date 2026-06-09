@@ -19,6 +19,7 @@ namespace BMDb.Controllers
         private readonly ITrailerServis _trailerServis;
         private readonly IUserKeyService _userKeyService;
         private readonly UserManager<Osoba> _userManager;
+        private readonly IMediaImageService _mediaImageService;
 
         public HomeController(
             ILogger<HomeController> logger,
@@ -26,7 +27,8 @@ namespace BMDb.Controllers
             IRecommendationService recommendationService,
             ITrailerServis trailerServis,
             IUserKeyService userKeyService,
-            UserManager<Osoba> userManager)
+            UserManager<Osoba> userManager,
+            IMediaImageService mediaImageService)
         {
             _logger = logger;
             _context = context;
@@ -34,6 +36,7 @@ namespace BMDb.Controllers
             _trailerServis = trailerServis;
             _userKeyService = userKeyService;
             _userManager = userManager;
+            _mediaImageService = mediaImageService;
         }
 
         public IActionResult Index()
@@ -215,7 +218,7 @@ namespace BMDb.Controllers
                     g => (IReadOnlyList<string>)g.Select(x => x.Naziv).Where(x => !string.IsNullOrWhiteSpace(x)).Distinct().ToList());
         }
 
-        private static HomeMediaItemViewModel MapMediaItem(
+        private HomeMediaItemViewModel MapMediaItem(
             Entertainment entertainment,
             IReadOnlyDictionary<int, IReadOnlyList<string>> zanrovi,
             string trailerEmbedUrl = "")
@@ -225,9 +228,7 @@ namespace BMDb.Controllers
                 Id = entertainment.Id,
                 Title = entertainment.Naziv ?? string.Empty,
                 ControllerName = entertainment is Serija ? "Serija" : "Film",
-                PosterUrl = string.IsNullOrWhiteSpace(entertainment.PosterLink)
-                    ? "/images/uploads/mv-item1.jpg"
-                    : entertainment.PosterLink,
+                PosterUrl = _mediaImageService.ResolvePosterUrl(entertainment.PosterLink),
                 Rating = entertainment.ProsjecnaOcjena,
                 Year = entertainment.GodinaIzlaska > 0 ? entertainment.GodinaIzlaska : null,
                 TrailerEmbedUrl = trailerEmbedUrl,

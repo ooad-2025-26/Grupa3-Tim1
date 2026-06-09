@@ -1,7 +1,8 @@
 @model BMDb.ViewModels.MediaDetailsViewModel
+@inject BMDb.Services.IMediaImageService MediaImageService
 @{
     var film = (BMDb.Models.Film)Model.Entertainment;
-    var poster = string.IsNullOrWhiteSpace(film.PosterLink) ? Url.Content("~/images/uploads/movie-single.jpg") : film.PosterLink;
+    var poster = MediaImageService.ResolvePosterUrl(film.PosterLink);
 }
 
 <div class="hero mv-single-hero"></div>
