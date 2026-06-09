@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BMDb.Data;
 using BMDb.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BMDb.Controllers
 {
+    [Authorize(Roles = "Admin,Moderator")]
     public class GalerijaSlikaController : Controller
     {
         private readonly ApplicationDbContext _context;

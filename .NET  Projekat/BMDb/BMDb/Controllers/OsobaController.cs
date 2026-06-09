@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using BMDb.Data; 
 using BMDb.Models; 
 
 namespace BMDb.Controllers
 {
+    [Authorize]
     public class OsobaController : Controller
     {
         private readonly UserManager<Osoba> _userManager;
@@ -24,6 +26,7 @@ namespace BMDb.Controllers
         }
 
 
+        [Authorize(Roles = "Admin")]
         public IActionResult Index()
         {
 

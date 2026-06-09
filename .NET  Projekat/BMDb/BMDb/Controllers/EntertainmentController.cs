@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BMDb.Data;
 using BMDb.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BMDb.Controllers
 {
@@ -44,6 +45,7 @@ namespace BMDb.Controllers
         }
 
         // GET: Entertainment/Create
+        [Authorize(Roles = "Admin,Moderator")]
         public IActionResult Create()
         {
             return View();
@@ -53,6 +55,7 @@ namespace BMDb.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize(Roles = "Admin,Moderator")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Naziv,Opis,ProsjecnaOcjena,Reditelj,GodinaIzlaska,YoutubeLink,Trajanje,PosterLink")] Entertainment entertainment)
         {
@@ -66,6 +69,7 @@ namespace BMDb.Controllers
         }
 
         // GET: Entertainment/Edit/5
+        [Authorize(Roles = "Admin,Moderator")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -85,6 +89,7 @@ namespace BMDb.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize(Roles = "Admin,Moderator")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Naziv,Opis,ProsjecnaOcjena,Reditelj,GodinaIzlaska,YoutubeLink,Trajanje,PosterLink")] Entertainment entertainment)
         {
@@ -117,6 +122,7 @@ namespace BMDb.Controllers
         }
 
         // GET: Entertainment/Delete/5
+        [Authorize(Roles = "Admin,Moderator")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -136,6 +142,7 @@ namespace BMDb.Controllers
 
         // POST: Entertainment/Delete/5
         [HttpPost, ActionName("Delete")]
+        [Authorize(Roles = "Admin,Moderator")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {

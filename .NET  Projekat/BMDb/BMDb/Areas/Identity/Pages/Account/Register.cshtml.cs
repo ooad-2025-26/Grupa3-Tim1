@@ -113,13 +113,13 @@ namespace BMDb.Areas.Identity.Pages.Account
 
         public async Task OnGetAsync(string returnUrl = null)
         {
-            ReturnUrl = returnUrl;
+            ReturnUrl = returnUrl ?? Url.Content("~/Home/Glavna");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
-            returnUrl ??= Url.Content("~/");
+            returnUrl ??= Url.Content("~/Home/Glavna");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
@@ -130,7 +130,7 @@ namespace BMDb.Areas.Identity.Pages.Account
                 user.Avatar = "default-avatar.png";
                 user.DatumRegistracije = DateTime.UtcNow;
                 user.NotifikacijeUkljucene = true;
-                user.StatusOsobe = BMDb.Models.OsobaStatus.Korisnik;
+                user.StatusOsobe = BMDb.Models.OsobaStatus.Aktivan;
                 user.BrojRecenzija = 0;
                                                    
 
@@ -141,6 +141,16 @@ namespace BMDb.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
+
+                    var roleResult = await _userManager.AddToRoleAsync(user, "Korisnik");
+                    if (!roleResult.Succeeded)
+                    {
+                        foreach (var error in roleResult.Errors)
+                        {
+                            ModelState.AddModelError(string.Empty, error.Description);
+                        }
+                        return Page();
+                    }
 
                     var userId = await _userManager.GetUserIdAsync(user);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);

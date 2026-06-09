@@ -8,9 +8,11 @@ using Microsoft.EntityFrameworkCore;
 using BMDb.Data;
 using BMDb.Models;
 using BMDb.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BMDb.Controllers
 {
+    [Authorize]
     public class RecenzijaController : Controller
     {
         private readonly ApplicationDbContext _context;

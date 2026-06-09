@@ -1,4 +1,4 @@
-﻿@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Identity
 @inject UserManager<Osoba> UserManager
 
 <!DOCTYPE html>
@@ -16,7 +16,7 @@
 <body>
 
     <div id="preloader">
-        <img class="logo" src="images/logo1.png" alt="" width="119" height="58">
+        <img class="logo" src="~/images/logo1.png" alt="" width="119" height="58">
         <div id="status"><span></span><span></span></div>
     </div>
 
@@ -25,35 +25,38 @@
             <nav class="navbar navbar-default navbar-custom">
                 <div class="navbar-header logo">
                     <div class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                        <span class="sr-only">Prikaži navigaciju</span>
+                        <span class="sr-only">Prika�i navigaciju</span>
                         <div id="nav-icon1"><span></span><span></span><span></span></div>
                     </div>
-                    <a href="#"><img class="logo" src="images/logo1.png" alt="" width="119" height="58"></a>
+                    <a href="#"><img class="logo" src="~/images/logo1.png" alt="" width="119" height="58"></a>
                 </div>
                 <div class="collapse navbar-collapse flex-parent" id="bs-example-navbar-collapse-1">
+                    @if (User.IsInRole("Admin"))
+                    {
                     <ul class="nav navbar-nav flex-child-menu menu-left">
-                        <li><a href="index.html">Početna</a></li>
-                        <li><a href="upravljanje_korisnicima.html">Korisnici</a></li>
-                        <li><a href="finansije.html">Finansije</a></li>
+                        <li><a asp-controller="Home" asp-action="Glavna">Pocetna</a></li>
+                        <li><a asp-controller="Home" asp-action="AdminLista">Korisnici</a></li>
+                        <li><a asp-controller="Home" asp-action="Finansije">Finansije</a></li>
                         <li class="dropdown first">
                             <a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown" data-hover="dropdown">
-                                Sadržaj<i class="fa fa-angle-down" aria-hidden="true"></i>
+                                Sadr�aj<i class="fa fa-angle-down" aria-hidden="true"></i>
                             </a>
                             <ul class="dropdown-menu level1">
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dodaj<i class="ion-ios-arrow-forward"></i></a>
                                     <ul class="dropdown-menu level2">
-                                        <li><a href="dodaj_film.html">Film</a></li>
-                                        <li><a href="dodaj_seriju.html">TV Serija</a></li>
+                                        <li><a asp-controller="Film" asp-action="Create">Film</a></li>
+                                        <li><a asp-controller="Serija" asp-action="Create">TV Serija</a></li>
                                     </ul>
                                 </li>
-                                <li class="it-last"><a href="lista.html">Lista</a></li>
+                                <li class="it-last"><a asp-controller="Entertainment" asp-action="Index">Lista</a></li>
                             </ul>
                         </li>
                     </ul>
+                    }
                     <ul class="nav navbar-nav flex-child-menu menu-right">
-                        <li class="btn signupLink" style="background-color: #dd4b39 !important; border: none; padding: 0; display: inline-block;">
-                            <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" method="post" style="display: inline;">
+                        <li class="btn" style="background-color: #dd4b39 !important; border: none; padding: 0; display: inline-block;">
+                            <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Glavna", "Home", new { area = "" })" method="post" style="display: inline;">
                                 <button type="submit" style="background: none; border: none; color: #ffffff; padding: 11px 25px; cursor: pointer; font-family: 'Dosis', sans-serif; font-size: 14px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px;">
                                     Odjavi se
                                 </button>
@@ -71,13 +74,16 @@
         <div class="container">
             <div class="flex-parent-ft">
                 <div class="flex-child-ft item1">
-                    <a href="admin.html"><img class="logo" src="images/logo1.png" alt=""></a>
+                    <a href="admin.html"><img class="logo" src="~/images/logo1.png" alt=""></a>
                     <p>Admin Panel Sektor</p>
                 </div>
                 <div class="flex-child-ft item5">
+                    @if (User.IsInRole("Admin"))
+                    {
                     <h4>Brzi alati</h4>
-                    <a href="upravljanje_korisnicima.html" class="btn">Upravljaj korisnicima</a>
+                    <a asp-controller="Home" asp-action="AdminLista" class="btn">Upravljaj korisnicima</a>
                     <br><br>
+                    }
 
                 </div>
             </div>

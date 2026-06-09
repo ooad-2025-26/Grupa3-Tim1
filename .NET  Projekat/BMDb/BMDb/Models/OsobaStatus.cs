@@ -2,6 +2,7 @@
 {
     public enum OsobaStatus
     {
-        Korisnik, Moderator,VerifikovaniKorisnik, Administrator, Gost  
+        Aktivan,
+        Neaktivan
     }
 }

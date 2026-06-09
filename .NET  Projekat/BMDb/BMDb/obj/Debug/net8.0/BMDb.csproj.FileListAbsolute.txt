@@ -568,7 +568,6 @@ C:\Users\ajdin\Desktop\etf\OAD\projekat\Grupa3-Tim1\.NET  Projekat\BMDb\BMDb\obj
 C:\Users\ajdin\Desktop\etf\OAD\projekat\Grupa3-Tim1\.NET  Projekat\BMDb\BMDb\obj\Debug\net8.0\staticwebassets.development.json
 C:\Users\ajdin\Desktop\etf\OAD\projekat\Grupa3-Tim1\.NET  Projekat\BMDb\BMDb\obj\Debug\net8.0\staticwebassets.build.endpoints.json
 C:\Users\ajdin\Desktop\etf\OAD\projekat\Grupa3-Tim1\.NET  Projekat\BMDb\BMDb\obj\Debug\net8.0\swae.build.ex.cache
-C:\Users\ajdin\Desktop\etf\OAD\projekat\Grupa3-Tim1\.NET  Projekat\BMDb\BMDb\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 C:\Users\ajdin\Desktop\etf\OAD\projekat\Grupa3-Tim1\.NET  Projekat\BMDb\BMDb\obj\Debug\net8.0\BMDb.csproj.Up2Date
 C:\Users\ajdin\Desktop\etf\OAD\projekat\Grupa3-Tim1\.NET  Projekat\BMDb\BMDb\obj\Debug\net8.0\BMDb.dll
 C:\Users\ajdin\Desktop\etf\OAD\projekat\Grupa3-Tim1\.NET  Projekat\BMDb\BMDb\obj\Debug\net8.0\refint\BMDb.dll
@@ -864,3 +863,4 @@ C:\Users\DT User\Desktop\Grupa3-Tim1\.NET  Projekat\BMDb\BMDb\obj\Debug\net8.0\r
 C:\Users\DT User\Desktop\Grupa3-Tim1\.NET  Projekat\BMDb\BMDb\obj\Debug\net8.0\BMDb.pdb
 C:\Users\DT User\Desktop\Grupa3-Tim1\.NET  Projekat\BMDb\BMDb\obj\Debug\net8.0\BMDb.genruntimeconfig.cache
 C:\Users\DT User\Desktop\Grupa3-Tim1\.NET  Projekat\BMDb\BMDb\obj\Debug\net8.0\ref\BMDb.dll
+C:\Users\ajdin\Desktop\etf\OAD\projekat\Grupa3-Tim1\.NET  Projekat\BMDb\BMDb\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt

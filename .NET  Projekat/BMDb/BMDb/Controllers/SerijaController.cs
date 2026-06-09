@@ -84,6 +84,7 @@ namespace BMDb.Controllers
         }
 
         // GET: Serija/Create
+        [Authorize(Roles = "Admin,Moderator")]
         public IActionResult Create()
         {
             return View();
@@ -114,6 +115,7 @@ namespace BMDb.Controllers
 
         [Authorize]
         [HttpPost]
+        [Authorize(Roles = "Admin,Moderator")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> OznaciGledao(int id)
         {
@@ -143,6 +145,7 @@ namespace BMDb.Controllers
         }
 
         // GET: Serija/Edit/5
+        [Authorize(Roles = "Admin,Moderator")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -162,6 +165,7 @@ namespace BMDb.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize(Roles = "Admin,Moderator")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("IDSerije,BrojSezona,BrojEpizoda,ZavrsenoEmitovanje,Id,Naziv,Opis,ProsjecnaOcjena,Reditelj,GodinaIzlaska,YoutubeLink,Trajanje,PosterLink")] Serija serija)
         {
@@ -200,6 +204,7 @@ namespace BMDb.Controllers
         }
 
         // GET: Serija/Delete/5
+        [Authorize(Roles = "Admin,Moderator")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -219,6 +224,7 @@ namespace BMDb.Controllers
 
         // POST: Serija/Delete/5
         [HttpPost, ActionName("Delete")]
+        [Authorize(Roles = "Admin,Moderator")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {

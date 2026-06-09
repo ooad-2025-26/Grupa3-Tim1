@@ -27,6 +27,8 @@ namespace BMDb.Data
         public DbSet<Uloga> Uloga { get; set; }
         public DbSet<Zanr> Zanr { get; set; }
 
+        public DbSet<OsobaZanr> OsobaZanr { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -46,6 +48,7 @@ namespace BMDb.Data
             modelBuilder.Entity<Sezona>().ToTable("Sezona");
             modelBuilder.Entity<Uloga>().ToTable("Uloga");
             modelBuilder.Entity<Zanr>().ToTable("Zanr");
+            modelBuilder.Entity<OsobaZanr>().ToTable("OsobaZanr");
         }
     }
 }
