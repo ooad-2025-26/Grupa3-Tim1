@@ -42,7 +42,7 @@ namespace BMDb.Services
         {
             if (string.IsNullOrWhiteSpace(osobaId))
             {
-                return await GlobalnePreporukeAsync(count);
+                return [];
             }
 
             var zanrIds = await _context.OsobaZanr
@@ -54,7 +54,7 @@ namespace BMDb.Services
 
             if (zanrIds.Count == 0)
             {
-                return await GlobalnePreporukeAsync(count);
+                return [];
             }
 
             var gledaniIds = gledaoSamOsobaId > 0
@@ -78,7 +78,7 @@ namespace BMDb.Services
 
             if (relevantnostPoSadrzaju.Count == 0)
             {
-                return await GlobalnePreporukeAsync(count);
+                return [];
             }
 
             var relevantnost = relevantnostPoSadrzaju.ToDictionary(x => x.EntertainmentId, x => x.BrojPoklopljenihZanrova);

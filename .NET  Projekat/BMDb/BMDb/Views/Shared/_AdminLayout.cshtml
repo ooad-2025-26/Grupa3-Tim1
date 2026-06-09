@@ -31,12 +31,12 @@
                     <a href="#"><img class="logo" src="~/images/logo1.png" alt="" width="119" height="58"></a>
                 </div>
                 <div class="collapse navbar-collapse flex-parent" id="bs-example-navbar-collapse-1">
-                    @if (User.IsInRole("Admin"))
+                    @if (User.IsInRole("Admin") || User.IsInRole("Moderator"))
                     {
                     <ul class="nav navbar-nav flex-child-menu menu-left">
                         <li><a asp-controller="Home" asp-action="Glavna">Pocetna</a></li>
-                        <li><a asp-controller="Home" asp-action="AdminLista">Korisnici</a></li>
-                        <li><a asp-controller="Home" asp-action="Finansije">Finansije</a></li>
+                        <li><a asp-controller="Home" asp-action="Korisnici">Korisnici</a></li>
+                        @if (User.IsInRole("Admin")) { <li><a asp-controller="Home" asp-action="Finansije">Finansije</a></li> }
                         <li class="dropdown first">
                             <a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown" data-hover="dropdown">
                                 Sadržaj<i class="fa fa-angle-down" aria-hidden="true"></i>
@@ -74,14 +74,14 @@
         <div class="container">
             <div class="flex-parent-ft">
                 <div class="flex-child-ft item1">
-                    <a href="admin.html"><img class="logo" src="~/images/logo1.png" alt=""></a>
+                    <a asp-controller="Home" asp-action="AdminDashboard"><img class="logo" src="~/images/logo1.png" alt=""></a>
                     <p>Admin Panel Sektor</p>
                 </div>
                 <div class="flex-child-ft item5">
-                    @if (User.IsInRole("Admin"))
+                    @if (User.IsInRole("Admin") || User.IsInRole("Moderator"))
                     {
                     <h4>Brzi alati</h4>
-                    <a asp-controller="Home" asp-action="AdminLista" class="btn">Upravljaj korisnicima</a>
+                    <a asp-controller="Home" asp-action="Korisnici" class="btn">Upravljaj korisnicima</a>
                     <br><br>
                     }
 
@@ -90,10 +90,10 @@
         </div>
     </footer>
 
-    <script src="js/jquery.js"></script>
-    <script src="js/plugins.js"></script>
-    <script src="js/plugins2.js"></script>
-    <script src="js/custom.js"></script>
+    <script src="~/js/jquery.js"></script>
+    <script src="~/js/plugins.js"></script>
+    <script src="~/js/plugins2.js"></script>
+    <script src="~/js/custom.js"></script>
 
 </body>
 </html>

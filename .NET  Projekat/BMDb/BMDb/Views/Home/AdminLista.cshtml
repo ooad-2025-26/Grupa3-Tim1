@@ -1,138 +1,76 @@
-﻿@{
+@model IReadOnlyList<BMDb.ViewModels.HomeMediaItemViewModel>
+@{
     Layout = "_AdminLayout";
 }
 @section StranicaStilovi {
-
     <style>
-        .admin-section {
-            padding: 50px 0;
-            background: #020d18;
-            color: white;
-            min-height: 70vh;
-        }
-
-        .table-custom {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-            background: #0b1a2a;
-        }
-
-            .table-custom th, .table-custom td {
-                padding: 15px;
-                border: 1px solid #1c3d5d;
-                text-align: left;
-            }
-
-            .table-custom th {
-                background: #06121e;
-                color: #fbb124;
-            }
-
-        .action-btn {
-            padding: 5px 12px;
-            border-radius: 3px;
-            cursor: pointer;
-            border: none;
-            margin-right: 5px;
-            transition: 0.3s;
-        }
-
-        .btn-del {
-            background: #dd163b;
-            color: white;
-        }
-
-        .btn-edit {
-            background: #fbb124;
-            color: black;
-        }
-
-        .status-objavljeno {
-            color: #2ecc71;
-        }
-
-        .status-obrada {
-            color: #fbb124;
-        }
+        .admin-section { padding: 50px 0; background: #020d18; color: white; min-height: 70vh; }
+        .table-custom { width: 100%; border-collapse: collapse; margin-top: 20px; background: #0b1a2a; }
+        .table-custom th, .table-custom td { padding: 15px; border: 1px solid #1c3d5d; text-align: left; }
+        .table-custom th { background: #06121e; color: #fbb124; }
+        .action-btn { padding: 5px 12px; border-radius: 3px; cursor: pointer; border: none; margin-right: 5px; transition: 0.3s; }
+        .btn-del { background: #dd163b; color: white; }
+        .btn-edit { background: #fbb124; color: black; }
+        .status-objavljeno { color: #2ecc71; }
+        .status-obrada { color: #fbb124; }
     </style>
 }
-    <div class="hero common-hero">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="hero-ct">
-                        <h1>Lista svih filmova i serija</h1>
-                        <ul class="breadcumb">
-                            <li><a href="admin.html">Admin</a></li>
-                            <li> <span class="ion-ios-arrow-right"></span> Sadržaj</li>
-                            <li> <span class="ion-ios-arrow-right"></span> Lista</li>
-                        </ul>
-                    </div>
+<div class="hero common-hero">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="hero-ct">
+                    <h1>Lista svih filmova i serija</h1>
+                    <ul class="breadcumb">
+                        <li><a asp-controller="Home" asp-action="AdminDashboard">Admin</a></li>
+                        <li><span class="ion-ios-arrow-right"></span> Sadrzaj</li>
+                        <li><span class="ion-ios-arrow-right"></span> Lista</li>
+                    </ul>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-    <section class="admin-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div style="margin-bottom: 20px;">
-                        <h3>Pregled baze podataka</h3>
-                    </div>
-                <div class="top-search">
-
-                    <input type="text" placeholder="Pretražite filmove i TV serije zelite promijeniti">
+<section class="admin-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div style="margin-bottom: 20px;">
+                    <h3>Pregled baze podataka</h3>
                 </div>
                 <table class="table-custom">
-                        <thead>
+                    <thead>
+                        <tr>
+                            <th>Poster</th>
+                            <th>Naziv</th>
+                            <th>Zanr</th>
+                            <th>Godina</th>
+                            <th>Tip</th>
+                            <th>Akcije</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
                             <tr>
-                                <th>Poster</th>
-                                <th>Naziv</th>
-                                <th>Žanr</th>
-                                <th>Godina</th>
-                                <th>Status</th>
-                                <th>Akcije</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><img src="images/uploads/mv1.jpg" alt="" width="50"></td>
-                                <td><strong>Interstellar</strong></td>
-                                <td>Sci-Fi, Adventure</td>
-                                <td>2014</td>
-                                <td class="status-objavljeno">Objavljeno</td>
+                                <td><img src="@item.PosterUrl" alt="@item.Title" width="50"></td>
+                                <td><strong>@item.Title</strong></td>
+                                <td>@(item.Genres.Count > 0 ? string.Join(", ", item.Genres) : "-")</td>
+                                <td>@(item.Year?.ToString() ?? "-")</td>
+                                <td class="status-objavljeno">@(item.ControllerName == "Serija" ? "Serija" : "Film")</td>
                                 <td>
-                                    <button class="action-btn btn-edit">Uredi</button>
-                                    <button class="action-btn btn-del">Obriši</button>
+                                    <a class="action-btn btn-edit" asp-controller="@item.ControllerName" asp-action="Edit" asp-route-id="@item.Id">Uredi</a>
+                                    <form asp-controller="@item.ControllerName" asp-action="Delete" asp-route-id="@item.Id" method="post" style="display:inline;">
+                                        @Html.AntiForgeryToken()
+                                        <button type="submit" class="action-btn btn-del">Obrisi</button>
+                                    </form>
                                 </td>
                             </tr>
-                            <tr>
-                                <td><img src="images/uploads/mv2.jpg" alt="" width="50"></td>
-                                <td><strong>Dune: Part Two</strong></td>
-                                <td>Sci-Fi, Epic</td>
-                                <td>2024</td>
-                                <td class="status-obrada">U obradi</td>
-                                <td>
-                                    <button class="action-btn btn-edit">Uredi</button>
-                                    <button class="action-btn btn-del">Obriši</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><img src="images/uploads/mv3.jpg" alt="" width="50"></td>
-                                <td><strong>The Dark Knight</strong></td>
-                                <td>Akcija, Krimi</td>
-                                <td>2008</td>
-                                <td class="status-objavljeno">Objavljeno</td>
-                                <td>
-                                    <button class="action-btn btn-edit">Uredi</button>
-                                    <button class="action-btn btn-del">Obriši</button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                        }
+                    </tbody>
+                </table>
             </div>
         </div>
-    </section>
+    </div>
+</section>
