@@ -1,6 +1,11 @@
-Ôªø@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Identity
+@using BMDb.Services
 @inject SignInManager<Osoba> SignInManager
 @inject UserManager<Osoba> UserManager
+@inject IOglasService OglasService
+@{
+    var aktivniOglas = await OglasService.DohvatiAktivniOglasAsync();
+}
 
 <!DOCTYPE html>
 
@@ -45,7 +50,7 @@
             <form asp-area="Identity" asp-page="/Account/Login" method="post">
                 <div class="row">
                     <label for="username">
-                        Korisniƒçko ime:
+                        KorisniËko ime:
                         <input type="text" name="Input.Email" id="username" required="required" />
                     </label>
                 </div>
@@ -69,7 +74,7 @@
                 </div>
             </form>
             <div class="row">
-                <p>Ili putem dru≈°tvenih mre≈æa</p>
+                <p>Ili putem druötvenih mreûa</p>
                 <div class="social-btn-2">
                     <a class="fb" href="#"><i class="ion-social-facebook"></i>Facebook</a>
                     <a class="tw" href="#"><i class="ion-social-twitter"></i>twitter</a>
@@ -108,7 +113,7 @@
 
                 <div class="row">
                     <label for="email-2">
-                        Va≈° e-mail:
+                        Vaö e-mail:
                         <input type="email" name="Input.Email" id="email-2" required="required" />
                     </label>
                 </div>
@@ -141,7 +146,7 @@
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header logo">
                     <div class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                        <span class="sr-only">Prika≈æi navigaciju</span>
+                        <span class="sr-only">Prikaûi navigaciju</span>
                         <div id="nav-icon1">
                             <span></span>
                             <span></span>
@@ -154,7 +159,7 @@
                 <div class="collapse navbar-collapse flex-parent" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav flex-child-menu menu-left">
                         <li class="hidden"><a href="#page-top"></a></li>
-                        <li><a asp-controller="Home" asp-action="Glavna">Poƒçetna</a></li>
+                        <li><a asp-controller="Home" asp-action="Glavna">PoËetna</a></li>
 
                         <li class="dropdown first">
                             <a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown" data-hover="dropdown">
@@ -182,8 +187,9 @@
                                     Profil<i class="fa fa-angle-down" aria-hidden="true"></i>
                                 </a>
                                 <ul class="dropdown-menu level1">
-                                    <li><a asp-controller="GledatCu" asp-action="Index">gledat ƒáu</a></li>
+                                    <li><a asp-controller="GledatCu" asp-action="Index">gledat Êu</a></li>
                                     <li><a asp-controller="GledaoSam" asp-action="Index">gledao sam</a></li>
+                                    <li><a asp-controller="Notifikacija" asp-action="Index">notifikacije</a></li>
                                     <li><a asp-controller="Osoba" asp-action="Details">profil</a></li>
                                     <li class="it-last"><a asp-controller="Recenzija" asp-action="Index">recenzije</a></li>
                                 </ul>
@@ -192,7 +198,7 @@
                     </ul>
 
                     <ul class="nav navbar-nav flex-child-menu menu-right">
-                        <li><a href="#">Pomoƒá</a></li>
+                        <li><a href="#">PomoÊ</a></li>
 
                         @if (!SignInManager.IsSignedIn(User))
                         {
@@ -217,7 +223,7 @@
 
             <!-- top search form -->
             <div class="top-search">
-                <input type="text" placeholder="Pretra≈æite filmove i TV serije koji vas zanimaju
+                <input type="text" placeholder="Pretraûite filmove i TV serije koji vas zanimaju
 
 ">
             </div>
@@ -225,6 +231,17 @@
     </header>
     <!-- END | Header -->
     @RenderBody()
+
+    @if (aktivniOglas != null)
+    {
+        <div class="container" style="margin-top:20px;margin-bottom:20px;">
+            <div class="ads">
+                <a href="@aktivniOglas.Link" target="_blank" rel="noopener">
+                    <img src="@aktivniOglas.Slika" alt="Oglas">
+                </a>
+            </div>
+        </div>
+    }
 
 
     <!-- footer section-->
@@ -252,7 +269,7 @@
                 <div class="flex-child-ft item3">
                     <h4>Pravne informacije</h4>
                     <ul>
-                        <li><a href="#">Uslovi kori≈°tenja</a></li>
+                        <li><a href="#">Uslovi koriötenja</a></li>
                         <li><a href="#">Politika privatnosti</a></li>
                         <li><a href="#">Sigurnost</a></li>
                     </ul>
@@ -266,7 +283,7 @@
                        
                             <li><a asp-controller="Osoba" asp-action="Details">Moj profil</a></li>
                             <li><a asp-controller="GledaoSam" asp-action="Index">Gledao sam</a></li>
-                            <li><a asp-controller="GledatCu" asp-action="Index">Gledat ƒáu</a></li>  
+                            <li><a asp-controller="GledatCu" asp-action="Index">Gledat Êu</a></li>  
                         
                     </ul>
                 </div>
@@ -282,7 +299,7 @@
         </div>
         <div class="ft-copyright">
             <div class="ft-left">
-                <p><a target="_blank" ref="https://github.com/ooad-2025-26/Grupa3-Tim1">&copy; 2026 BMDb. Sva prava zadr≈æana.</a></p>
+                <p><a target="_blank" ref="https://github.com/ooad-2025-26/Grupa3-Tim1">&copy; 2026 BMDb. Sva prava zadrûana.</a></p>
             </div>
             <div class="backtotop">
                 <p><a href="#" id="back-to-top">Natrag na vrh  <i class="ion-ios-arrow-thin-up"></i></a></p>
@@ -316,3 +333,4 @@
 
 
 </html>
+

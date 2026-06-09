@@ -1,628 +1,149 @@
-﻿
-	<div class="hero sr-single-hero sr-single">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<!-- <h1> movie listing - list</h1>
-					<ul class="breadcumb">
-						<li class="active"><a href="#">Home</a></li>
-						<li> <span class="ion-ios-arrow-right"></span> movie listing</li>
-					</ul> -->
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="page-single movie-single movie_single">
-		<div class="container">
-			<div class="row ipad-width2">
-				<div class="col-md-4 col-sm-12 col-xs-12">
-					<div class="movie-img sticky-sb">
-						<img src="images/uploads/friends.jpg" alt="">
-						<div class="movie-btn">
-							<div class="btn-transform transform-vertical red">
-								<div><a href="https://www.youtube.com/embed/RasWhgd4vao" class="item item-1 redbtn bmd-trigger"><i class="ion-play"></i> Pogledaj trailer</a></div>
-								<div><a href="https://www.youtube.com/embed/RasWhgd4vao" class="item item-2 redbtn hvr-grow bmd-trigger"><i class="ion-play"></i></a></div>
-							</div>
+@model BMDb.ViewModels.MediaDetailsViewModel
+@{
+    var serija = (BMDb.Models.Serija)Model.Entertainment;
+    var poster = string.IsNullOrWhiteSpace(serija.PosterLink) ? Url.Content("~/images/uploads/friends.jpg") : serija.PosterLink;
+}
 
-							<div id="bmd-trailer-popup" class="bmd-modal-overlay">
-								<div class="bmd-modal-content">
-									<a href="#!" id="bmd-close" class="bmd-close-btn">&times;</a>
-									<div class="bmd-video-wrapper">
-										<iframe id="bmd-video-iframe"
-												src=""
-												data-src="https://www.youtube.com/embed/RasWhgd4vao?autoplay=1&rel=0&vq=hd1080"
-												frameborder="0"
-												allowfullscreen>
-										</iframe>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-8 col-sm-12 col-xs-12">
-					<div class="movie-single-ct main-content">
-						<h1 class="bd-hd">Prijatelji<span> 1994 - 2004</span></h1>
-						<div class="social-btn">
-							<a href="#" class="parent-btn" style="color: #add8e6; margin-left: 20px;">
-								<i class="ion-ios-play"></i> Gledat ću
-							</a>
-							<a href="#" class="parent-btn" style="color: #add8e6;">
-								<i class="ion-checkmark-circled"></i> Gledao sam
-							</a>
-						</div>
-						<div class="movie-rate">
-							<div class="rate">
-								<i class="ion-android-star"></i>
-								<p>
-									<span>8.1</span> /10<br>
-									<span class="rv">56 Ocjena</span>
-								</p>
-							</div>
-							<div class="rate-star">
-								<p>Ocjeni ovu seriju:  </p>
-								<i class="ion-ios-star"></i>
-								<i class="ion-ios-star"></i>
-								<i class="ion-ios-star"></i>
-								<i class="ion-ios-star"></i>
-								<i class="ion-ios-star"></i>
-								<i class="ion-ios-star"></i>
-								<i class="ion-ios-star"></i>
-								<i class="ion-ios-star"></i>
-								<i class="ion-ios-star-outline"></i>
-							</div>
-						</div>
-						<div class="movie-tabs">
-							<div class="tabs">
-								<ul class="tab-links tabs-mv tabs-series">
-									<li class="active"><a href="#overview">Pregled</a></li>
-									<li><a href="#reviews">Recenzije</a></li>
-									<li><a href="#reviews">Verifikovane recenzije</a></li>
-									<li><a href="#media">Galerija</a></li>
-									<li><a href="#season">Sezone</a></li>
-								</ul>
-								<div class="tab-content">
-									<div id="overview" class="tab active">
-										<div class="row">
-											<div class="col-md-8 col-sm-12 col-xs-12">
-												<p>Rachel Green, Ross Geller, Monica Geller, Chandler Bing, Joey Tribbiani i Phoebe Buffay su šest prijatelja koji žive u New Yorku, a njihovi životi se vrte oko prijateljstva, ljubavi i karijere. Zajedno prolaze kroz svakodnevne izazove odraslog života uz mnogo humora, nezaboravnih trenutaka i snažnih međusobnih veza.</p>
-												<div class="title-hd-sm">
-													<h4>Trenutna sezona</h4>
-													<a href="#" class="time">Pogledaj sve sezone <i class="ion-ios-arrow-right"></i></a>
-												</div>
-												<!-- movie cast -->
-												<div class="mvcast-item">
-													<div class="cast-it">
-														<div class="cast-left series-it">
-															<img src="images/uploads/season.jpg" alt="">
-															<div>
-																<a href="#">Sezona 10</a>
-																<p>18 epizoda</p>
-																<p>
-																	Sezona 10 serije Friends premijerno je prikazana
-																	25. septembra 2003.
-																</p>
-															</div>
-														</div>
-													</div>
-												</div>
-												<div class="title-hd-sm">
-													<h4>Fotografije</h4>
-													<a href="#" class="time">Svih 5 videa i 245 fotografija <i class="ion-ios-arrow-right"></i></a>
-												</div>
-												<div class="mvsingle-item ov-item">
-													<a class="img-lightbox" data-fancybox-group="gallery" href="images/uploads/friends1.jpg"><img src="images/uploads/friends1.jpg" alt="" style="width:100px;height:100px;object-fit:cover;"></a>
-													<a class="img-lightbox" data-fancybox-group="gallery" href="images/uploads/friends2.jpg"><img src="images/uploads/friends2.jpg" alt="" style="width:100px;height:100px;object-fit:cover;"></a>
-													<a class="img-lightbox" data-fancybox-group="gallery" href="images/uploads/friends3.jpg"><img src="images/uploads/friends3.jpg" alt="" style="width:100px;height:100px;object-fit:cover;"></a>
-													<a class="img-lightbox" data-fancybox-group="gallery" href="images/uploads/friends4.jpg"><img src="images/uploads/friends4.jpg" alt="" style="width:100px;height:100px;object-fit:cover;"></a>
-												</div>
-												<div class="title-hd-sm">
-													<h4>Glumačka postava</h4>
-													<a href="#" class="time">Cijela postava i ekipa  <i class="ion-ios-arrow-right"></i></a>
-												</div>
-												<!-- movie cast -->
-												<div class="mvcast-item">
-													<div class="cast-it">
-														<div class="cast-left">
-															<img src="images/uploads/jen.jpg" alt="" style="width:40px; height:40px; object-fit: cover;">
-															<a href="#">Jennifer Aniston</a>
-														</div>
-														<p>... Rachel Green</p>
-													</div>
-													<div class="cast-it">
-														<div class="cast-left">
-															<img src="images/uploads/cox.jpg" alt="" style="width:40px; height:40px; object-fit: cover;">
-															<a href="#">Courteney Cox</a>
-														</div>
-														<p>... Monica Geller</p>
-													</div>
-													<div class="cast-it">
-														<div class="cast-left">
-															<img src="images/uploads/lisa.jpg" alt="" style="width:40px; height:40px; object-fit: cover;">
-															<a href="#">Lisa Kudrow</a>
-														</div>
-														<p>... Phoebe Buffay</p>
-													</div>
-													<div class="cast-it">
-														<div class="cast-left">
-															<img src="images/uploads/matt.jpg" alt="" style="width:40px; height:40px; object-fit: cover;">
-															<a href="#">Matt LeBlanc</a>
-														</div>
-														<p>... Joey Tribbiani</p>
-													</div>
-													<div class="cast-it">
-														<div class="cast-left">
-															<img src="images/uploads/perry.jpg" alt="" style="width:40px; height:40px; object-fit: cover;">
-															<a href="#">Matthew Perry</a>
-														</div>
-														<p>... Chandler Bing</p>
-													</div>
-													<div class="cast-it">
-														<div class="cast-left">
-															<img src="images/uploads/david.jpg" alt="" style="width:40px; height:40px; object-fit: cover;">
-															<a href="#">David Schwimmer</a>
-														</div>
-														<p>... Ross Geller</p>
-													</div>
-												</div>
-											</div>
-											<div class="col-md-4 col-xs-12 col-sm-12">
-												<div class="sb-it">
-													<h6>Režija: </h6>
-													<p><a href="#">Razni</a></p>
-												</div>
-												<div class="sb-it">
-													<h6>Scenarij: </h6>
-													<p><a href="#">David Crane,</a> <a href="#">Marta Kauffman</a></p>
-												</div>
-												<div class="sb-it">
-													<h6>Glumci: </h6>
-													<p><a href="#">Jennifer Aniston,</a> <a href="#">Courteney Cox,</a> <a href="#">Matthew Perry,</a><a href="#"> Lisa Kudrow</a></p>
-												</div>
-												<div class="sb-it">
-													<h6>Žanr:</h6>
-													<p><a href="#">Komedija, </a> <a href="#"> Romansa</a></p>
-												</div>
-												<div class="sb-it">
-													<h6>Datum izlaska:</h6>
-													<p>22. septembar 1994 (SAD)</p>
-												</div>
-												<div class="sb-it">
-													<h6>Trajanje:</h6>
-													<p>22 min</p>
-												</div>
-												<div class="sb-it">
-													<h6>Dobna oznaka:</h6>
-													<p>TV-14</p>
-												</div>
-												<div class="sb-it">
-													<h6>Ključne riječi:</h6>
-													<p class="tags">
-														<span class="time"><a href="#">prijateljstvo</a></span>
-														<span class="time"><a href="#">new york</a></span>
-														<span class="time"><a href="#">sitcom</a></span>
-														<span class="time"><a href="#">odnosi</a></span>
-														<span class="time"><a href="#">komedija</a></span>
-													</p>
-												</div>
-												<div class="ads">
-													<img src="images/uploads/ads1.png" alt="">
-												</div>
-											</div>
-										</div>
-									</div>
-									<div id="reviews" class="tab review">
-										<div class="row">
-											<div class="rv-hd" style="margin-bottom: 20px;">
-												<a href="#" class="redbtn">Napiši recenziju</a>
-											</div>
-											<div class="topbar-filter">
-												<p>Pronađeno ukupno <span>56 recenzija</span></p>
-												<label>Filtriraj po:</label>
-												<select>
-													<option value="range">-- Odaberi opciju --</option>
-													<option value="saab">-- Odaberi opciju 2 --</option>
-												</select>
-											</div>
-											<div class="mv-user-review-item">
-												<div class="user-infor">
-													<img src="images/uploads/userava1.jpg" alt="">
-													<div>
-														<h3>Najbolja humoristična serija po mom mišljenju</h3>
-														<div class="no-star">
-															<i class="ion-android-star"></i>
-															<i class="ion-android-star"></i>
-															<i class="ion-android-star"></i>
-															<i class="ion-android-star"></i>
-															<i class="ion-android-star"></i>
-															<i class="ion-android-star"></i>
-															<i class="ion-android-star"></i>
-															<i class="ion-android-star"></i>
-															<i class="ion-android-star"></i>
-															<i class="ion-android-star last"></i>
-														</div>
-														<p class="time">
-															17. decembar 2016 od <a href="#"> hawaiipierson</a>
-														</p>
-													</div>
-												</div>
-												<p>Ovo je jedna od mojih omiljenih serija svih vremena. Likovi su nevjerovatni, a humor je uvijek na vrhunskom nivou. Svaka epizoda donosi nešto novo i zanimljivo, a priče su povezane na način koji gledaoce još više veže za likove.</p>
-											</div>
-											<div class="mv-user-review-item">
-												<div class="user-infor">
-													<img src="images/uploads/userava2.jpg" alt="">
-													<div>
-														<h3>Jednako dobra kao i na početku</h3>
-														<div class="no-star">
-															<i class="ion-android-star"></i>
-															<i class="ion-android-star"></i>
-															<i class="ion-android-star"></i>
-															<i class="ion-android-star"></i>
-															<i class="ion-android-star"></i>
-															<i class="ion-android-star"></i>
-															<i class="ion-android-star"></i>
-															<i class="ion-android-star"></i>
-															<i class="ion-android-star"></i>
-															<i class="ion-android-star"></i>
-														</div>
-														<p class="time">
-															17. decembar 2016 od <a href="#"> hawaiipierson</a>
-														</p>
-													</div>
-												</div>
-												<p>Friends je serija koja nikada ne gubi svoj šarm. Humor, prijateljstvo i odnosi između likova čine je posebnom i uvijek zanimljivom za gledanje.</p>
+<div class="hero sr-single-hero sr-single"></div>
+<div class="page-single movie-single movie_single">
+    <div class="container">
+        @if (!string.IsNullOrWhiteSpace(Model.StatusPoruka))
+        {
+            <p style="color:#f5b50a;">@Model.StatusPoruka</p>
+        }
+        <div class="row ipad-width2">
+            <div class="col-md-4 col-sm-12 col-xs-12">
+                <div class="movie-img sticky-sb">
+                    <img src="@poster" alt="@serija.Naziv">
+                    <div class="movie-btn">
+                        @if (!string.IsNullOrWhiteSpace(Model.TrailerEmbedUrl))
+                        {
+                            <iframe width="100%" height="240" src="@Model.TrailerEmbedUrl" title="Trailer" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        }
+                        else
+                        {
+                            <p style="color:#ffffff;">Trailer nije dostupan ili link nije validan.</p>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8 col-sm-12 col-xs-12">
+                <div class="movie-single-ct main-content">
+                    <h1 class="bd-hd">@serija.Naziv <span>@serija.GodinaIzlaska</span></h1>
+                    <div class="social-btn">
+                        @if (User.Identity?.IsAuthenticated == true)
+                        {
+                            <form asp-action="OznaciPlanirano" asp-route-id="@serija.Id" method="post" style="display:inline;">
+                                @Html.AntiForgeryToken()
+                                <button class="parent-btn" type="submit" style="background:none;border:0;color:#add8e6;margin-left:20px;">
+                                    <i class="ion-ios-play"></i> @(Model.JePlanirano ? "Planirano" : "Gledat ću")
+                                </button>
+                            </form>
+                            <form asp-action="OznaciGledao" asp-route-id="@serija.Id" method="post" style="display:inline;">
+                                @Html.AntiForgeryToken()
+                                <button class="parent-btn" type="submit" style="background:none;border:0;color:#add8e6;">
+                                    <i class="ion-checkmark-circled"></i> @(Model.JeGledao ? "Gledao sam" : "Označi gledano")
+                                </button>
+                            </form>
+                        }
+                    </div>
+                    <div class="movie-rate">
+                        <div class="rate">
+                            <i class="ion-android-star"></i>
+                            <p><span>@serija.ProsjecnaOcjena.ToString("0.0")</span> /10<br><span class="rv">@Model.Recenzije.Count recenzija</span></p>
+                        </div>
+                    </div>
+                    <div class="movie-tabs">
+                        <div class="tabs">
+                            <ul class="tab-links tabs-mv tabs-series">
+                                <li class="active"><a href="#overview">Pregled</a></li>
+                                <li><a href="#reviews">Recenzije</a></li>
+                                <li><a href="#season">Sezone</a></li>
+                                <li><a href="#media">Galerija</a></li>
+                            </ul>
+                            <div class="tab-content">
+                                <div id="overview" class="tab active">
+                                    <div class="row">
+                                        <div class="col-md-8 col-sm-12 col-xs-12">
+                                            <p>@serija.Opis</p>
+                                        </div>
+                                        <div class="col-md-4 col-xs-12 col-sm-12">
+                                            <div class="sb-it"><h6>Režija:</h6><p>@serija.Reditelj</p></div>
+                                            <div class="sb-it"><h6>Sezone:</h6><p>@serija.BrojSezona</p></div>
+                                            <div class="sb-it"><h6>Epizode:</h6><p>@serija.BrojEpizoda</p></div>
+                                            <div class="sb-it"><h6>Status:</h6><p>@(serija.ZavrsenoEmitovanje ? "Završeno" : "U emitiranju")</p></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="reviews" class="tab review">
+                                    <div class="row">
+                                        @if (User.Identity?.IsAuthenticated == true && Model.MozeOcijeniti)
+                                        {
+                                            <form asp-action="DodajRecenziju" asp-route-id="@serija.Id" method="post" class="form-style-1">
+                                                @Html.AntiForgeryToken()
+                                                <div class="row">
+                                                    <div class="col-md-3 form-it"><label>Ocjena</label><input type="number" name="ocjena" min="1" max="10" required></div>
+                                                    <div class="col-md-9 form-it"><label>Komentar</label><textarea name="komentar"></textarea></div>
+                                                    <div class="col-md-12"><input class="submit" type="submit" value="Sačuvaj recenziju"></div>
+                                                </div>
+                                            </form>
+                                        }
+                                        else if (User.Identity?.IsAuthenticated == true)
+                                        {
+                                            <p style="color:#ffffff;">Ocjenjivanje je dostupno nakon oznake "Gledao sam".</p>
+                                        }
 
-												<p>POZITIVNO:</p>
-
-												<p>Likovi su izuzetno dobro napisani i svako ima svoju jedinstvenu osobnost. Hemija između njih je ono što čini seriju posebnom.</p>
-
-												<p>NEGATIVNO:</p>
-
-												<p>Ponekad se neke priče ponavljaju, ali to ne umanjuje ukupni dojam.</p>
-											</div>
-											<div class="mv-user-review-item">
-												<div class="user-infor">
-													<img src="images/uploads/userava3.jpg" alt="">
-													<div>
-														<h3>Nije za svakoga, ali meni je dosadna</h3>
-														<div class="no-star">
-															<i class="ion-android-star"></i>
-															<i class="ion-android-star last"></i>
-															<i class="ion-android-star last"></i>
-															<i class="ion-android-star last"></i>
-															<i class="ion-android-star last"></i>
-															<i class="ion-android-star last"></i>
-															<i class="ion-android-star last"></i>
-															<i class="ion-android-star last"></i>
-															<i class="ion-android-star last"></i>
-															<i class="ion-android-star last"></i>
-														</div>
-														<p class="time">
-															26. mart 2017 od <a href="#"> christopherfreeman</a>
-														</p>
-													</div>
-												</div>
-												<p>Iskreno, nisam se uspio povezati sa serijom. Humor mi nije uvijek odgovarao i neke epizode su mi bile prilično spore.</p>
-
-												<p>Zaključak: Nije moj stil.</p>
-											</div>
-											<div class="mv-user-review-item ">
-												<div class="user-infor">
-													<img src="images/uploads/userava4.jpg" alt="">
-													<div>
-														<h3>Zabavna i opuštajuća serija</h3>
-														<div class="no-star">
-															<i class="ion-android-star"></i>
-															<i class="ion-android-star"></i>
-															<i class="ion-android-star"></i>
-															<i class="ion-android-star"></i>
-															<i class="ion-android-star"></i>
-															<i class="ion-android-star"></i>
-															<i class="ion-android-star last"></i>
-															<i class="ion-android-star last"></i>
-															<i class="ion-android-star last"></i>
-															<i class="ion-android-star last"></i>
-														</div>
-														<p class="time">
-															26. mart 2017 od <a href="#"> juliawest</a>
-														</p>
-													</div>
-												</div>
-												<p>Friends je savršena serija za opuštanje. Likovi su simpatični, priče zanimljive, a humor lagan i zabavan. Idealna za gledanje više puta.</p>
-											</div>
-											<div class="mv-user-review-item last">
-												<div class="user-infor">
-													<img src="images/uploads/userava5.jpg" alt="">
-													<div>
-														<h3>Odlična gluma i nezaboravni likovi</h3>
-														<div class="no-star">
-															<i class="ion-android-star"></i>
-															<i class="ion-android-star"></i>
-															<i class="ion-android-star"></i>
-															<i class="ion-android-star"></i>
-															<i class="ion-android-star"></i>
-															<i class="ion-android-star"></i>
-															<i class="ion-android-star"></i>
-															<i class="ion-android-star"></i>
-															<i class="ion-android-star last"></i>
-															<i class="ion-android-star last"></i>
-														</div>
-														<p class="time">
-															26. mart 2017 od <a href="#"> johnnylee</a>
-														</p>
-													</div>
-												</div>
-												<p>Serija prati grupu prijatelja u New Yorku i njihove svakodnevne avanture. Svaki lik ima svoju posebnost i doprinosi ukupnom doživljaju. Vrijedi pogledati zbog humora i emocija koje pruža.</p>
-
-												<p>Friends je jedna od onih serija koje ostaju popularne i nakon mnogo godina, upravo zbog svoje jednostavnosti i topline.</p>
-											</div>
-											<div class="topbar-filter">
-												<label>Recenzija po stranici:</label>
-												<select>
-													<option value="range">5 recenzija</option>
-													<option value="saab">10 recenzija</option>
-												</select>
-												<div class="pagination2">
-													<span>Stranica 1 od 6:</span>
-													<a class="active" href="#">1</a>
-													<a href="#">2</a>
-													<a href="#">3</a>
-													<a href="#">4</a>
-													<a href="#">5</a>
-													<a href="#">6</a>
-													<a href="#"><i class="ion-arrow-right-b"></i></a>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div id="media" class="tab">
-										<div class="row">
-											<div class="rv-hd">
-												<div>
-													<h3>Slike iz serije</h3>
-													<h2>Prijatelji</h2>
-												</div>
-											</div>
-
-											<div class="title-hd-sm">
-												<h4>Fotografije <span>(21)</span></h4>
-											</div>
-											<div class="mvsingle-item">
-												<a class="img-lightbox" data-fancybox-group="gallery" href="images/uploads/friends1.jpg"><img src="images/uploads/friends1.jpg" alt="" style="width:100px; height:100px; object-fit:cover;"></a>
-												<a class="img-lightbox" data-fancybox-group="gallery" href="images/uploads/friends2.jpg"><img src="images/uploads/friends2.jpg" alt="" style="width:100px; height:100px; object-fit:cover;"></a>
-												<a class="img-lightbox" data-fancybox-group="gallery" href="images/uploads/friends3.jpg"><img src="images/uploads/friends3.jpg" alt="" style="width:100px; height:100px; object-fit:cover;"></a>
-												<a class="img-lightbox" data-fancybox-group="gallery" href="images/uploads/friends4.jpg"><img src="images/uploads/friends4.jpg" alt="" style="width:100px; height:100px; object-fit:cover;"></a>
-												<a class="img-lightbox" data-fancybox-group="gallery" href="images/uploads/friends5.jpg"><img src="images/uploads/friends5.jpg" alt="" style="width:100px; height:100px; object-fit:cover;"></a>
-												<a class="img-lightbox" data-fancybox-group="gallery" href="images/uploads/friends6.jpg"><img src="images/uploads/friends6.jpg" alt="" style="width:100px; height:100px; object-fit:cover;"></a>
-												<a class="img-lightbox" data-fancybox-group="gallery" href="images/uploads/friends7.jpg"><img src="images/uploads/friends7.jpg" alt="" style="width:100px; height:100px; object-fit:cover;"></a>
-											</div>
-										</div>
-									</div>
-									<div id="season" class="tab">
-										<div class="row">
-											<div class="mvcast-item">
-												<div class="cast-it">
-													<div class="cast-left series-it">
-														<img src="images/uploads/season.jpg" alt="" style="height:100px; width:auto;">
-														<div>
-															<a href="#">Sezona 1</a>
-															<p>24 epizode</p>
-															<p>Sezona 1 serije Friends premijerno je prikazana 22. septembra 1994.</p>
-														</div>
-													</div>
-												</div>
-											</div>
-
-											<div class="mvcast-item">
-												<div class="cast-it">
-													<div class="cast-left series-it">
-														<img src="images/uploads/season.jpg" alt="" style="height:100px; width:auto;">
-														<div>
-															<a href="#">Sezona 2</a>
-															<p>24 epizode</p>
-															<p>Sezona 2 serije Friends premijerno je prikazana 21. septembra 1995.</p>
-														</div>
-													</div>
-												</div>
-											</div>
-
-											<div class="mvcast-item">
-												<div class="cast-it">
-													<div class="cast-left series-it">
-														<img src="images/uploads/season.jpg" alt="" style="height:100px; width:auto;">
-														<div>
-															<a href="#">Sezona 3</a>
-															<p>25 epizoda</p>
-															<p>Sezona 3 serije Friends premijerno je prikazana 19. septembra 1996.</p>
-														</div>
-													</div>
-												</div>
-											</div>
-
-											<div class="mvcast-item">
-												<div class="cast-it">
-													<div class="cast-left series-it">
-														<img src="images/uploads/season.jpg" alt="" style="height:100px; width:auto;">
-														<div>
-															<a href="#">Sezona 4</a>
-															<p>24 epizode</p>
-															<p>Sezona 4 serije Friends premijerno je prikazana 25. septembra 1997.</p>
-														</div>
-													</div>
-												</div>
-											</div>
-
-											<div class="mvcast-item">
-												<div class="cast-it">
-													<div class="cast-left series-it">
-														<img src="images/uploads/season.jpg" alt="" style="height:100px; width:auto;">
-														<div>
-															<a href="#">Sezona 5</a>
-															<p>24 epizode</p>
-															<p>Sezona 5 serije Friends premijerno je prikazana 24. septembra 1998.</p>
-														</div>
-													</div>
-												</div>
-											</div>
-
-											<div class="mvcast-item">
-												<div class="cast-it">
-													<div class="cast-left series-it">
-														<img src="images/uploads/season.jpg" alt="" style="height:100px; width:auto;">
-														<div>
-															<a href="#">Sezona 6</a>
-															<p>25 epizoda</p>
-															<p>Sezona 6 serije Friends premijerno je prikazana 23. septembra 1999.</p>
-														</div>
-													</div>
-												</div>
-											</div>
-
-											<div class="mvcast-item">
-												<div class="cast-it">
-													<div class="cast-left series-it">
-														<img src="images/uploads/season.jpg" alt="" style="height:100px; width:auto;">
-														<div>
-															<a href="#">Sezona 7</a>
-															<p>24 epizode</p>
-															<p>Sezona 7 serije Friends premijerno je prikazana 12. oktobra 2000.</p>
-														</div>
-													</div>
-												</div>
-											</div>
-
-											<div class="mvcast-item">
-												<div class="cast-it">
-													<div class="cast-left series-it">
-														<img src="images/uploads/season.jpg" alt="" style="height:100px; width:auto;">
-														<div>
-															<a href="#">Sezona 8</a>
-															<p>24 epizode</p>
-															<p>Sezona 8 serije Friends premijerno je prikazana 27. septembra 2001.</p>
-														</div>
-													</div>
-												</div>
-											</div>
-
-											<div class="mvcast-item">
-												<div class="cast-it">
-													<div class="cast-left series-it">
-														<img src="images/uploads/season.jpg" alt="" style="height:100px; width:auto;">
-														<div>
-															<a href="#">Sezona 9</a>
-															<p>24 epizode</p>
-															<p>Sezona 9 serije Friends premijerno je prikazana 26. septembra 2002.</p>
-														</div>
-													</div>
-												</div>
-											</div>
-
-											<div class="mvcast-item">
-												<div class="cast-it">
-													<div class="cast-left series-it">
-														<img src="images/uploads/season.jpg" alt="" style="height:100px; width:auto;">
-														<div>
-															<a href="#">Sezona 10</a>
-															<p>18 epizoda</p>
-															<p>Sezona 10 serije Friends premijerno je prikazana 25. septembra 2003.</p>
-														</div>
-													</div>
-												</div>
-											</div>
-
-										</div>
-									</div>
-									<div id="moviesrelated" class="tab">
-										<div class="row">
-											<h3>Related Movies To</h3>
-											<h2>Skyfall: Quantum of Spectre</h2>
-											<div class="topbar-filter">
-												<p>Found <span>12 movies</span> in total</p>
-												<label>Sort by:</label>
-												<select>
-													<option value="popularity">Popularity Descending</option>
-													<option value="popularity">Popularity Ascending</option>
-													<option value="rating">Rating Descending</option>
-													<option value="rating">Rating Ascending</option>
-													<option value="date">Release date Descending</option>
-													<option value="date">Release date Ascending</option>
-												</select>
-											</div>
-											<div class="movie-item-style-2">
-												<img src="images/uploads/mv1.jpg" alt="">
-												<div class="mv-item-infor">
-													<h6><a href="#">oblivion <span>(2012)</span></a></h6>
-													<p class="rate"><i class="ion-android-star"></i><span>8.1</span> /10</p>
-													<p class="describe">Earth's mightiest heroes must come together and learn to fight as a team if they are to stop the mischievous Loki and his alien army from enslaving humanity...</p>
-													<p class="run-time"> Run Time: 2h21’    .     <span>MMPA: PG-13 </span>    .     <span>Release: 1 May 2015</span></p>
-													<p>Director: <a href="#">Joss Whedon</a></p>
-													<p>Stars: <a href="#">Robert Downey Jr.,</a> <a href="#">Chris Evans,</a> <a href="#">  Chris Hemsworth</a></p>
-												</div>
-											</div>
-											<div class="movie-item-style-2">
-												<img src="images/uploads/mv2.jpg" alt="">
-												<div class="mv-item-infor">
-													<h6><a href="#">into the wild <span>(2014)</span></a></h6>
-													<p class="rate"><i class="ion-android-star"></i><span>7.8</span> /10</p>
-													<p class="describe">As Steve Rogers struggles to embrace his role in the modern world, he teams up with a fellow Avenger and S.H.I.E.L.D agent, Black Widow, to battle a new threat...</p>
-													<p class="run-time"> Run Time: 2h21’    .     <span>MMPA: PG-13 </span>    .     <span>Release: 1 May 2015</span></p>
-													<p>Director: <a href="#">Anthony Russo,</a><a href="#">Joe Russo</a></p>
-													<p>Stars: <a href="#">Chris Evans,</a> <a href="#">Samuel L. Jackson,</a> <a href="#">  Scarlett Johansson</a></p>
-												</div>
-											</div>
-											<div class="movie-item-style-2">
-												<img src="images/uploads/mv3.jpg" alt="">
-												<div class="mv-item-infor">
-													<h6><a href="#">blade runner  <span>(2015)</span></a></h6>
-													<p class="rate"><i class="ion-android-star"></i><span>7.3</span> /10</p>
-													<p class="describe">Armed with a super-suit with the astonishing ability to shrink in scale but increase in strength, cat burglar Scott Lang must embrace his inner hero and help...</p>
-													<p class="run-time"> Run Time: 2h21’    .     <span>MMPA: PG-13 </span>    .     <span>Release: 1 May 2015</span></p>
-													<p>Director: <a href="#">Peyton Reed</a></p>
-													<p>Stars: <a href="#">Paul Rudd,</a> <a href="#"> Michael Douglas</a></p>
-												</div>
-											</div>
-											<div class="movie-item-style-2">
-												<img src="images/uploads/mv4.jpg" alt="">
-												<div class="mv-item-infor">
-													<h6><a href="#">Mulholland pride<span> (2013)  </span></a></h6>
-													<p class="rate"><i class="ion-android-star"></i><span>7.2</span> /10</p>
-													<p class="describe">When Tony Stark's world is torn apart by a formidable terrorist called the Mandarin, he starts an odyssey of rebuilding and retribution.</p>
-													<p class="run-time"> Run Time: 2h21’    .     <span>MMPA: PG-13 </span>    .     <span>Release: 1 May 2015</span></p>
-													<p>Director: <a href="#">Shane Black</a></p>
-													<p>Stars: <a href="#">Robert Downey Jr., </a> <a href="#">  Guy Pearce,</a><a href="#">Don Cheadle</a></p>
-												</div>
-											</div>
-											<div class="movie-item-style-2">
-												<img src="images/uploads/mv5.jpg" alt="">
-												<div class="mv-item-infor">
-													<h6><a href="#">skyfall: evil of boss<span> (2013)  </span></a></h6>
-													<p class="rate"><i class="ion-android-star"></i><span>7.0</span> /10</p>
-													<p class="describe">When Tony Stark's world is torn apart by a formidable terrorist called the Mandarin, he starts an odyssey of rebuilding and retribution.</p>
-													<p class="run-time"> Run Time: 2h21’    .     <span>MMPA: PG-13 </span>    .     <span>Release: 1 May 2015</span></p>
-													<p>Director: <a href="#">Alan Taylor</a></p>
-													<p>Stars: <a href="#">Chris Hemsworth,  </a> <a href="#">  Natalie Portman,</a><a href="#">Tom Hiddleston</a></p>
-												</div>
-											</div>
-											<div class="topbar-filter">
-												<label>Movies per page:</label>
-												<select>
-													<option value="range">5 Movies</option>
-													<option value="saab">10 Movies</option>
-												</select>
-												<div class="pagination2">
-													<span>Page 1 of 2:</span>
-													<a class="active" href="#">1</a>
-													<a href="#">2</a>
-													<a href="#"><i class="ion-arrow-right-b"></i></a>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+                                        @foreach (var recenzija in Model.Recenzije)
+                                        {
+                                            <div class="mv-user-review-item">
+                                                <div class="user-infor">
+                                                    <img src="@Url.Content("~/images/uploads/userava1.jpg")" alt="">
+                                                    <div>
+                                                        <h3>Ocjena: @recenzija.Ocjena/10</h3>
+                                                        <p class="time">@recenzija.DatumObjave.ToLocalTime().ToString("dd.MM.yyyy.")</p>
+                                                    </div>
+                                                </div>
+                                                @if (!string.IsNullOrWhiteSpace(recenzija.Komentar))
+                                                {
+                                                    <p>@recenzija.Komentar</p>
+                                                }
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                                <div id="season" class="tab">
+                                    <div class="row">
+                                        @foreach (var sezona in Model.Sezone)
+                                        {
+                                            <div class="mvcast-item">
+                                                <div class="cast-it">
+                                                    <div class="cast-left series-it">
+                                                        <img src="@Url.Content("~/images/uploads/season.jpg")" alt="">
+                                                        <div>
+                                                            <a href="#">Sezona @sezona.RedniBrojSezone</a>
+                                                            <p>@sezona.BrojEpizoda epizoda</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                                <div id="media" class="tab">
+                                    <div class="row">
+                                        <div class="mvsingle-item">
+                                            @foreach (var slika in Model.Galerija)
+                                            {
+                                                <a class="img-lightbox" href="@slika.Url"><img src="@slika.Url" alt="@serija.Naziv"></a>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

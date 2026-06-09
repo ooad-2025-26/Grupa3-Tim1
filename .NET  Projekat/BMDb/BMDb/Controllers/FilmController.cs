@@ -7,22 +7,62 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BMDb.Data;
 using BMDb.Models;
+using BMDb.Services;
+using BMDb.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BMDb.Controllers
 {
     public class FilmController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IMediaSearchService _mediaSearchService;
+        private readonly KatalogFacade _katalogFacade;
+        private readonly IUserKeyService _userKeyService;
+        private readonly IWatchlistService _watchlistService;
+        private readonly IRecenzijaService _recenzijaService;
+        private readonly INotificationService _notificationService;
+        private readonly IFileValidationService _fileValidationService;
 
-        public FilmController(ApplicationDbContext context)
+        public FilmController(
+            ApplicationDbContext context,
+            IMediaSearchService mediaSearchService,
+            KatalogFacade katalogFacade,
+            IUserKeyService userKeyService,
+            IWatchlistService watchlistService,
+            IRecenzijaService recenzijaService,
+            INotificationService notificationService,
+            IFileValidationService fileValidationService)
         {
             _context = context;
+            _mediaSearchService = mediaSearchService;
+            _katalogFacade = katalogFacade;
+            _userKeyService = userKeyService;
+            _watchlistService = watchlistService;
+            _recenzijaService = recenzijaService;
+            _notificationService = notificationService;
+            _fileValidationService = fileValidationService;
         }
 
         // GET: Film
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string? search, int? zanrId, int? godina, double? minimalnaOcjena, string? sort)
         {
-            return View(await _context.Film.ToListAsync());
+            var filter = new ContentSearchFilterBuilder()
+                .WithSearch(search)
+                .WithGenre(zanrId)
+                .WithYear(godina)
+                .WithRating(minimalnaOcjena)
+                .WithSort(sort)
+                .Build();
+
+            var model = new MediaIndexViewModel<Film>
+            {
+                Items = await _mediaSearchService.SearchAsync(_context.Film, filter),
+                Zanrovi = await _context.Zanr.OrderBy(x => x.Naziv).ToListAsync(),
+                Filter = filter
+            };
+
+            return View(model);
         }
 
         // GET: Film/Details/5
@@ -33,14 +73,14 @@ namespace BMDb.Controllers
                 return NotFound();
             }
 
-            var film = await _context.Film
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (film == null)
+            var model = await _katalogFacade.DohvatiSveDetaljeAsync(id.Value, _userKeyService.GetCurrentUserKey(User));
+            if (model == null || await _context.Film.FindAsync(id.Value) == null)
             {
                 return NotFound();
             }
 
-            return View(film);
+            model.StatusPoruka = TempData["StatusPoruka"] as string;
+            return View(model);
         }
 
         // GET: Film/Create
@@ -63,11 +103,48 @@ namespace BMDb.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (!_fileValidationService.IsAllowedPoster(film.PosterLink))
+                {
+                    ModelState.AddModelError(nameof(Film.PosterLink), "Poster mora biti .jpg ili .png.");
+                    return View(film);
+                }
+
                 _context.Add(film);
                 await _context.SaveChangesAsync();
+                await _notificationService.OnContentCreatedAsync(film);
                 return RedirectToAction(nameof(Index));
             }
             return View(film);
+        }
+
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> OznaciGledao(int id)
+        {
+            await _watchlistService.OznaciGledaoAsync(_userKeyService.GetCurrentUserKey(User), id);
+            TempData["StatusPoruka"] = "Sadržaj je označen kao 'Gledao sam'.";
+            return RedirectToAction(nameof(Details), new { id });
+        }
+
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> OznaciPlanirano(int id)
+        {
+            await _watchlistService.OznaciPlaniranoAsync(_userKeyService.GetCurrentUserKey(User), id);
+            TempData["StatusPoruka"] = "Sadržaj je označen kao 'Gledat ću'.";
+            return RedirectToAction(nameof(Details), new { id });
+        }
+
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DodajRecenziju(int id, int ocjena, string? komentar)
+        {
+            var result = await _recenzijaService.DodajRecenzijuAsync(_userKeyService.GetCurrentUserKey(User), id, ocjena, komentar);
+            TempData["StatusPoruka"] = result.Message;
+            return RedirectToAction(nameof(Details), new { id });
         }
 
         // GET: Film/Edit/5
@@ -100,6 +177,12 @@ namespace BMDb.Controllers
 
             if (ModelState.IsValid)
             {
+                if (!_fileValidationService.IsAllowedPoster(film.PosterLink))
+                {
+                    ModelState.AddModelError(nameof(Film.PosterLink), "Poster mora biti .jpg ili .png.");
+                    return View(film);
+                }
+
                 try
                 {
                     _context.Update(film);

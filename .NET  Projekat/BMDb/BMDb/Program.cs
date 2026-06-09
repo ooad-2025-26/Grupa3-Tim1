@@ -1,5 +1,6 @@
 using BMDb.Data;
 using BMDb.Models;
+using BMDb.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -26,6 +27,18 @@ builder.Services.AddIdentity<Osoba, IdentityRole>(options =>
 .AddDefaultUI();
 
 builder.Services.AddControllersWithViews();
+builder.Services.AddScoped<ITrailerServis, YouTubeTrailerServis>();
+builder.Services.AddScoped<IUserKeyService, UserKeyService>();
+builder.Services.AddScoped<IWatchlistService, WatchlistService>();
+builder.Services.AddScoped<IRecenzijaService, RecenzijaService>();
+builder.Services.AddScoped<INotificationService, NotificationService>();
+builder.Services.AddScoped<IContentCreationObserver>(sp => sp.GetRequiredService<INotificationService>());
+builder.Services.AddScoped<IOglasService, OglasService>();
+builder.Services.AddScoped<IMediaSearchService, MediaSearchService>();
+builder.Services.AddScoped<IRecommendationService, RecommendationService>();
+builder.Services.AddScoped<IFileValidationService, FileValidationService>();
+builder.Services.AddScoped<KatalogFacade>();
+builder.Services.AddScoped<MediaFactory>();
 
 var app = builder.Build();
 

@@ -127,7 +127,11 @@ namespace BMDb.Areas.Identity.Pages.Account
                 user.Ime = Input.Ime;
                 user.Prezime = Input.Prezime;
                 user.Nadimak = Input.Nadimak;
-                user.Avatar = "default-avatar.png"; 
+                user.Avatar = "default-avatar.png";
+                user.DatumRegistracije = DateTime.UtcNow;
+                user.NotifikacijeUkljucene = true;
+                user.StatusOsobe = BMDb.Models.OsobaStatus.Korisnik;
+                user.BrojRecenzija = 0;
                                                    
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);

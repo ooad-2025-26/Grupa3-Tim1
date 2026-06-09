@@ -7,16 +7,19 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BMDb.Data;
 using BMDb.Models;
+using BMDb.Services;
 
 namespace BMDb.Controllers
 {
     public class RecenzijaController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IRecenzijaService _recenzijaService;
 
-        public RecenzijaController(ApplicationDbContext context)
+        public RecenzijaController(ApplicationDbContext context, IRecenzijaService recenzijaService)
         {
             _context = context;
+            _recenzijaService = recenzijaService;
         }
 
         // GET: Recenzija
@@ -58,8 +61,15 @@ namespace BMDb.Controllers
         {
             if (ModelState.IsValid)
             {
+                recenzija.Komentar ??= string.Empty;
+                if (recenzija.DatumObjave == default)
+                {
+                    recenzija.DatumObjave = DateTime.UtcNow;
+                }
+
                 _context.Add(recenzija);
                 await _context.SaveChangesAsync();
+                await _recenzijaService.AzurirajProsjecnuOcjenuAsync(recenzija.EntertainmentId);
                 return RedirectToAction(nameof(Index));
             }
             return View(recenzija);
@@ -99,6 +109,7 @@ namespace BMDb.Controllers
                 {
                     _context.Update(recenzija);
                     await _context.SaveChangesAsync();
+                    await _recenzijaService.AzurirajProsjecnuOcjenuAsync(recenzija.EntertainmentId);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -142,7 +153,11 @@ namespace BMDb.Controllers
             var recenzija = await _context.Recenzija.FindAsync(id);
             if (recenzija != null)
             {
+                var entertainmentId = recenzija.EntertainmentId;
                 _context.Recenzija.Remove(recenzija);
+                await _context.SaveChangesAsync();
+                await _recenzijaService.AzurirajProsjecnuOcjenuAsync(entertainmentId);
+                return RedirectToAction(nameof(Index));
             }
 
             await _context.SaveChangesAsync();
