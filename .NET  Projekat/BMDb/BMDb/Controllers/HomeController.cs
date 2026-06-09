@@ -5,6 +5,7 @@ using BMDb.Models;
 using BMDb.Services;
 using BMDb.ViewModels;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,19 +18,22 @@ namespace BMDb.Controllers
         private readonly IRecommendationService _recommendationService;
         private readonly ITrailerServis _trailerServis;
         private readonly IUserKeyService _userKeyService;
+        private readonly UserManager<Osoba> _userManager;
 
         public HomeController(
             ILogger<HomeController> logger,
             ApplicationDbContext context,
             IRecommendationService recommendationService,
             ITrailerServis trailerServis,
-            IUserKeyService userKeyService)
+            IUserKeyService userKeyService,
+            UserManager<Osoba> userManager)
         {
             _logger = logger;
             _context = context;
             _recommendationService = recommendationService;
             _trailerServis = trailerServis;
             _userKeyService = userKeyService;
+            _userManager = userManager;
         }
 
         public IActionResult Index()
@@ -53,11 +57,16 @@ namespace BMDb.Controllers
                 .Take(10)
                 .ToListAsync();
 
-            var osobaId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var gledaoSamOsobaId = User.Identity?.IsAuthenticated == true
-                ? _userKeyService.GetCurrentUserKey(User)
-                : 0;
-            var preporuke = await _recommendationService.PersonalizovanePreporukeAsync(osobaId, gledaoSamOsobaId, 10);
+            IReadOnlyList<Entertainment> preporuke = [];
+            if (User.Identity?.IsAuthenticated == true &&
+                (User.IsInRole("Korisnik") || User.IsInRole("VerifikovaniRecenzent")) &&
+                !User.IsInRole("Admin") &&
+                !User.IsInRole("Moderator"))
+            {
+                var osobaId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                var gledaoSamOsobaId = _userKeyService.GetCurrentUserKey(User);
+                preporuke = await _recommendationService.PersonalizovanePreporukeAsync(osobaId, gledaoSamOsobaId, 10);
+            }
 
             var trenutnaGodina = DateTime.UtcNow.Year;
             var buduciFilmovi = await _context.Film
@@ -104,8 +113,85 @@ namespace BMDb.Controllers
         [Authorize(Roles = "Admin")]
         public IActionResult Finansije() { return View(); }
 
-        [Authorize(Roles = "Admin")]
-        public IActionResult AdminLista() { return View(); }
+        [Authorize(Roles = "Admin,Moderator")]
+        public async Task<IActionResult> AdminLista()
+        {
+            var filmovi = await _context.Film
+                .AsNoTracking()
+                .OrderByDescending(x => x.GodinaIzlaska)
+                .Select(x => (Entertainment)x)
+                .ToListAsync();
+
+            var serije = await _context.Serija
+                .AsNoTracking()
+                .OrderByDescending(x => x.GodinaIzlaska)
+                .Select(x => (Entertainment)x)
+                .ToListAsync();
+
+            var items = filmovi.Concat(serije)
+                .OrderByDescending(x => x.GodinaIzlaska)
+                .ThenBy(x => x.Naziv)
+                .ToList();
+
+            var zanrovi = await UcitajZanroveAsync(items.Select(x => x.Id).ToList());
+            return View(items.Select(x => MapMediaItem(x, zanrovi)).ToList());
+        }
+
+        [Authorize(Roles = "Admin,Moderator")]
+        public async Task<IActionResult> Korisnici()
+        {
+            var users = await _userManager.Users
+                .OrderBy(x => x.Ime)
+                .ThenBy(x => x.Prezime)
+                .ThenBy(x => x.Email)
+                .ToListAsync();
+
+            var model = new List<AdminUserViewModel>();
+            foreach (var user in users)
+            {
+                var roles = await _userManager.GetRolesAsync(user);
+                model.Add(new AdminUserViewModel
+                {
+                    Id = user.Id,
+                    FullName = string.Join(" ", new[] { user.Ime, user.Prezime }.Where(x => !string.IsNullOrWhiteSpace(x))),
+                    Email = user.Email ?? string.Empty,
+                    Roles = roles.ToList()
+                });
+            }
+
+            return View("~/Views/Osoba/Index.cshtml", model);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Admin,Moderator")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteUser(string id)
+        {
+            if (string.IsNullOrWhiteSpace(id))
+            {
+                return NotFound();
+            }
+
+            var user = await _userManager.FindByIdAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            var roles = await _userManager.GetRolesAsync(user);
+            if (User.IsInRole("Moderator") && roles.Any(x => x == "Admin" || x == "Moderator"))
+            {
+                return Forbid();
+            }
+
+            var result = await _userManager.DeleteAsync(user);
+            if (!result.Succeeded)
+            {
+                TempData["AdminUserError"] = string.Join(" ", result.Errors.Select(x => x.Description));
+            }
+
+            return RedirectToAction(nameof(Korisnici));
+        }
 
         private async Task<Dictionary<int, IReadOnlyList<string>>> UcitajZanroveAsync(IReadOnlyList<int> entertainmentIds)
         {

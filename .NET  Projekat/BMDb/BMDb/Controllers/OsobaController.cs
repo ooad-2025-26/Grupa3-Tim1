@@ -26,11 +26,10 @@ namespace BMDb.Controllers
         }
 
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,Moderator")]
         public IActionResult Index()
         {
-
-            return View();
+            return RedirectToAction("Korisnici", "Home");
         }
     }
 }

@@ -1,57 +1,17 @@
-﻿@{
+@model BMDb.Models.Serija
+@{
     Layout = "_AdminLayout";
 }
 @section StranicaStilovi {
     <style>
-        .admin-section {
-            padding: 50px 0;
-            background: #020d18;
-            color: white;
-            min-height: 70vh;
-        }
-
-        .form-container {
-            background: #0b1a2a;
-            padding: 30px;
-            border: 1px solid #1c3d5d;
-            border-radius: 5px;
-        }
-
-            .form-container input, .form-container select, .form-container textarea {
-                width: 100%;
-                padding: 12px;
-                margin: 10px 0;
-                background: #020d18;
-                border: 1px solid #1c3d5d;
-                color: white;
-                border-radius: 3px;
-            }
-
-            .form-container label {
-                color: #fbb124;
-                font-weight: bold;
-                margin-top: 15px;
-                display: block;
-            }
-
-        .btn-submit {
-            background: #fbb124;
-            color: black;
-            font-weight: bold;
-            text-transform: uppercase;
-            border: none;
-            padding: 15px 30px;
-            margin-top: 20px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-            .btn-submit:hover {
-                background: #ffffff;
-            }
+        .admin-section { padding: 50px 0; background: #020d18; color: white; min-height: 70vh; }
+        .form-container { background: #0b1a2a; padding: 30px; border: 1px solid #1c3d5d; border-radius: 5px; }
+        .form-container input, .form-container select, .form-container textarea { width: 100%; padding: 12px; margin: 10px 0; background: #020d18; border: 1px solid #1c3d5d; color: white; border-radius: 3px; }
+        .form-container label { color: #fbb124; font-weight: bold; margin-top: 15px; display: block; }
+        .btn-submit { background: #fbb124; color: black; font-weight: bold; text-transform: uppercase; border: none; padding: 15px 30px; margin-top: 20px; cursor: pointer; transition: 0.3s; }
+        .btn-submit:hover { background: #ffffff; }
     </style>
 }
-
 
 <div class="hero common-hero">
     <div class="container">
@@ -60,9 +20,9 @@
                 <div class="hero-ct">
                     <h1>Dodaj novu seriju</h1>
                     <ul class="breadcumb">
-                        <li><a href="admin.html">Admin</a></li>
-                        <li> <span class="ion-ios-arrow-right"></span> Sadržaj</li>
-                        <li> <span class="ion-ios-arrow-right"></span> Dodaj</li>
+                        <li><a asp-controller="Home" asp-action="AdminDashboard">Admin</a></li>
+                        <li><span class="ion-ios-arrow-right"></span> Sadrzaj</li>
+                        <li><span class="ion-ios-arrow-right"></span> Dodaj</li>
                     </ul>
                 </div>
             </div>
@@ -75,39 +35,56 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="form-container">
-                    <form action="#">
+                    <form asp-controller="Serija" asp-action="Create" method="post">
+                        @Html.AntiForgeryToken()
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         <div class="row">
                             <div class="col-md-6">
-                                <label>Naslov filma</label>
-                                <input type="text" placeholder="Npr. The Godfather" required>
+                                <label asp-for="Naziv">Naslov serije</label>
+                                <input asp-for="Naziv" placeholder="Npr. Breaking Bad" required>
+                                <span asp-validation-for="Naziv" class="text-danger"></span>
 
-                                <label>Žanr</label>
-                                <input type="text" placeholder="Npr. Drama, Krimi">
+                                <label asp-for="GodinaIzlaska">Godina izdanja</label>
+                                <input asp-for="GodinaIzlaska" type="number" placeholder="2024">
+                                <span asp-validation-for="GodinaIzlaska" class="text-danger"></span>
 
-                                <label>Godina izdanja</label>
-                                <input type="number" placeholder="2024">
+                                <label asp-for="Trajanje">Trajanje epizode (minuta)</label>
+                                <input asp-for="Trajanje" type="number" placeholder="Npr. 45">
+                                <span asp-validation-for="Trajanje" class="text-danger"></span>
 
-                                <label>Trajanje (minuta)</label>
-                                <input type="text" placeholder="Npr. 145 min">
+                                <label asp-for="ProsjecnaOcjena">Prosjecna ocjena</label>
+                                <input asp-for="ProsjecnaOcjena" type="number" step="0.1" min="0" max="10" placeholder="0.0">
+                                <span asp-validation-for="ProsjecnaOcjena" class="text-danger"></span>
                             </div>
                             <div class="col-md-6">
-                                <label>URL Postera (putanja)</label>
-                                <input type="text" placeholder="images/uploads/novi_film.jpg">
+                                <label asp-for="PosterLink">URL Postera (putanja)</label>
+                                <input asp-for="PosterLink" placeholder="images/uploads/nova_serija.jpg">
+                                <span asp-validation-for="PosterLink" class="text-danger"></span>
 
-                                <label>Režiser</label>
-                                <input type="text" placeholder="Npr. Francis Ford Coppola">
+                                <label asp-for="YoutubeLink">YouTube trailer URL</label>
+                                <input asp-for="YoutubeLink" placeholder="https://www.youtube.com/watch?v=...">
+                                <span asp-validation-for="YoutubeLink" class="text-danger"></span>
 
-                                <label>Glavne uloge</label>
-                                <input type="text" placeholder="Npr. Marlon Brando, Al Pacino">
+                                <label asp-for="Reditelj">Reziser</label>
+                                <input asp-for="Reditelj" placeholder="Npr. Vince Gilligan">
+                                <span asp-validation-for="Reditelj" class="text-danger"></span>
 
-                                <label>Sezona</label>
-                                <input type="text" placeholder="Npr. 10">
+                                <label asp-for="BrojSezona">Broj sezona</label>
+                                <input asp-for="BrojSezona" type="number" placeholder="1">
+                                <span asp-validation-for="BrojSezona" class="text-danger"></span>
+
+                                <label asp-for="BrojEpizoda">Broj epizoda</label>
+                                <input asp-for="BrojEpizoda" type="number" placeholder="10">
+                                <span asp-validation-for="BrojEpizoda" class="text-danger"></span>
+
+                                <label><input asp-for="ZavrsenoEmitovanje" type="checkbox" style="width:auto; margin-right:8px;"> Zavrseno emitovanje</label>
                             </div>
                             <div class="col-md-12">
-                                <label>Sinopsis (Kratak sadržaj)</label>
-                                <textarea rows="6" placeholder="Unesite opis filma ovdje..."></textarea>
+                                <label asp-for="Opis">Sinopsis (Kratak sadrzaj)</label>
+                                <textarea asp-for="Opis" rows="6" placeholder="Unesite opis serije ovdje..."></textarea>
+                                <span asp-validation-for="Opis" class="text-danger"></span>
 
-                                <button type="submit" class="btn-submit">Sačuvaj u bazu podataka</button>
+                                <button type="submit" class="btn-submit">Sacuvaj u bazu podataka</button>
                             </div>
                         </div>
                     </form>
