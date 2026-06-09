@@ -1,7 +1,10 @@
-@model BMDb.ViewModels.HomeGlavnaViewModel
+﻿@model BMDb.ViewModels.HomeGlavnaViewModel
 
+@{
+    var genreClasses = new[] { "blue", "yell", "green", "orange" };
+}
 
-<div class="slider movie-items">
+<div class="slider movie-items" style="background: url('/images/uploads/slider-bg.jpg') no-repeat center center; background-size: cover;">
 	<div class="container">
 		<div class="row">
 			<div class="social-link">
@@ -12,119 +15,30 @@
 				<a href="#"><i class="ion-social-youtube"></i></a>
 			</div>
 			<div class="slick-multiItemSlider">
-				<div class="movie-item">
-					<div class="mv-img">
-						<a href="#"><img src="images/uploads/slider1.jpg" alt="" width="285" height="437"></a>
-					</div>
-					<div class="title-in">
-						<div class="cate">
-							<span class="blue"><a href="#">Sci-fi</a></span>
+				@foreach (var item in Model.RandomMediaItems)
+				{
+					<div class="movie-item">
+						<div class="mv-img">
+							<a asp-controller="@item.ControllerName" asp-action="Details" asp-route-id="@item.Id"><img src="@item.PosterUrl" alt="@item.Title" width="285" height="437"></a>
 						</div>
-						<h6><a href="#">Meduzvjezdani</a></h6>
-						<p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-					</div>
-				</div>
-				<div class="movie-item">
-					<div class="mv-img">
-						<a href="#"><img src="images/uploads/slider2.jpg" alt="" width="285" height="437"></a>
-					</div>
-					<div class="title-in">
-						<div class="cate">
-							<span class="yell"><a href="#">akcija</a></span>
+						<div class="title-in">
+							<div class="cate">
+								@for (var i = 0; i < item.Genres.Take(2).Count(); i++)
+								{
+									<span class="@genreClasses[i % genreClasses.Length]"><a href="#">@item.Genres[i]</a></span>
+								}
+							</div>
+							<h6><a asp-controller="@item.ControllerName" asp-action="Details" asp-route-id="@item.Id">@item.Title</a></h6>
+							<p><i class="ion-android-star"></i><span>@item.Rating.ToString("0.0")</span> /10</p>
 						</div>
-						<h6><a href="#">Povratnik</a></h6>
-						<p><i class="ion-android-star"></i><span>7.4</span> /10</p>
 					</div>
-				</div>
-				<div class="movie-item">
-					<div class="mv-img">
-						<a href="#"><img src="images/uploads/slider3.jpg" alt="" width="285" height="437"></a>
-					</div>
-					<div class="title-in">
-						<div class="cate">
-							<span class="green"><a href="#">komedija</a></span>
-						</div>
-						<h6><a href="#">Umri mu�ki</a></h6>
-						<p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-					</div>
-				</div>
-				<div class="movie-item">
-					<div class="mv-img">
-						<a href="#"><img src="images/uploads/slider4.jpg" alt="" width="285" height="437"></a>
-					</div>
-					<div class="title-in">
-						<div class="cate">
-							<span class="blue"><a href="#">Sci-fi</a></span> <span class="orange"><a href="#">Avantura</a></span>
-						</div>
-						<h6><a href="#">Put do slave</a></h6>
-						<p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-					</div>
-				</div>
-				<div class="movie-item">
-					<div class="mv-img">
-						<a href="#"><img src="images/uploads/slider1.jpg" alt="" width="285" height="437"></a>
-					</div>
-					<div class="title-in">
-						<div class="cate">
-							<span class="blue"><a href="#">Sci-fi</a></span>
-						</div>
-						<h6><a href="#">Meduzvjezdani</a></h6>
-						<p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-					</div>
-				</div>
-				<div class="movie-item">
-					<div class="mv-img">
-						<a href="#"><img src="images/uploads/slider2.jpg" alt="" width="285" height="437"></a>
-					</div>
-					<div class="title-in">
-						<div class="cate">
-							<span class="yell"><a href="#">akcija</a></span>
-						</div>
-						<h6><a href="#">Povratnik</a></h6>
-						<p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-					</div>
-				</div>
-				<div class="movie-item">
-					<div class="mv-img">
-						<img src="images/uploads/slider3.jpg" alt="" width="285" height="437">
-					</div>
-					<div class="title-in">
-						<div class="cate">
-							<span class="green"><a href="#">komedija</a></span>
-						</div>
-						<h6><a href="#">Umri mu�ki</a></h6>
-						<p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-					</div>
-				</div>
-				<div class="movie-item">
-					<div class="mv-img">
-						<img src="images/uploads/slider4.jpg" alt="" width="285" height="437">
-					</div>
-					<div class="title-in">
-						<div class="cate">
-							<span class="blue"><a href="#">Sci-fi</a></span> <span class="orange"><a href="#">Avantura</a></span>
-						</div>
-						<h6><a href="#">Put do slave</a></h6>
-						<p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-					</div>
-				</div>
-				<div class="movie-item">
-					<div class="mv-img">
-						<img src="images/uploads/slider3.jpg" alt="" width="285" height="437">
-					</div>
-					<div class="title-in">
-						<div class="cate">
-							<span class="green"><a href="#">komedija</a></span>
-						</div>
-						<h6><a href="#">Umri mu�ki</a></h6>
-						<p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-					</div>
-				</div>
+				}
 			</div>
 		</div>
 	</div>
 </div>
-<div class="movie-items  full-width">
+
+<div class="movie-items full-width">
 	<div class="row">
 		<div class="col-md-12">
 			<div class="title-hd">
@@ -133,695 +47,96 @@
 			</div>
 			<div class="tabs">
 				<ul class="tab-links">
-					<li class="active"><a href="#tab1-h2">#Filmovi</a></li>
-					<li><a href="#tab2-h2"> #Serije</a></li>                     
+					<li class="active"><a href="#tab1">#Filmovi</a></li>
+					<li><a href="#tab2"> #Serije</a></li>
 				</ul>
-			    <div class="tab-content">
-			        <div id="tab1-h2" class="tab active">
-			            <div class="row">
-			            	<div class="slick-multiItem2">
-			            		<div class="slide-it">
-			            			<div class="movie-item">
-				            			<div class="mv-img">
-				            				<img src="images/uploads/mv-it1.jpg" alt="">
-				            			</div>
-				            			<div class="hvr-inner">
-				            				<a  href="moviesingle.html"> Vidi više <i class="ion-android-arrow-dropright"></i> </a>
-				            			</div>
-				            			<div class="title-in">
-				            				<h6><a href="#">Međuzvjezdani</a></h6>
-				            				<p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-				            			</div>
-				            		</div>
-			            		</div>
-								<div class="slide-it">
-									<div class="movie-item">
-				            			<div class="mv-img">
-				            				<img src="images/uploads/mv-it2.jpg" alt="">
-				            			</div>
-				            			<div class="hvr-inner">
-				            				<a  href="moviesingle.html"> Vidi više <i class="ion-android-arrow-dropright"></i> </a>
-				            			</div>
-				            			<div class="title-in">
-				            				<h6><a href="#">Povratnik</a></h6>
-				            				<p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-				            			</div>
-				            		</div>
-								</div>
-			            		<div class="slide-it">
-			            			<div class="movie-item">
-				            			<div class="mv-img">
-				            				<img src="images/uploads/mv-it3.jpg" alt="">
-				            			</div>
-				            			<div class="hvr-inner">
-				            				<a  href="moviesingle.html"> Vidi više <i class="ion-android-arrow-dropright"></i> </a>
-				            			</div>
-				            			<div class="title-in">
-				            				<h6><a href="#">Umri muški</a></h6>
-				            				<p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-				            			</div>
-				            		</div>
-			            		</div>
-			            		<div class="slide-it">
-			            			<div class="movie-item">
-				            			<div class="mv-img">
-				            				<img src="images/uploads/mv-it4.jpg" alt="">
-				            			</div>
-				            			<div class="hvr-inner">
-				            				<a  href="moviesingle.html"> Vidi više <i class="ion-android-arrow-dropright"></i> </a>
-				            			</div>
-				            			<div class="title-in">
-				            				<h6><a href="#">Put do slave</a></h6>
-				            				<p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-				            			</div>
-				            		</div>
-			            		</div>
-			            		<div class="slide-it">
-			            			<div class="movie-item">
-				            			<div class="mv-img">
-				            				<img src="images/uploads/mv-it5.jpg" alt="">
-				            			</div>
-				            			<div class="hvr-inner">
-				            				<a  href="moviesingle.html"> Vidi više <i class="ion-android-arrow-dropright"></i> </a>
-				            			</div>
-				            			<div class="title-in">
-				            				<h6><a href="#">Umri muški</a></h6>
-				            				<p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-				            			</div>
-				            		</div>
-			            		</div>
-			            		<div class="slide-it">
-			            			<div class="movie-item">
-				            			<div class="mv-img">
-				            				<img src="images/uploads/mv-it6.jpg" alt="">
-				            			</div>
-				            			<div class="hvr-inner">
-				            				<a  href="moviesingle.html"> Vidi više <i class="ion-android-arrow-dropright"></i> </a>
-				            			</div>
-				            			<div class="title-in">
-				            				<h6><a href="#">Međuzvjezdani</a></h6>
-				            				<p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-				            			</div>
-				            		</div>
-			            		</div>
-			            		<div class="slide-it">
-			            			<div class="movie-item">
-				            			<div class="mv-img">
-				            				<img src="images/uploads/mv-it7.jpg" alt="">
-				            			</div>
-				            			<div class="hvr-inner">
-				            				<a  href="moviesingle.html"> Vidi više <i class="ion-android-arrow-dropright"></i> </a>
-				            			</div>
-				            			<div class="title-in">
-				            				<h6><a href="#">Umri muški</a></h6>
-				            				<p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-				            			</div>
-				            		</div>
-			            		</div>
-			            		<div class="slide-it">
-			            			<div class="movie-item">
-				            			<div class="mv-img">
-				            				<img src="images/uploads/mv-it8.jpg" alt="">
-				            			</div>
-				            			<div class="hvr-inner">
-				            				<a  href="moviesingle.html"> Vidi više <i class="ion-android-arrow-dropright"></i> </a>
-				            			</div>
-				            			<div class="title-in">
-				            				<h6><a href="#">Umri muški</a></h6>
-				            				<p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-				            			</div>
-				            		</div>
-			            		</div>
-			            	</div>
-			            </div>
-			        </div>
-			        <div id="tab2-h2" class="tab">
-			           <div class="row">
-			            	<div class="slick-multiItem2">
-			            		<div class="slide-it">
-			            			<div class="movie-item">
-				            			<div class="mv-img">
-				            				<img src="images/uploads/mv-it4.jpg" alt="">
-				            			</div>
-				            			<div class="hvr-inner">
-				            				<a  href="moviesingle.html"> Vidi više <i class="ion-android-arrow-dropright"></i> </a>
-				            			</div>
-				            			<div class="title-in">
-				            				<h6><a href="#">Put do slave</a></h6>
-				            				<p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-				            			</div>
-				            		</div>
-			            		</div>
-			            		<div class="slide-it">
-			            			<div class="movie-item">
-				            			<div class="mv-img">
-				            				<img src="images/uploads/mv-it5.jpg" alt="">
-				            			</div>
-				            			<div class="hvr-inner">
-				            				<a  href="moviesingle.html"> Vidi više <i class="ion-android-arrow-dropright"></i> </a>
-				            			</div>
-				            			<div class="title-in">
-				            				<h6><a href="#">Umri muški</a></h6>
-				            				<p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-				            			</div>
-				            		</div>
-			            		</div>
-			            		<div class="slide-it">
-			            			<div class="movie-item">
-				            			<div class="mv-img">
-				            				<img src="images/uploads/mv-it6.jpg" alt="">
-				            			</div>
-				            			<div class="hvr-inner">
-				            				<a  href="moviesingle.html"> Vidi više <i class="ion-android-arrow-dropright"></i> </a>
-				            			</div>
-				            			<div class="title-in">
-				            				<h6><a href="#">Međuzvjezdani</a></h6>
-				            				<p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-				            			</div>
-				            		</div>
-			            		</div>
-			            		<div class="slide-it">
-			            			<div class="movie-item">
-				            			<div class="mv-img">
-				            				<img src="images/uploads/mv-it7.jpg" alt="">
-				            			</div>
-				            			<div class="hvr-inner">
-				            				<a  href="moviesingle.html"> Vidi više <i class="ion-android-arrow-dropright"></i> </a>
-				            			</div>
-				            			<div class="title-in">
-				            				<h6><a href="#">Umri muški</a></h6>
-				            				<p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-				            			</div>
-				            		</div>
-			            		</div>
-			            		<div class="slide-it">
-			            			<div class="movie-item">
-				            			<div class="mv-img">
-				            				<img src="images/uploads/mv-it8.jpg" alt="">
-				            			</div>
-				            			<div class="hvr-inner">
-				            				<a  href="moviesingle.html"> Vidi više <i class="ion-android-arrow-dropright"></i> </a>
-				            			</div>
-				            			<div class="title-in">
-				            				<h6><a href="#">Umri muški</a></h6>
-				            				<p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-				            			</div>
-				            		</div>
-			            		</div>
-			            	</div>
-			            </div>
-			        </div>
-			        <div id="tab3-h2" class="tab">
-			        	<div class="row">
-			            	<div class="slick-multiItem2">
-			            		<div class="slide-it">
-			            			<div class="movie-item">
-				            			<div class="mv-img">
-				            				<img src="images/uploads/mv-it1.jpg" alt="">
-				            			</div>
-				            			<div class="hvr-inner">
-				            				<a  href="moviesingle.html"> Vidi više <i class="ion-android-arrow-dropright"></i> </a>
-				            			</div>
-				            			<div class="title-in">
-				            				<h6><a href="#">Međuzvjezdani</a></h6>
-				            				<p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-				            			</div>
-				            		</div>
-			            		</div>
-								<div class="slide-it">
-									<div class="movie-item">
-				            			<div class="mv-img">
-				            				<img src="images/uploads/mv-it2.jpg" alt="">
-				            			</div>
-				            			<div class="hvr-inner">
-				            				<a  href="moviesingle.html"> Vidi više <i class="ion-android-arrow-dropright"></i> </a>
-				            			</div>
-				            			<div class="title-in">
-				            				<h6><a href="#">Povratnik</a></h6>
-				            				<p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-				            			</div>
-				            		</div>
-								</div>
-			            		<div class="slide-it">
-			            			<div class="movie-item">
-				            			<div class="mv-img">
-				            				<img src="images/uploads/mv-it3.jpg" alt="">
-				            			</div>
-				            			<div class="hvr-inner">
-				            				<a  href="moviesingle.html"> Vidi više <i class="ion-android-arrow-dropright"></i> </a>
-				            			</div>
-				            			<div class="title-in">
-				            				<h6><a href="#">Umri muški</a></h6>
-				            				<p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-				            			</div>
-				            		</div>
-			            		</div>
-			            		<div class="slide-it">
-			            			<div class="movie-item">
-				            			<div class="mv-img">
-				            				<img src="images/uploads/mv-it4.jpg" alt="">
-				            			</div>
-				            			<div class="hvr-inner">
-				            				<a  href="moviesingle.html"> Vidi više <i class="ion-android-arrow-dropright"></i> </a>
-				            			</div>
-				            			<div class="title-in">
-				            				<h6><a href="#">Put do slave</a></h6>
-				            				<p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-				            			</div>
-				            		</div>
-			            		</div>
-			            		<div class="slide-it">
-			            			<div class="movie-item">
-				            			<div class="mv-img">
-				            				<img src="images/uploads/mv-it5.jpg" alt="">
-				            			</div>
-				            			<div class="hvr-inner">
-				            				<a  href="moviesingle.html"> Vidi više <i class="ion-android-arrow-dropright"></i> </a>
-				            			</div>
-				            			<div class="title-in">
-				            				<h6><a href="#">Umri muški</a></h6>
-				            				<p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-				            			</div>
-				            		</div>
-			            		</div>
-			            	</div>
-			            </div>
-		       	 	</div>
-		       	 	 <div id="tab4-h2" class="tab">
-			        	<div class="row">
-			            	<div class="slick-multiItem2">
-			            		<div class="slide-it">
-			            			<div class="movie-item">
-				            			<div class="mv-img">
-				            				<img src="images/uploads/mv-it5.jpg" alt="">
-				            			</div>
-				            			<div class="hvr-inner">
-				            				<a  href="moviesingle.html"> Vidi više <i class="ion-android-arrow-dropright"></i> </a>
-				            			</div>
-				            			<div class="title-in">
-				            				<h6><a href="#">Umri muški</a></h6>
-				            				<p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-				            			</div>
-				            		</div>
-			            		</div>
-			            		<div class="slide-it">
-			            			<div class="movie-item">
-				            			<div class="mv-img">
-				            				<img src="images/uploads/mv-it6.jpg" alt="">
-				            			</div>
-				            			<div class="hvr-inner">
-				            				<a  href="moviesingle.html"> Vidi više <i class="ion-android-arrow-dropright"></i> </a>
-				            			</div>
-				            			<div class="title-in">
-				            				<h6><a href="#">Međuzvjezdani</a></h6>
-				            				<p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-				            			</div>
-				            		</div>
-			            		</div>
-			            		<div class="slide-it">
-			            			<div class="movie-item">
-				            			<div class="mv-img">
-				            				<img src="images/uploads/mv-it7.jpg" alt="">
-				            			</div>
-				            			<div class="hvr-inner">
-				            				<a  href="moviesingle.html"> Vidi više <i class="ion-android-arrow-dropright"></i> </a>
-				            			</div>
-				            			<div class="title-in">
-				            				<h6><a href="#">Umri muški</a></h6>
-				            				<p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-				            			</div>
-				            		</div>
-			            		</div>
-			            		<div class="slide-it">
-			            			<div class="movie-item">
-				            			<div class="mv-img">
-				            				<img src="images/uploads/mv-it8.jpg" alt="">
-				            			</div>
-				            			<div class="hvr-inner">
-				            				<a  href="moviesingle.html"> Vidi više <i class="ion-android-arrow-dropright"></i> </a>
-				            			</div>
-				            			<div class="title-in">
-				            				<h6><a href="#">Umri muški</a></h6>
-				            				<p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-				            			</div>
-				            		</div>
-			            		</div>
-			            	</div>
-			            </div>
-		       	 	</div>
-			    </div>
+				<div class="tab-content">
+					<div id="tab1" class="tab active">
+						<div class="row">
+							<div class="slick-multiItem2">
+								@foreach (var item in Model.TopRatedFilms)
+								{
+									<div class="slide-it">
+										<div class="movie-item">
+											<div class="mv-img">
+												<img src="@item.PosterUrl" alt="@item.Title">
+											</div>
+											<div class="hvr-inner">
+												<a asp-controller="Film" asp-action="Details" asp-route-id="@item.Id"> Vidi više <i class="ion-android-arrow-dropright"></i> </a>
+											</div>
+											<div class="title-in">
+												<h6><a asp-controller="Film" asp-action="Details" asp-route-id="@item.Id">@item.Title</a></h6>
+												<p><i class="ion-android-star"></i><span>@item.Rating.ToString("0.0")</span> /10</p>
+											</div>
+										</div>
+									</div>
+								}
+							</div>
+						</div>
+					</div>
+					<div id="tab2" class="tab">
+						<div class="row">
+							<div class="slick-multiItem2">
+								@foreach (var item in Model.TopRatedSeries)
+								{
+									<div class="slide-it">
+										<div class="movie-item">
+											<div class="mv-img">
+												<img src="@item.PosterUrl" alt="@item.Title">
+											</div>
+											<div class="hvr-inner">
+												<a asp-controller="Serija" asp-action="Details" asp-route-id="@item.Id"> Vidi više <i class="ion-android-arrow-dropright"></i> </a>
+											</div>
+											<div class="title-in">
+												<h6><a asp-controller="Serija" asp-action="Details" asp-route-id="@item.Id">@item.Title</a></h6>
+												<p><i class="ion-android-star"></i><span>@item.Rating.ToString("0.0")</span> /10</p>
+											</div>
+										</div>
+									</div>
+								}
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
-			<div class="title-hd">
-				<h2>PREPORUKE ZA VAS</h2>
-				<a href="#" class="viewall">Pogledaj sve <i class="ion-ios-arrow-right"></i></a>
-			</div>
-			<div class="tabs">
-				<ul class="tab-links-2">
-					<li class="active"><a href="#tab21-h2">#Filmovi</a></li>
-					<li><a href="#tab22-h2"> #Serije</a></li>                      
-				</ul>
-			    <div class="tab-content">
-			        <div id="tab21-h2" class="tab active">
-			            <div class="row">
-			            	<div class="slick-multiItem2">
-			            		<div class="slide-it">
-			            			<div class="movie-item">
-				            			<div class="mv-img">
-				            				<img src="images/uploads/mv-it7.jpg" alt="">
-				            			</div>
-				            			<div class="hvr-inner">
-				            				<a  href="moviesingle.html"> Vidi više <i class="ion-android-arrow-dropright"></i> </a>
-				            			</div>
-				            			<div class="title-in">
-				            				<h6><a href="#">Međuzvjezdani</a></h6>
-				            				<p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-				            			</div>
-				            		</div>
-			            		</div>
-								<div class="slide-it">
-									<div class="movie-item">
-				            			<div class="mv-img">
-				            				<img src="images/uploads/mv-it8.jpg" alt="">
-				            			</div>
-				            			<div class="hvr-inner">
-				            				<a  href="moviesingle.html"> Vidi više <i class="ion-android-arrow-dropright"></i> </a>
-				            			</div>
-				            			<div class="title-in">
-				            				<h6><a href="#">Povratnik</a></h6>
-				            				<p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-				            			</div>
-				            		</div>
+
+			@if (Model.ShowRecommendations)
+			{
+				<div class="title-hd">
+					<h2>PREPORUKE ZA VAS</h2>
+					<a href="#" class="viewall">Pogledaj sve <i class="ion-ios-arrow-right"></i></a>
+				</div>
+				<div class="tabs">
+					<div class="tab-content">
+						<div class="tab active">
+							<div class="row">
+								<div class="slick-multiItem2">
+									@foreach (var item in Model.RecommendedItems)
+									{
+										<div class="slide-it">
+											<div class="movie-item">
+												<div class="mv-img">
+													<img src="@item.PosterUrl" alt="@item.Title">
+												</div>
+												<div class="hvr-inner">
+													<a asp-controller="@item.ControllerName" asp-action="Details" asp-route-id="@item.Id"> Vidi više <i class="ion-android-arrow-dropright"></i> </a>
+												</div>
+												<div class="title-in">
+													<h6><a asp-controller="@item.ControllerName" asp-action="Details" asp-route-id="@item.Id">@item.Title</a></h6>
+													<p><i class="ion-android-star"></i><span>@item.Rating.ToString("0.0")</span> /10</p>
+												</div>
+											</div>
+										</div>
+									}
 								</div>
-			            		<div class="slide-it">
-			            			<div class="movie-item">
-				            			<div class="mv-img">
-				            				<img src="images/uploads/mv-it9.jpg" alt="">
-				            			</div>
-				            			<div class="hvr-inner">
-				            				<a  href="moviesingle.html"> Vidi više <i class="ion-android-arrow-dropright"></i> </a>
-				            			</div>
-				            			<div class="title-in">
-				            				<h6><a href="#">Umri muški</a></h6>
-				            				<p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-				            			</div>
-				            		</div>
-			            		</div>
-			            		<div class="slide-it">
-			            			<div class="movie-item">
-				            			<div class="mv-img">
-				            				<img src="images/uploads/mv-it4.jpg" alt="">
-				            			</div>
-				            			<div class="hvr-inner">
-				            				<a  href="moviesingle.html"> Vidi više <i class="ion-android-arrow-dropright"></i> </a>
-				            			</div>
-				            			<div class="title-in">
-				            				<h6><a href="#">Put do slave</a></h6>
-				            				<p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-				            			</div>
-				            		</div>
-			            		</div>
-			            		<div class="slide-it">
-			            			<div class="movie-item">
-				            			<div class="mv-img">
-				            				<img src="images/uploads/mv-it5.jpg" alt="">
-				            			</div>
-				            			<div class="hvr-inner">
-				            				<a  href="moviesingle.html"> Vidi više <i class="ion-android-arrow-dropright"></i> </a>
-				            			</div>
-				            			<div class="title-in">
-				            				<h6><a href="#">Umri muški</a></h6>
-				            				<p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-				            			</div>
-				            		</div>
-			            		</div>
-			            		<div class="slide-it">
-			            			<div class="movie-item">
-				            			<div class="mv-img">
-				            				<img src="images/uploads/mv-it6.jpg" alt="">
-				            			</div>
-				            			<div class="hvr-inner">
-				            				<a  href="moviesingle.html"> Vidi više <i class="ion-android-arrow-dropright"></i> </a>
-				            			</div>
-				            			<div class="title-in">
-				            				<h6><a href="#">Međuzvjezdani</a></h6>
-				            				<p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-				            			</div>
-				            		</div>
-			            		</div>
-			            		<div class="slide-it">
-			            			<div class="movie-item">
-				            			<div class="mv-img">
-				            				<img src="images/uploads/mv-it7.jpg" alt="">
-				            			</div>
-				            			<div class="hvr-inner">
-				            				<a  href="moviesingle.html"> Vidi više <i class="ion-android-arrow-dropright"></i> </a>
-				            			</div>
-				            			<div class="title-in">
-				            				<h6><a href="#">Umri muški</a></h6>
-				            				<p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-				            			</div>
-				            		</div>
-			            		</div>
-			            		<div class="slide-it">
-			            			<div class="movie-item">
-				            			<div class="mv-img">
-				            				<img src="images/uploads/mv-it8.jpg" alt="">
-				            			</div>
-				            			<div class="hvr-inner">
-				            				<a  href="moviesingle.html"> Vidi više <i class="ion-android-arrow-dropright"></i> </a>
-				            			</div>
-				            			<div class="title-in">
-				            				<h6><a href="#">Umri muški</a></h6>
-				            				<p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-				            			</div>
-				            		</div>
-			            		</div>
-			            	</div>
-			            </div>
-			        </div>
-			        <div id="tab22-h2" class="tab">
-			           <div class="row">
-			            	<div class="slick-multiItem2">
-			            		<div class="slide-it">
-			            			<div class="movie-item">
-				            			<div class="mv-img">
-				            				<img src="images/uploads/mv-it4.jpg" alt="">
-				            			</div>
-				            			<div class="hvr-inner">
-				            				<a  href="moviesingle.html"> Vidi više <i class="ion-android-arrow-dropright"></i> </a>
-				            			</div>
-				            			<div class="title-in">
-				            				<h6><a href="#">Put do slave</a></h6>
-				            				<p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-				            			</div>
-				            		</div>
-			            		</div>
-			            		<div class="slide-it">
-			            			<div class="movie-item">
-				            			<div class="mv-img">
-				            				<img src="images/uploads/mv-it5.jpg" alt="">
-				            			</div>
-				            			<div class="hvr-inner">
-				            				<a  href="moviesingle.html"> Vidi više <i class="ion-android-arrow-dropright"></i> </a>
-				            			</div>
-				            			<div class="title-in">
-				            				<h6><a href="#">Umri muški</a></h6>
-				            				<p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-				            			</div>
-				            		</div>
-			            		</div>
-			            		<div class="slide-it">
-			            			<div class="movie-item">
-				            			<div class="mv-img">
-				            				<img src="images/uploads/mv-it6.jpg" alt="">
-				            			</div>
-				            			<div class="hvr-inner">
-				            				<a  href="moviesingle.html"> Vidi više <i class="ion-android-arrow-dropright"></i> </a>
-				            			</div>
-				            			<div class="title-in">
-				            				<h6><a href="#">Međuzvjezdani</a></h6>
-				            				<p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-				            			</div>
-				            		</div>
-			            		</div>
-			            		<div class="slide-it">
-			            			<div class="movie-item">
-				            			<div class="mv-img">
-				            				<img src="images/uploads/mv-it7.jpg" alt="">
-				            			</div>
-				            			<div class="hvr-inner">
-				            				<a  href="moviesingle.html"> Vidi više <i class="ion-android-arrow-dropright"></i> </a>
-				            			</div>
-				            			<div class="title-in">
-				            				<h6><a href="#">Umri muški</a></h6>
-				            				<p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-				            			</div>
-				            		</div>
-			            		</div>
-			            		<div class="slide-it">
-			            			<div class="movie-item">
-				            			<div class="mv-img">
-				            				<img src="images/uploads/mv-it8.jpg" alt="">
-				            			</div>
-				            			<div class="hvr-inner">
-				            				<a  href="moviesingle.html"> Vidi više <i class="ion-android-arrow-dropright"></i> </a>
-				            			</div>
-				            			<div class="title-in">
-				            				<h6><a href="#">Umri muški</a></h6>
-				            				<p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-				            			</div>
-				            		</div>
-			            		</div>
-			            	</div>
-			            </div>
-			        </div>
-			        <div id="tab23-h2" class="tab">
-			        	<div class="row">
-			            	<div class="slick-multiItem2">
-			            		<div class="movie-item">
-			            			<div class="mv-img">
-			            				<img src="images/uploads/mv-it1.jpg" alt="">
-			            			</div>
-			            			<div class="hvr-inner">
-			            				<a  href="moviesingle.html"> Vidi više <i class="ion-android-arrow-dropright"></i> </a>
-			            			</div>
-			            			<div class="title-in">
-			            				<h6><a href="#">Međuzvjezdani</a></h6>
-			            				<p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-			            			</div>
-			            		</div>
-								<div class="movie-item">
-			            			<div class="mv-img">
-			            				<img src="images/uploads/mv-it2.jpg" alt="">
-			            			</div>
-			            			<div class="hvr-inner">
-			            				<a  href="moviesingle.html"> Vidi više <i class="ion-android-arrow-dropright"></i> </a>
-			            			</div>
-			            			<div class="title-in">
-			            				<h6><a href="#">Povratnik</a></h6>
-			            				<p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-			            			</div>
-			            		</div>
-			            		<div class="movie-item">
-			            			<div class="mv-img">
-			            				<img src="images/uploads/mv-it3.jpg" alt="">
-			            			</div>
-			            			<div class="hvr-inner">
-			            				<a  href="moviesingle.html"> Vidi više <i class="ion-android-arrow-dropright"></i> </a>
-			            			</div>
-			            			<div class="title-in">
-			            				<h6><a href="#">Umri muški</a></h6>
-			            				<p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-			            			</div>
-			            		</div>
-			            		<div class="movie-item">
-			            			<div class="mv-img">
-			            				<img src="images/uploads/mv-it4.jpg" alt="">
-			            			</div>
-			            			<div class="hvr-inner">
-			            				<a  href="moviesingle.html"> Vidi više <i class="ion-android-arrow-dropright"></i> </a>
-			            			</div>
-			            			<div class="title-in">
-			            				<h6><a href="#">Put do slave</a></h6>
-			            				<p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-			            			</div>
-			            		</div>
-			            		<div class="movie-item">
-			            			<div class="mv-img">
-			            				<img src="images/uploads/mv-it3.jpg" alt="">
-			            			</div>
-			            			<div class="hvr-inner">
-			            				<a  href="moviesingle.html"> Vidi više <i class="ion-android-arrow-dropright"></i> </a>
-			            			</div>
-			            			<div class="title-in">
-			            				<h6><a href="#">Umri muški</a></h6>
-			            				<p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-			            			</div>
-			            		</div>
-			            	</div>
-			            </div>
-		       	 	</div>
-		       	 	 <div id="tab24-h2" class="tab">
-			        	<div class="row">
-			            	<div class="slick-multiItem2">
-			            		<div class="slide-it">
-			            			<div class="movie-item">
-				            			<div class="mv-img">
-				            				<img src="images/uploads/mv-it4.jpg" alt="">
-				            			</div>
-				            			<div class="hvr-inner">
-				            				<a  href="moviesingle.html"> Vidi više <i class="ion-android-arrow-dropright"></i> </a>
-				            			</div>
-				            			<div class="title-in">
-				            				<h6><a href="#">Put do slave</a></h6>
-				            				<p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-				            			</div>
-				            		</div>
-			            		</div>
-			            		<div class="slide-it">
-			            			<div class="movie-item">
-				            			<div class="mv-img">
-				            				<img src="images/uploads/mv-it5.jpg" alt="">
-				            			</div>
-				            			<div class="hvr-inner">
-				            				<a  href="moviesingle.html"> Vidi više <i class="ion-android-arrow-dropright"></i> </a>
-				            			</div>
-				            			<div class="title-in">
-				            				<h6><a href="#">Umri muški</a></h6>
-				            				<p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-				            			</div>
-				            		</div>
-			            		</div>
-			            		<div class="slide-it">
-			            			<div class="movie-item">
-				            			<div class="mv-img">
-				            				<img src="images/uploads/mv-it6.jpg" alt="">
-				            			</div>
-				            			<div class="hvr-inner">
-				            				<a  href="moviesingle.html"> Vidi više <i class="ion-android-arrow-dropright"></i> </a>
-				            			</div>
-				            			<div class="title-in">
-				            				<h6><a href="#">Međuzvjezdani</a></h6>
-				            				<p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-				            			</div>
-				            		</div>
-			            		</div>
-			            		<div class="slide-it">
-			            			<div class="movie-item">
-				            			<div class="mv-img">
-				            				<img src="images/uploads/mv-it7.jpg" alt="">
-				            			</div>
-				            			<div class="hvr-inner">
-				            				<a  href="moviesingle.html"> Vidi više <i class="ion-android-arrow-dropright"></i> </a>
-				            			</div>
-				            			<div class="title-in">
-				            				<h6><a href="#">Umri muški</a></h6>
-				            				<p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-				            			</div>
-				            		</div>
-			            		</div>
-			            		<div class="slide-it">
-			            			<div class="movie-item">
-				            			<div class="mv-img">
-				            				<img src="images/uploads/mv-it8.jpg" alt="">
-				            			</div>
-				            			<div class="hvr-inner">
-				            				<a  href="moviesingle.html"> Vidi više <i class="ion-android-arrow-dropright"></i> </a>
-				            			</div>
-				            			<div class="title-in">
-				            				<h6><a href="#">Umri muški</a></h6>
-				            				<p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-				            			</div>
-				            		</div>
-			            		</div>
-			            	</div>
-			            </div>
-		       	 	</div>
-			    </div>
-			</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			}
 		</div>
 	</div>
-</div>	
+</div>
 
 <div class="trailers">
     <div class="container">
@@ -862,4 +177,3 @@
         </div>
     </div>
 </div>
-<!-- latest new v1 section-->
