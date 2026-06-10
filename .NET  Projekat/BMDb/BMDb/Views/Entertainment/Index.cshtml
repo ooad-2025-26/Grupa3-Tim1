@@ -1,4 +1,20 @@
-﻿
+﻿@{
+    Layout = "_AdminLayout";
+}
+
+@section StranicaStilovi {
+  <style>
+        .admin-section { padding: 50px 0; background: #020d18; color: white; min-height: 70vh; }
+        .table-custom { width: 100%; border-collapse: collapse; margin-top: 20px; background: #0b1a2a; }
+        .table-custom th, .table-custom td { padding: 15px; border: 1px solid #1c3d5d; text-align: left; }
+        .table-custom th { background: #06121e; color: #fbb124; }
+        .action-btn { padding: 5px 12px; border-radius: 3px; cursor: pointer; border: none; margin-right: 5px; transition: 0.3s; }
+        .btn-del { background: #dd163b; color: white; }
+        .btn-edit { background: #fbb124; color: black; }
+        .status-objavljeno { color: #2ecc71; }
+        .status-obrada { color: #fbb124; }
+    </style>
+}
 
 <div class="hero common-hero">
     <div class="container">
@@ -29,7 +45,7 @@
 
         <div class="top-search">
 
-            <input type="text" placeholder="Pretražite filmove i TV serije zelite promijeniti">
+            <input type="text" placeholder="Pretražite filmove i TV serije želite promijeniti">
         </div> 
 
 
