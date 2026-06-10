@@ -1,105 +1,38 @@
-﻿
+@model IEnumerable<BMDb.Models.Film>
+@inject BMDb.Services.IMediaImageService MediaImageService
+@{
+    var zanrovi = ViewBag.Zanrovi as IDictionary<int, List<string>> ?? new Dictionary<int, List<string>>();
+}
+
     <h1>Uskoro u kinima</h1>
     <div class="slider movie-items">
         <div class="container">
             <div class="row">
                 <div class="slick-multiItemSlider">
-                    <div class="movie-item">
-                        <div class="mv-img">
-                            <a href="#"><img src="https://images.fandango.com/ImageRenderer/200/0/redesign/static/img/default_poster--dark-mode.png/0/images/masterrepository/Fandango/242307/MOG_Payoff_1Sheet_1080x1920_2_adjusted.jpg" alt="" style="width: 285px; height: 437px; object-fit: cover;"></a>
-                        </div>
-                        <div class="title-in">
-                            <div class="cate">
-                                <span class="blue"><a href="#">Avantura</a></span>
+                    @foreach (var film in Model)
+                    {
+                        var filmZanrovi = zanrovi.TryGetValue(film.Id, out var itemZanrovi) ? itemZanrovi : new List<string>();
+                        <div class="movie-item">
+                            <div class="mv-img">
+                                <a asp-controller="Film" asp-action="Details" asp-route-id="@film.Id"><img src="@MediaImageService.ResolvePosterUrl(film.PosterLink)" alt="@film.Naziv" style="width: 285px; height: 437px; object-fit: cover;"></a>
                             </div>
-                            <h6><a href="#">Super Mario Galaksija</a></h6>
-                            <p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-                        </div>
-                    </div>
-                    <div class="movie-item">
-                        <div class="mv-img">
-                            <a href="#"><img src="https://images.fandango.com/ImageRenderer/200/0/redesign/static/img/default_poster--dark-mode.png/0/images/masterrepository/Fandango/243816/projecthailmary-finalart.jpg" alt="" style="width: 285px; height: 437px; object-fit: cover;"></a>
-                        </div>
-                        <div class="title-in">
-                            <div class="cate">
-                                <span class="blue"><a href="#">Akcija</a></span> <span class="orange"><a href="#">Sci-Fi</a></span>
+                            <div class="title-in">
+                                <div class="cate">
+                                    @foreach (var zanr in filmZanrovi.Take(2))
+                                    {
+                                        <span class="blue"><a href="#">@zanr</a></span>
+                                    }
+                                </div>
+                                <h6><a asp-controller="Film" asp-action="Details" asp-route-id="@film.Id">@film.Naziv</a></h6>
+                                <p><i class="ion-android-star"></i><span>@film.ProsjecnaOcjena.ToString("0.0")</span> /10</p>
+                                <p>@film.GodinaIzlaska</p>
+                                @if (!string.IsNullOrWhiteSpace(film.YoutubeLink))
+                                {
+                                    <p><a href="@film.YoutubeLink" target="_blank" rel="noopener">Trailer</a></p>
+                                }
                             </div>
-                            <h6><a href="#">Projekt Spas: Ave Maria</a></h6>
-                            <p><i class="ion-android-star"></i><span>7.4</span> /10</p>
                         </div>
-                    </div>
-                    <div class="movie-item">
-                        <div class="mv-img">
-                            <a href="#"><img src="https://images.fandango.com/ImageRenderer/200/0/redesign/static/img/default_poster--dark-mode.png/0/images/masterrepository/Fandango/241416/HPR_Payoff_Life_1s_v50_Mech5.jpg" alt="" style="width: 285px; height: 437px; object-fit: cover;"></a>
-                        </div>
-                        <div class="title-in">
-                            <div class="cate">
-                                <span class="blue"><a href="#">Animirani</a></span> <span class="orange"><a href="#">Komedija</a></span>
-                            </div>
-                            <h6><a href="#">Skakači</a></h6>
-                            <p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-                        </div>
-                    </div>
-                    <div class="movie-item">
-                        <div class="mv-img">
-                            <a href="#"><img src="https://images.fandango.com/ImageRenderer/200/0/redesign/static/img/default_poster--dark-mode.png/0/images/masterrepository/Fandango/244538/BEAST_2000x3000_ONLINE_1SHT_2x3_PAYOFF_ALT_ONE_V1.jpg" alt="" style="width: 285px; height: 437px; object-fit: cover;"></a>
-                        </div>
-                        <div class="title-in">
-                            <div class="cate">
-                                <span class="blue"><a href="#">Drama</a></span>
-                            </div>
-                            <h6><a href="#">Zvijer</a></h6>
-                            <p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-                        </div>
-                    </div>
-                    <div class="movie-item">
-                        <div class="mv-img">
-                            <a href="#"><img src="https://images.fandango.com/ImageRenderer/200/0/redesign/static/img/default_poster--dark-mode.png/0/images/masterrepository/Fandango/243964/agreatawakening-posterart.jpg" alt="" style="width: 285px; height: 437px; object-fit: cover;"></a>
-                        </div>
-                        <div class="title-in">
-                            <div class="cate">
-                                <span class="blue"><a href="#">Drama</a></span>
-                            </div>
-                            <h6><a href="#">Veliko buđenje</a></h6>
-                            <p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-                        </div>
-                    </div>
-                    <div class="movie-item">
-                        <div class="mv-img">
-                            <a href="#"><img src="https://images.fandango.com/ImageRenderer/200/0/redesign/static/img/default_poster--dark-mode.png/0/images/masterrepository/Fandango/243766/Hunting-Matthew-Nichols-24x36-Lead-WebHQ.jpg" alt="" style="width: 285px; height: 437px; object-fit: cover;"></a>
-                        </div>
-                        <div class="title-in">
-                            <div class="cate">
-                                <span class="yell"><a href="#">Horor</a></span>
-                            </div>
-                            <h6><a href="#">Lov na Matthewa Nicholsa</a></h6>
-                            <p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-                        </div>
-                    </div>
-                    <div class="movie-item">
-                        <div class="mv-img">
-                            <img src="https://images.fandango.com/ImageRenderer/200/0/redesign/static/img/default_poster--dark-mode.png/0/images/masterrepository/Fandango/244051/theywillkillyou-posterart.jpg" alt="" style="width: 285px; height: 437px; object-fit: cover;">
-                        </div>
-                        <div class="title-in">
-                            <div class="cate">
-                                <span class="blue"><a href="#">Komedija</a></span> <span class="orange"><a href="#">Horor</a></span>
-                            </div>
-                            <h6><a href="#">Oni će te ubiti</a></h6>
-                            <p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-                        </div>
-                    </div>
-                    <div class="movie-item">
-                        <div class="mv-img">
-                            <img src="https://images.fandango.com/ImageRenderer/200/0/redesign/static/img/default_poster--dark-mode.png/0/images/masterrepository/Fandango/244038/fantasy_life_1sht_72dpi.jpg" alt="" style="width: 285px; height: 437px; object-fit: cover;">
-                        </div>
-                        <div class="title-in">
-                            <div class="cate">
-                                <span class="blue"><a href="#">Komedija</a></span> <span class="orange"><a href="#">Drama</a></span>
-                            </div>
-                            <h6><a href="#">Fantastičan život</a></h6>
-                            <p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-                        </div>
-                    </div>
+                    }
                 </div>
             </div>
         </div>

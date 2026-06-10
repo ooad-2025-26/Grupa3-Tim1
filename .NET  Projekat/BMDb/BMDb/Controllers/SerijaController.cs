@@ -273,21 +273,31 @@ namespace BMDb.Controllers
         [HttpPost, ActionName("Delete")]
         [Authorize(Roles = "Admin,Moderator")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(int id, string? returnTo)
         {
             var serija = await _context.Serija.FindAsync(id);
             if (serija != null)
             {
+                RemoveRelatedData(id);
                 _context.Serija.Remove(serija);
             }
 
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectAfterDelete(returnTo);
         }
 
         private bool SerijaExists(int id)
         {
             return _context.Serija.Any(e => e.Id == id);
+        }
+
+        private IActionResult RedirectAfterDelete(string? returnTo)
+        {
+            return returnTo switch
+            {
+                "Entertainment" => RedirectToAction("Index", "Entertainment"),
+                _ => RedirectToAction(nameof(Index))
+            };
         }
 
         private async Task PopulateCreateListsAsync(int[]? selectedZanrIds = null)
@@ -408,6 +418,17 @@ namespace BMDb.Controllers
             return (value ?? string.Empty)
                 .Split(new[] { "\r\n", "\n", ";", "," }, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
                 .Where(x => !string.IsNullOrWhiteSpace(x));
+        }
+
+        private void RemoveRelatedData(int entertainmentId)
+        {
+            _context.EntertainmentZanr.RemoveRange(_context.EntertainmentZanr.Where(x => x.EntertainmentId == entertainmentId));
+            _context.GalerijaSlika.RemoveRange(_context.GalerijaSlika.Where(x => x.EntertainmentId == entertainmentId));
+            _context.Uloga.RemoveRange(_context.Uloga.Where(x => x.EntertainmentId == entertainmentId));
+            _context.Recenzija.RemoveRange(_context.Recenzija.Where(x => x.EntertainmentId == entertainmentId));
+            _context.GledaoSam.RemoveRange(_context.GledaoSam.Where(x => x.EntertainmentId == entertainmentId));
+            _context.GledatCu.RemoveRange(_context.GledatCu.Where(x => x.EntertainmentId == entertainmentId));
+            _context.Sezona.RemoveRange(_context.Sezona.Where(x => x.IdSerije == entertainmentId));
         }
     }
 }

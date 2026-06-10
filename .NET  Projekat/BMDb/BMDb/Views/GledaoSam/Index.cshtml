@@ -1,4 +1,7 @@
 ﻿
+@model IReadOnlyList<BMDb.ViewModels.ProfileMediaItemViewModel>
+@inject BMDb.Services.IMediaImageService MediaImageService
+
     <div class="hero user-hero">
         <div class="container">
             <div class="row">
@@ -6,7 +9,7 @@
                     <div class="hero-ct">
                         <h1 style="position: relative; left: -18px;">Filmovi koje sam gledao</h1>
                         <ul class="breadcumb">
-                            <li class="active"><a href="index.html">Početna</a></li>
+                            <li class="active"><a asp-controller="Home" asp-action="Glavna">Početna</a></li>
                             <li><span class="ion-ios-arrow-right"></span> Gledao sam</li>
                         </ul>
                     </div>
@@ -21,23 +24,23 @@
                 <div class="col-md-3 col-sm-12 col-xs-12">
                     <div class="user-information">
                         <div class="user-img">
-                            <a href="#"><img src="images/uploads/user-img.png" alt=""><br></a>
-                            <a href="#" class="redbtn">Promijeni avatar</a>
+                            <a asp-controller="Osoba" asp-action="Details"><img src="/images/uploads/user-img.png" alt=""><br></a>
+                            <a asp-area="Identity" asp-page="/Account/Manage/Index" class="redbtn">Promijeni avatar</a>
                         </div>
                         <div class="user-fav">
                             <p>Detalji računa</p>
                             <ul>
-                                <li><a href="userprofile.html">Profil</a></li>
-                                <li><a href="userfavoritegrid.html">Gledat ću</a></li>
-                                <li class="active"><a href="#">Gledao sam</a></li>
-                                <li><a href="userrate.html">Recenzije</a></li>
+                                <li><a asp-controller="Osoba" asp-action="Details">Profil</a></li>
+                                <li><a asp-controller="GledatCu" asp-action="Index">Gledat ću</a></li>
+                                <li class="active"><a asp-controller="GledaoSam" asp-action="Index">Gledao sam</a></li>
+                                <li><a asp-controller="Recenzija" asp-action="Index">Recenzije</a></li>
                             </ul>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-9 col-sm-12 col-xs-12">
                     <div class="topbar-filter user">
-                        <p>Pronađeno: <span>5 filmova</span></p>
+                        <p>Pronađeno: <span>@Model.Count naslova</span></p>
                         <label>Sortiraj po:</label>
                         <select>
                             <option value="range">Najnovije dodano</option>
@@ -46,53 +49,30 @@
                     </div>
 
                     <div class="flex-wrap-movielist user-fav-list">
-                        <div class="movie-item-style-2">
-                            <img src="images/uploads/mv1.jpg" alt="">
-                            <div class="mv-item-infor">
-                                <h6><a href="#">Zaborav <span>(2013)</span></a></h6>
-                                <p class="rate"><i class="ion-android-star"></i><span>8.1</span> /10</p>
-                                <p class="describe">U budućnosti gdje je Zemlja uništena ratom, vojnik zadužen za popravku dronova počinje preispitivati svoju misiju i samu realnost u kojoj živi...</p>
-                                <p class="run-time">Trajanje: 2h 04m . <span>MMPA: PG-13</span> . <span>Premijera: 19 April 2013</span></p>
-                                <p>Režiser: <a href="#">Joseph Kosinski</a></p>
-                                <p>Uloge: <a href="#">Tom Cruise,</a> <a href="#">Morgan Freeman,</a> <a href="#">Olga Kurylenko</a></p>
+                        @foreach (var item in Model)
+                        {
+                            <div class="movie-item-style-2">
+                                <img src="@MediaImageService.ResolvePosterUrl(item.PosterLink)" alt="">
+                                <div class="mv-item-infor">
+                                    <h6><a asp-controller="@item.ControllerName" asp-action="Details" asp-route-id="@item.EntertainmentId">@item.Naziv <span>(@item.GodinaIzlaska)</span></a></h6>
+                                    <p class="rate"><i class="ion-android-star"></i><span>@item.ProsjecnaOcjena.ToString("0.0")</span> /10</p>
+                                    <p class="describe">@item.Opis</p>
+                                    <p class="run-time">Trajanje: @item.Trajanje min . <span>Premijera: @item.GodinaIzlaska</span></p>
+                                    <p>Režiser: @item.Reditelj</p>
+                                </div>
                             </div>
-                        </div>
-
-                        <div class="movie-item-style-2">
-                            <img src="images/uploads/mv2.jpg" alt="">
-                            <div class="mv-item-infor">
-                                <h6><a href="#">U divljinu <span>(2007)</span></a></h6>
-                                <p class="rate"><i class="ion-android-star"></i><span>7.8</span> /10</p>
-                                <p class="describe">Nakon što završi fakultet, Christopher McCandless napušta civilizaciju i kreće na putovanje prema divljinama Aljaske kako bi pronašao smisao života...</p>
-                                <p class="run-time">Trajanje: 2h 28m . <span>MMPA: R</span> . <span>Premijera: 21 Septembar 2007</span></p>
-                                <p>Režiser: <a href="#">Sean Penn</a></p>
-                                <p>Uloge: <a href="#">Emile Hirsch,</a> <a href="#">Vince Vaughn,</a> <a href="#">Catherine Keener</a></p>
-                            </div>
-                        </div>
-
-                        <div class="movie-item-style-2">
-                            <img src="images/uploads/mv3.jpg" alt="">
-                            <div class="mv-item-infor">
-                                <h6><a href="#">Istrebljivač <span>(2017)</span></a></h6>
-                                <p class="rate"><i class="ion-android-star"></i><span>7.3</span> /10</p>
-                                <p class="describe">Mladi "istrebljivač" otkriva dugo skrivenu tajnu koja bi mogla u potpunosti promijeniti odnos između ljudi i replikanata u futurističkom društvu...</p>
-                                <p class="run-time">Trajanje: 2h 44m . <span>MMPA: R</span> . <span>Premijera: 6 Oktobar 2017</span></p>
-                                <p>Režiser: <a href="#">Denis Villeneuve</a></p>
-                                <p>Uloge: <a href="#">Ryan Gosling,</a> <a href="#">Harrison Ford,</a> <a href="#">Ana de Armas</a></p>
-                            </div>
-                        </div>
+                        }
                     </div>
 
                     <div class="topbar-filter">
                         <label>Filmova po stranici:</label>
                         <select>
-                            <option value="range">5 Filmova</option>
-                            <option value="saab">10 Filmova</option>
+                            <option value="range">@Model.Count naslova</option>
                         </select>
                         <div class="pagination2">
                             <span>Stranica 1 od 1:</span>
-                            <a class="active" href="#">1</a>
-                            <a href="#"><i class="ion-arrow-right-b"></i></a>
+                            <a class="active" asp-controller="GledaoSam" asp-action="Index">1</a>
+                            <a asp-controller="GledaoSam" asp-action="Index"><i class="ion-arrow-right-b"></i></a>
                         </div>
                     </div>
                 </div>

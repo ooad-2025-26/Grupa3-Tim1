@@ -91,9 +91,32 @@ namespace BMDb.Controllers
             return View();
         }
 
-        public IActionResult ComingSoon()
+        public async Task<IActionResult> ComingSoon()
         {
-            return View();
+            var trenutnaGodina = DateTime.UtcNow.Year;
+            var filmovi = await _context.Film
+                .AsNoTracking()
+                .Where(x => x.GodinaIzlaska > trenutnaGodina)
+                .OrderBy(x => x.GodinaIzlaska)
+                .ThenBy(x => x.Naziv)
+                .ToListAsync();
+
+            var filmIds = filmovi.Select(x => x.Id).ToList();
+            var zanrovi = await (
+                    from ez in _context.EntertainmentZanr.AsNoTracking()
+                    join z in _context.Zanr.AsNoTracking() on ez.ZanrId equals z.Id
+                    where filmIds.Contains(ez.EntertainmentId)
+                    select new { ez.EntertainmentId, z.Naziv }
+                )
+                .ToListAsync();
+
+            ViewBag.Zanrovi = zanrovi
+                .GroupBy(x => x.EntertainmentId)
+                .ToDictionary(
+                    x => x.Key,
+                    x => x.Select(z => z.Naziv).Where(z => !string.IsNullOrWhiteSpace(z)).Distinct().ToList());
+
+            return View(filmovi);
         }
 
         // POST: Film/Create
@@ -260,21 +283,31 @@ namespace BMDb.Controllers
         [HttpPost, ActionName("Delete")]
         [Authorize(Roles = "Admin,Moderator")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(int id, string? returnTo)
         {
             var film = await _context.Film.FindAsync(id);
             if (film != null)
             {
+                RemoveRelatedData(id);
                 _context.Film.Remove(film);
             }
 
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectAfterDelete(returnTo);
         }
 
         private bool FilmExists(int id)
         {
             return _context.Film.Any(e => e.Id == id);
+        }
+
+        private IActionResult RedirectAfterDelete(string? returnTo)
+        {
+            return returnTo switch
+            {
+                "Entertainment" => RedirectToAction("Index", "Entertainment"),
+                _ => RedirectToAction(nameof(Index))
+            };
         }
 
         private async Task PopulateCreateListsAsync(int[]? selectedZanrIds = null)
@@ -351,6 +384,16 @@ namespace BMDb.Controllers
             return (value ?? string.Empty)
                 .Split(new[] { "\r\n", "\n", ";", "," }, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
                 .Where(x => !string.IsNullOrWhiteSpace(x));
+        }
+
+        private void RemoveRelatedData(int entertainmentId)
+        {
+            _context.EntertainmentZanr.RemoveRange(_context.EntertainmentZanr.Where(x => x.EntertainmentId == entertainmentId));
+            _context.GalerijaSlika.RemoveRange(_context.GalerijaSlika.Where(x => x.EntertainmentId == entertainmentId));
+            _context.Uloga.RemoveRange(_context.Uloga.Where(x => x.EntertainmentId == entertainmentId));
+            _context.Recenzija.RemoveRange(_context.Recenzija.Where(x => x.EntertainmentId == entertainmentId));
+            _context.GledaoSam.RemoveRange(_context.GledaoSam.Where(x => x.EntertainmentId == entertainmentId));
+            _context.GledatCu.RemoveRange(_context.GledatCu.Where(x => x.EntertainmentId == entertainmentId));
         }
     }
 }

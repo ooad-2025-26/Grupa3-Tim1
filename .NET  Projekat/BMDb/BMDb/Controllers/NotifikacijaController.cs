@@ -8,10 +8,10 @@ using Microsoft.EntityFrameworkCore;
 using BMDb.Data;
 using BMDb.Models;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace BMDb.Controllers
 {
-    [Authorize(Roles = "Admin,Moderator")]
     public class NotifikacijaController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -22,12 +22,24 @@ namespace BMDb.Controllers
         }
 
         // GET: Notifikacija
+        [Authorize]
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Notifikacija.ToListAsync());
+            if (!await CurrentUserHasNotificationsEnabledAsync())
+            {
+                return View(Array.Empty<Notifikacija>());
+            }
+
+            var notifikacije = await _context.Notifikacija
+                .AsNoTracking()
+                .OrderByDescending(x => x.DatumObjave)
+                .ToListAsync();
+
+            return View(notifikacije);
         }
 
         // GET: Notifikacija/Details/5
+        [Authorize]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -35,7 +47,13 @@ namespace BMDb.Controllers
                 return NotFound();
             }
 
+            if (!await CurrentUserHasNotificationsEnabledAsync())
+            {
+                return NotFound();
+            }
+
             var notifikacija = await _context.Notifikacija
+                .AsNoTracking()
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (notifikacija == null)
             {
@@ -46,6 +64,7 @@ namespace BMDb.Controllers
         }
 
         // GET: Notifikacija/Create
+        [Authorize(Roles = "Admin,Moderator")]
         public IActionResult Create()
         {
             return View();
@@ -55,6 +74,7 @@ namespace BMDb.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize(Roles = "Admin,Moderator")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Tekst,DatumObjave,Slika")] Notifikacija notifikacija)
         {
@@ -68,6 +88,7 @@ namespace BMDb.Controllers
         }
 
         // GET: Notifikacija/Edit/5
+        [Authorize(Roles = "Admin,Moderator")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -87,6 +108,7 @@ namespace BMDb.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize(Roles = "Admin,Moderator")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Tekst,DatumObjave,Slika")] Notifikacija notifikacija)
         {
@@ -119,6 +141,7 @@ namespace BMDb.Controllers
         }
 
         // GET: Notifikacija/Delete/5
+        [Authorize(Roles = "Admin,Moderator")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -138,6 +161,7 @@ namespace BMDb.Controllers
 
         // POST: Notifikacija/Delete/5
         [HttpPost, ActionName("Delete")]
+        [Authorize(Roles = "Admin,Moderator")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
@@ -154,6 +178,21 @@ namespace BMDb.Controllers
         private bool NotifikacijaExists(int id)
         {
             return _context.Notifikacija.Any(e => e.Id == id);
+        }
+
+        private async Task<bool> CurrentUserHasNotificationsEnabledAsync()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (string.IsNullOrWhiteSpace(userId))
+            {
+                return false;
+            }
+
+            return await _context.Users
+                .AsNoTracking()
+                .Where(x => x.Id == userId)
+                .Select(x => x.NotifikacijeUkljucene)
+                .FirstOrDefaultAsync();
         }
     }
 }

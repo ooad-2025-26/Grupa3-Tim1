@@ -1,4 +1,7 @@
 ﻿
+@model IReadOnlyList<BMDb.ViewModels.ProfileReviewViewModel>
+@inject BMDb.Services.IMediaImageService MediaImageService
+
 	<div class="hero user-hero">
 		<div class="container">
 			<div class="row">
@@ -6,7 +9,7 @@
 					<div class="hero-ct">
 						<h1 style="position: relative; left: -138px;">Recenzije</h1>
 						<ul class="breadcumb">
-							<li class="active"><a href="index.html">Početna</a></li>
+							<li class="active"><a asp-controller="Home" asp-action="Glavna">Početna</a></li>
 							<li><span class="ion-ios-arrow-right"></span> Recenzije</li>
 						</ul>
 					</div>
@@ -21,16 +24,16 @@
 				<div class="col-md-3 col-sm-12 col-xs-12">
 					<div class="user-information">
 						<div class="user-img">
-							<a href="#"><img src="images/uploads/user-img.png" alt=""><br></a>
-							<a href="#" class="redbtn">Promijeni avatar</a>
+							<a asp-controller="Osoba" asp-action="Details"><img src="/images/uploads/user-img.png" alt=""><br></a>
+							<a asp-area="Identity" asp-page="/Account/Manage/Index" class="redbtn">Promijeni avatar</a>
 						</div>
 						<div class="user-fav">
 							<p>Detalji računa</p>
 							<ul>
-								<li><a href="userprofile.html">Profil</a></li>
-								<li><a href="userfavoritegrid.html">Gledat ću</a></li>
-								<li><a href="userfavoritelist.html">Gledao sam</a></li>
-								<li class="active"><a href="#">Recenzije</a></li>
+								<li><a asp-controller="Osoba" asp-action="Details">Profil</a></li>
+								<li><a asp-controller="GledatCu" asp-action="Index">Gledat ću</a></li>
+								<li><a asp-controller="GledaoSam" asp-action="Index">Gledao sam</a></li>
+								<li class="active"><a asp-controller="Recenzija" asp-action="Index">Recenzije</a></li>
 							</ul>
 						</div>
 					</div>
@@ -38,7 +41,7 @@
 
 				<div class="col-md-9 col-sm-12 col-xs-12">
 					<div class="topbar-filter">
-						<p>Pronađene <span>3 recenzije</span> ukupno</p>
+						<p>Pronađene <span>@Model.Count recenzije</span> ukupno</p>
 						<label>Sortiraj po:</label>
 						<select>
 							<option value="range">-- Odaberi opciju --</option>
@@ -46,55 +49,31 @@
 						</select>
 					</div>
 
-					<div class="movie-item-style-2 userrate">
-						<img src="images/uploads/mv1.jpg" alt="">
-						<div class="mv-item-infor">
-							<h6><a href="moviesingle.html">Zaborav <span>(2013)</span></a></h6>
-							<p class="time sm-text">Vaša ocjena:</p>
-							<p class="rate"><i class="ion-android-star"></i><span>9.0</span> /10</p>
-							<p class="time sm-text">Recenzija:</p>
-							<h6>Odličan sci-fi film</h6>
-							<p class="time sm">02 April 2017</p>
-							<p>Film ima odličnu atmosferu, zanimljivu priču i veoma dobar vizuelni identitet. Radnja je napeta, a gluma i efekti dodatno pojačavaju doživljaj gledanja. Jedan od boljih naučnofantastičnih filmova koje sam pogledao.</p>
+					@foreach (var recenzija in Model)
+					{
+						<div class="movie-item-style-2 userrate">
+							<img src="@MediaImageService.ResolvePosterUrl(recenzija.PosterLink)" alt="">
+							<div class="mv-item-infor">
+								<h6><a asp-controller="@recenzija.ControllerName" asp-action="Details" asp-route-id="@recenzija.EntertainmentId">@recenzija.Naziv <span>(@recenzija.GodinaIzlaska)</span></a></h6>
+								<p class="time sm-text">Vaša ocjena:</p>
+								<p class="rate"><i class="ion-android-star"></i><span>@recenzija.Ocjena.ToString("0.0")</span> /10</p>
+								<p class="time sm-text">Recenzija:</p>
+								<h6>@recenzija.Naziv</h6>
+								<p class="time sm">@recenzija.DatumObjave.ToString("dd MMMM yyyy")</p>
+								<p>@recenzija.Komentar</p>
+							</div>
 						</div>
-					</div>
-
-					<div class="movie-item-style-2 userrate">
-						<img src="images/uploads/mv2.jpg" alt="">
-						<div class="mv-item-infor">
-							<h6><a href="moviesingle.html">U divljinu <span>(2007)</span></a></h6>
-							<p class="time sm-text">Vaša ocjena:</p>
-							<p class="rate"><i class="ion-android-star"></i><span>7.0</span> /10</p>
-							<p class="time sm-text">Recenzija:</p>
-							<h6>Inspirativan i emotivan film</h6>
-							<p class="time sm">21 Septembar 2017</p>
-							<p>Film nosi snažnu poruku o slobodi, životu i potrazi za smislom. Priča je zanimljiva i emotivna, a prirodni ambijenti i muzika ostavljaju poseban utisak.</p>
-						</div>
-					</div>
-
-					<div class="movie-item-style-2 userrate last">
-						<img src="images/uploads/mv3.jpg" alt="">
-						<div class="mv-item-infor">
-							<h6><a href="moviesingle.html">Istrebljivač <span>(2017)</span></a></h6>
-							<p class="time sm-text">Vaša ocjena:</p>
-							<p class="rate"><i class="ion-android-star"></i><span>10.0</span> /10</p>
-							<p class="time sm-text">Recenzija:</p>
-							<h6>Pravo remek-djelo</h6>
-							<p class="time sm">01 Februar 2018</p>
-							<p>Izuzetna fotografija, odlična muzika i duboka priča čine ovaj film posebnim. Atmosfera je vrhunska, a cijeli film djeluje ozbiljno, emocionalno i vizuelno impresivno od početka do kraja.</p>
-						</div>
-					</div>
+					}
 
 					<div class="topbar-filter">
 						<label>Filmova po stranici:</label>
 						<select>
-							<option value="range">20 filmova</option>
-							<option value="saab">10 filmova</option>
+							<option value="range">@Model.Count recenzija</option>
 						</select>
 						<div class="pagination2">
 							<span>Stranica 1 od 1:</span>
-							<a class="active" href="#">1</a>
-							<a href="#"><i class="ion-arrow-right-b"></i></a>
+							<a class="active" asp-controller="Recenzija" asp-action="Index">1</a>
+							<a asp-controller="Recenzija" asp-action="Index"><i class="ion-arrow-right-b"></i></a>
 						</div>
 					</div>
 				</div>

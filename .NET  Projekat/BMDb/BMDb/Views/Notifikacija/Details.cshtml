@@ -1,4 +1,6 @@
-﻿
+@model BMDb.Models.Notifikacija
+@inject BMDb.Services.IMediaImageService MediaImageService
+
 	<div class="hero common-hero">
 		<div class="container">
 			<div class="row">
@@ -20,35 +22,11 @@
 			<div class="row">
 				<div class="col-md-9 col-sm-12 col-xs-12">
 					<div class="blog-detail-ct">
-						<h1>‘Dune: Part Two’ obarao rekordne zarade u kinima</h1>
-						<span class="time">11 Apr 2026</span>
-						<img src="https://imgs.search.brave.com/PMCRlN2wW7j3VFfsdZaDURG84Ol0WPkIIwHAAzAs6Wg/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJjYXQuY29t/L3cvZnVsbC8xLzMv/OS8zMjIxNS0xOTIw/eDEwODAtZGVza3Rv/cC1mdWxsLWhkLWR1/bmUtMjAyMS1iYWNr/Z3JvdW5kLWltYWdl/LmpwZw" alt="">
+						<h1>Novost</h1>
+						<span class="time">@Model.DatumObjave.ToString("dd MMM yyyy")</span>
+						<img src="@MediaImageService.ResolvePosterUrl(Model.Slika)" alt="">
 						<p>
-							Novi film ‘Dune: Part Two’ nastavlja uspjeh prve adaptacije i ostvaruje izuzetne rezultate na svjetskim kino blagajnama, uz pohvale kritike za vizuelni spektakl i priču.
-						</p>
-
-						<p>
-							Film donosi nastavak epske priče Paula Atreidesa dok se suočava s novim političkim sukobima, savezima i ratom za kontrolu pustinjske planete Arrakis.
-						</p>
-
-						<p>
-							Režiser Denis Villeneuve ponovo donosi impresivnu režiju, a glumačka postava predvođena Timothée Chalametom i Zendayom dobija odlične kritike za svoje izvedbe.
-						</p>
-
-						<div class="flex-it flex-ct">
-							<p>
-								Film se posebno ističe svojom kinematografijom i muzikom Hansa Zimmera, koji dodatno pojačava epsku atmosferu i emotivnu težinu priče.
-								<br><br>
-								Kritičari ga već nazivaju jednim od najvećih filmskih spektakala godine, a publika masovno puni kina širom svijeta.
-							</p>
-						</div>
-
-						<p>
-							‘Dune: Part Two’ se očekuje da će obilježiti ovu filmsku godinu i postaviti nove standarde za naučnofantastične blockbustere.
-						</p>
-
-						<p>
-							Film već sada bilježi ogroman interes publike i smatra se jednim od najvažnijih kino izdanja savremenog perioda.
+							@Model.Tekst
 						</p>
 
 						<!-- share link -->
@@ -72,7 +50,7 @@
 							<input type="text" placeholder="Unesi ključne riječi">
 						</div>
 						<div class="ads">
-							<img src="images/uploads/ads1.png" alt="">
+							<img src="/images/uploads/ads1.png" alt="">
 						</div>
 					</div>
 				</div>

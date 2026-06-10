@@ -77,7 +77,11 @@
                                 <td>@item.Ocjena.ToString("0.0")</td>
                                 <td>
                                     <a asp-controller="@item.ControllerName" asp-action="Edit" asp-route-id="@item.Id" class="action-btn btn-edit">Uredi</a>
-                                    <a asp-controller="@item.ControllerName" asp-action="Delete" asp-route-id="@item.Id" class="action-btn btn-del">Obriši</a>
+                                    <form asp-controller="@item.ControllerName" asp-action="Delete" asp-route-id="@item.Id" method="post" style="display:inline;">
+                                        @Html.AntiForgeryToken()
+                                        <input type="hidden" name="returnTo" value="Entertainment" />
+                                        <button type="submit" class="action-btn btn-del">Obriši</button>
+                                    </form>
                                 </td>
                             </tr>
                         }

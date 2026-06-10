@@ -1,4 +1,6 @@
 ﻿
+@model BMDb.ViewModels.ProfileDetailsViewModel
+
     <div class="hero user-hero">
         <div class="container">
             <div class="row">
@@ -6,7 +8,7 @@
                     <div class="hero-ct">
                         <h1 style="position: relative; left: -85px;">Profil korisnika</h1>
                         <ul class="breadcumb">
-                            <li class="active"><a href="index.html">Početna</a></li>
+                            <li class="active"><a asp-controller="Home" asp-action="Glavna">Početna</a></li>
                             <li><span class="ion-ios-arrow-right"></span> Profil</li>
                         </ul>
                     </div>
@@ -21,63 +23,76 @@
                 <div class="col-md-3 col-sm-12 col-xs-12">
                     <div class="user-information">
                         <div class="user-img">
-                            <a href="#"><img src="images/uploads/user-img.png" alt=""><br></a>
-                            <a href="#" class="redbtn">Promijeni avatar</a>
+                            <a href="#"><img src="@Model.AvatarUrl" alt=""><br></a>
+                            <label for="AvatarUpload" class="redbtn" style="cursor:pointer;">Uredi avatar</label>
                         </div>
                         <div class="user-fav">
                             <p>Detalji računa</p>
                             <ul>
-                                <li class="active"><a href="#">Profil</a></li>
-                                <li><a href="userfavoritegrid.html">Gledat ću</a></li>
-                                <li><a href="userfavoritelist.html">Gledao sam</a></li>
-                                <li><a href="userrate.html">Recenzije</a></li>
+                                <li class="active"><a asp-controller="Osoba" asp-action="Details">Profil</a></li>
+                                <li><a asp-controller="GledatCu" asp-action="Index">Gledat ću</a></li>
+                                <li><a asp-controller="GledaoSam" asp-action="Index">Gledao sam</a></li>
+                                <li><a asp-controller="Recenzija" asp-action="Index">Recenzije</a></li>
                             </ul>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-9 col-sm-12 col-xs-12">
                     <div class="form-style-1 user-pro">
-                        <form action="#" class="user">
+                        <form asp-controller="Osoba" asp-action="Details" method="post" enctype="multipart/form-data" class="user">
+                            @Html.AntiForgeryToken()
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            @if (TempData["StatusPoruka"] != null)
+                            {
+                                <p class="text-success">@TempData["StatusPoruka"]</p>
+                            }
                             <h4>01. Detalji profila</h4>
                             <div class="row">
                                 <div class="col-md-6 form-it">
                                     <label>Korisničko ime</label>
-                                    <input type="text" placeholder="nekonekic">
+                                    <input type="text" value="@Model.User.UserName" readonly>
                                 </div>
                                 <div class="col-md-6 form-it">
-                                    <label>Email adresa</label>
-                                    <input type="text" placeholder="nekonekic@gmail.com">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6 form-it">
-                                    <label>Ime</label>
-                                    <input type="text" placeholder="Neko">
-                                </div>
-                                <div class="col-md-6 form-it">
-                                    <label>Prezime</label>
-                                    <input type="text" placeholder="Nekić">
+                                    <label asp-for="Email">Email adresa</label>
+                                    <input asp-for="Email" type="email" placeholder="email@primjer.ba">
+                                    <span asp-validation-for="Email" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6 form-it">
-                                    <label>Država</label>
-                                    <select>
-                                        <option value="bih">Bosna i Hercegovina</option>
-                                        <option value="others">Ostalo</option>
-                                    </select>
+                                    <label asp-for="Ime">Ime</label>
+                                    <input asp-for="Ime" placeholder="Ime">
+                                    <span asp-validation-for="Ime" class="text-danger"></span>
                                 </div>
                                 <div class="col-md-6 form-it">
-                                    <label>Grad / Kanton</label>
-                                    <select>
-                                        <option value="sarajevo">Sarajevo</option>
-                                        <option value="tuzla">Tuzla</option>
-                                        <option value="mostar">Mostar</option>
-                                        <option value="zenica">Zenica</option>
-                                        <option value="bihac">Bihać</option>
-                                        <option value="banjaluka">Banja Luka</option>
-                                        <option value="others">Ostalo</option>
-                                    </select>
+                                    <label asp-for="Prezime">Prezime</label>
+                                    <input asp-for="Prezime" placeholder="Prezime">
+                                    <span asp-validation-for="Prezime" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 form-it">
+                                    <label asp-for="Nadimak">Nadimak</label>
+                                    <input asp-for="Nadimak" placeholder="Nadimak">
+                                    <span asp-validation-for="Nadimak" class="text-danger"></span>
+                                </div>
+                                <div class="col-md-6 form-it">
+                                    <label asp-for="PhoneNumber">Telefon</label>
+                                    <input asp-for="PhoneNumber" placeholder="+387...">
+                                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 form-it">
+                                    <label asp-for="NotifikacijeUkljucene">
+                                        <input asp-for="NotifikacijeUkljucene" type="checkbox" style="width:auto; margin-right:8px;">
+                                        Notifikacije uključene
+                                    </label>
+                                </div>
+                                <div class="col-md-6 form-it">
+                                    <label asp-for="AvatarUpload">Avatar slika</label>
+                                    <input asp-for="AvatarUpload" id="AvatarUpload" type="file" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp">
+                                    <span asp-validation-for="AvatarUpload" class="text-danger"></span>
                                 </div>
                             </div>
 
@@ -86,9 +101,17 @@
                                 <div class="col-md-12 form-it">
                                     <label>Vaši omiljeni žanrovi:</label>
                                     <div class="cate">
-                                        <span class="blue"><a href="#">Avantura</a></span>
-                                        <span class="yell"><a href="#">Sci-Fi</a></span>
-                                        <span class="orange"><a href="#">+</a></span>
+                                        @if (Model.PreferiraniZanrovi.Any())
+                                        {
+                                            foreach (var zanr in Model.PreferiraniZanrovi)
+                                            {
+                                                <span class="blue"><a asp-controller="Film" asp-action="Index">@zanr</a></span>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <span class="blue"><a asp-controller="Film" asp-action="Index">Nema odabranih žanrova</a></span>
+                                        }
                                     </div>
                                 </div>
                             </div>

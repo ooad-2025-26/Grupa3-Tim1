@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using BMDb.Data;
 using BMDb.Models;
 using Microsoft.AspNetCore.Authorization;
+using BMDb.Services;
+using BMDb.ViewModels;
 
 namespace BMDb.Controllers
 {
@@ -15,16 +17,26 @@ namespace BMDb.Controllers
     public class GledatCuController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IUserKeyService _userKeyService;
 
-        public GledatCuController(ApplicationDbContext context)
+        public GledatCuController(ApplicationDbContext context, IUserKeyService userKeyService)
         {
             _context = context;
+            _userKeyService = userKeyService;
         }
 
         // GET: GledatCu
         public async Task<IActionResult> Index()
         {
-            return View(await _context.GledatCu.ToListAsync());
+            var osobaId = _userKeyService.GetCurrentUserKey(User);
+            var entertainmentIds = await _context.GledatCu
+                .AsNoTracking()
+                .Where(x => x.OsobaId == osobaId)
+                .Select(x => x.EntertainmentId)
+                .ToListAsync();
+
+            var items = await BuildProfileItemsAsync(entertainmentIds);
+            return View(items);
         }
 
         // GET: GledatCu/Details/5
@@ -154,6 +166,41 @@ namespace BMDb.Controllers
         private bool GledatCuExists(int id)
         {
             return _context.GledatCu.Any(e => e.Id == id);
+        }
+
+        private async Task<IReadOnlyList<ProfileMediaItemViewModel>> BuildProfileItemsAsync(IReadOnlyList<int> entertainmentIds)
+        {
+            if (entertainmentIds.Count == 0)
+            {
+                return Array.Empty<ProfileMediaItemViewModel>();
+            }
+
+            var filmIds = await _context.Film
+                .AsNoTracking()
+                .Where(x => entertainmentIds.Contains(x.Id))
+                .Select(x => x.Id)
+                .ToListAsync();
+            var filmIdSet = filmIds.ToHashSet();
+
+            var items = await _context.Entertainment
+                .AsNoTracking()
+                .Where(x => entertainmentIds.Contains(x.Id))
+                .OrderBy(x => x.Naziv)
+                .Select(x => new ProfileMediaItemViewModel
+                {
+                    EntertainmentId = x.Id,
+                    Naziv = x.Naziv ?? string.Empty,
+                    Opis = x.Opis ?? string.Empty,
+                    ProsjecnaOcjena = x.ProsjecnaOcjena,
+                    Reditelj = x.Reditelj ?? string.Empty,
+                    GodinaIzlaska = x.GodinaIzlaska,
+                    Trajanje = x.Trajanje,
+                    PosterLink = x.PosterLink ?? string.Empty,
+                    ControllerName = filmIdSet.Contains(x.Id) ? "Film" : "Serija"
+                })
+                .ToListAsync();
+
+            return items;
         }
     }
 }

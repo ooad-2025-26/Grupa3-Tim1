@@ -1,74 +1,89 @@
-﻿@model BMDb.Models.Film
-
+@model BMDb.Models.Film
 @{
-    ViewData["Title"] = "Edit";
+    Layout = "_AdminLayout";
+}
+@section StranicaStilovi {
+    <style>
+        .admin-section { padding: 50px 0; background: #020d18; color: white; min-height: 70vh; }
+        .form-container { background: #0b1a2a; padding: 30px; border: 1px solid #1c3d5d; border-radius: 5px; }
+        .form-container input, .form-container select, .form-container textarea { width: 100%; padding: 12px; margin: 10px 0; background: #020d18; border: 1px solid #1c3d5d; color: white; border-radius: 3px; }
+        .form-container label { color: #fbb124; font-weight: bold; margin-top: 15px; display: block; }
+        .btn-submit { background: #fbb124; color: black; font-weight: bold; text-transform: uppercase; border: none; padding: 15px 30px; margin-top: 20px; cursor: pointer; transition: 0.3s; }
+        .btn-submit:hover { background: #ffffff; }
+    </style>
 }
 
-<h1>Edit</h1>
-
-<h4>Film</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit" asp-route-id="@Model.Id" method="post">
-            @Html.AntiForgeryToken()
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="BoxOffice" class="control-label"></label>
-                <input asp-for="BoxOffice" class="form-control" />
-                <span asp-validation-for="BoxOffice" class="text-danger"></span>
+<div class="hero common-hero">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="hero-ct">
+                    <h1>Uredi film</h1>
+                    <ul class="breadcumb">
+                        <li><a asp-controller="Home" asp-action="AdminDashboard">Admin</a></li>
+                        <li><span class="ion-ios-arrow-right"></span> Sadrzaj</li>
+                        <li><span class="ion-ios-arrow-right"></span> Uredi</li>
+                    </ul>
+                </div>
             </div>
-            <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="Naziv" class="control-label"></label>
-                <input asp-for="Naziv" class="form-control" />
-                <span asp-validation-for="Naziv" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Opis" class="control-label"></label>
-                <input asp-for="Opis" class="form-control" />
-                <span asp-validation-for="Opis" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Reditelj" class="control-label"></label>
-                <input asp-for="Reditelj" class="form-control" />
-                <span asp-validation-for="Reditelj" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="GodinaIzlaska" class="control-label"></label>
-                <input asp-for="GodinaIzlaska" class="form-control" />
-                <span asp-validation-for="GodinaIzlaska" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="YoutubeLink" class="control-label"></label>
-                <input asp-for="YoutubeLink" class="form-control" />
-                <span asp-validation-for="YoutubeLink" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Trajanje" class="control-label"></label>
-                <input asp-for="Trajanje" class="form-control" />
-                <span asp-validation-for="Trajanje" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PosterLink" class="control-label"></label>
-                <input asp-for="PosterLink" type="text" class="form-control" />
-                <span asp-validation-for="PosterLink" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label for="zanrIds" class="control-label">Zanrovi</label>
-                <select id="zanrIds" name="zanrIds" class="form-control" multiple asp-items="ViewBag.Zanrovi"></select>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+<section class="admin-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-container">
+                    <form asp-controller="Film" asp-action="Edit" asp-route-id="@Model.Id" method="post">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" asp-for="Id" />
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label asp-for="Naziv">Naslov filma</label>
+                                <input asp-for="Naziv" placeholder="Npr. The Godfather" required>
+                                <span asp-validation-for="Naziv" class="text-danger"></span>
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+                                <label asp-for="GodinaIzlaska">Godina izdanja</label>
+                                <input asp-for="GodinaIzlaska" type="number" placeholder="2024">
+                                <span asp-validation-for="GodinaIzlaska" class="text-danger"></span>
+
+                                <label asp-for="Trajanje">Trajanje (minuta)</label>
+                                <input asp-for="Trajanje" type="number" placeholder="Npr. 145">
+                                <span asp-validation-for="Trajanje" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="PosterLink">URL Postera (putanja)</label>
+                                <input asp-for="PosterLink" type="text" placeholder="images/uploads/novi_film.jpg">
+                                <span asp-validation-for="PosterLink" class="text-danger"></span>
+
+                                <label asp-for="YoutubeLink">YouTube trailer URL</label>
+                                <input asp-for="YoutubeLink" placeholder="https://www.youtube.com/watch?v=...">
+                                <span asp-validation-for="YoutubeLink" class="text-danger"></span>
+
+                                <label asp-for="Reditelj">Reziser</label>
+                                <input asp-for="Reditelj" placeholder="Npr. Francis Ford Coppola">
+                                <span asp-validation-for="Reditelj" class="text-danger"></span>
+
+                                <label asp-for="BoxOffice">Box office</label>
+                                <input asp-for="BoxOffice" type="number" placeholder="0">
+                                <span asp-validation-for="BoxOffice" class="text-danger"></span>
+
+                                <label for="zanrIds">Zanrovi</label>
+                                <select id="zanrIds" name="zanrIds" multiple asp-items="ViewBag.Zanrovi"></select>
+                            </div>
+                            <div class="col-md-12">
+                                <label asp-for="Opis">Sinopsis (Kratak sadrzaj)</label>
+                                <textarea asp-for="Opis" rows="6" placeholder="Unesite opis filma ovdje..."></textarea>
+                                <span asp-validation-for="Opis" class="text-danger"></span>
+
+                                <button type="submit" class="btn-submit">Sacuvaj promjene</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

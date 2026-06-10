@@ -9,6 +9,7 @@ using BMDb.Data;
 using BMDb.Models;
 using BMDb.Services;
 using Microsoft.AspNetCore.Authorization;
+using BMDb.ViewModels;
 
 namespace BMDb.Controllers
 {
@@ -17,17 +18,59 @@ namespace BMDb.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly IRecenzijaService _recenzijaService;
+        private readonly IUserKeyService _userKeyService;
 
-        public RecenzijaController(ApplicationDbContext context, IRecenzijaService recenzijaService)
+        public RecenzijaController(ApplicationDbContext context, IRecenzijaService recenzijaService, IUserKeyService userKeyService)
         {
             _context = context;
             _recenzijaService = recenzijaService;
+            _userKeyService = userKeyService;
         }
 
         // GET: Recenzija
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Recenzija.ToListAsync());
+            var osobaId = _userKeyService.GetCurrentUserKey(User);
+            var recenzije = await _context.Recenzija
+                .AsNoTracking()
+                .Where(x => x.OsobaId == osobaId)
+                .OrderByDescending(x => x.DatumObjave)
+                .ToListAsync();
+
+            var entertainmentIds = recenzije.Select(x => x.EntertainmentId).Distinct().ToList();
+            var filmIds = await _context.Film
+                .AsNoTracking()
+                .Where(x => entertainmentIds.Contains(x.Id))
+                .Select(x => x.Id)
+                .ToListAsync();
+            var filmIdSet = filmIds.ToHashSet();
+
+            var entertainment = await _context.Entertainment
+                .AsNoTracking()
+                .Where(x => entertainmentIds.Contains(x.Id))
+                .ToDictionaryAsync(x => x.Id);
+
+            var model = recenzije
+                .Where(x => entertainment.ContainsKey(x.EntertainmentId))
+                .Select(x =>
+                {
+                    var item = entertainment[x.EntertainmentId];
+                    return new ProfileReviewViewModel
+                    {
+                        Id = x.Id,
+                        EntertainmentId = x.EntertainmentId,
+                        Naziv = item.Naziv ?? string.Empty,
+                        GodinaIzlaska = item.GodinaIzlaska,
+                        PosterLink = item.PosterLink ?? string.Empty,
+                        ControllerName = filmIdSet.Contains(x.EntertainmentId) ? "Film" : "Serija",
+                        Ocjena = x.Ocjena,
+                        Komentar = x.Komentar ?? string.Empty,
+                        DatumObjave = x.DatumObjave
+                    };
+                })
+                .ToList();
+
+            return View(model);
         }
 
         // GET: Recenzija/Details/5
