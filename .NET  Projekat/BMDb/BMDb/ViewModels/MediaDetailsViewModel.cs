@@ -10,6 +10,7 @@ namespace BMDb.ViewModels
         public IReadOnlyList<Sezona> Sezone { get; set; } = Array.Empty<Sezona>();
         public IReadOnlyList<Uloga> Uloge { get; set; } = Array.Empty<Uloga>();
         public IReadOnlyList<Glumac> Glumci { get; set; } = Array.Empty<Glumac>();
+        public IReadOnlyList<Zanr> Zanrovi { get; set; } = Array.Empty<Zanr>();
         public IReadOnlyList<GalerijaSlika> Galerija { get; set; } = Array.Empty<GalerijaSlika>();
         public bool JeGledao { get; set; }
         public bool JePlanirano { get; set; }

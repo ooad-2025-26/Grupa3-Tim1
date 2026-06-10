@@ -85,8 +85,9 @@ namespace BMDb.Controllers
 
         // GET: Serija/Create
         [Authorize(Roles = "Admin,Moderator")]
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
+            await PopulateCreateListsAsync();
             return View();
         }
 
@@ -96,21 +97,39 @@ namespace BMDb.Controllers
         [HttpPost]
         [Authorize(Roles = "Admin,Moderator")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IDSerije,BrojSezona,BrojEpizoda,ZavrsenoEmitovanje,Id,Naziv,Opis,ProsjecnaOcjena,Reditelj,GodinaIzlaska,YoutubeLink,Trajanje,PosterLink")] Serija serija)
+        public async Task<IActionResult> Create(
+            [Bind("IDSerije,BrojSezona,BrojEpizoda,ZavrsenoEmitovanje,Id,Naziv,Opis,ProsjecnaOcjena,Reditelj,GodinaIzlaska,YoutubeLink,Trajanje,PosterLink")] Serija serija,
+            int[] zanrIds,
+            int[] glumacIds,
+            string[] imenaLikova,
+            string? galerijaUrls,
+            int[] redniBrojeviSezona,
+            int[] brojeviEpizodaSezona,
+            int[] datumiPremijereSezona,
+            int[] posteriSezona)
         {
             if (ModelState.IsValid)
             {
                 if (!_fileValidationService.IsAllowedPoster(serija.PosterLink))
                 {
                     ModelState.AddModelError(nameof(Serija.PosterLink), "Poster mora biti .jpg ili .png.");
+                    await PopulateCreateListsAsync(zanrIds);
                     return View(serija);
                 }
 
-                _context.Add(serija);
+                await using var transaction = await _context.Database.BeginTransactionAsync();
+
+                _context.Serija.Add(serija);
                 await _context.SaveChangesAsync();
+                AddRelatedData(serija.Id, zanrIds, glumacIds, imenaLikova, galerijaUrls);
+                AddSeasonData(serija.Id, redniBrojeviSezona, brojeviEpizodaSezona, datumiPremijereSezona, posteriSezona);
+                await _context.SaveChangesAsync();
+                await transaction.CommitAsync();
+
                 await _notificationService.OnContentCreatedAsync(serija);
                 return RedirectToAction(nameof(Index));
             }
+            await PopulateCreateListsAsync(zanrIds);
             return View(serija);
         }
 
@@ -241,6 +260,80 @@ namespace BMDb.Controllers
         private bool SerijaExists(int id)
         {
             return _context.Serija.Any(e => e.Id == id);
+        }
+
+        private async Task PopulateCreateListsAsync(int[]? selectedZanrIds = null)
+        {
+            ViewBag.Zanrovi = new MultiSelectList(
+                await _context.Zanr.OrderBy(x => x.Naziv).ToListAsync(),
+                nameof(Zanr.Id),
+                nameof(Zanr.Naziv),
+                selectedZanrIds ?? Array.Empty<int>());
+
+            ViewBag.Glumci = await _context.Glumac.OrderBy(x => x.Ime).ThenBy(x => x.Prezime).ToListAsync();
+        }
+
+        private void AddRelatedData(int entertainmentId, int[] zanrIds, int[] glumacIds, string[] imenaLikova, string? galerijaUrls)
+        {
+            foreach (var zanrId in zanrIds.Distinct().Where(x => x > 0))
+            {
+                _context.EntertainmentZanr.Add(new EntertainmentZanr
+                {
+                    EntertainmentId = entertainmentId,
+                    ZanrId = zanrId
+                });
+            }
+
+            for (var i = 0; i < glumacIds.Length; i++)
+            {
+                if (glumacIds[i] <= 0)
+                {
+                    continue;
+                }
+
+                _context.Uloga.Add(new Uloga
+                {
+                    EntertainmentId = entertainmentId,
+                    GlumacId = glumacIds[i],
+                    ImeLika = i < imenaLikova.Length ? imenaLikova[i]?.Trim() ?? string.Empty : string.Empty
+                });
+            }
+
+            foreach (var url in SplitLines(galerijaUrls))
+            {
+                _context.GalerijaSlika.Add(new GalerijaSlika
+                {
+                    EntertainmentId = entertainmentId,
+                    Url = url
+                });
+            }
+        }
+
+        private void AddSeasonData(int serijaId, int[] redniBrojevi, int[] brojeviEpizoda, int[] datumiPremijere, int[] posteri)
+        {
+            for (var i = 0; i < redniBrojevi.Length; i++)
+            {
+                if (redniBrojevi[i] <= 0)
+                {
+                    continue;
+                }
+
+                _context.Sezona.Add(new Sezona
+                {
+                    IdSerije = serijaId,
+                    RedniBrojSezone = redniBrojevi[i],
+                    BrojEpizoda = i < brojeviEpizoda.Length ? brojeviEpizoda[i] : 0,
+                    DatumPremijere = i < datumiPremijere.Length ? datumiPremijere[i] : 0,
+                    PosterSezone = i < posteri.Length ? posteri[i] : 0
+                });
+            }
+        }
+
+        private static IEnumerable<string> SplitLines(string? value)
+        {
+            return (value ?? string.Empty)
+                .Split(new[] { "\r\n", "\n", ";", "," }, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
+                .Where(x => !string.IsNullOrWhiteSpace(x));
         }
     }
 }

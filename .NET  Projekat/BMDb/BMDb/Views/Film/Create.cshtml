@@ -40,6 +40,10 @@
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         <div class="row">
                             <div class="col-md-6">
+                                <label asp-for="IDFilma">Interni ID filma</label>
+                                <input asp-for="IDFilma" type="number" placeholder="0">
+                                <span asp-validation-for="IDFilma" class="text-danger"></span>
+
                                 <label asp-for="Naziv">Naslov filma</label>
                                 <input asp-for="Naziv" placeholder="Npr. The Godfather" required>
                                 <span asp-validation-for="Naziv" class="text-danger"></span>
@@ -72,11 +76,36 @@
                                 <label asp-for="BoxOffice">Box office</label>
                                 <input asp-for="BoxOffice" type="number" placeholder="0">
                                 <span asp-validation-for="BoxOffice" class="text-danger"></span>
+
+                                <label for="zanrIds">Zanrovi</label>
+                                <select id="zanrIds" name="zanrIds" multiple asp-items="ViewBag.Zanrovi"></select>
                             </div>
                             <div class="col-md-12">
                                 <label asp-for="Opis">Sinopsis (Kratak sadrzaj)</label>
                                 <textarea asp-for="Opis" rows="6" placeholder="Unesite opis filma ovdje..."></textarea>
                                 <span asp-validation-for="Opis" class="text-danger"></span>
+
+                                <label for="galerijaUrls">Galerija slika</label>
+                                <textarea id="galerijaUrls" name="galerijaUrls" rows="4" placeholder="Unesite URL slike po redu, odvojeno novim redom"></textarea>
+
+                                <label>Uloge</label>
+                                @for (var i = 0; i < 5; i++)
+                                {
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <select name="glumacIds">
+                                                <option value="0">Odaberite glumca</option>
+                                                @foreach (var glumac in (IEnumerable<BMDb.Models.Glumac>)(ViewBag.Glumci ?? Enumerable.Empty<BMDb.Models.Glumac>()))
+                                                {
+                                                    <option value="@glumac.Id">@glumac.Ime @glumac.Prezime</option>
+                                                }
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input name="imenaLikova" placeholder="Ime lika">
+                                        </div>
+                                    </div>
+                                }
 
                                 <button type="submit" class="btn-submit">Sacuvaj u bazu podataka</button>
                             </div>

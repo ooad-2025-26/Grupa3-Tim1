@@ -1,3 +1,16 @@
+@model BMDb.ViewModels.MediaDetailsViewModel
+@inject BMDb.Services.IMediaImageService MediaImageService
+@{
+    var film = Model.Entertainment as BMDb.Models.Film;
+    var poster = MediaImageService.ResolvePosterUrl(Model.Entertainment.PosterLink);
+    var trailer = Model.TrailerEmbedUrl ?? string.Empty;
+    var recenzije = Model.Recenzije ?? Array.Empty<BMDb.Models.Recenzija>();
+    var galerija = Model.Galerija ?? Array.Empty<BMDb.Models.GalerijaSlika>();
+    var uloge = Model.Uloge ?? Array.Empty<BMDb.Models.Uloga>();
+    var glumci = Model.Glumci ?? Array.Empty<BMDb.Models.Glumac>();
+    var zanrovi = Model.Zanrovi ?? Array.Empty<BMDb.Models.Zanr>();
+}
+
 <div class="hero mv-single-hero">
 	<div class="container">
 		<div class="row">
@@ -11,31 +24,29 @@
 		<div class="row ipad-width2">
 			<div class="col-md-4 col-sm-12 col-xs-12">
 				<div class="movie-img sticky-sb">
-					<img src="images/uploads/movie-single.jpg" alt="">
-					<div class="movie-btn">	
-						<div class="btn-transform transform-vertical red">
-							<div>
-								<a href="https://www.youtube.com/embed/6kw1UVovByw" class="item item-1 redbtn bmd-trigger">
-									<i class="ion-play"></i> Pogledaj trailer
-								</a>
+					<img src="@poster" alt="@Model.Entertainment.Naziv">
+					<div class="movie-btn">
+						@if (!string.IsNullOrWhiteSpace(trailer))
+						{
+							<div class="btn-transform transform-vertical red">
+								<div>
+									<a href="#bmd-trailer-popup" data-trailer-url="@trailer" class="item item-1 redbtn bmd-trigger">
+										<i class="ion-play"></i> Pogledaj trailer
+									</a>
+								</div>
+								<div>
+									<a href="#bmd-trailer-popup" data-trailer-url="@trailer" class="item item-2 redbtn hvr-grow bmd-trigger">
+										<i class="ion-play"></i>
+									</a>
+								</div>
 							</div>
-							<div>
-								<a href="https://www.youtube.com/embed/6kw1UVovByw" class="item item-2 redbtn hvr-grow bmd-trigger">
-									<i class="ion-play"></i>
-								</a>
-							</div>
-						</div>
+						}
 
 						<div id="bmd-trailer-popup" class="bmd-modal-overlay">
 							<div class="bmd-modal-content">
 								<a href="#!" id="bmd-close" class="bmd-close-btn">&times;</a>
 								<div class="bmd-video-wrapper">
-									<iframe 
-										id="bmd-video-iframe"
-										src="" 
-										frameborder="0" 
-										allowfullscreen>
-									</iframe>
+									<iframe id="bmd-video-iframe" src="" frameborder="0" allowfullscreen></iframe>
 								</div>
 							</div>
 						</div>
@@ -45,33 +56,38 @@
 			</div>
 			<div class="col-md-8 col-sm-12 col-xs-12">
 				<div class="movie-single-ct main-content">
-					<h1 class="bd-hd">Skyfall <span>2012</span></h1>
+					<h1 class="bd-hd">@Model.Entertainment.Naziv <span>@Model.Entertainment.GodinaIzlaska</span></h1>
+					@if (!string.IsNullOrWhiteSpace(Model.StatusPoruka))
+					{
+						<p style="color:#fbb124;">@Model.StatusPoruka</p>
+					}
 					<div class="social-btn">
-						<a href="#" class="parent-btn" style="color: #add8e6; margin-left: 20px;">
-							<i class="ion-ios-play"></i> Gledat ću
-						</a>
-						<a href="#" class="parent-btn" style="color: #add8e6;">
-							<i class="ion-checkmark-circled"></i> Gledao sam
-						</a>
+						<form asp-controller="Film" asp-action="OznaciPlanirano" asp-route-id="@Model.Entertainment.Id" method="post" style="display:inline;">
+							@Html.AntiForgeryToken()
+							<button type="submit" class="parent-btn" style="color: #add8e6; margin-left: 20px; background:none; border:0;">
+								<i class="ion-ios-play"></i> @(Model.JePlanirano ? "U planu" : "Gledat cu")
+							</button>
+						</form>
+						<form asp-controller="Film" asp-action="OznaciGledao" asp-route-id="@Model.Entertainment.Id" method="post" style="display:inline;">
+							@Html.AntiForgeryToken()
+							<button type="submit" class="parent-btn" style="color: #add8e6; background:none; border:0;">
+								<i class="ion-checkmark-circled"></i> @(Model.JeGledao ? "Gledano" : "Gledao sam")
+							</button>
+						</form>
 					</div>
 					<div class="movie-rate">
 						<div class="rate">
 							<i class="ion-android-star"></i>
-							<p><span>6.8</span> /10<br>
-								<span class="rv">56 Recenzija</span>
+							<p><span>@Model.Entertainment.ProsjecnaOcjena.ToString("0.0")</span> /10<br>
+								<span class="rv">@recenzije.Count Recenzija</span>
 							</p>
 						</div>
 						<div class="rate-star">
 							<p>Ocijenite film: </p>
-							<i class="ion-ios-star"></i>
-							<i class="ion-ios-star"></i>
-							<i class="ion-ios-star"></i>
-							<i class="ion-ios-star"></i>
-							<i class="ion-ios-star"></i>
-							<i class="ion-ios-star"></i>
-							<i class="ion-ios-star"></i>
-							<i class="ion-ios-star"></i>
-							<i class="ion-ios-star-outline"></i>
+							@for (var i = 1; i <= 10; i++)
+							{
+								<i class="@(i <= Math.Round(Model.Entertainment.ProsjecnaOcjena) ? "ion-ios-star" : "ion-ios-star-outline")"></i>
+							}
 						</div>
 					</div>
 					<div class="movie-tabs">
@@ -86,120 +102,64 @@
 						        <div id="overview" class="tab active">
 						            <div class="row">
 						            	<div class="col-md-8 col-sm-12 col-xs-12">
-						            		<p>Zagonetna poruka iz prošlosti šalje Jamesa Bonda na tajnu misiju u Mexico City, a zatim u Rim, gdje upoznaje Luciju Sciarru, prelijepu i zabranjenu udovicu ozloglašenog kriminalca. Bond se infiltrira na tajni sastanak i otkriva postojanje zlokobne organizacije poznate kao Skyfall. Kako se on približava srcu organizacije, otkriva zastrašujuću vezu između sebe i neprijatelja kojeg traži.</p>
+						            		<p>@Model.Entertainment.Opis</p>
 						            		<div class="title-hd-sm">
 												<h4>Fotografije</h4>
-												<a href="#" class="time">Sve fotografije <i class="ion-ios-arrow-right"></i></a>
+												<a href="#media" class="time">Sve fotografije <i class="ion-ios-arrow-right"></i></a>
 											</div>
 											<div class="mvsingle-item ov-item">
-												<a class="img-lightbox"  data-fancybox-group="gallery" href="images/uploads/image11.jpg" ><img src="images/uploads/image1.jpg" alt=""></a>
-												<a class="img-lightbox"  data-fancybox-group="gallery" href="images/uploads/image21.jpg" ><img src="images/uploads/image2.jpg" alt=""></a>
-												<a class="img-lightbox"  data-fancybox-group="gallery" href="images/uploads/image31.jpg" ><img src="images/uploads/image3.jpg" alt=""></a>
-											    <a class="img-lightbox"  data-fancybox-group="gallery" href="images/uploads/image111.jpg" ><img src="images/uploads/image1-1.jpg" alt=""></a>
+												@foreach (var slika in galerija.Take(4))
+												{
+													var slikaUrl = MediaImageService.ResolvePosterUrl(slika.Url);
+													<a class="img-lightbox" data-fancybox-group="gallery" href="@slikaUrl"><img src="@slikaUrl" alt=""></a>
+												}
 											</div>
 											<div class="title-hd-sm">
 												<h4>Uloge</h4>
 												<a href="#" class="time">Cijela postava <i class="ion-ios-arrow-right"></i></a>
 											</div>
-											<div class="mvcast-item">											
-												<div class="cast-it">
-													<div class="cast-left">
-														<img src="images/uploads/cast1.jpg" alt="">
-														<a href="#">Daniel Craig</a>
+											<div class="mvcast-item">
+												@foreach (var uloga in uloge)
+												{
+													var glumac = glumci.FirstOrDefault(x => x.Id == uloga.GlumacId);
+													var slika = MediaImageService.ResolvePosterUrl(glumac?.Slika);
+													<div class="cast-it">
+														<div class="cast-left">
+															<img src="@slika" alt="">
+															<a href="#">@(glumac == null ? "Nepoznat glumac" : $"{glumac.Ime} {glumac.Prezime}")</a>
+														</div>
+														<p>... @uloga.ImeLika</p>
 													</div>
-													<p>... James Bond</p>
-												</div>
-												<div class="cast-it">
-													<div class="cast-left">
-														<img src="images/uploads/cast2.jpg" alt="">
-														<a href="#">Christoph Waltz</a>
-													</div>
-													<p>... Ernst Stavro Blofeld</p>
-												</div>
-												<div class="cast-it">
-													<div class="cast-left">
-														<img src="images/uploads/cast3.jpg" alt="">
-														<a href="#">Léa Seydoux</a>
-													</div>
-													<p>... Madeleine Swann</p>
-												</div>
-												<div class="cast-it">
-													<div class="cast-left">
-														<img src="images/uploads/cast4.jpg" alt="">
-														<a href="#">Ralph Fiennes</a>
-													</div>
-													<p>... M</p>
-												</div>
-												<div class="cast-it">
-													<div class="cast-left">
-														<img src="images/uploads/cast5.jpg" alt="">
-														<a href="#">Monica Bellucci</a>
-													</div>
-													<p>... Lucia Sciarra</p>
-												</div>
-												<div class="cast-it">
-													<div class="cast-left">
-														<img src="images/uploads/cast6.jpg" alt="">
-														<a href="#">Ben Whishaw</a>
-													</div>
-													<p>... Q</p>
-												</div>
-												<div class="cast-it">
-													<div class="cast-left">
-														<img src="images/uploads/cast7.jpg" alt="">
-														<a href="#">Naomie Harris</a>
-													</div>
-													<p>... Eve Moneypenny</p>
-												</div>
-												<div class="cast-it">
-													<div class="cast-left">
-														<img src="images/uploads/cast9.jpg" alt="">
-														<a href="#">Dave Bautista</a>
-													</div>
-													<p>... Gospodin Hinx</p>
-												</div>
+												}
 											</div>
 						            	</div>
 						            	<div class="col-md-4 col-xs-12 col-sm-12">
 						            		<div class="sb-it">
-						            			<h6>Režiser: </h6>
-						            			<p><a href="#">Sam Mendes</a></p>
+						            			<h6>Reziser: </h6>
+						            			<p><a href="#">@Model.Entertainment.Reditelj</a></p>
 						            		</div>
 						            		<div class="sb-it">
 						            			<h6>BoxOffice: </h6>
-						            			<p><a href="#">$1,108,594,137</a></p>
+						            			<p><a href="#">@(film?.BoxOffice.ToString("N0") ?? "0")</a></p>
 						            		</div>
 						            		<div class="sb-it">
 						            			<h6>Zvijezde: </h6>
-						            			<p><a href="#">Daniel Craig,</a> <a href="#">Christoph Waltz,</a> <a href="#">Léa Seydoux</a></p>
+						            			<p>@string.Join(", ", glumci.Take(3).Select(x => $"{x.Ime} {x.Prezime}"))</p>
 						            		</div>
 						            		<div class="sb-it">
-						            			<h6>Žanrovi:</h6>
-						            			<p><a href="#">Akcija, </a> <a href="#"> Avantura,</a> <a href="#">Triler</a></p>
+						            			<h6>Zanrovi:</h6>
+						            			<p>@string.Join(", ", zanrovi.Select(x => x.Naziv))</p>
 						            		</div>
 						            		<div class="sb-it">
 						            			<h6>Datum izlaska:</h6>
-						            			<p>6. novembar 2015. (SAD)</p>
+						            			<p>@Model.Entertainment.GodinaIzlaska</p>
 						            		</div>
 						            		<div class="sb-it">
 						            			<h6>Trajanje:</h6>
-						            			<p>148 min</p>
-						            		</div>
-						            		<div class="sb-it">
-						            			<h6>MMPA rejting:</h6>
-						            			<p>PG-13</p>
-						            		</div>
-						            		<div class="sb-it">
-						            			<h6>Ključne riječi:</h6>
-						            			<p class="tags">
-						            				<span class="time"><a href="#">špijun</a></span>
-													<span class="time"><a href="#">tajni agent</a></span>
-													<span class="time"><a href="#">007</a></span>
-													<span class="time"><a href="#">blockbuster</a></span>
-						            			</p>
+						            			<p>@Model.Entertainment.Trajanje min</p>
 						            		</div>
 						            		<div class="ads">
-												<img src="images/uploads/ads1.png" alt="">
+												<img src="/images/uploads/ads1.png" alt="">
 											</div>
 						            	</div>
 						            </div>
@@ -207,61 +167,38 @@
 						        <div id="reviews" class="tab review">
 						           <div class="row">
 						            	<div class="rv-hd" style="margin-bottom: 20px;">
-											<a href="#" class="redbtn">Napiši recenziju</a>
+											@if (Model.MozeOcijeniti)
+											{
+												<form asp-controller="Film" asp-action="DodajRecenziju" asp-route-id="@Model.Entertainment.Id" method="post">
+													@Html.AntiForgeryToken()
+													<input type="number" name="ocjena" min="1" max="10" placeholder="Ocjena" style="width:90px;">
+													<input type="text" name="komentar" placeholder="Komentar">
+													<button type="submit" class="redbtn">Napisi recenziju</button>
+												</form>
+											}
 										</div>
 						            	<div class="topbar-filter">
-											<p>Pronađeno <span>56 recenzija</span> ukupno</p>
-											<label>Sortiraj po:</label>
-											<select>
-												<option value="popularity">Popularnosti (opadajuće)</option>
-												<option value="popularity">Popularnosti (rastuće)</option>
-												<option value="rating">Ocjeni (opadajuće)</option>
-												<option value="rating">Ocjeni (rastuće)</option>
-												<option value="date">Datumu izlaska (opadajuće)</option>
-												<option value="date">Datumu izlaska (rastuće)</option>
-											</select>
+											<p>Pronadeno <span>@recenzije.Count recenzija</span> ukupno</p>
 										</div>
-										<div class="mv-user-review-item">
-											<div class="user-infor">
-												<img src="images/uploads/userava1.jpg" alt="">
-												<div>
-													<h3>Najbolji Craigov Bond nakon Skyfalla</h3>
-													<div class="no-star">
-														<i class="ion-android-star"></i>
-														<i class="ion-android-star"></i>
-														<i class="ion-android-star"></i>
-														<i class="ion-android-star"></i>
-														<i class="ion-android-star"></i>
-														<i class="ion-android-star"></i>
-														<i class="ion-android-star"></i>
-														<i class="ion-android-star"></i>
-														<i class="ion-android-star"></i>
-														<i class="ion-android-star last"></i>
+										@foreach (var recenzija in recenzije)
+										{
+											<div class="mv-user-review-item">
+												<div class="user-infor">
+													<img src="/images/uploads/userava1.jpg" alt="">
+													<div>
+														<h3>Ocjena @recenzija.Ocjena/10</h3>
+														<div class="no-star">
+															@for (var i = 1; i <= 10; i++)
+															{
+																<i class="@(i <= recenzija.Ocjena ? "ion-android-star" : "ion-android-star last")"></i>
+															}
+														</div>
+														<p class="time">@recenzija.DatumObjave.ToLocalTime().ToString("dd.MM.yyyy.")</p>
 													</div>
-													<p class="time">
-														17. decembar 2016. napisao <a href="#"> amina_m</a>
-													</p>
 												</div>
+												<p>@recenzija.Komentar</p>
 											</div>
-											<p>Kao ljubitelj Bonda, Skyfall mi je bio pravo uživanje. Lik Madeleine Swann je osvježavajući, a hemija između nje i Bonda je vidljiva. Akcija je fenomenalna, naročito potjera u Rimu.</p>
-										</div>
-										<div class="topbar-filter">
-											<label>Recenzija po stranici:</label>
-											<select>
-												<option value="range">5 recenzija</option>
-												<option value="saab">10 recenzija</option>
-											</select>
-											<div class="pagination2">
-												<span>Stranica 1 od 6:</span>
-												<a class="active" href="#">1</a>
-												<a href="#">2</a>
-												<a href="#">3</a>
-												<a href="#">4</a>
-												<a href="#">5</a>
-												<a href="#">6</a>
-												<a href="#"><i class="ion-arrow-right-b"></i></a>
-											</div>
-										</div>
+										}
 						            </div>
 						        </div>
 					       	 	<div id="media" class="tab">
@@ -269,35 +206,19 @@
 						        		<div class="rv-hd">
 						            		<div>
 						            			<h3>Slike iz filma</h3>
-					       	 					<h2>Skyfall</h2>
+					       	 					<h2>@Model.Entertainment.Naziv</h2>
 						            		</div>
 						            	</div>
 										<div class="title-hd-sm">
-											<h4>Fotografije <span> (21)</span></h4>
+											<h4>Fotografije <span> (@galerija.Count)</span></h4>
 										</div>
 										<div class="mvsingle-item">
-											<a class="img-lightbox"  data-fancybox-group="gallery" href="images/uploads/image11.jpg" ><img src="images/uploads/image1.jpg" alt=""></a>
-											<a class="img-lightbox"  data-fancybox-group="gallery"  href="images/uploads/image21.jpg" ><img src="images/uploads/image2.jpg" alt=""></a>
-											<a class="img-lightbox"  data-fancybox-group="gallery" href="images/uploads/image31.jpg" ><img src="images/uploads/image3.jpg" alt=""></a>
-											<a class="img-lightbox"  data-fancybox-group="gallery" href="images/uploads/image41.jpg" ><img src="images/uploads/image4.jpg" alt=""></a>
-											<a class="img-lightbox"  data-fancybox-group="gallery" href="images/uploads/image51.jpg" ><img src="images/uploads/image5.jpg" alt=""></a>
-											<a class="img-lightbox"  data-fancybox-group="gallery" href="images/uploads/image61.jpg" ><img src="images/uploads/image6.jpg" alt=""></a>
-											<a class="img-lightbox"  data-fancybox-group="gallery" href="images/uploads/image71.jpg" ><img src="images/uploads/image7.jpg" alt=""></a>
-											<a class="img-lightbox"  data-fancybox-group="gallery" href="images/uploads/image81.jpg" ><img src="images/uploads/image8.jpg" alt=""></a>
-											<a class="img-lightbox"  data-fancybox-group="gallery" href="images/uploads/image91.jpg" ><img src="images/uploads/image9.jpg" alt=""></a>
-											<a class="img-lightbox"  data-fancybox-group="gallery" href="images/uploads/image101.jpg" ><img src="images/uploads/image10.jpg" alt=""></a>
-											<a class="img-lightbox"  data-fancybox-group="gallery" href="images/uploads/image111.jpg" ><img src="images/uploads/image1-1.jpg" alt=""></a>
-											<a class="img-lightbox"  data-fancybox-group="gallery" href="images/uploads/image121.jpg" ><img src="images/uploads/image12.jpg" alt=""></a>
-											<a class="img-lightbox"  data-fancybox-group="gallery" href="images/uploads/image131.jpg" ><img src="images/uploads/image13.jpg" alt=""></a>
-											<a class="img-lightbox"  data-fancybox-group="gallery" href="images/uploads/image141.jpg" ><img src="images/uploads/image14.jpg" alt=""></a>
-											<a class="img-lightbox"  data-fancybox-group="gallery" href="images/uploads/image151.jpg" ><img src="images/uploads/image15.jpg" alt=""></a>
-											<a class="img-lightbox"  data-fancybox-group="gallery" href="images/uploads/image161.jpg" ><img src="images/uploads/image16.jpg" alt=""></a>
-											<a class="img-lightbox"  data-fancybox-group="gallery" href="images/uploads/image171.jpg" ><img src="images/uploads/image17.jpg" alt=""></a>
-											<a class="img-lightbox"  data-fancybox-group="gallery" href="images/uploads/image181.jpg" ><img src="images/uploads/image18.jpg" alt=""></a>
-											<a class="img-lightbox"  data-fancybox-group="gallery" href="images/uploads/image191.jpg" ><img src="images/uploads/image19.jpg" alt=""></a>
-											<a class="img-lightbox"  data-fancybox-group="gallery" href="images/uploads/image201.jpg" ><img src="images/uploads/image20.jpg" alt=""></a>
-											<a class="img-lightbox"  data-fancybox-group="gallery" href="images/uploads/image211.jpg" ><img src="images/uploads/image2-1.jpg" alt=""></a>
-                                            </div>
+											@foreach (var slika in galerija)
+											{
+												var slikaUrl = MediaImageService.ResolvePosterUrl(slika.Url);
+												<a class="img-lightbox" data-fancybox-group="gallery" href="@slikaUrl"><img src="@slikaUrl" alt=""></a>
+											}
+										</div>
 						        	</div>
 					       	 	</div>
 						    </div>
@@ -309,3 +230,14 @@
 	</div>
 </div>
 
+<script>
+	document.querySelectorAll('.bmd-trigger').forEach(function (link) {
+		link.addEventListener('click', function () {
+			var iframe = document.getElementById('bmd-video-iframe');
+			iframe.src = this.getAttribute('data-trailer-url') || '';
+		});
+	});
+	document.getElementById('bmd-close')?.addEventListener('click', function () {
+		document.getElementById('bmd-video-iframe').src = '';
+	});
+</script>

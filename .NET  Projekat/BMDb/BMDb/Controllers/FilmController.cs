@@ -85,8 +85,9 @@ namespace BMDb.Controllers
 
         // GET: Film/Create
         [Authorize(Roles = "Admin,Moderator")]
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
+            await PopulateCreateListsAsync();
             return View();
         }
 
@@ -101,21 +102,34 @@ namespace BMDb.Controllers
         [HttpPost]
         [Authorize(Roles = "Admin,Moderator")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IDFilma,BoxOffice,Id,Naziv,Opis,ProsjecnaOcjena,Reditelj,GodinaIzlaska,YoutubeLink,Trajanje,PosterLink")] Film film)
+        public async Task<IActionResult> Create(
+            [Bind("IDFilma,BoxOffice,Id,Naziv,Opis,ProsjecnaOcjena,Reditelj,GodinaIzlaska,YoutubeLink,Trajanje,PosterLink")] Film film,
+            int[] zanrIds,
+            int[] glumacIds,
+            string[] imenaLikova,
+            string? galerijaUrls)
         {
             if (ModelState.IsValid)
             {
                 if (!_fileValidationService.IsAllowedPoster(film.PosterLink))
                 {
                     ModelState.AddModelError(nameof(Film.PosterLink), "Poster mora biti .jpg ili .png.");
+                    await PopulateCreateListsAsync(zanrIds);
                     return View(film);
                 }
 
-                _context.Add(film);
+                await using var transaction = await _context.Database.BeginTransactionAsync();
+
+                _context.Film.Add(film);
                 await _context.SaveChangesAsync();
+                AddRelatedData(film.Id, zanrIds, glumacIds, imenaLikova, galerijaUrls);
+                await _context.SaveChangesAsync();
+                await transaction.CommitAsync();
+
                 await _notificationService.OnContentCreatedAsync(film);
                 return RedirectToAction(nameof(Index));
             }
+            await PopulateCreateListsAsync(zanrIds);
             return View(film);
         }
 
@@ -246,6 +260,60 @@ namespace BMDb.Controllers
         private bool FilmExists(int id)
         {
             return _context.Film.Any(e => e.Id == id);
+        }
+
+        private async Task PopulateCreateListsAsync(int[]? selectedZanrIds = null)
+        {
+            ViewBag.Zanrovi = new MultiSelectList(
+                await _context.Zanr.OrderBy(x => x.Naziv).ToListAsync(),
+                nameof(Zanr.Id),
+                nameof(Zanr.Naziv),
+                selectedZanrIds ?? Array.Empty<int>());
+
+            ViewBag.Glumci = await _context.Glumac.OrderBy(x => x.Ime).ThenBy(x => x.Prezime).ToListAsync();
+        }
+
+        private void AddRelatedData(int entertainmentId, int[] zanrIds, int[] glumacIds, string[] imenaLikova, string? galerijaUrls)
+        {
+            foreach (var zanrId in zanrIds.Distinct().Where(x => x > 0))
+            {
+                _context.EntertainmentZanr.Add(new EntertainmentZanr
+                {
+                    EntertainmentId = entertainmentId,
+                    ZanrId = zanrId
+                });
+            }
+
+            for (var i = 0; i < glumacIds.Length; i++)
+            {
+                if (glumacIds[i] <= 0)
+                {
+                    continue;
+                }
+
+                _context.Uloga.Add(new Uloga
+                {
+                    EntertainmentId = entertainmentId,
+                    GlumacId = glumacIds[i],
+                    ImeLika = i < imenaLikova.Length ? imenaLikova[i]?.Trim() ?? string.Empty : string.Empty
+                });
+            }
+
+            foreach (var url in SplitLines(galerijaUrls))
+            {
+                _context.GalerijaSlika.Add(new GalerijaSlika
+                {
+                    EntertainmentId = entertainmentId,
+                    Url = url
+                });
+            }
+        }
+
+        private static IEnumerable<string> SplitLines(string? value)
+        {
+            return (value ?? string.Empty)
+                .Split(new[] { "\r\n", "\n", ";", "," }, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
+                .Where(x => !string.IsNullOrWhiteSpace(x));
         }
     }
 }
