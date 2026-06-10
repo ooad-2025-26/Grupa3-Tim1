@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BMDb.Data;
 using BMDb.Models;
+using BMDb.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 
 namespace BMDb.Controllers
@@ -21,9 +22,36 @@ namespace BMDb.Controllers
         }
 
         // GET: Entertainment
+        [Authorize(Roles = "Admin,Moderator")]
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Entertainment.ToListAsync());
+            var filmovi = await _context.Film
+                .Select(x => new EntertainmentListItemViewModel
+                {
+                    Id = x.Id,
+                    Naziv = x.Naziv ?? string.Empty,
+                    Tip = "Film",
+                    GodinaIzlaska = x.GodinaIzlaska,
+                    Ocjena = x.ProsjecnaOcjena,
+                    PosterLink = x.PosterLink,
+                    ControllerName = "Film"
+                })
+                .ToListAsync();
+
+            var serije = await _context.Serija
+                .Select(x => new EntertainmentListItemViewModel
+                {
+                    Id = x.Id,
+                    Naziv = x.Naziv ?? string.Empty,
+                    Tip = "Serija",
+                    GodinaIzlaska = x.GodinaIzlaska,
+                    Ocjena = x.ProsjecnaOcjena,
+                    PosterLink = x.PosterLink,
+                    ControllerName = "Serija"
+                })
+                .ToListAsync();
+
+            return View(filmovi.Concat(serije).OrderBy(x => x.Naziv).ToList());
         }
 
         // GET: Entertainment/Details/5

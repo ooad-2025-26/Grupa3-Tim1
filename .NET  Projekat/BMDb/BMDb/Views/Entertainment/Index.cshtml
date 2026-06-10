@@ -2,6 +2,9 @@
     Layout = "_AdminLayout";
 }
 
+@model IEnumerable<BMDb.ViewModels.EntertainmentListItemViewModel>
+@inject BMDb.Services.IMediaImageService MediaImageService
+
 @section StranicaStilovi {
   <style>
         .admin-section { padding: 50px 0; background: #020d18; color: white; min-height: 70vh; }
@@ -11,8 +14,7 @@
         .action-btn { padding: 5px 12px; border-radius: 3px; cursor: pointer; border: none; margin-right: 5px; transition: 0.3s; }
         .btn-del { background: #dd163b; color: white; }
         .btn-edit { background: #fbb124; color: black; }
-        .status-objavljeno { color: #2ecc71; }
-        .status-obrada { color: #fbb124; }
+        .btn-details { background: #1c3d5d; color: white; }
     </style>
 }
 
@@ -39,61 +41,37 @@
             <div class="col-md-12">
                 <div style="margin-bottom: 20px;">
                     <h3>Pregled baze podataka</h3>
+                    <a asp-controller="Film" asp-action="Create" class="action-btn btn-edit">Dodaj film</a>
+                    <a asp-controller="Serija" asp-action="Create" class="action-btn btn-details">Dodaj seriju</a>
                 </div>
-                
-                <!-- top search form -->
-
-        <div class="top-search">
-
-            <input type="text" placeholder="Pretražite filmove i TV serije želite promijeniti">
-        </div> 
-
 
                 <table class="table-custom">
                     <thead>
                         <tr>
                             <th>Poster</th>
                             <th>Naziv</th>
-                            <th>Žanr</th>
+                            <th>Tip</th>
                             <th>Godina</th>
-                            <th>Status</th>
+                            <th>Ocjena</th>
                             <th>Akcije</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td><img src="images/uploads/mv1.jpg" alt="" width="50"></td>
-                            <td><strong>Interstellar</strong></td>
-                            <td>Sci-Fi, Adventure</td>
-                            <td>2014</td>
-                            <td class="status-objavljeno">Objavljeno</td>
-                            <td>
-                                <button class="action-btn btn-edit">Uredi</button>
-                                <button class="action-btn btn-del">Obriši</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><img src="images/uploads/mv2.jpg" alt="" width="50"></td>
-                            <td><strong>Dune: Part Two</strong></td>
-                            <td>Sci-Fi, Epic</td>
-                            <td>2024</td>
-                            <td class="status-obrada">U obradi</td>
-                            <td>
-                                <button class="action-btn btn-edit">Uredi</button>
-                                <button class="action-btn btn-del">Obriši</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><img src="images/uploads/mv3.jpg" alt="" width="50"></td>
-                            <td><strong>The Dark Knight</strong></td>
-                            <td>Akcija, Krimi</td>
-                            <td>2008</td>
-                            <td class="status-objavljeno">Objavljeno</td>
-                            <td>
-                                <button class="action-btn btn-edit">Uredi</button>
-                                <button class="action-btn btn-del">Obriši</button>
-                            </td>
-                        </tr>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td><img src="@MediaImageService.ResolvePosterUrl(item.PosterLink)" alt="@item.Naziv" width="50"></td>
+                                <td><strong>@item.Naziv</strong></td>
+                                <td>@item.Tip</td>
+                                <td>@item.GodinaIzlaska</td>
+                                <td>@item.Ocjena.ToString("0.0")</td>
+                                <td>
+                                    <a asp-controller="@item.ControllerName" asp-action="Details" asp-route-id="@item.Id" class="action-btn btn-details">Detalji</a>
+                                    <a asp-controller="@item.ControllerName" asp-action="Edit" asp-route-id="@item.Id" class="action-btn btn-edit">Uredi</a>
+                                    <a asp-controller="@item.ControllerName" asp-action="Delete" asp-route-id="@item.Id" class="action-btn btn-del">Obriši</a>
+                                </td>
+                            </tr>
+                        }
                     </tbody>
                 </table>
             </div>
