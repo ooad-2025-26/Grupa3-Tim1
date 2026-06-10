@@ -1,77 +1,87 @@
-﻿@model IEnumerable<BMDb.Models.Entertainment>
+﻿
 
-@{
-    ViewData["Title"] = "Index";
-}
+<div class="hero common-hero">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="hero-ct">
+                    <h1>Lista svih filmova i serija</h1>
+                    <ul class="breadcumb">
+                        <li><a href="admin.html">Admin</a></li>
+                        <li> <span class="ion-ios-arrow-right"></span> Sadržaj</li>
+                        <li> <span class="ion-ios-arrow-right"></span> Lista</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-<h1>Index</h1>
+<section class="admin-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div style="margin-bottom: 20px;">
+                    <h3>Pregled baze podataka</h3>
+                </div>
+                
+                <!-- top search form -->
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Naziv)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Opis)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProsjecnaOcjena)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Reditelj)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.GodinaIzlaska)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.YoutubeLink)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Trajanje)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PosterLink)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Naziv)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Opis)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProsjecnaOcjena)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Reditelj)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.GodinaIzlaska)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.YoutubeLink)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Trajanje)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PosterLink)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+        <div class="top-search">
+
+            <input type="text" placeholder="Pretražite filmove i TV serije zelite promijeniti">
+        </div> 
+
+
+                <table class="table-custom">
+                    <thead>
+                        <tr>
+                            <th>Poster</th>
+                            <th>Naziv</th>
+                            <th>Žanr</th>
+                            <th>Godina</th>
+                            <th>Status</th>
+                            <th>Akcije</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><img src="images/uploads/mv1.jpg" alt="" width="50"></td>
+                            <td><strong>Interstellar</strong></td>
+                            <td>Sci-Fi, Adventure</td>
+                            <td>2014</td>
+                            <td class="status-objavljeno">Objavljeno</td>
+                            <td>
+                                <button class="action-btn btn-edit">Uredi</button>
+                                <button class="action-btn btn-del">Obriši</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><img src="images/uploads/mv2.jpg" alt="" width="50"></td>
+                            <td><strong>Dune: Part Two</strong></td>
+                            <td>Sci-Fi, Epic</td>
+                            <td>2024</td>
+                            <td class="status-obrada">U obradi</td>
+                            <td>
+                                <button class="action-btn btn-edit">Uredi</button>
+                                <button class="action-btn btn-del">Obriši</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><img src="images/uploads/mv3.jpg" alt="" width="50"></td>
+                            <td><strong>The Dark Knight</strong></td>
+                            <td>Akcija, Krimi</td>
+                            <td>2008</td>
+                            <td class="status-objavljeno">Objavljeno</td>
+                            <td>
+                                <button class="action-btn btn-edit">Uredi</button>
+                                <button class="action-btn btn-del">Obriši</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+
