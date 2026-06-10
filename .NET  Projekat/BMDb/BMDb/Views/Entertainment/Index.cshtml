@@ -42,13 +42,16 @@
             <div class="col-md-12">
                 <div style="margin-bottom: 20px;">
                     <h3>Pregled baze podataka</h3>
-                    <a asp-controller="Film" asp-action="Create" class="action-btn btn-edit">Dodaj film</a>
-                    <a asp-controller="Serija" asp-action="Create" class="action-btn btn-details">Dodaj seriju</a>
                 </div>
 
                 <form asp-controller="Entertainment" asp-action="Index" method="get">
                     <div class="top-search">
-                        <input type="text" name="search" value="@ViewData["Search"]" placeholder="Pretražite filmove i TV serije koji vas zanimaju">
+                       
+                        <input type="text" name="search"
+                               value="@ViewData["Search"]"
+                               placeholder="Pretražite filmove i TV serije koji vas zanimaju"
+                               style="background-color: #0b1f3a; color: white; border: 1px solid #1f3b63;">
+
                     </div>
                 </form>
 
