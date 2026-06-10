@@ -25,10 +25,14 @@
             <nav class="navbar navbar-default navbar-custom">
                 <div class="navbar-header logo">
                     <div class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                        <span class="sr-only">Prikaûi navigaciju</span>
+                        <span class="sr-only">Prika≈æi navigaciju</span>
                         <div id="nav-icon1"><span></span><span></span><span></span></div>
                     </div>
+<<<<<<< Updated upstream
                     <a asp-controller="Home" asp-action="Glavna"><img class="logo" src="~/images/logo1.png" alt="" width="119" height="58"></a>
+=======
+                    <a asp-controller="Home" asp-action="AdminDashboard"><img class="logo" src="~/images/logo1.png" alt="" width="119" height="58"></a>
+>>>>>>> Stashed changes
                 </div>
                 <div class="collapse navbar-collapse flex-parent" id="bs-example-navbar-collapse-1">
                     @if (User.IsInRole("Admin") || User.IsInRole("Moderator"))
@@ -39,7 +43,7 @@
                         @if (User.IsInRole("Admin")) { <li><a asp-controller="Home" asp-action="Finansije">Finansije</a></li> }
                         <li class="dropdown first">
                             <a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown" data-hover="dropdown">
-                                Sadrûaj<i class="fa fa-angle-down" aria-hidden="true"></i>
+                                Sadr≈æaj<i class="fa fa-angle-down" aria-hidden="true"></i>
                             </a>
                             <ul class="dropdown-menu level1">
                                 <li class="dropdown">

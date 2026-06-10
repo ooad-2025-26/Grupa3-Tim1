@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "D:\\Projekat\\Grupa3-Tim1\\.NET  Projekat\\BMDb\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{08397937-14F8-4F36-BD2B-41C277992A07}|BMDb\\BMDb.csproj|d:\\projekat\\grupa3-tim1\\.net  projekat\\bmdb\\bmdb\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{08397937-14F8-4F36-BD2B-41C277992A07}|BMDb\\BMDb.csproj|solutionrelative:bmdb\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{08397937-14F8-4F36-BD2B-41C277992A07}|BMDb\\BMDb.csproj|d:\\projekat\\grupa3-tim1\\.net  projekat\\bmdb\\bmdb\\views\\home\\glavna.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{08397937-14F8-4F36-BD2B-41C277992A07}|BMDb\\BMDb.csproj|solutionrelative:bmdb\\views\\home\\glavna.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
@@ -27,19 +31,32 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "D:\\Projekat\\Grupa3-Tim1\\.NET  Projekat\\BMDb\\BMDb\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "BMDb\\Controllers\\HomeController.cs",
+              "ToolTip": "D:\\Projekat\\Grupa3-Tim1\\.NET  Projekat\\BMDb\\BMDb\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "BMDb\\Controllers\\HomeController.cs",
+              "ViewState": "AgIAAJ4AAAAAAAAAAAAuwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-10T08:54:15.064Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "Glavna.cshtml",
               "DocumentMoniker": "D:\\Projekat\\Grupa3-Tim1\\.NET  Projekat\\BMDb\\BMDb\\Views\\Home\\Glavna.cshtml",
               "RelativeDocumentMoniker": "BMDb\\Views\\Home\\Glavna.cshtml",
               "ToolTip": "D:\\Projekat\\Grupa3-Tim1\\.NET  Projekat\\BMDb\\BMDb\\Views\\Home\\Glavna.cshtml",
               "RelativeToolTip": "BMDb\\Views\\Home\\Glavna.cshtml",
-              "ViewState": "AgIAAG8AAAAAAAAAAAAAABAAAAAcAAAAAAAAAA==",
+              "ViewState": "AgIAACEAAAAAAAAAAAAAABAAAAAcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2026-06-09T16:29:18.777Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "FilmController.cs",
               "DocumentMoniker": "D:\\Projekat\\Grupa3-Tim1\\.NET  Projekat\\BMDb\\BMDb\\Controllers\\FilmController.cs",
               "RelativeDocumentMoniker": "BMDb\\Controllers\\FilmController.cs",
@@ -47,12 +64,11 @@
               "RelativeToolTip": "BMDb\\Controllers\\FilmController.cs",
               "ViewState": "AgIAAOUAAAAAAAAAAADwvzMAAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-08T19:18:32.754Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-08T19:18:32.754Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "appsettings.json",
               "DocumentMoniker": "D:\\Projekat\\Grupa3-Tim1\\.NET  Projekat\\BMDb\\BMDb\\appsettings.json",
               "RelativeDocumentMoniker": "BMDb\\appsettings.json",
