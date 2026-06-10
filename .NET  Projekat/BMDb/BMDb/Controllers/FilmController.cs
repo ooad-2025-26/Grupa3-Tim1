@@ -103,7 +103,7 @@ namespace BMDb.Controllers
         [Authorize(Roles = "Admin,Moderator")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(
-            [Bind("IDFilma,BoxOffice,Id,Naziv,Opis,ProsjecnaOcjena,Reditelj,GodinaIzlaska,YoutubeLink,Trajanje,PosterLink")] Film film,
+            [Bind("BoxOffice,Naziv,Opis,Reditelj,GodinaIzlaska,YoutubeLink,Trajanje,PosterLink")] Film film,
             int[] zanrIds,
             int[] glumacIds,
             string[] imenaLikova,
@@ -177,6 +177,7 @@ namespace BMDb.Controllers
             {
                 return NotFound();
             }
+            await PopulateCreateListsAsync(await GetSelectedGenreIdsAsync(film.Id));
             return View(film);
         }
 
@@ -186,9 +187,13 @@ namespace BMDb.Controllers
         [HttpPost]
         [Authorize(Roles = "Admin,Moderator")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IDFilma,BoxOffice,Id,Naziv,Opis,ProsjecnaOcjena,Reditelj,GodinaIzlaska,YoutubeLink,Trajanje,PosterLink")] Film film)
+        public async Task<IActionResult> Edit(
+            int id,
+            [Bind("BoxOffice,Naziv,Opis,Reditelj,GodinaIzlaska,YoutubeLink,Trajanje,PosterLink")] Film film,
+            int[] zanrIds)
         {
-            if (id != film.Id)
+            var existingFilm = await _context.Film.FindAsync(id);
+            if (existingFilm == null)
             {
                 return NotFound();
             }
@@ -198,17 +203,26 @@ namespace BMDb.Controllers
                 if (!_fileValidationService.IsAllowedPoster(film.PosterLink))
                 {
                     ModelState.AddModelError(nameof(Film.PosterLink), "Poster mora biti .jpg ili .png.");
-                    return View(film);
+                    await PopulateCreateListsAsync(zanrIds);
+                    return View(existingFilm);
                 }
 
                 try
                 {
-                    _context.Update(film);
+                    existingFilm.Naziv = film.Naziv;
+                    existingFilm.Opis = film.Opis;
+                    existingFilm.Reditelj = film.Reditelj;
+                    existingFilm.GodinaIzlaska = film.GodinaIzlaska;
+                    existingFilm.YoutubeLink = film.YoutubeLink;
+                    existingFilm.Trajanje = film.Trajanje;
+                    existingFilm.PosterLink = film.PosterLink;
+                    existingFilm.BoxOffice = film.BoxOffice;
+                    await ReplaceGenresAsync(existingFilm.Id, zanrIds);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!FilmExists(film.Id))
+                    if (!FilmExists(id))
                     {
                         return NotFound();
                     }
@@ -219,7 +233,8 @@ namespace BMDb.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(film);
+            await PopulateCreateListsAsync(zanrIds);
+            return View(existingFilm);
         }
 
         // GET: Film/Delete/5
@@ -275,14 +290,7 @@ namespace BMDb.Controllers
 
         private void AddRelatedData(int entertainmentId, int[] zanrIds, int[] glumacIds, string[] imenaLikova, string? galerijaUrls)
         {
-            foreach (var zanrId in zanrIds.Distinct().Where(x => x > 0))
-            {
-                _context.EntertainmentZanr.Add(new EntertainmentZanr
-                {
-                    EntertainmentId = entertainmentId,
-                    ZanrId = zanrId
-                });
-            }
+            AddGenres(entertainmentId, zanrIds);
 
             for (var i = 0; i < glumacIds.Length; i++)
             {
@@ -307,6 +315,35 @@ namespace BMDb.Controllers
                     Url = url
                 });
             }
+        }
+
+        private void AddGenres(int entertainmentId, int[] zanrIds)
+        {
+            foreach (var zanrId in zanrIds.Distinct().Where(x => x > 0))
+            {
+                _context.EntertainmentZanr.Add(new EntertainmentZanr
+                {
+                    EntertainmentId = entertainmentId,
+                    ZanrId = zanrId
+                });
+            }
+        }
+
+        private async Task ReplaceGenresAsync(int entertainmentId, int[] zanrIds)
+        {
+            var existing = await _context.EntertainmentZanr
+                .Where(x => x.EntertainmentId == entertainmentId)
+                .ToListAsync();
+            _context.EntertainmentZanr.RemoveRange(existing);
+            AddGenres(entertainmentId, zanrIds);
+        }
+
+        private async Task<int[]> GetSelectedGenreIdsAsync(int entertainmentId)
+        {
+            return await _context.EntertainmentZanr
+                .Where(x => x.EntertainmentId == entertainmentId)
+                .Select(x => x.ZanrId)
+                .ToArrayAsync();
         }
 
         private static IEnumerable<string> SplitLines(string? value)

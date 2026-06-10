@@ -23,7 +23,7 @@ namespace BMDb.Controllers
 
         // GET: Entertainment
         [Authorize(Roles = "Admin,Moderator")]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string? search)
         {
             var filmovi = await _context.Film
                 .Select(x => new EntertainmentListItemViewModel
@@ -51,7 +51,18 @@ namespace BMDb.Controllers
                 })
                 .ToListAsync();
 
-            return View(filmovi.Concat(serije).OrderBy(x => x.Naziv).ToList());
+            var items = filmovi.Concat(serije);
+            if (!string.IsNullOrWhiteSpace(search))
+            {
+                var normalizedSearch = search.Trim();
+                items = items.Where(x =>
+                    x.Naziv.Contains(normalizedSearch, StringComparison.OrdinalIgnoreCase) ||
+                    x.Tip.Contains(normalizedSearch, StringComparison.OrdinalIgnoreCase) ||
+                    x.GodinaIzlaska.ToString().Contains(normalizedSearch, StringComparison.OrdinalIgnoreCase));
+            }
+
+            ViewData["Search"] = search;
+            return View(items.OrderBy(x => x.Naziv).ToList());
         }
 
         // GET: Entertainment/Details/5

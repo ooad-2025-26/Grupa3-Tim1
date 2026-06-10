@@ -311,6 +311,7 @@
     <script src="~/js/plugins.js"></script>
     <script src="~/js/plugins2.js"></script>
     <script src="~/js/custom.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
     <!-- force skok na vrh-->
     <script>
         if ('scrollRestoration' in history) {

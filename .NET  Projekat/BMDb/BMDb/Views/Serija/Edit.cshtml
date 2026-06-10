@@ -2,6 +2,15 @@
 
 @{
     ViewData["Title"] = "Edit";
+    var sezone = ((IEnumerable<BMDb.Models.Sezona>)(ViewBag.Sezone ?? Enumerable.Empty<BMDb.Models.Sezona>()))
+        .OrderBy(x => x.RedniBrojSezone)
+        .Select(x => new
+        {
+            redniBroj = x.RedniBrojSezone,
+            brojEpizoda = x.BrojEpizoda,
+            datumPremijere = x.DatumPremijere,
+            posterSezone = x.PosterSezone
+        });
 }
 
 <h1>Edit</h1>
@@ -10,13 +19,9 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
+        <form asp-action="Edit" asp-route-id="@Model.Id" method="post">
+            @Html.AntiForgeryToken()
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="IDSerije" class="control-label"></label>
-                <input asp-for="IDSerije" class="form-control" />
-                <span asp-validation-for="IDSerije" class="text-danger"></span>
-            </div>
             <div class="form-group">
                 <label asp-for="BrojSezona" class="control-label"></label>
                 <input asp-for="BrojSezona" class="form-control" />
@@ -44,11 +49,6 @@
                 <span asp-validation-for="Opis" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ProsjecnaOcjena" class="control-label"></label>
-                <input asp-for="ProsjecnaOcjena" class="form-control" />
-                <span asp-validation-for="ProsjecnaOcjena" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="Reditelj" class="control-label"></label>
                 <input asp-for="Reditelj" class="form-control" />
                 <span asp-validation-for="Reditelj" class="text-danger"></span>
@@ -70,8 +70,16 @@
             </div>
             <div class="form-group">
                 <label asp-for="PosterLink" class="control-label"></label>
-                <input asp-for="PosterLink" class="form-control" />
+                <input asp-for="PosterLink" type="text" class="form-control" />
                 <span asp-validation-for="PosterLink" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="zanrIds" class="control-label">Zanrovi</label>
+                <select id="zanrIds" name="zanrIds" class="form-control" multiple asp-items="ViewBag.Zanrovi"></select>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Sezone</label>
+                <div id="sezone-container"></div>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
@@ -86,4 +94,35 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        (function () {
+            var existingSezone = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(sezone));
+            var brojSezonaInput = document.getElementById('BrojSezona');
+            var container = document.getElementById('sezone-container');
+
+            function renderSezone() {
+                var brojSezona = parseInt(brojSezonaInput.value || '0', 10);
+                container.innerHTML = '';
+
+                for (var i = 1; i <= brojSezona; i++) {
+                    var existing = existingSezone[i - 1] || {};
+                    var redniBroj = existing.redniBroj || i;
+                    var brojEpizoda = existing.brojEpizoda || 0;
+                    var datumPremijere = existing.datumPremijere || 0;
+                    var posterSezone = existing.posterSezone || 0;
+                    var row = document.createElement('div');
+                    row.className = 'row';
+                    row.innerHTML =
+                        '<div class="col-md-3"><input name="redniBrojeviSezona" class="form-control" type="number" value="' + redniBroj + '" placeholder="Redni broj"></div>' +
+                        '<div class="col-md-3"><input name="brojeviEpizodaSezona" class="form-control" type="number" value="' + brojEpizoda + '" placeholder="Broj epizoda"></div>' +
+                        '<div class="col-md-3"><input name="datumiPremijereSezona" class="form-control" type="number" value="' + datumPremijere + '" placeholder="Godina premijere"></div>' +
+                        '<div class="col-md-3"><input name="posteriSezona" class="form-control" type="number" value="' + posterSezone + '" placeholder="Poster sezone"></div>';
+                    container.appendChild(row);
+                }
+            }
+
+            brojSezonaInput.addEventListener('input', renderSezone);
+            renderSezone();
+        })();
+    </script>
 }

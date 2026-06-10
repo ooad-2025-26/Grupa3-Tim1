@@ -40,10 +40,6 @@
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         <div class="row">
                             <div class="col-md-6">
-                                <label asp-for="IDFilma">Interni ID filma</label>
-                                <input asp-for="IDFilma" type="number" placeholder="0">
-                                <span asp-validation-for="IDFilma" class="text-danger"></span>
-
                                 <label asp-for="Naziv">Naslov filma</label>
                                 <input asp-for="Naziv" placeholder="Npr. The Godfather" required>
                                 <span asp-validation-for="Naziv" class="text-danger"></span>
@@ -55,10 +51,6 @@
                                 <label asp-for="Trajanje">Trajanje (minuta)</label>
                                 <input asp-for="Trajanje" type="number" placeholder="Npr. 145">
                                 <span asp-validation-for="Trajanje" class="text-danger"></span>
-
-                                <label asp-for="ProsjecnaOcjena">Prosjecna ocjena</label>
-                                <input asp-for="ProsjecnaOcjena" type="number" step="0.1" min="0" max="10" placeholder="0.0">
-                                <span asp-validation-for="ProsjecnaOcjena" class="text-danger"></span>
                             </div>
                             <div class="col-md-6">
                                 <label asp-for="PosterLink">URL Postera (putanja)</label>

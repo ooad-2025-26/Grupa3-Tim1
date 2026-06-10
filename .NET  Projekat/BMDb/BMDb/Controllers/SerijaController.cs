@@ -98,7 +98,7 @@ namespace BMDb.Controllers
         [Authorize(Roles = "Admin,Moderator")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(
-            [Bind("IDSerije,BrojSezona,BrojEpizoda,ZavrsenoEmitovanje,Id,Naziv,Opis,ProsjecnaOcjena,Reditelj,GodinaIzlaska,YoutubeLink,Trajanje,PosterLink")] Serija serija,
+            [Bind("BrojSezona,BrojEpizoda,ZavrsenoEmitovanje,Naziv,Opis,Reditelj,GodinaIzlaska,YoutubeLink,Trajanje,PosterLink")] Serija serija,
             int[] zanrIds,
             int[] glumacIds,
             string[] imenaLikova,
@@ -177,6 +177,11 @@ namespace BMDb.Controllers
             {
                 return NotFound();
             }
+            await PopulateCreateListsAsync(await GetSelectedGenreIdsAsync(serija.Id));
+            ViewBag.Sezone = await _context.Sezona
+                .Where(x => x.IdSerije == serija.Id)
+                .OrderBy(x => x.RedniBrojSezone)
+                .ToListAsync();
             return View(serija);
         }
 
@@ -186,9 +191,17 @@ namespace BMDb.Controllers
         [HttpPost]
         [Authorize(Roles = "Admin,Moderator")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IDSerije,BrojSezona,BrojEpizoda,ZavrsenoEmitovanje,Id,Naziv,Opis,ProsjecnaOcjena,Reditelj,GodinaIzlaska,YoutubeLink,Trajanje,PosterLink")] Serija serija)
+        public async Task<IActionResult> Edit(
+            int id,
+            [Bind("BrojSezona,BrojEpizoda,ZavrsenoEmitovanje,Naziv,Opis,Reditelj,GodinaIzlaska,YoutubeLink,Trajanje,PosterLink")] Serija serija,
+            int[] zanrIds,
+            int[] redniBrojeviSezona,
+            int[] brojeviEpizodaSezona,
+            int[] datumiPremijereSezona,
+            int[] posteriSezona)
         {
-            if (id != serija.Id)
+            var existingSerija = await _context.Serija.FindAsync(id);
+            if (existingSerija == null)
             {
                 return NotFound();
             }
@@ -198,17 +211,30 @@ namespace BMDb.Controllers
                 if (!_fileValidationService.IsAllowedPoster(serija.PosterLink))
                 {
                     ModelState.AddModelError(nameof(Serija.PosterLink), "Poster mora biti .jpg ili .png.");
-                    return View(serija);
+                    await PopulateCreateListsAsync(zanrIds);
+                    ViewBag.Sezone = await BuildSeasonPreviewAsync(redniBrojeviSezona, brojeviEpizodaSezona, datumiPremijereSezona, posteriSezona);
+                    return View(existingSerija);
                 }
 
                 try
                 {
-                    _context.Update(serija);
+                    existingSerija.Naziv = serija.Naziv;
+                    existingSerija.Opis = serija.Opis;
+                    existingSerija.Reditelj = serija.Reditelj;
+                    existingSerija.GodinaIzlaska = serija.GodinaIzlaska;
+                    existingSerija.YoutubeLink = serija.YoutubeLink;
+                    existingSerija.Trajanje = serija.Trajanje;
+                    existingSerija.PosterLink = serija.PosterLink;
+                    existingSerija.BrojSezona = serija.BrojSezona;
+                    existingSerija.BrojEpizoda = serija.BrojEpizoda;
+                    existingSerija.ZavrsenoEmitovanje = serija.ZavrsenoEmitovanje;
+                    await ReplaceGenresAsync(existingSerija.Id, zanrIds);
+                    await ReplaceSeasonDataAsync(existingSerija.Id, redniBrojeviSezona, brojeviEpizodaSezona, datumiPremijereSezona, posteriSezona);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!SerijaExists(serija.Id))
+                    if (!SerijaExists(id))
                     {
                         return NotFound();
                     }
@@ -219,7 +245,9 @@ namespace BMDb.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(serija);
+            await PopulateCreateListsAsync(zanrIds);
+            ViewBag.Sezone = await BuildSeasonPreviewAsync(redniBrojeviSezona, brojeviEpizodaSezona, datumiPremijereSezona, posteriSezona);
+            return View(existingSerija);
         }
 
         // GET: Serija/Delete/5
@@ -275,14 +303,7 @@ namespace BMDb.Controllers
 
         private void AddRelatedData(int entertainmentId, int[] zanrIds, int[] glumacIds, string[] imenaLikova, string? galerijaUrls)
         {
-            foreach (var zanrId in zanrIds.Distinct().Where(x => x > 0))
-            {
-                _context.EntertainmentZanr.Add(new EntertainmentZanr
-                {
-                    EntertainmentId = entertainmentId,
-                    ZanrId = zanrId
-                });
-            }
+            AddGenres(entertainmentId, zanrIds);
 
             for (var i = 0; i < glumacIds.Length; i++)
             {
@@ -309,6 +330,35 @@ namespace BMDb.Controllers
             }
         }
 
+        private void AddGenres(int entertainmentId, int[] zanrIds)
+        {
+            foreach (var zanrId in zanrIds.Distinct().Where(x => x > 0))
+            {
+                _context.EntertainmentZanr.Add(new EntertainmentZanr
+                {
+                    EntertainmentId = entertainmentId,
+                    ZanrId = zanrId
+                });
+            }
+        }
+
+        private async Task ReplaceGenresAsync(int entertainmentId, int[] zanrIds)
+        {
+            var existing = await _context.EntertainmentZanr
+                .Where(x => x.EntertainmentId == entertainmentId)
+                .ToListAsync();
+            _context.EntertainmentZanr.RemoveRange(existing);
+            AddGenres(entertainmentId, zanrIds);
+        }
+
+        private async Task<int[]> GetSelectedGenreIdsAsync(int entertainmentId)
+        {
+            return await _context.EntertainmentZanr
+                .Where(x => x.EntertainmentId == entertainmentId)
+                .Select(x => x.ZanrId)
+                .ToArrayAsync();
+        }
+
         private void AddSeasonData(int serijaId, int[] redniBrojevi, int[] brojeviEpizoda, int[] datumiPremijere, int[] posteri)
         {
             for (var i = 0; i < redniBrojevi.Length; i++)
@@ -327,6 +377,30 @@ namespace BMDb.Controllers
                     PosterSezone = i < posteri.Length ? posteri[i] : 0
                 });
             }
+        }
+
+        private async Task ReplaceSeasonDataAsync(int serijaId, int[] redniBrojevi, int[] brojeviEpizoda, int[] datumiPremijere, int[] posteri)
+        {
+            var existing = await _context.Sezona.Where(x => x.IdSerije == serijaId).ToListAsync();
+            _context.Sezona.RemoveRange(existing);
+            AddSeasonData(serijaId, redniBrojevi, brojeviEpizoda, datumiPremijere, posteri);
+        }
+
+        private static Task<List<Sezona>> BuildSeasonPreviewAsync(int[] redniBrojevi, int[] brojeviEpizoda, int[] datumiPremijere, int[] posteri)
+        {
+            var sezone = new List<Sezona>();
+            for (var i = 0; i < redniBrojevi.Length; i++)
+            {
+                sezone.Add(new Sezona
+                {
+                    RedniBrojSezone = redniBrojevi[i],
+                    BrojEpizoda = i < brojeviEpizoda.Length ? brojeviEpizoda[i] : 0,
+                    DatumPremijere = i < datumiPremijere.Length ? datumiPremijere[i] : 0,
+                    PosterSezone = i < posteri.Length ? posteri[i] : 0
+                });
+            }
+
+            return Task.FromResult(sezone);
         }
 
         private static IEnumerable<string> SplitLines(string? value)

@@ -15,6 +15,7 @@
         .btn-del { background: #dd163b; color: white; }
         .btn-edit { background: #fbb124; color: black; }
         .btn-details { background: #1c3d5d; color: white; }
+        .admin-section .top-search { background: #0b1a2a; }
     </style>
 }
 
@@ -45,6 +46,12 @@
                     <a asp-controller="Serija" asp-action="Create" class="action-btn btn-details">Dodaj seriju</a>
                 </div>
 
+                <form asp-controller="Entertainment" asp-action="Index" method="get">
+                    <div class="top-search">
+                        <input type="text" name="search" value="@ViewData["Search"]" placeholder="Pretražite filmove i TV serije koji vas zanimaju">
+                    </div>
+                </form>
+
                 <table class="table-custom">
                     <thead>
                         <tr>
@@ -66,7 +73,6 @@
                                 <td>@item.GodinaIzlaska</td>
                                 <td>@item.Ocjena.ToString("0.0")</td>
                                 <td>
-                                    <a asp-controller="@item.ControllerName" asp-action="Details" asp-route-id="@item.Id" class="action-btn btn-details">Detalji</a>
                                     <a asp-controller="@item.ControllerName" asp-action="Edit" asp-route-id="@item.Id" class="action-btn btn-edit">Uredi</a>
                                     <a asp-controller="@item.ControllerName" asp-action="Delete" asp-route-id="@item.Id" class="action-btn btn-del">Obriši</a>
                                 </td>

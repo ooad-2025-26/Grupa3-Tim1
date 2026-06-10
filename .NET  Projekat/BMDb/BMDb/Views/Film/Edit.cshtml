@@ -10,13 +10,9 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
+        <form asp-action="Edit" asp-route-id="@Model.Id" method="post">
+            @Html.AntiForgeryToken()
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="IDFilma" class="control-label"></label>
-                <input asp-for="IDFilma" class="form-control" />
-                <span asp-validation-for="IDFilma" class="text-danger"></span>
-            </div>
             <div class="form-group">
                 <label asp-for="BoxOffice" class="control-label"></label>
                 <input asp-for="BoxOffice" class="form-control" />
@@ -32,11 +28,6 @@
                 <label asp-for="Opis" class="control-label"></label>
                 <input asp-for="Opis" class="form-control" />
                 <span asp-validation-for="Opis" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ProsjecnaOcjena" class="control-label"></label>
-                <input asp-for="ProsjecnaOcjena" class="form-control" />
-                <span asp-validation-for="ProsjecnaOcjena" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Reditelj" class="control-label"></label>
@@ -60,8 +51,12 @@
             </div>
             <div class="form-group">
                 <label asp-for="PosterLink" class="control-label"></label>
-                <input asp-for="PosterLink" class="form-control" />
+                <input asp-for="PosterLink" type="text" class="form-control" />
                 <span asp-validation-for="PosterLink" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="zanrIds" class="control-label">Zanrovi</label>
+                <select id="zanrIds" name="zanrIds" class="form-control" multiple asp-items="ViewBag.Zanrovi"></select>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
