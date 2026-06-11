@@ -148,7 +148,7 @@ namespace BMDb.Areas.Identity.Pages.Account
                     user.Ime = Input.Ime;
                     user.Prezime = Input.Prezime;
                     user.Nadimak = Input.Nadimak;
-                    user.Avatar = "default-avatar.png";
+                    user.Avatar = "~/images/uploads/obicna.png";
                     user.DatumRegistracije = DateTime.UtcNow;
                     user.NotifikacijeUkljucene = true;
                     user.StatusOsobe = BMDb.Models.OsobaStatus.Aktivan;

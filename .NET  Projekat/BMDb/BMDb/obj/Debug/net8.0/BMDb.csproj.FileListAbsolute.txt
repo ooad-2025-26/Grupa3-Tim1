@@ -1,5 +1,3 @@
-D:\Projekat\Grupa3-Tim1\.NET  Projekat\BMDb\BMDb\bin\Debug\net8.0\appsettings.Development.json
-D:\Projekat\Grupa3-Tim1\.NET  Projekat\BMDb\BMDb\bin\Debug\net8.0\appsettings.json
 D:\Projekat\Grupa3-Tim1\.NET  Projekat\BMDb\BMDb\bin\Debug\net8.0\BMDb.staticwebassets.runtime.json
 D:\Projekat\Grupa3-Tim1\.NET  Projekat\BMDb\BMDb\bin\Debug\net8.0\BMDb.staticwebassets.endpoints.json
 D:\Projekat\Grupa3-Tim1\.NET  Projekat\BMDb\BMDb\bin\Debug\net8.0\BMDb.exe
@@ -586,3 +584,5 @@ C:\Users\ajdin\Desktop\etf\OAD\projekat\Grupa3-Tim1\.NET  Projekat\BMDb\build-ch
 C:\Users\ajdin\Desktop\etf\OAD\projekat\Grupa3-Tim1\.NET  Projekat\BMDb\build-check\BMDb.dll
 C:\Users\ajdin\Desktop\etf\OAD\projekat\Grupa3-Tim1\.NET  Projekat\BMDb\build-check\BMDb.pdb
 C:\Users\ajdin\Desktop\etf\OAD\projekat\Grupa3-Tim1\.NET  Projekat\BMDb\BMDb\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
+D:\Projekat\Grupa3-Tim1\.NET  Projekat\BMDb\BMDb\bin\Debug\net8.0\appsettings.Development.json
+D:\Projekat\Grupa3-Tim1\.NET  Projekat\BMDb\BMDb\bin\Debug\net8.0\appsettings.json

@@ -2,21 +2,27 @@
     Layout = "_AdminLayout";
 }
 
-<div class="slider movie-items">
+<div class="slider movie-items" style="min-height: 75vh; display: flex; align-items: center; justify-content: center; padding: 0;">
     <div class="container">
-        <div class="row">
-            <div class="title-hd" style="padding-top: 100px;">
-                <h2 style="color: #fbb124;">Dobrodošli nazad, Admin</h2>
+        <div class="row" style="width: 100%;">
+
+
+            <div style="min-height: 80vh; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; text-align: center;">
+
+                <h1 style="color: #fbb124; font-size: 3.5rem; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; margin: 0; padding: 0 15px;">
+                    @if (User.IsInRole("Admin"))
+                    {
+                        @:Dobrodošli nazad, administratore
+                    }
+                    else if (User.IsInRole("Moderator"))
+                    {
+                        @:Dobrodošli nazad, moderatore
+                    }
+                    
+                </h1>
+
             </div>
-            <div class="slick-multiItemSlider">
-                <div class="movie-item">
-                    <div class="mv-img"><img src="~/images/uploads/slider1.jpg" alt=""></div>
-                    <div class="title-in">
-                        <h6><a href="#">Međuzvjezdani</a></h6>
-                        <p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-                    </div>
-                </div>
-            </div>
+
         </div>
     </div>
 </div>

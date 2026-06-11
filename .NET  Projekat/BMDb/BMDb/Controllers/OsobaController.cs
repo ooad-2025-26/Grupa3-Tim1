@@ -136,7 +136,7 @@ namespace BMDb.Controllers
         private string ResolveAvatarUrl(string? avatarPath)
         {
             return string.IsNullOrWhiteSpace(avatarPath)
-                ? "/images/uploads/user-img.png"
+                ? "~/images/uploads/obicna.png"
                 : _mediaImageService.ResolvePosterUrl(avatarPath);
         }
 
