@@ -3,10 +3,7 @@
 @using System.Text.Json
 @inject SignInManager<Osoba> SignInManager
 @inject UserManager<Osoba> UserManager
-@inject IOglasService OglasService
-@inject IMediaImageService MediaImageService
 @{
-    var aktivniOglas = await OglasService.DohvatiAktivniOglasAsync();
     var currentReturnUrl = $"{Context.Request.PathBase}{Context.Request.Path}{Context.Request.QueryString}";
     var showLoginPopup = string.Equals(TempData["ShowLoginPopup"] as string, "true", StringComparison.OrdinalIgnoreCase);
     var loginErrorsJson = TempData["LoginErrors"] as string;
@@ -272,17 +269,6 @@
     </header>
     <!-- END | Header -->
     @RenderBody()
-
-    @if (aktivniOglas != null)
-    {
-        <div class="container" style="margin-top:20px;margin-bottom:20px;">
-            <div class="ads">
-                <a href="@aktivniOglas.Link" target="_blank" rel="noopener">
-                    <img src="@MediaImageService.ResolvePosterUrl(aktivniOglas.Slika)" alt="Oglas">
-                </a>
-            </div>
-        </div>
-    }
 
 
     <!-- footer section-->

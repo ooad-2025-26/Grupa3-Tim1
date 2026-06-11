@@ -1,8 +1,7 @@
-
+ï»¿@model IReadOnlyList<BMDb.ViewModels.FinanceAdRowViewModel>
 @{
     Layout = "_AdminLayout";
 }
-
 
 @section StranicaStilovi {
     <style>
@@ -12,38 +11,6 @@
             color: white;
             min-height: 70vh;
         }
-
-
-        .finance-cards {
-            display: flex;
-            gap: 20px;
-            margin-bottom: 40px;
-            flex-wrap: wrap;
-        }
-
-        .finance-card {
-            background: #0b1a2a;
-            border: 1px solid #1c3d5d;
-            padding: 20px;
-            flex: 1;
-            min-width: 200px;
-            border-radius: 5px;
-            text-align: center;
-        }
-
-            .finance-card h4 {
-                color: #abb7c4;
-                font-size: 14px;
-                text-transform: uppercase;
-                margin-bottom: 10px;
-            }
-
-            .finance-card .amount {
-                color: #fbb124;
-                font-size: 24px;
-                font-weight: bold;
-            }
-
 
         .table-custom {
             width: 100%;
@@ -68,83 +35,64 @@
             font-weight: bold;
         }
     </style>
-    }
+}
 
-    <div class="hero common-hero">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="hero-ct">
-                        <h1>Pregled primanja i reklama</h1>
-                        <ul class="breadcumb">
-                            <li><a asp-controller="Home" asp-action="AdminDashboard">Admin</a></li>
-                            <li> <span class="ion-ios-arrow-right"></span> Finansije</li>
-                        </ul>
-                    </div>
+<div class="hero common-hero">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="hero-ct">
+                    <h1>Pregled primanja i reklama</h1>
+                    <ul class="breadcumb">
+                        <li><a asp-controller="Home" asp-action="AdminDashboard">Admin</a></li>
+                        <li><span class="ion-ios-arrow-right"></span> Finansije</li>
+                    </ul>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-    <section class="admin-section">
-        <div class="container">
-            <div class="finance-cards">
-                <div class="finance-card">
-                    <h4>Danas</h4>
-                    <div class="amount">145.50 KM</div>
-                </div>
-                <div class="finance-card">
-                    <h4>Ova sedmica</h4>
-                    <div class="amount">1,020.00 KM</div>
-                </div>
-                <div class="finance-card">
-                    <h4>Ovaj mjesec</h4>
-                    <div class="amount">4,350.00 KM</div>
-                </div>
-                <div class="finance-card">
-                    <h4>Ova godina</h4>
-                    <div class="amount">52,210.00 KM</div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-12">
-                    <h3>Detaljan izvještaj po reklamama</h3>
-                    <table class="table-custom">
-                        <thead>
+<section class="admin-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h3>Detaljan izvjestaj po reklamama</h3>
+                <table class="table-custom">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Link</th>
+                            <th>Prikazi</th>
+                            <th>Prihod po prikazu</th>
+                            <th>Ukupni prihod</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (!Model.Any())
+                        {
                             <tr>
-                                <th>Naziv reklame / Kampanja</th>
-                                <th>Dnevno</th>
-                                <th>Sedmicno</th>
-                                <th>Mjesecno</th>
-                                <th>Status</th>
+                                <td colspan="6">Nema reklama u bazi.</td>
                             </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><strong>Google AdSense - Sidebar</strong></td>
-                                <td>45.20 KM</td>
-                                <td>315.00 KM</td>
-                                <td>1,260.00 KM</td>
-                                <td class="trending-up">Aktivan</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Coca-Cola Video Pre-roll</strong></td>
-                                <td>80.00 KM</td>
-                                <td>560.00 KM</td>
-                                <td>2,400.00 KM</td>
-                                <td class="trending-up">Aktivan</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Banners - Movie Page</strong></td>
-                                <td>20.30 KM</td>
-                                <td>145.00 KM</td>
-                                <td>690.00 KM</td>
-                                <td class="trending-up">Aktivan</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                        }
+                        else
+                        {
+                            @foreach (var oglas in Model)
+                            {
+                                <tr>
+                                    <td>@oglas.Id</td>
+                                    <td><a href="@oglas.Link" target="_blank" rel="noopener">@oglas.Link</a></td>
+                                    <td>@oglas.BrojanjeOglasa</td>
+                                    <td>@oglas.Prihod.ToString("0.00") KM</td>
+                                    <td>@oglas.UkupniPrihod.ToString("0.00") KM</td>
+                                    <td class="@(oglas.Aktivan ? "trending-up" : string.Empty)">@(oglas.Aktivan ? "Aktivan" : "Neaktivan")</td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
             </div>
         </div>
-    </section>
+    </div>
+</section>

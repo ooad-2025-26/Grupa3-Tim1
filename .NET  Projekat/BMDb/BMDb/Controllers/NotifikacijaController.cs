@@ -67,7 +67,7 @@ namespace BMDb.Controllers
         [Authorize(Roles = "Admin,Moderator")]
         public IActionResult Create()
         {
-            return View();
+            return View(new Notifikacija { DatumObjave = DateTime.UtcNow });
         }
 
         // POST: Notifikacija/Create
@@ -76,7 +76,7 @@ namespace BMDb.Controllers
         [HttpPost]
         [Authorize(Roles = "Admin,Moderator")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Tekst,DatumObjave,Slika")] Notifikacija notifikacija)
+        public async Task<IActionResult> Create([Bind("Tekst,DatumObjave,Slika")] Notifikacija notifikacija)
         {
             if (ModelState.IsValid)
             {

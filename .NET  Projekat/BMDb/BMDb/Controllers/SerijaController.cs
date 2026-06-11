@@ -90,7 +90,7 @@ namespace BMDb.Controllers
         public async Task<IActionResult> Create()
         {
             await PopulateCreateListsAsync();
-            return View();
+            return View(new Serija { DatumIzlaska = DateTime.Today });
         }
 
         // POST: Serija/Create
@@ -100,7 +100,7 @@ namespace BMDb.Controllers
         [Authorize(Roles = "Admin,Moderator")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(
-            [Bind("BrojSezona,BrojEpizoda,ZavrsenoEmitovanje,Naziv,Opis,Reditelj,GodinaIzlaska,YoutubeLink,Trajanje,PosterLink")] Serija serija,
+            [Bind("BrojSezona,BrojEpizoda,ZavrsenoEmitovanje,Naziv,Opis,Reditelj,DatumIzlaska,YoutubeLink,Trajanje,PosterLink")] Serija serija,
             int[] zanrIds,
             int[] glumacIds,
             string[] imenaLikova,
@@ -112,6 +112,8 @@ namespace BMDb.Controllers
         {
             if (ModelState.IsValid)
             {
+                SetReleaseYear(serija);
+
                 if (!_fileValidationService.IsAllowedPoster(serija.PosterLink))
                 {
                     ModelState.AddModelError(nameof(Serija.PosterLink), "Poster mora biti .jpg ili .png.");
@@ -179,6 +181,7 @@ namespace BMDb.Controllers
             {
                 return NotFound();
             }
+            EnsureReleaseDateForEdit(serija);
             await PopulateCreateListsAsync(await GetSelectedGenreIdsAsync(serija.Id));
             ViewBag.Sezone = await _context.Sezona
                 .Where(x => x.IdSerije == serija.Id)
@@ -195,7 +198,7 @@ namespace BMDb.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(
             int id,
-            [Bind("BrojSezona,BrojEpizoda,ZavrsenoEmitovanje,Naziv,Opis,Reditelj,GodinaIzlaska,YoutubeLink,Trajanje,PosterLink")] Serija serija,
+            [Bind("BrojSezona,BrojEpizoda,ZavrsenoEmitovanje,Naziv,Opis,Reditelj,DatumIzlaska,YoutubeLink,Trajanje,PosterLink")] Serija serija,
             int[] zanrIds,
             int[] redniBrojeviSezona,
             int[] brojeviEpizodaSezona,
@@ -210,6 +213,8 @@ namespace BMDb.Controllers
 
             if (ModelState.IsValid)
             {
+                SetReleaseYear(serija);
+
                 if (!_fileValidationService.IsAllowedPoster(serija.PosterLink))
                 {
                     ModelState.AddModelError(nameof(Serija.PosterLink), "Poster mora biti .jpg ili .png.");
@@ -224,6 +229,7 @@ namespace BMDb.Controllers
                     existingSerija.Opis = serija.Opis;
                     existingSerija.Reditelj = serija.Reditelj;
                     existingSerija.GodinaIzlaska = serija.GodinaIzlaska;
+                    existingSerija.DatumIzlaska = serija.DatumIzlaska;
                     existingSerija.YoutubeLink = serija.YoutubeLink;
                     existingSerija.Trajanje = serija.Trajanje;
                     existingSerija.PosterLink = serija.PosterLink;
@@ -291,6 +297,20 @@ namespace BMDb.Controllers
         private bool SerijaExists(int id)
         {
             return _context.Serija.Any(e => e.Id == id);
+        }
+
+        private static void SetReleaseYear(Serija serija)
+        {
+            serija.DatumIzlaska = serija.DatumIzlaska.Date;
+            serija.GodinaIzlaska = serija.DatumIzlaska.Year;
+        }
+
+        private static void EnsureReleaseDateForEdit(Serija serija)
+        {
+            if (serija.DatumIzlaska == default && serija.GodinaIzlaska > 0)
+            {
+                serija.DatumIzlaska = new DateTime(serija.GodinaIzlaska, 1, 1);
+            }
         }
 
         private IActionResult RedirectAfterDelete(string? returnTo)

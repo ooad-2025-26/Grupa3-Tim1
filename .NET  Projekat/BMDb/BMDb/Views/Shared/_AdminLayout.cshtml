@@ -47,6 +47,11 @@
                                     <ul class="dropdown-menu level2">
                                         <li><a asp-controller="Film" asp-action="Create">Film</a></li>
                                         <li><a asp-controller="Serija" asp-action="Create">TV Serija</a></li>
+                                        @if (User.IsInRole("Admin"))
+                                        {
+                                            <li><a asp-controller="Oglas" asp-action="Create">Oglas</a></li>
+                                        }
+                                        <li><a asp-controller="Notifikacija" asp-action="Create">Novost</a></li>
                                     </ul>
                                 </li>
                                 <li class="it-last"><a asp-controller="Entertainment" asp-action="Index">Lista</a></li>
@@ -94,6 +99,7 @@
     <script src="~/js/plugins.js"></script>
     <script src="~/js/plugins2.js"></script>
     <script src="~/js/custom.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
 
 </body>
 </html>

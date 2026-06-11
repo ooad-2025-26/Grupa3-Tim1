@@ -1,5 +1,6 @@
 ﻿@model BMDb.ViewModels.HomeGlavnaViewModel
 
+<div class="bmd-home-page">
 <div class="slider movie-items" style="background: url('/images/uploads/slider-bg.jpg') no-repeat center center; background-size: cover;">
 	<div class="container">
 		<div class="row">
@@ -185,9 +186,10 @@
             </div>
             <div class="col-md-12">
                 <div class="ads" style="margin-top: 40px; text-align: center;">
-                    <img src="images/uploads/ads2.png" alt="" width="728" height="106">
+                     <partial name="_AdPartial" />
                 </div>
             </div>
         </div>
     </div>
+</div>
 </div>

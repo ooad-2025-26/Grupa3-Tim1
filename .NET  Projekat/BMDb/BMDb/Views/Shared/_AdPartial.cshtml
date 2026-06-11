@@ -1,0 +1,12 @@
+@inject BMDb.Services.IOglasService OglasService
+@inject BMDb.Services.IMediaImageService MediaImageService
+@{
+    var oglas = await OglasService.DohvatiAktivniOglasAsync();
+}
+
+@if (oglas != null)
+{
+    <a href="@oglas.Link" target="_blank" rel="noopener">
+        <img src="@MediaImageService.ResolvePosterUrl(oglas.Slika)" alt="Oglas">
+    </a>
+}

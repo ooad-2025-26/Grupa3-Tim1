@@ -90,16 +90,16 @@ namespace BMDb.Controllers
         public async Task<IActionResult> Create()
         {
             await PopulateCreateListsAsync();
-            return View();
+            return View(new Film { DatumIzlaska = DateTime.Today });
         }
 
         public async Task<IActionResult> ComingSoon()
         {
-            var trenutnaGodina = DateTime.UtcNow.Year;
+            var danas = DateTime.Today;
             var filmovi = await _context.Film
                 .AsNoTracking()
-                .Where(x => x.GodinaIzlaska > trenutnaGodina)
-                .OrderBy(x => x.GodinaIzlaska)
+                .Where(x => x.DatumIzlaska.Date > danas)
+                .OrderBy(x => x.DatumIzlaska)
                 .ThenBy(x => x.Naziv)
                 .ToListAsync();
 
@@ -133,7 +133,7 @@ namespace BMDb.Controllers
         [Authorize(Roles = "Admin,Moderator")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(
-            [Bind("BoxOffice,Naziv,Opis,Reditelj,GodinaIzlaska,YoutubeLink,Trajanje,PosterLink")] Film film,
+            [Bind("BoxOffice,Naziv,Opis,Reditelj,DatumIzlaska,YoutubeLink,Trajanje,PosterLink")] Film film,
             int[] zanrIds,
             int[] glumacIds,
             string[] imenaLikova,
@@ -141,6 +141,8 @@ namespace BMDb.Controllers
         {
             if (ModelState.IsValid)
             {
+                SetReleaseYear(film);
+
                 if (!_fileValidationService.IsAllowedPoster(film.PosterLink))
                 {
                     ModelState.AddModelError(nameof(Film.PosterLink), "Poster mora biti .jpg ili .png.");
@@ -207,6 +209,7 @@ namespace BMDb.Controllers
             {
                 return NotFound();
             }
+            EnsureReleaseDateForEdit(film);
             await PopulateCreateListsAsync(await GetSelectedGenreIdsAsync(film.Id));
             return View(film);
         }
@@ -219,7 +222,7 @@ namespace BMDb.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(
             int id,
-            [Bind("BoxOffice,Naziv,Opis,Reditelj,GodinaIzlaska,YoutubeLink,Trajanje,PosterLink")] Film film,
+            [Bind("BoxOffice,Naziv,Opis,Reditelj,DatumIzlaska,YoutubeLink,Trajanje,PosterLink")] Film film,
             int[] zanrIds)
         {
             var existingFilm = await _context.Film.FindAsync(id);
@@ -230,6 +233,8 @@ namespace BMDb.Controllers
 
             if (ModelState.IsValid)
             {
+                SetReleaseYear(film);
+
                 if (!_fileValidationService.IsAllowedPoster(film.PosterLink))
                 {
                     ModelState.AddModelError(nameof(Film.PosterLink), "Poster mora biti .jpg ili .png.");
@@ -243,6 +248,7 @@ namespace BMDb.Controllers
                     existingFilm.Opis = film.Opis;
                     existingFilm.Reditelj = film.Reditelj;
                     existingFilm.GodinaIzlaska = film.GodinaIzlaska;
+                    existingFilm.DatumIzlaska = film.DatumIzlaska;
                     existingFilm.YoutubeLink = film.YoutubeLink;
                     existingFilm.Trajanje = film.Trajanje;
                     existingFilm.PosterLink = film.PosterLink;
@@ -306,6 +312,20 @@ namespace BMDb.Controllers
         private bool FilmExists(int id)
         {
             return _context.Film.Any(e => e.Id == id);
+        }
+
+        private static void SetReleaseYear(Film film)
+        {
+            film.DatumIzlaska = film.DatumIzlaska.Date;
+            film.GodinaIzlaska = film.DatumIzlaska.Year;
+        }
+
+        private static void EnsureReleaseDateForEdit(Film film)
+        {
+            if (film.DatumIzlaska == default && film.GodinaIzlaska > 0)
+            {
+                film.DatumIzlaska = new DateTime(film.GodinaIzlaska, 1, 1);
+            }
         }
 
         private IActionResult RedirectAfterDelete(string? returnTo)

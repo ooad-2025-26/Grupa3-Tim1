@@ -26,7 +26,11 @@ namespace BMDb.Services
                 return null;
             }
 
-            return aktivni[Random.Shared.Next(aktivni.Count)];
+            var odabraniOglas = aktivni[Random.Shared.Next(aktivni.Count)];
+            odabraniOglas.brojanjeOglasa += 1;
+            await _context.SaveChangesAsync();
+
+            return odabraniOglas;
         }
     }
 

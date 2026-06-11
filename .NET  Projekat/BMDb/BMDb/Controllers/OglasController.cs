@@ -48,7 +48,7 @@ namespace BMDb.Controllers
         // GET: Oglas/Create
         public IActionResult Create()
         {
-            return View();
+            return View(new Oglas { Aktivan = true });
         }
 
         // POST: Oglas/Create
@@ -56,10 +56,11 @@ namespace BMDb.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Slika,Link,Aktivan,Prihod")] Oglas oglas)
+        public async Task<IActionResult> Create([Bind("Slika,Link,Aktivan,Prihod")] Oglas oglas)
         {
             if (ModelState.IsValid)
             {
+                oglas.brojanjeOglasa = 0;
                 _context.Add(oglas);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

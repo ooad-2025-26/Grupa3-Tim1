@@ -99,11 +99,11 @@ namespace BMDb.Controllers
                 }
             }
 
-            var trenutnaGodina = DateTime.UtcNow.Year;
+            var danas = DateTime.Today;
             var buduciFilmovi = await _context.Film
                 .AsNoTracking()
-                .Where(x => x.GodinaIzlaska > trenutnaGodina && x.YoutubeLink != null && x.YoutubeLink != string.Empty)
-                .OrderBy(x => x.GodinaIzlaska)
+                .Where(x => x.DatumIzlaska.Date > danas && x.YoutubeLink != null && x.YoutubeLink != string.Empty)
+                .OrderBy(x => x.DatumIzlaska)
                 .ThenByDescending(x => x.ProsjecnaOcjena)
                 .Take(10)
                 .ToListAsync();
@@ -169,7 +169,24 @@ namespace BMDb.Controllers
         public IActionResult AdminDashboard() { return View(); }
 
         [Authorize(Roles = "Admin")]
-        public IActionResult Finansije() { return View(); }
+        public async Task<IActionResult> Finansije()
+        {
+            var oglasi = await _context.Oglas
+                .AsNoTracking()
+                .OrderByDescending(x => x.Aktivan)
+                .ThenBy(x => x.Id)
+                .Select(x => new FinanceAdRowViewModel
+                {
+                    Id = x.Id,
+                    Link = x.Link ?? string.Empty,
+                    Aktivan = x.Aktivan,
+                    Prihod = x.Prihod,
+                    BrojanjeOglasa = x.brojanjeOglasa
+                })
+                .ToListAsync();
+
+            return View(oglasi);
+        }
 
         [Authorize(Roles = "Admin,Moderator")]
         public async Task<IActionResult> AdminLista()
