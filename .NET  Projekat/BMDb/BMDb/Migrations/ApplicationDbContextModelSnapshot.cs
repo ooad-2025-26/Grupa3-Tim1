@@ -300,8 +300,9 @@ namespace BMDb.Migrations
                     b.Property<int>("IdSerije")
                         .HasColumnType("int");
 
-                    b.Property<int>("PosterSezone")
-                        .HasColumnType("int");
+                    b.Property<string>("PosterSezone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("RedniBrojSezone")
                         .HasColumnType("int");
