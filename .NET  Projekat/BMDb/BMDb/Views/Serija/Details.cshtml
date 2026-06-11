@@ -74,7 +74,7 @@
                         <form asp-controller="Serija" asp-action="OznaciPlanirano" asp-route-id="@Model.Entertainment.Id" method="post" style="display:inline;">
                             @Html.AntiForgeryToken()
                             <button type="submit" class="parent-btn" style="color: #add8e6; margin-left: 20px; background:none; border:0;">
-                                <i class="ion-ios-play"></i> @(Model.JePlanirano ? "U planu" : "Gledat cu")
+                                <i class="ion-ios-play"></i> @(Model.JePlanirano ? "U planu" : "Gledat ću")
                             </button>
                         </form>
                         <form asp-controller="Serija" asp-action="OznaciGledao" asp-route-id="@Model.Entertainment.Id" method="post" style="display:inline;">

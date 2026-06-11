@@ -26,16 +26,23 @@ namespace BMDb.Controllers
         }
 
         // GET: GledaoSam
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string? sort)
         {
             var osobaId = _userKeyService.GetCurrentUserKey(User);
-            var entertainmentIds = await _context.GledaoSam
+            var sortOrder = NormalizeSort(sort);
+            var watchedRows = await _context.GledaoSam
                 .AsNoTracking()
                 .Where(x => x.OsobaId == osobaId)
-                .Select(x => x.EntertainmentId)
+                .Select(x => new { x.Id, x.EntertainmentId })
                 .ToListAsync();
 
-            var items = await BuildProfileItemsAsync(entertainmentIds);
+            var entertainmentIds = watchedRows.Select(x => x.EntertainmentId).ToList();
+            var addedOrder = watchedRows
+                .GroupBy(x => x.EntertainmentId)
+                .ToDictionary(x => x.Key, x => x.Max(row => row.Id));
+
+            var items = await BuildProfileItemsAsync(entertainmentIds, addedOrder, sortOrder);
+            ViewBag.Sort = sortOrder;
             return View(items);
         }
 
@@ -168,7 +175,10 @@ namespace BMDb.Controllers
             return _context.GledaoSam.Any(e => e.Id == id);
         }
 
-        private async Task<IReadOnlyList<ProfileMediaItemViewModel>> BuildProfileItemsAsync(IReadOnlyList<int> entertainmentIds)
+        private async Task<IReadOnlyList<ProfileMediaItemViewModel>> BuildProfileItemsAsync(
+            IReadOnlyList<int> entertainmentIds,
+            IReadOnlyDictionary<int, int> addedOrder,
+            string sortOrder)
         {
             if (entertainmentIds.Count == 0)
             {
@@ -185,7 +195,6 @@ namespace BMDb.Controllers
             var items = await _context.Entertainment
                 .AsNoTracking()
                 .Where(x => entertainmentIds.Contains(x.Id))
-                .OrderBy(x => x.Naziv)
                 .Select(x => new ProfileMediaItemViewModel
                 {
                     EntertainmentId = x.Id,
@@ -226,7 +235,22 @@ namespace BMDb.Controllers
                     : Array.Empty<string>();
             }
 
-            return items;
+            return sortOrder == "rating"
+                ? items
+                    .OrderByDescending(x => x.ProsjecnaOcjena)
+                    .ThenBy(x => x.Naziv)
+                    .ToList()
+                : items
+                    .OrderByDescending(x => addedOrder.TryGetValue(x.EntertainmentId, out var id) ? id : 0)
+                    .ThenBy(x => x.Naziv)
+                    .ToList();
+        }
+
+        private static string NormalizeSort(string? sort)
+        {
+            return string.Equals(sort, "rating", StringComparison.OrdinalIgnoreCase)
+                ? "rating"
+                : "newest";
         }
     }
 }

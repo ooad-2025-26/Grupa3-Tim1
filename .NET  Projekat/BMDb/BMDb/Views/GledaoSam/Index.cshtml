@@ -8,6 +8,7 @@
     var avatarUrl = string.IsNullOrWhiteSpace(currentUser?.Avatar)
         ? "/images/uploads/user-img.png"
         : MediaImageService.ResolvePosterUrl(currentUser.Avatar);
+    var currentSort = ViewBag.Sort as string ?? "newest";
 }
 
     <div class="hero user-hero">
@@ -49,11 +50,13 @@
                 <div class="col-md-9 col-sm-12 col-xs-12">
                     <div class="topbar-filter user">
                         <p>Pronađeno: <span>@Model.Count naslova</span></p>
-                        <label>Sortiraj po:</label>
-                        <select>
-                            <option value="range">Najnovije dodano</option>
-                            <option value="saab">Ocjena (najviša)</option>
-                        </select>
+                        <form asp-controller="GledaoSam" asp-action="Index" method="get" style="display:inline;">
+                            <label>Sortiraj po:</label>
+                            <select name="sort" onchange="this.form.submit()">
+                                <option value="newest" selected="@(currentSort == "newest")">Najnovije dodano</option>
+                                <option value="rating" selected="@(currentSort == "rating")">Ocjena (najviša)</option>
+                            </select>
+                        </form>
                     </div>
 
                     <div class="flex-wrap-movielist user-fav-list">
@@ -87,8 +90,8 @@
                         </select>
                         <div class="pagination2">
                             <span>Stranica 1 od 1:</span>
-                            <a class="active" asp-controller="GledaoSam" asp-action="Index">1</a>
-                            <a asp-controller="GledaoSam" asp-action="Index"><i class="ion-arrow-right-b"></i></a>
+                            <a class="active" asp-controller="GledaoSam" asp-action="Index" asp-route-sort="@currentSort">1</a>
+                            <a asp-controller="GledaoSam" asp-action="Index" asp-route-sort="@currentSort"><i class="ion-arrow-right-b"></i></a>
                         </div>
                     </div>
                 </div>
