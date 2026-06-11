@@ -34,7 +34,7 @@
                     @if (User.IsInRole("Admin") || User.IsInRole("Moderator"))
                     {
                     <ul class="nav navbar-nav flex-child-menu menu-left">
-                        <li><a asp-controller="Home" asp-action="Glavna">Pocetna</a></li>
+                        <li><a asp-controller="Home" asp-action="Glavna">Početna</a></li>
                         <li><a asp-controller="Home" asp-action="Korisnici">Korisnici</a></li>
                         @if (User.IsInRole("Admin")) { <li><a asp-controller="Home" asp-action="Finansije">Finansije</a></li> }
                         <li class="dropdown first">

@@ -3,8 +3,20 @@
   "WorkspaceRootPath": "D:\\Projekat\\Grupa3-Tim1\\.NET  Projekat\\BMDb\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Projekat\\Grupa3-Tim1\\.NET  Projekat\\BMDb\\BMDb\\Migrations\\20260611134849_Migracija5.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:BMDb\\Migrations\\20260611134849_Migracija5.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{08397937-14F8-4F36-BD2B-41C277992A07}|BMDb\\BMDb.csproj|d:\\projekat\\grupa3-tim1\\.net  projekat\\bmdb\\bmdb\\views\\home\\glavna.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{08397937-14F8-4F36-BD2B-41C277992A07}|BMDb\\BMDb.csproj|solutionrelative:bmdb\\views\\home\\glavna.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{08397937-14F8-4F36-BD2B-41C277992A07}|BMDb\\BMDb.csproj|d:\\projekat\\grupa3-tim1\\.net  projekat\\bmdb\\bmdb\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{08397937-14F8-4F36-BD2B-41C277992A07}|BMDb\\BMDb.csproj|solutionrelative:bmdb\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{08397937-14F8-4F36-BD2B-41C277992A07}|BMDb\\BMDb.csproj|d:\\projekat\\grupa3-tim1\\.net  projekat\\bmdb\\bmdb\\views\\shared\\_adminlayout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{08397937-14F8-4F36-BD2B-41C277992A07}|BMDb\\BMDb.csproj|solutionrelative:bmdb\\views\\shared\\_adminlayout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{08397937-14F8-4F36-BD2B-41C277992A07}|BMDb\\BMDb.csproj|d:\\projekat\\grupa3-tim1\\.net  projekat\\bmdb\\bmdb\\migrations\\20260611134849_migracija5.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{08397937-14F8-4F36-BD2B-41C277992A07}|BMDb\\BMDb.csproj|solutionrelative:bmdb\\migrations\\20260611134849_migracija5.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -19,12 +31,51 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "Glavna.cshtml",
+              "DocumentMoniker": "D:\\Projekat\\Grupa3-Tim1\\.NET  Projekat\\BMDb\\BMDb\\Views\\Home\\Glavna.cshtml",
+              "RelativeDocumentMoniker": "BMDb\\Views\\Home\\Glavna.cshtml",
+              "ToolTip": "D:\\Projekat\\Grupa3-Tim1\\.NET  Projekat\\BMDb\\BMDb\\Views\\Home\\Glavna.cshtml",
+              "RelativeToolTip": "BMDb\\Views\\Home\\Glavna.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-06-11T17:54:06.328Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "D:\\Projekat\\Grupa3-Tim1\\.NET  Projekat\\BMDb\\BMDb\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "BMDb\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "D:\\Projekat\\Grupa3-Tim1\\.NET  Projekat\\BMDb\\BMDb\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "BMDb\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAAGIBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-06-11T17:53:05.419Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "_AdminLayout.cshtml",
+              "DocumentMoniker": "D:\\Projekat\\Grupa3-Tim1\\.NET  Projekat\\BMDb\\BMDb\\Views\\Shared\\_AdminLayout.cshtml",
+              "RelativeDocumentMoniker": "BMDb\\Views\\Shared\\_AdminLayout.cshtml",
+              "ToolTip": "D:\\Projekat\\Grupa3-Tim1\\.NET  Projekat\\BMDb\\BMDb\\Views\\Shared\\_AdminLayout.cshtml*",
+              "RelativeToolTip": "BMDb\\Views\\Shared\\_AdminLayout.cshtml*",
+              "ViewState": "AgIAACQAAAAAAAAAAAAAACQAAABMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-06-11T17:52:00.327Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "20260611134849_Migracija5.cs",
               "DocumentMoniker": "D:\\Projekat\\Grupa3-Tim1\\.NET  Projekat\\BMDb\\BMDb\\Migrations\\20260611134849_Migracija5.cs",
               "RelativeDocumentMoniker": "BMDb\\Migrations\\20260611134849_Migracija5.cs",
               "ToolTip": "D:\\Projekat\\Grupa3-Tim1\\.NET  Projekat\\BMDb\\BMDb\\Migrations\\20260611134849_Migracija5.cs",
               "RelativeToolTip": "BMDb\\Migrations\\20260611134849_Migracija5.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAxwBkAAAAfAAAAAAAAAA==",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAABkAAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-06-11T13:48:50.695Z",
               "EditorCaption": ""
