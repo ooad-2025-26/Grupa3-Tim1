@@ -1,6 +1,7 @@
 @model BMDb.Models.Film
 @{
     Layout = "_AdminLayout";
+    var galerijaUrls = ViewBag.GalerijaUrls as string ?? string.Empty;
 }
 @section StranicaStilovi {
     <style>
@@ -78,6 +79,9 @@
                                 <label asp-for="Opis">Sinopsis (Kratak sadrzaj)</label>
                                 <textarea asp-for="Opis" rows="6" placeholder="Unesite opis filma ovdje..."></textarea>
                                 <span asp-validation-for="Opis" class="text-danger"></span>
+
+                                <label for="galerijaUrls">Galerija slika</label>
+                                <textarea id="galerijaUrls" name="galerijaUrls" rows="4" placeholder="Unesite URL slike po redu, odvojeno novim redom">@galerijaUrls</textarea>
 
                                 <button type="submit" class="btn-submit">Sacuvaj promjene</button>
                             </div>

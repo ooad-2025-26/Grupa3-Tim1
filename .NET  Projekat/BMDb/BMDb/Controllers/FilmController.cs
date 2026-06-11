@@ -211,6 +211,7 @@ namespace BMDb.Controllers
             }
             EnsureReleaseDateForEdit(film);
             await PopulateCreateListsAsync(await GetSelectedGenreIdsAsync(film.Id));
+            ViewBag.GalerijaUrls = await GetGalleryUrlsAsync(film.Id);
             return View(film);
         }
 
@@ -223,7 +224,8 @@ namespace BMDb.Controllers
         public async Task<IActionResult> Edit(
             int id,
             [Bind("BoxOffice,Naziv,Opis,Reditelj,DatumIzlaska,YoutubeLink,Trajanje,PosterLink")] Film film,
-            int[] zanrIds)
+            int[] zanrIds,
+            string? galerijaUrls)
         {
             var existingFilm = await _context.Film.FindAsync(id);
             if (existingFilm == null)
@@ -239,6 +241,7 @@ namespace BMDb.Controllers
                 {
                     ModelState.AddModelError(nameof(Film.PosterLink), "Poster mora biti .jpg ili .png.");
                     await PopulateCreateListsAsync(zanrIds);
+                    ViewBag.GalerijaUrls = galerijaUrls ?? string.Empty;
                     return View(existingFilm);
                 }
 
@@ -254,6 +257,7 @@ namespace BMDb.Controllers
                     existingFilm.PosterLink = film.PosterLink;
                     existingFilm.BoxOffice = film.BoxOffice;
                     await ReplaceGenresAsync(existingFilm.Id, zanrIds);
+                    await ReplaceGalleryAsync(existingFilm.Id, galerijaUrls);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -270,6 +274,7 @@ namespace BMDb.Controllers
                 return RedirectToAction(nameof(Index));
             }
             await PopulateCreateListsAsync(zanrIds);
+            ViewBag.GalerijaUrls = galerijaUrls ?? string.Empty;
             return View(existingFilm);
         }
 
@@ -367,7 +372,36 @@ namespace BMDb.Controllers
                 });
             }
 
-            foreach (var url in SplitLines(galerijaUrls))
+            foreach (var url in SplitLines(galerijaUrls).Distinct(StringComparer.OrdinalIgnoreCase))
+            {
+                _context.GalerijaSlika.Add(new GalerijaSlika
+                {
+                    EntertainmentId = entertainmentId,
+                    Url = url
+                });
+            }
+        }
+
+        private async Task<string> GetGalleryUrlsAsync(int entertainmentId)
+        {
+            var urls = await _context.GalerijaSlika
+                .AsNoTracking()
+                .Where(x => x.EntertainmentId == entertainmentId)
+                .OrderBy(x => x.Id)
+                .Select(x => x.Url)
+                .ToListAsync();
+
+            return string.Join(Environment.NewLine, urls);
+        }
+
+        private async Task ReplaceGalleryAsync(int entertainmentId, string? galerijaUrls)
+        {
+            var existing = await _context.GalerijaSlika
+                .Where(x => x.EntertainmentId == entertainmentId)
+                .ToListAsync();
+            _context.GalerijaSlika.RemoveRange(existing);
+
+            foreach (var url in SplitLines(galerijaUrls).Distinct(StringComparer.OrdinalIgnoreCase))
             {
                 _context.GalerijaSlika.Add(new GalerijaSlika
                 {

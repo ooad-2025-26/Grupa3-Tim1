@@ -175,7 +175,7 @@
 						        <div id="reviews" class="tab review">
 						           <div class="row">
 						            	<div class="rv-hd" style="margin-bottom: 20px;">
-											@if (Model.MozeOcijeniti)
+											@if (Model.MozeOcijeniti && !Model.JeVerifikovaniRecenzent)
 											{
 												<form asp-controller="Film" asp-action="DodajRecenziju" asp-route-id="@Model.Entertainment.Id" method="post">
 													@Html.AntiForgeryToken()
@@ -184,7 +184,7 @@
 													<button type="submit" class="redbtn">Napisi recenziju</button>
 												</form>
 											}
-											else if (Model.JeVecRecenzirao)
+											else if (Model.JeVecRecenzirao && !Model.JeVerifikovaniRecenzent)
 											{
 												<p style="color:#fbb124;">Vec ste napisali recenziju za ovaj naslov.</p>
 											}
@@ -219,6 +219,21 @@
 						        </div>
 						        <div id="verified-reviews" class="tab review">
 						           <div class="row">
+						            	<div class="rv-hd" style="margin-bottom: 20px;">
+											@if (Model.MozeOcijeniti && Model.JeVerifikovaniRecenzent)
+											{
+												<form asp-controller="Film" asp-action="DodajRecenziju" asp-route-id="@Model.Entertainment.Id" method="post">
+													@Html.AntiForgeryToken()
+													<input type="number" name="ocjena" min="1" max="10" placeholder="Ocjena" style="width:90px;">
+													<input type="text" name="komentar" placeholder="Komentar">
+													<button type="submit" class="redbtn">Napisi recenziju</button>
+												</form>
+											}
+											else if (Model.JeVecRecenzirao && Model.JeVerifikovaniRecenzent)
+											{
+												<p style="color:#fbb124;">Vec ste napisali recenziju za ovaj naslov.</p>
+											}
+										</div>
 						            	<div class="topbar-filter">
 											<p>Pronadeno <span>@verifikovaneRecenzije.Count recenzija</span> ukupno</p>
 										</div>

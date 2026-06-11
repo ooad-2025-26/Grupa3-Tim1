@@ -187,6 +187,7 @@ namespace BMDb.Controllers
                 .Where(x => x.IdSerije == serija.Id)
                 .OrderBy(x => x.RedniBrojSezone)
                 .ToListAsync();
+            ViewBag.GalerijaUrls = await GetGalleryUrlsAsync(serija.Id);
             return View(serija);
         }
 
@@ -203,7 +204,8 @@ namespace BMDb.Controllers
             int[] redniBrojeviSezona,
             int[] brojeviEpizodaSezona,
             int[] datumiPremijereSezona,
-            string[] posteriSezona)
+            string[] posteriSezona,
+            string? galerijaUrls)
         {
             var existingSerija = await _context.Serija.FindAsync(id);
             if (existingSerija == null)
@@ -220,6 +222,7 @@ namespace BMDb.Controllers
                     ModelState.AddModelError(nameof(Serija.PosterLink), "Poster mora biti .jpg ili .png.");
                     await PopulateCreateListsAsync(zanrIds);
                     ViewBag.Sezone = await BuildSeasonPreviewAsync(redniBrojeviSezona, brojeviEpizodaSezona, datumiPremijereSezona, posteriSezona);
+                    ViewBag.GalerijaUrls = galerijaUrls ?? string.Empty;
                     return View(existingSerija);
                 }
 
@@ -238,6 +241,7 @@ namespace BMDb.Controllers
                     existingSerija.ZavrsenoEmitovanje = serija.ZavrsenoEmitovanje;
                     await ReplaceGenresAsync(existingSerija.Id, zanrIds);
                     await ReplaceSeasonDataAsync(existingSerija.Id, redniBrojeviSezona, brojeviEpizodaSezona, datumiPremijereSezona, posteriSezona);
+                    await ReplaceGalleryAsync(existingSerija.Id, galerijaUrls);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -255,6 +259,7 @@ namespace BMDb.Controllers
             }
             await PopulateCreateListsAsync(zanrIds);
             ViewBag.Sezone = await BuildSeasonPreviewAsync(redniBrojeviSezona, brojeviEpizodaSezona, datumiPremijereSezona, posteriSezona);
+            ViewBag.GalerijaUrls = galerijaUrls ?? string.Empty;
             return View(existingSerija);
         }
 
@@ -352,7 +357,36 @@ namespace BMDb.Controllers
                 });
             }
 
-            foreach (var url in SplitLines(galerijaUrls))
+            foreach (var url in SplitLines(galerijaUrls).Distinct(StringComparer.OrdinalIgnoreCase))
+            {
+                _context.GalerijaSlika.Add(new GalerijaSlika
+                {
+                    EntertainmentId = entertainmentId,
+                    Url = url
+                });
+            }
+        }
+
+        private async Task<string> GetGalleryUrlsAsync(int entertainmentId)
+        {
+            var urls = await _context.GalerijaSlika
+                .AsNoTracking()
+                .Where(x => x.EntertainmentId == entertainmentId)
+                .OrderBy(x => x.Id)
+                .Select(x => x.Url)
+                .ToListAsync();
+
+            return string.Join(Environment.NewLine, urls);
+        }
+
+        private async Task ReplaceGalleryAsync(int entertainmentId, string? galerijaUrls)
+        {
+            var existing = await _context.GalerijaSlika
+                .Where(x => x.EntertainmentId == entertainmentId)
+                .ToListAsync();
+            _context.GalerijaSlika.RemoveRange(existing);
+
+            foreach (var url in SplitLines(galerijaUrls).Distinct(StringComparer.OrdinalIgnoreCase))
             {
                 _context.GalerijaSlika.Add(new GalerijaSlika
                 {

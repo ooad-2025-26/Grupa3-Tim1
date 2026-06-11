@@ -20,6 +20,7 @@ namespace BMDb.ViewModels
         public bool JePlanirano { get; set; }
         public bool JePrijavljen { get; set; }
         public bool JeVecRecenzirao { get; set; }
+        public bool JeVerifikovaniRecenzent { get; set; }
         public bool MozeOcijeniti => JePrijavljen && !JeVecRecenzirao;
         public string? StatusPoruka { get; set; }
     }

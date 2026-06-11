@@ -1,6 +1,7 @@
 @model BMDb.Models.Serija
 @{
     Layout = "_AdminLayout";
+    var galerijaUrls = ViewBag.GalerijaUrls as string ?? string.Empty;
     var sezone = ((IEnumerable<BMDb.Models.Sezona>)(ViewBag.Sezone ?? Enumerable.Empty<BMDb.Models.Sezona>()))
         .OrderBy(x => x.RedniBrojSezone)
         .Select(x => new
@@ -93,6 +94,9 @@
                                 <label asp-for="Opis">Sinopsis (Kratak sadrzaj)</label>
                                 <textarea asp-for="Opis" rows="6" placeholder="Unesite opis serije ovdje..."></textarea>
                                 <span asp-validation-for="Opis" class="text-danger"></span>
+
+                                <label for="galerijaUrls">Galerija slika</label>
+                                <textarea id="galerijaUrls" name="galerijaUrls" rows="4" placeholder="Unesite URL slike po redu, odvojeno novim redom">@galerijaUrls</textarea>
 
                                 <label>Sezone</label>
                                 <div id="sezone-container"></div>

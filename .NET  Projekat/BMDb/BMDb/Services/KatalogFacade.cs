@@ -37,6 +37,7 @@ namespace BMDb.Services
                 .ToListAsync();
             var reviewData = await GetReviewDataAsync();
             var jeVecRecenzirao = osobaId > 0 && recenzije.Any(x => x.OsobaId == osobaId);
+            var jeVerifikovaniRecenzent = osobaId > 0 && reviewData.VerifiedUserKeys.Contains(osobaId);
             var zanrovi = (await _context.EntertainmentZanr
                 .AsNoTracking()
                 .Where(x => x.EntertainmentId == id)
@@ -57,7 +58,7 @@ namespace BMDb.Services
                 Entertainment = entertainment,
                 TrailerEmbedUrl = _trailerServis.PokreniTrailer(entertainment.YoutubeLink),
                 Recenzije = recenzije,
-                RegularRecenzije = recenzije,
+                RegularRecenzije = recenzije.Where(x => !reviewData.VerifiedUserKeys.Contains(x.OsobaId)).ToList(),
                 VerifikovaneRecenzije = recenzije.Where(x => reviewData.VerifiedUserKeys.Contains(x.OsobaId)).ToList(),
                 Recenzenti = reviewData.Authors,
                 Sezone = await _context.Sezona.Where(x => x.IdSerije == id).OrderBy(x => x.RedniBrojSezone).ToListAsync(),
@@ -68,7 +69,8 @@ namespace BMDb.Services
                 JeGledao = osobaId > 0 && await _watchlistService.JeGledaoAsync(osobaId, id),
                 JePlanirano = osobaId > 0 && await _watchlistService.JePlaniranoAsync(osobaId, id),
                 JePrijavljen = osobaId > 0,
-                JeVecRecenzirao = jeVecRecenzirao
+                JeVecRecenzirao = jeVecRecenzirao,
+                JeVerifikovaniRecenzent = jeVerifikovaniRecenzent
             };
         }
 
