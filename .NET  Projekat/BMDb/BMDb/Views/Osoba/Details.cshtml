@@ -1,131 +1,207 @@
 @model BMDb.ViewModels.ProfileDetailsViewModel
 
-    <div class="hero user-hero">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="hero-ct">
-                        <h1 style="position: relative; left: -85px;">Profil korisnika</h1>
-                        <ul class="breadcumb">
-                            <li class="active"><a asp-controller="Home" asp-action="Glavna">Početna</a></li>
-                            <li><span class="ion-ios-arrow-right"></span> Profil</li>
+<div class="hero user-hero">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="hero-ct">
+                    <h1 style="position: relative; left: -85px;">Profil korisnika</h1>
+                    <ul class="breadcumb">
+                        <li class="active"><a asp-controller="Home" asp-action="Glavna">Pocetna</a></li>
+                        <li><span class="ion-ios-arrow-right"></span> Profil</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="page-single">
+    <div class="container">
+        <div class="row ipad-width">
+            <div class="col-md-3 col-sm-12 col-xs-12">
+                <div class="user-information">
+                    <div class="user-img">
+                        <a href="#avatar-modal"><img class="bmd-avatar" src="@Model.AvatarUrl" alt=""><br></a>
+                        <a href="#avatar-modal" class="redbtn">Uredi avatar</a>
+                    </div>
+                    <div class="user-fav">
+                        <p>Detalji racuna</p>
+                        <ul>
+                            <li class="active"><a asp-controller="Osoba" asp-action="Details">Profil</a></li>
+                            <li><a asp-controller="GledatCu" asp-action="Index">Gledat cu</a></li>
+                            <li><a asp-controller="GledaoSam" asp-action="Index">Gledao sam</a></li>
+                            <li><a asp-controller="Recenzija" asp-action="Index">Recenzije</a></li>
                         </ul>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-
-    <div class="page-single">
-        <div class="container">
-            <div class="row ipad-width">
-                <div class="col-md-3 col-sm-12 col-xs-12">
-                    <div class="user-information">
-                        <div class="user-img">
-                            <a href="#avatar-modal"><img class="bmd-avatar" src="@Model.AvatarUrl" alt=""><br></a>
-                            <a href="#avatar-modal" class="redbtn">Uredi avatar</a>
+            <div class="col-md-9 col-sm-12 col-xs-12">
+                <div class="form-style-1 user-pro">
+                    <form asp-controller="Osoba" asp-action="Details" method="post" class="user">
+                        @Html.AntiForgeryToken()
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        @if (TempData["StatusPoruka"] != null)
+                        {
+                            <p class="text-success">@TempData["StatusPoruka"]</p>
+                        }
+                        <h4>01. Detalji profila</h4>
+                        <div class="row">
+                            <div class="col-md-6 form-it">
+                                <label asp-for="Nadimak">Nadimak</label>
+                                <input asp-for="Nadimak" placeholder="Nadimak">
+                                <span asp-validation-for="Nadimak" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6 form-it">
+                                <label asp-for="Email">Email adresa</label>
+                                <input asp-for="Email" type="email" readonly>
+                            </div>
                         </div>
-                        <div class="user-fav">
-                            <p>Detalji računa</p>
-                            <ul>
-                                <li class="active"><a asp-controller="Osoba" asp-action="Details">Profil</a></li>
-                                <li><a asp-controller="GledatCu" asp-action="Index">Gledat ću</a></li>
-                                <li><a asp-controller="GledaoSam" asp-action="Index">Gledao sam</a></li>
-                                <li><a asp-controller="Recenzija" asp-action="Index">Recenzije</a></li>
-                            </ul>
+                        <div class="row">
+                            <div class="col-md-6 form-it">
+                                <label asp-for="Ime">Ime</label>
+                                <input asp-for="Ime" placeholder="Ime">
+                                <span asp-validation-for="Ime" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6 form-it">
+                                <label asp-for="Prezime">Prezime</label>
+                                <input asp-for="Prezime" placeholder="Prezime">
+                                <span asp-validation-for="Prezime" class="text-danger"></span>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="col-md-9 col-sm-12 col-xs-12">
-                    <div class="form-style-1 user-pro">
-                        <form asp-controller="Osoba" asp-action="Details" method="post" class="user">
-                            @Html.AntiForgeryToken()
-                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                            @if (TempData["StatusPoruka"] != null)
-                            {
-                                <p class="text-success">@TempData["StatusPoruka"]</p>
-                            }
-                            <h4>01. Detalji profila</h4>
-                            <div class="row">
-                                <div class="col-md-6 form-it">
-                                    <label asp-for="Nadimak">Nadimak</label>
-                                    <input asp-for="Nadimak" placeholder="Nadimak">
-                                    <span asp-validation-for="Nadimak" class="text-danger"></span>
-                                </div>
-                                <div class="col-md-6 form-it">
-                                    <label asp-for="Email">Email adresa</label>
-                                    <input asp-for="Email" type="email" readonly>
-                                </div>
+                        <div class="row">
+                            <div class="col-md-6 form-it">
+                                <label asp-for="PhoneNumber">Telefon</label>
+                                <input asp-for="PhoneNumber" placeholder="+387...">
+                                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
                             </div>
-                            <div class="row">
-                                <div class="col-md-6 form-it">
-                                    <label asp-for="Ime">Ime</label>
-                                    <input asp-for="Ime" placeholder="Ime">
-                                    <span asp-validation-for="Ime" class="text-danger"></span>
-                                </div>
-                                <div class="col-md-6 form-it">
-                                    <label asp-for="Prezime">Prezime</label>
-                                    <input asp-for="Prezime" placeholder="Prezime">
-                                    <span asp-validation-for="Prezime" class="text-danger"></span>
-                                </div>
+                            <div class="col-md-6 form-it">
+                                <label>Notifikacije</label>
+                                <label class="bmd-toggle">
+                                    <input asp-for="NotifikacijeUkljucene" type="checkbox">
+                                    <span class="bmd-toggle-slider"></span>
+                                    <span class="bmd-toggle-label" data-on="Notifikacije ukljucene" data-off="Notifikacije iskljucene"></span>
+                                </label>
                             </div>
-                            <div class="row">
-                                <div class="col-md-6 form-it">
-                                    <label asp-for="PhoneNumber">Telefon</label>
-                                    <input asp-for="PhoneNumber" placeholder="+387...">
-                                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
-                                </div>
-                                <div class="col-md-6 form-it">
-                                    <label asp-for="NotifikacijeUkljucene">
-                                        <input asp-for="NotifikacijeUkljucene" type="checkbox" style="width:auto; margin-right:8px;">
-                                        Notifikacije uključene
-                                    </label>
-                                </div>
-                            </div>
+                        </div>
 
-                            <h4 style="margin-top: 40px;">02. Preferirani žanrovi</h4>
-                            <div class="row">
-                                <div class="col-md-12 form-it">
-                                    <label for="SelectedZanrIds">Vaši omiljeni žanrovi:</label>
-                                    <select id="SelectedZanrIds" name="SelectedZanrIds" multiple>
-                                        @foreach (var zanr in Model.SviZanrovi)
+                        <h4 class="bmd-profile-section-title">02. PREFERIRANI ZANROVI</h4>
+                        <div class="row">
+                            <div class="col-md-12 form-it">
+                                <label for="bmd-genre-select">Vasi omiljeni zanrovi:</label>
+                                <div class="bmd-preferred-genres">
+                                    <div class="bmd-selected-genres" id="bmd-selected-genres">
+                                        @foreach (var zanr in Model.SviZanrovi.Where(x => Model.SelectedZanrIds.Contains(x.Id)))
                                         {
-                                            if (Model.SelectedZanrIds.Contains(zanr.Id))
-                                            {
-                                                <option value="@zanr.Id" selected>@zanr.Naziv</option>
-                                            }
-                                            else
-                                            {
-                                                <option value="@zanr.Id">@zanr.Naziv</option>
-                                            }
+                                            <span class="bmd-genre-badge @BMDb.Services.GenreBadgeHelper.CssClass(zanr.Naziv)" data-genre-id="@zanr.Id">
+                                                @zanr.Naziv
+                                                <button type="button" class="bmd-genre-remove" aria-label="Ukloni @zanr.Naziv">x</button>
+                                                <input type="hidden" name="SelectedZanrIds" value="@zanr.Id">
+                                            </span>
                                         }
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <input class="submit" type="submit" value="Sačuvaj">
-                                </div>
-                            </div>
-
-                            <div id="avatar-modal" class="bmd-modal-overlay bmd-profile-modal">
-                                <div class="bmd-modal-content bmd-profile-modal-content">
-                                    <a href="#!" class="bmd-close-btn">&times;</a>
-                                    <h4>Avatar slika</h4>
-                                    <div class="form-it">
-                                        <label asp-for="AvatarPath">URL ili putanja slike</label>
-                                        <input asp-for="AvatarPath" placeholder="/images/uploads/user-img.png">
-                                        <span asp-validation-for="AvatarPath" class="text-danger"></span>
                                     </div>
-                                    <div class="bmd-profile-modal-actions">
-                                        <a href="#!" class="redbtn">Zatvori</a>
+                                    <div class="bmd-genre-add-row">
+                                        <select id="bmd-genre-select">
+                                            <option value="">Odaberite zanr</option>
+                                            @foreach (var zanr in Model.SviZanrovi)
+                                            {
+                                                <option value="@zanr.Id" data-class="@BMDb.Services.GenreBadgeHelper.CssClass(zanr.Naziv)">@zanr.Naziv</option>
+                                            }
+                                        </select>
+                                        <button type="button" id="bmd-add-genre" class="bmd-add-genre-btn">+</button>
                                     </div>
                                 </div>
                             </div>
-                        </form>
-                    </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-2">
+                                <input class="submit" type="submit" value="Sacuvaj">
+                            </div>
+                        </div>
+
+                        <div id="avatar-modal" class="bmd-modal-overlay bmd-profile-modal">
+                            <div class="bmd-modal-content bmd-profile-modal-content">
+                                <a href="#!" class="bmd-close-btn">&times;</a>
+                                <h4>Avatar slika</h4>
+                                <div class="form-it">
+                                    <label asp-for="AvatarPath">URL ili putanja slike</label>
+                                    <input asp-for="AvatarPath" placeholder="/images/uploads/user-img.png">
+                                    <span asp-validation-for="AvatarPath" class="text-danger"></span>
+                                </div>
+                                <div class="bmd-profile-modal-actions">
+                                    <a href="#!" class="redbtn">Zatvori</a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
+</div>
+
+<script>
+    (function () {
+        var container = document.getElementById('bmd-selected-genres');
+        var select = document.getElementById('bmd-genre-select');
+        var addButton = document.getElementById('bmd-add-genre');
+
+        if (!container || !select || !addButton) {
+            return;
+        }
+
+        function updateOptions() {
+            var selected = Array.prototype.map.call(
+                container.querySelectorAll('[data-genre-id]'),
+                function (item) { return item.getAttribute('data-genre-id'); }
+            );
+
+            Array.prototype.forEach.call(select.options, function (option) {
+                option.disabled = option.value !== '' && selected.indexOf(option.value) !== -1;
+            });
+
+            if (select.selectedOptions.length && select.selectedOptions[0].disabled) {
+                select.value = '';
+            }
+        }
+
+        function addGenre() {
+            var option = select.selectedOptions[0];
+            if (!option || !option.value || option.disabled) {
+                return;
+            }
+
+            var badge = document.createElement('span');
+            badge.className = 'bmd-genre-badge ' + (option.getAttribute('data-class') || 'bmd-genre-0');
+            badge.setAttribute('data-genre-id', option.value);
+            badge.appendChild(document.createTextNode(option.text + ' '));
+
+            var remove = document.createElement('button');
+            remove.type = 'button';
+            remove.className = 'bmd-genre-remove';
+            remove.setAttribute('aria-label', 'Ukloni ' + option.text);
+            remove.textContent = 'x';
+            badge.appendChild(remove);
+
+            var hidden = document.createElement('input');
+            hidden.type = 'hidden';
+            hidden.name = 'SelectedZanrIds';
+            hidden.value = option.value;
+            badge.appendChild(hidden);
+
+            container.appendChild(badge);
+            select.value = '';
+            updateOptions();
+        }
+
+        addButton.addEventListener('click', addGenre);
+        container.addEventListener('click', function (event) {
+            if (event.target.classList.contains('bmd-genre-remove')) {
+                event.target.closest('[data-genre-id]').remove();
+                updateOptions();
+            }
+        });
+        updateOptions();
+    })();
+</script>
