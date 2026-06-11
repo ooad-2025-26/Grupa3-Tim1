@@ -6,6 +6,8 @@ namespace BMDb.ViewModels
         public IReadOnlyList<HomeMediaItemViewModel> TopRatedFilms { get; set; } = [];
         public IReadOnlyList<HomeMediaItemViewModel> TopRatedSeries { get; set; } = [];
         public IReadOnlyList<HomeMediaItemViewModel> RecommendedItems { get; set; } = [];
+        public IReadOnlyList<HomeMediaItemViewModel> RecommendedFilms { get; set; } = [];
+        public IReadOnlyList<HomeMediaItemViewModel> RecommendedSeries { get; set; } = [];
         public bool ShowRecommendations { get; set; }
         public IReadOnlyList<HomeMediaItemViewModel> ComingSoonFilms { get; set; } = [];
     }

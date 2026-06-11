@@ -33,6 +33,7 @@ builder.Services.AddScoped<IWatchlistService, WatchlistService>();
 builder.Services.AddScoped<IRecenzijaService, RecenzijaService>();
 builder.Services.AddScoped<INotificationService, NotificationService>();
 builder.Services.AddScoped<IContentCreationObserver>(sp => sp.GetRequiredService<INotificationService>());
+builder.Services.AddScoped<INotificationPreferenceService, NotificationPreferenceService>();
 builder.Services.AddScoped<IOglasService, OglasService>();
 builder.Services.AddScoped<IMediaSearchService, MediaSearchService>();
 builder.Services.AddScoped<IRecommendationService, RecommendationService>();

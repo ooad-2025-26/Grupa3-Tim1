@@ -80,7 +80,7 @@
             <div class="flex-parent-ft">
                 <div class="flex-child-ft item1">
                     <a asp-controller="Home" asp-action="AdminDashboard"><img class="logo" src="~/images/logo1.png" alt=""></a>
-                    <p>Admin Panel Sektor</p>
+                    <p>@(User.IsInRole("Admin") ? "Admin" : "Moderator") Panel Sektor</p>
                 </div>
                 <div class="flex-child-ft item5">
                     @if (User.IsInRole("Admin") || User.IsInRole("Moderator"))

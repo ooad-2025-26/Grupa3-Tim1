@@ -3,6 +3,7 @@
 @using System.Text.Json
 @inject SignInManager<Osoba> SignInManager
 @inject UserManager<Osoba> UserManager
+@inject INotificationPreferenceService NotificationPreferenceService
 @{
     var currentReturnUrl = $"{Context.Request.PathBase}{Context.Request.Path}{Context.Request.QueryString}";
     var showLoginPopup = string.Equals(TempData["ShowLoginPopup"] as string, "true", StringComparison.OrdinalIgnoreCase);
@@ -21,6 +22,7 @@
     var registerInputPrezime = TempData["RegisterInput.Prezime"] as string ?? string.Empty;
     var registerInputNadimak = TempData["RegisterInput.Nadimak"] as string ?? string.Empty;
     var registerInputEmail = TempData["RegisterInput.Email"] as string ?? string.Empty;
+    var showVijestiLink = SignInManager.IsSignedIn(User) && await NotificationPreferenceService.CanCurrentUserViewNewsAsync(User);
 }
 
 <!DOCTYPE html>
@@ -209,7 +211,10 @@
                                 Novosti <i class="fa fa-angle-down" aria-hidden="true"></i>
                             </a>
                             <ul class="dropdown-menu level1">
-                                <li><a asp-controller="Notifikacija" asp-action="Index">Vijesti</a></li>
+                                @if (showVijestiLink)
+                                {
+                                    <li><a asp-controller="Notifikacija" asp-action="Index">Vijesti</a></li>
+                                }
                                 <li><a asp-controller="Film" asp-action="ComingSoon">Uskoro u kinu</a></li>
                             </ul>
                         </li>
@@ -232,7 +237,7 @@
                     <ul class="nav navbar-nav flex-child-menu menu-right">
                         @if (User.IsInRole("Admin") || User.IsInRole("Moderator"))
                         {
-                            <li><a asp-controller="Home" asp-action="AdminDashboard">Admin</a></li>
+                            <li><a asp-controller="Home" asp-action="AdminDashboard">@(User.IsInRole("Admin") ? "Admin" : "Moderator")</a></li>
                         }
 
                         @if (!SignInManager.IsSignedIn(User))
@@ -283,7 +288,10 @@
                     <ul>
                         <li><a href="#">O nama</a></li>
                         <li><a href="#">Kontakt</a></li>
-                        <li><a asp-controller="Notifikacija" asp-action="Index">Vijesti</a></li>
+                        @if (showVijestiLink)
+                        {
+                            <li><a asp-controller="Notifikacija" asp-action="Index">Vijesti</a></li>
+                        }
                     </ul>
                 </div>
 

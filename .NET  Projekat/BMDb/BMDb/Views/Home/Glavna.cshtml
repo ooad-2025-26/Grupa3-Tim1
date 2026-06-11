@@ -116,19 +116,23 @@
 					<a href="#" class="viewall">Pogledaj sve <i class="ion-ios-arrow-right"></i></a>
 				</div>
 				<div class="tabs">
+					<ul class="tab-links">
+						<li class="active"><a href="#recommended-films">#Preporučeni filmovi</a></li>
+						<li><a href="#recommended-series"> #Preporučene serije</a></li>
+					</ul>
 					<div class="tab-content">
-						<div class="tab active">
+						<div id="recommended-films" class="tab active">
 							<div class="row">
 								<div class="slick-multiItem2">
-									@foreach (var item in Model.RecommendedItems)
+									@foreach (var item in Model.RecommendedFilms)
 									{
 										<div class="slide-it">
 											<div class="movie-item">
 												<div class="mv-img">
-													<a asp-controller="@item.ControllerName" asp-action="Details" asp-route-id="@item.Id"><img src="@item.PosterUrl" alt="@item.Title"></a>
+													<a asp-controller="Film" asp-action="Details" asp-route-id="@item.Id"><img src="@item.PosterUrl" alt="@item.Title"></a>
 												</div>
 												<div class="hvr-inner">
-													<a asp-controller="@item.ControllerName" asp-action="Details" asp-route-id="@item.Id"> Vidi više <i class="ion-android-arrow-dropright"></i> </a>
+													<a asp-controller="Film" asp-action="Details" asp-route-id="@item.Id"> Vidi više <i class="ion-android-arrow-dropright"></i> </a>
 												</div>
 												<div class="title-in">
 													<div class="cate">
@@ -137,7 +141,36 @@
 															<span class="bmd-genre-badge @BMDb.Services.GenreBadgeHelper.CssClass(zanr)"><a href="#">@zanr</a></span>
 														}
 													</div>
-													<h6><a asp-controller="@item.ControllerName" asp-action="Details" asp-route-id="@item.Id">@item.Title</a></h6>
+													<h6><a asp-controller="Film" asp-action="Details" asp-route-id="@item.Id">@item.Title</a></h6>
+													<p><i class="ion-android-star"></i><span>@item.Rating.ToString("0.0")</span> /10</p>
+												</div>
+											</div>
+										</div>
+									}
+								</div>
+							</div>
+						</div>
+						<div id="recommended-series" class="tab">
+							<div class="row">
+								<div class="slick-multiItem2">
+									@foreach (var item in Model.RecommendedSeries)
+									{
+										<div class="slide-it">
+											<div class="movie-item">
+												<div class="mv-img">
+													<a asp-controller="Serija" asp-action="Details" asp-route-id="@item.Id"><img src="@item.PosterUrl" alt="@item.Title"></a>
+												</div>
+												<div class="hvr-inner">
+													<a asp-controller="Serija" asp-action="Details" asp-route-id="@item.Id"> Vidi više <i class="ion-android-arrow-dropright"></i> </a>
+												</div>
+												<div class="title-in">
+													<div class="cate">
+														@foreach (var zanr in item.Genres.Take(2))
+														{
+															<span class="bmd-genre-badge @BMDb.Services.GenreBadgeHelper.CssClass(zanr)"><a href="#">@zanr</a></span>
+														}
+													</div>
+													<h6><a asp-controller="Serija" asp-action="Details" asp-route-id="@item.Id">@item.Title</a></h6>
 													<p><i class="ion-android-star"></i><span>@item.Rating.ToString("0.0")</span> /10</p>
 												</div>
 											</div>

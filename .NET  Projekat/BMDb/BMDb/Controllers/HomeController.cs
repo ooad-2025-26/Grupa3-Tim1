@@ -79,7 +79,8 @@ namespace BMDb.Controllers
                 .Take(10)
                 .ToListAsync();
 
-            IReadOnlyList<Entertainment> preporuke = [];
+            IReadOnlyList<Film> preporuceniFilmovi = [];
+            IReadOnlyList<Serija> preporuceneSerije = [];
             var prikaziPreporuke = false;
             var osobaId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var korisnikMozeDobitiPreporuke = User.Identity?.IsAuthenticated == true &&
@@ -97,8 +98,9 @@ namespace BMDb.Controllers
                 if (korisnikImaPreferiraneZanrove)
                 {
                     var gledaoSamOsobaId = _userKeyService.GetCurrentUserKey(User);
-                    preporuke = await _recommendationService.PersonalizovanePreporukeAsync(osobaId, gledaoSamOsobaId, 10);
-                    prikaziPreporuke = preporuke.Count > 0;
+                    preporuceniFilmovi = await _recommendationService.PreporuceniFilmoviAsync(osobaId, gledaoSamOsobaId, 10);
+                    preporuceneSerije = await _recommendationService.PreporuceneSerijeAsync(osobaId, gledaoSamOsobaId, 10);
+                    prikaziPreporuke = preporuceniFilmovi.Count > 0 || preporuceneSerije.Count > 0;
                 }
             }
 
@@ -120,7 +122,8 @@ namespace BMDb.Controllers
             var sviIds = randomSadrzaj.Select(x => x.Id)
                 .Concat(topFilmovi.Select(x => x.Id))
                 .Concat(topSerije.Select(x => x.Id))
-                .Concat(preporuke.Select(x => x.Id))
+                .Concat(preporuceniFilmovi.Select(x => x.Id))
+                .Concat(preporuceneSerije.Select(x => x.Id))
                 .Concat(comingSoon.Select(x => x.Film.Id))
                 .Distinct()
                 .ToList();
@@ -132,7 +135,8 @@ namespace BMDb.Controllers
                 RandomMediaItems = randomSadrzaj.Select(x => MapMediaItem(x, zanrovi)).ToList(),
                 TopRatedFilms = topFilmovi.Select(x => MapMediaItem(x, zanrovi)).ToList(),
                 TopRatedSeries = topSerije.Select(x => MapMediaItem(x, zanrovi)).ToList(),
-                RecommendedItems = preporuke.Select(x => MapMediaItem(x, zanrovi)).ToList(),
+                RecommendedFilms = preporuceniFilmovi.Select(x => MapMediaItem(x, zanrovi)).ToList(),
+                RecommendedSeries = preporuceneSerije.Select(x => MapMediaItem(x, zanrovi)).ToList(),
                 ShowRecommendations = prikaziPreporuke,
                 ComingSoonFilms = comingSoon.Select(x => MapMediaItem(x.Film, zanrovi, x.TrailerEmbedUrl)).ToList()
             };
@@ -168,7 +172,7 @@ namespace BMDb.Controllers
             return RedirectToAction("Index", "Film", new { search });
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,Moderator")]
         public IActionResult AdminDashboard() { return View(); }
 
         [Authorize(Roles = "Admin")]
@@ -234,6 +238,11 @@ namespace BMDb.Controllers
             foreach (var user in users)
             {
                 var roles = await _userManager.GetRolesAsync(user);
+                if (User.IsInRole("Moderator") && !User.IsInRole("Admin") && roles.Contains("Admin"))
+                {
+                    continue;
+                }
+
                 model.Add(new AdminUserViewModel
                 {
                     Id = user.Id,

@@ -15,6 +15,12 @@
     var sezone = Model.Sezone ?? Array.Empty<BMDb.Models.Sezona>();
 }
 
+<style>
+    .bmd-gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, 100px); gap: 10px; align-items: start; }
+    .bmd-gallery-grid a { display: block; width: 100px; height: 100px; overflow: hidden; }
+    .bmd-gallery-grid img { width: 100px; height: 100px; object-fit: cover; object-position: center; }
+</style>
+
 <div class="hero mv-single-hero">
     <div class="container">
         <div class="row">
@@ -111,7 +117,7 @@
                                                 <h4>Fotografije</h4>
                                                 <a href="#media" class="time">Sve fotografije <i class="ion-ios-arrow-right"></i></a>
                                             </div>
-                                            <div class="mvsingle-item ov-item">
+                                            <div class="mvsingle-item ov-item bmd-gallery-grid">
                                                 @foreach (var slika in galerija.Take(4))
                                                 {
                                                     var slikaUrl = MediaImageService.ResolvePosterUrl(slika.Url);
@@ -299,7 +305,7 @@
                                         <div class="title-hd-sm">
                                             <h4>Fotografije <span> (@galerija.Count)</span></h4>
                                         </div>
-                                        <div class="mvsingle-item">
+                                        <div class="mvsingle-item bmd-gallery-grid">
                                             @foreach (var slika in galerija)
                                             {
                                                 var slikaUrl = MediaImageService.ResolvePosterUrl(slika.Url);

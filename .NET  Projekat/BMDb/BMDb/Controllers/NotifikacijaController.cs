@@ -8,26 +8,28 @@ using Microsoft.EntityFrameworkCore;
 using BMDb.Data;
 using BMDb.Models;
 using Microsoft.AspNetCore.Authorization;
-using System.Security.Claims;
+using BMDb.Services;
 
 namespace BMDb.Controllers
 {
     public class NotifikacijaController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly INotificationPreferenceService _notificationPreferenceService;
 
-        public NotifikacijaController(ApplicationDbContext context)
+        public NotifikacijaController(ApplicationDbContext context, INotificationPreferenceService notificationPreferenceService)
         {
             _context = context;
+            _notificationPreferenceService = notificationPreferenceService;
         }
 
         // GET: Notifikacija
         [Authorize]
         public async Task<IActionResult> Index()
         {
-            if (!await CurrentUserHasNotificationsEnabledAsync())
+            if (!await _notificationPreferenceService.CanCurrentUserViewNewsAsync(User))
             {
-                return View(Array.Empty<Notifikacija>());
+                return Forbid();
             }
 
             var notifikacije = await _context.Notifikacija
@@ -47,9 +49,9 @@ namespace BMDb.Controllers
                 return NotFound();
             }
 
-            if (!await CurrentUserHasNotificationsEnabledAsync())
+            if (!await _notificationPreferenceService.CanCurrentUserViewNewsAsync(User))
             {
-                return NotFound();
+                return Forbid();
             }
 
             var notifikacija = await _context.Notifikacija
@@ -180,19 +182,5 @@ namespace BMDb.Controllers
             return _context.Notifikacija.Any(e => e.Id == id);
         }
 
-        private async Task<bool> CurrentUserHasNotificationsEnabledAsync()
-        {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (string.IsNullOrWhiteSpace(userId))
-            {
-                return false;
-            }
-
-            return await _context.Users
-                .AsNoTracking()
-                .Where(x => x.Id == userId)
-                .Select(x => x.NotifikacijeUkljucene)
-                .FirstOrDefaultAsync();
-        }
     }
 }
