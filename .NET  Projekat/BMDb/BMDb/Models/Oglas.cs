@@ -7,6 +7,7 @@
         public string Link { get; set; }
         public bool Aktivan { get; set; }
         public double Prihod { get; set; }
+        public int brojanjeOglasa { get; set; }
 
         public Oglas() { }
     }

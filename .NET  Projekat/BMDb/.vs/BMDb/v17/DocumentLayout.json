@@ -3,44 +3,24 @@
   "WorkspaceRootPath": "D:\\Projekat\\Grupa3-Tim1\\.NET  Projekat\\BMDb\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{08397937-14F8-4F36-BD2B-41C277992A07}|BMDb\\BMDb.csproj|d:\\projekat\\grupa3-tim1\\.net  projekat\\bmdb\\bmdb\\areas\\identity\\pages\\account\\register.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{08397937-14F8-4F36-BD2B-41C277992A07}|BMDb\\BMDb.csproj|solutionrelative:bmdb\\areas\\identity\\pages\\account\\register.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Projekat\\Grupa3-Tim1\\.NET  Projekat\\BMDb\\BMDb\\Migrations\\20260611133241_Migracija4.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:BMDb\\Migrations\\20260611133241_Migracija4.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{08397937-14F8-4F36-BD2B-41C277992A07}|BMDb\\BMDb.csproj|d:\\projekat\\grupa3-tim1\\.net  projekat\\bmdb\\bmdb\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{08397937-14F8-4F36-BD2B-41C277992A07}|BMDb\\BMDb.csproj|solutionrelative:bmdb\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{08397937-14F8-4F36-BD2B-41C277992A07}|BMDb\\BMDb.csproj|d:\\projekat\\grupa3-tim1\\.net  projekat\\bmdb\\bmdb\\models\\osoba.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{08397937-14F8-4F36-BD2B-41C277992A07}|BMDb\\BMDb.csproj|solutionrelative:bmdb\\models\\osoba.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{08397937-14F8-4F36-BD2B-41C277992A07}|BMDb\\BMDb.csproj|d:\\projekat\\grupa3-tim1\\.net  projekat\\bmdb\\bmdb\\models\\oglas.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{08397937-14F8-4F36-BD2B-41C277992A07}|BMDb\\BMDb.csproj|solutionrelative:bmdb\\models\\oglas.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{08397937-14F8-4F36-BD2B-41C277992A07}|BMDb\\BMDb.csproj|d:\\projekat\\grupa3-tim1\\.net  projekat\\bmdb\\bmdb\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{08397937-14F8-4F36-BD2B-41C277992A07}|BMDb\\BMDb.csproj|solutionrelative:bmdb\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{08397937-14F8-4F36-BD2B-41C277992A07}|BMDb\\BMDb.csproj|d:\\projekat\\grupa3-tim1\\.net  projekat\\bmdb\\bmdb\\areas\\identity\\pages\\account\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{08397937-14F8-4F36-BD2B-41C277992A07}|BMDb\\BMDb.csproj|solutionrelative:bmdb\\areas\\identity\\pages\\account\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{08397937-14F8-4F36-BD2B-41C277992A07}|BMDb\\BMDb.csproj|d:\\projekat\\grupa3-tim1\\.net  projekat\\bmdb\\bmdb\\controllers\\osobacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{08397937-14F8-4F36-BD2B-41C277992A07}|BMDb\\BMDb.csproj|solutionrelative:bmdb\\controllers\\osobacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{08397937-14F8-4F36-BD2B-41C277992A07}|BMDb\\BMDb.csproj|d:\\projekat\\grupa3-tim1\\.net  projekat\\bmdb\\bmdb\\views\\osoba\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{08397937-14F8-4F36-BD2B-41C277992A07}|BMDb\\BMDb.csproj|solutionrelative:bmdb\\views\\osoba\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{08397937-14F8-4F36-BD2B-41C277992A07}|BMDb\\BMDb.csproj|d:\\projekat\\grupa3-tim1\\.net  projekat\\bmdb\\bmdb\\views\\home\\admindashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{08397937-14F8-4F36-BD2B-41C277992A07}|BMDb\\BMDb.csproj|solutionrelative:bmdb\\views\\home\\admindashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{08397937-14F8-4F36-BD2B-41C277992A07}|BMDb\\BMDb.csproj|d:\\projekat\\grupa3-tim1\\.net  projekat\\bmdb\\bmdb\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{08397937-14F8-4F36-BD2B-41C277992A07}|BMDb\\BMDb.csproj|solutionrelative:bmdb\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{08397937-14F8-4F36-BD2B-41C277992A07}|BMDb\\BMDb.csproj|d:\\projekat\\grupa3-tim1\\.net  projekat\\bmdb\\bmdb\\views\\entertainment\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{08397937-14F8-4F36-BD2B-41C277992A07}|BMDb\\BMDb.csproj|solutionrelative:bmdb\\views\\entertainment\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{08397937-14F8-4F36-BD2B-41C277992A07}|BMDb\\BMDb.csproj|d:\\projekat\\grupa3-tim1\\.net  projekat\\bmdb\\bmdb\\views\\entertainment\\search.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{08397937-14F8-4F36-BD2B-41C277992A07}|BMDb\\BMDb.csproj|solutionrelative:bmdb\\views\\entertainment\\search.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -55,14 +35,14 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Register.cshtml.cs",
-              "DocumentMoniker": "D:\\Projekat\\Grupa3-Tim1\\.NET  Projekat\\BMDb\\BMDb\\Areas\\Identity\\Pages\\Account\\Register.cshtml.cs",
-              "RelativeDocumentMoniker": "BMDb\\Areas\\Identity\\Pages\\Account\\Register.cshtml.cs",
-              "ToolTip": "D:\\Projekat\\Grupa3-Tim1\\.NET  Projekat\\BMDb\\BMDb\\Areas\\Identity\\Pages\\Account\\Register.cshtml.cs",
-              "RelativeToolTip": "BMDb\\Areas\\Identity\\Pages\\Account\\Register.cshtml.cs",
-              "ViewState": "AgIAAIgAAAAAAAAAAAArwJYAAAA0AAAAAAAAAA==",
+              "Title": "20260611133241_Migracija4.cs",
+              "DocumentMoniker": "D:\\Projekat\\Grupa3-Tim1\\.NET  Projekat\\BMDb\\BMDb\\Migrations\\20260611133241_Migracija4.cs",
+              "RelativeDocumentMoniker": "BMDb\\Migrations\\20260611133241_Migracija4.cs",
+              "ToolTip": "D:\\Projekat\\Grupa3-Tim1\\.NET  Projekat\\BMDb\\BMDb\\Migrations\\20260611133241_Migracija4.cs",
+              "RelativeToolTip": "BMDb\\Migrations\\20260611133241_Migracija4.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAQwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-11T12:30:32.005Z",
+              "WhenOpened": "2026-06-11T13:32:43.337Z",
               "EditorCaption": ""
             },
             {
@@ -73,22 +53,22 @@
               "RelativeDocumentMoniker": "BMDb\\Data\\ApplicationDbContext.cs",
               "ToolTip": "D:\\Projekat\\Grupa3-Tim1\\.NET  Projekat\\BMDb\\BMDb\\Data\\ApplicationDbContext.cs",
               "RelativeToolTip": "BMDb\\Data\\ApplicationDbContext.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAPAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-11T12:29:26.381Z",
+              "WhenOpened": "2026-06-11T13:27:49.803Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "Osoba.cs",
-              "DocumentMoniker": "D:\\Projekat\\Grupa3-Tim1\\.NET  Projekat\\BMDb\\BMDb\\Models\\Osoba.cs",
-              "RelativeDocumentMoniker": "BMDb\\Models\\Osoba.cs",
-              "ToolTip": "D:\\Projekat\\Grupa3-Tim1\\.NET  Projekat\\BMDb\\BMDb\\Models\\Osoba.cs",
-              "RelativeToolTip": "BMDb\\Models\\Osoba.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Title": "Oglas.cs",
+              "DocumentMoniker": "D:\\Projekat\\Grupa3-Tim1\\.NET  Projekat\\BMDb\\BMDb\\Models\\Oglas.cs",
+              "RelativeDocumentMoniker": "BMDb\\Models\\Oglas.cs",
+              "ToolTip": "D:\\Projekat\\Grupa3-Tim1\\.NET  Projekat\\BMDb\\BMDb\\Models\\Oglas.cs",
+              "RelativeToolTip": "BMDb\\Models\\Oglas.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAvAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-11T12:29:02.925Z",
+              "WhenOpened": "2026-06-11T13:26:58.689Z",
               "EditorCaption": ""
             },
             {
@@ -99,88 +79,22 @@
               "RelativeDocumentMoniker": "BMDb\\Views\\Shared\\_Layout.cshtml",
               "ToolTip": "D:\\Projekat\\Grupa3-Tim1\\.NET  Projekat\\BMDb\\BMDb\\Views\\Shared\\_Layout.cshtml",
               "RelativeToolTip": "BMDb\\Views\\Shared\\_Layout.cshtml",
-              "ViewState": "AgIAADQAAAAAAAAAAAArwM8AAAA5AAAAAAAAAA==",
+              "ViewState": "AgIAAO0AAAAAAAAAAAAAAPcAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-06-11T12:27:20.645Z",
+              "WhenOpened": "2026-06-11T12:39:33.653Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "Register.cshtml",
-              "DocumentMoniker": "D:\\Projekat\\Grupa3-Tim1\\.NET  Projekat\\BMDb\\BMDb\\Areas\\Identity\\Pages\\Account\\Register.cshtml",
-              "RelativeDocumentMoniker": "BMDb\\Areas\\Identity\\Pages\\Account\\Register.cshtml",
-              "ToolTip": "D:\\Projekat\\Grupa3-Tim1\\.NET  Projekat\\BMDb\\BMDb\\Areas\\Identity\\Pages\\Account\\Register.cshtml",
-              "RelativeToolTip": "BMDb\\Areas\\Identity\\Pages\\Account\\Register.cshtml",
-              "ViewState": "AgIAADkAAAAAAAAAAAAAAA8AAAAkAAAAAAAAAA==",
+              "Title": "Search.cshtml",
+              "DocumentMoniker": "D:\\Projekat\\Grupa3-Tim1\\.NET  Projekat\\BMDb\\BMDb\\Views\\Entertainment\\Search.cshtml",
+              "RelativeDocumentMoniker": "BMDb\\Views\\Entertainment\\Search.cshtml",
+              "ToolTip": "D:\\Projekat\\Grupa3-Tim1\\.NET  Projekat\\BMDb\\BMDb\\Views\\Entertainment\\Search.cshtml",
+              "RelativeToolTip": "BMDb\\Views\\Entertainment\\Search.cshtml",
+              "ViewState": "AgIAABIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-06-11T12:25:44.037Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "OsobaController.cs",
-              "DocumentMoniker": "D:\\Projekat\\Grupa3-Tim1\\.NET  Projekat\\BMDb\\BMDb\\Controllers\\OsobaController.cs",
-              "RelativeDocumentMoniker": "BMDb\\Controllers\\OsobaController.cs",
-              "ToolTip": "D:\\Projekat\\Grupa3-Tim1\\.NET  Projekat\\BMDb\\BMDb\\Controllers\\OsobaController.cs",
-              "RelativeToolTip": "BMDb\\Controllers\\OsobaController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAIoAAAAUAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-11T12:17:26.766Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Details.cshtml",
-              "DocumentMoniker": "D:\\Projekat\\Grupa3-Tim1\\.NET  Projekat\\BMDb\\BMDb\\Views\\Osoba\\Details.cshtml",
-              "RelativeDocumentMoniker": "BMDb\\Views\\Osoba\\Details.cshtml",
-              "ToolTip": "D:\\Projekat\\Grupa3-Tim1\\.NET  Projekat\\BMDb\\BMDb\\Views\\Osoba\\Details.cshtml",
-              "RelativeToolTip": "BMDb\\Views\\Osoba\\Details.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-06-11T12:14:18.728Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "HomeController.cs",
-              "DocumentMoniker": "D:\\Projekat\\Grupa3-Tim1\\.NET  Projekat\\BMDb\\BMDb\\Controllers\\HomeController.cs",
-              "RelativeDocumentMoniker": "BMDb\\Controllers\\HomeController.cs",
-              "ToolTip": "D:\\Projekat\\Grupa3-Tim1\\.NET  Projekat\\BMDb\\BMDb\\Controllers\\HomeController.cs",
-              "RelativeToolTip": "BMDb\\Controllers\\HomeController.cs",
-              "ViewState": "AgIAAAABAAAAAAAAAAAzwBQBAAAkAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-11T11:55:37.12Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "AdminDashboard.cshtml",
-              "DocumentMoniker": "D:\\Projekat\\Grupa3-Tim1\\.NET  Projekat\\BMDb\\BMDb\\Views\\Home\\AdminDashboard.cshtml",
-              "RelativeDocumentMoniker": "BMDb\\Views\\Home\\AdminDashboard.cshtml",
-              "ToolTip": "D:\\Projekat\\Grupa3-Tim1\\.NET  Projekat\\BMDb\\BMDb\\Views\\Home\\AdminDashboard.cshtml",
-              "RelativeToolTip": "BMDb\\Views\\Home\\AdminDashboard.cshtml",
-              "ViewState": "AgIAAAIAAAAAAAAAAAAiwBAAAAA1AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-06-11T11:49:46.128Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "D:\\Projekat\\Grupa3-Tim1\\.NET  Projekat\\BMDb\\BMDb\\Views\\Entertainment\\Index.cshtml",
-              "RelativeDocumentMoniker": "BMDb\\Views\\Entertainment\\Index.cshtml",
-              "ToolTip": "D:\\Projekat\\Grupa3-Tim1\\.NET  Projekat\\BMDb\\BMDb\\Views\\Entertainment\\Index.cshtml",
-              "RelativeToolTip": "BMDb\\Views\\Entertainment\\Index.cshtml",
-              "ViewState": "AgIAABgAAAAAAAAAAAAAADQAAABrAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-06-10T13:59:58.581Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-11T12:39:19.573Z"
             }
           ]
         }
