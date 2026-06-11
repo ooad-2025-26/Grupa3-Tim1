@@ -16,7 +16,18 @@ namespace BMDb.Services
                 return true;
             }
 
-            return AllowedExtensions.Contains(Path.GetExtension(fileName));
+            var value = fileName.Trim();
+            if (Uri.TryCreate(value, UriKind.Absolute, out var uri))
+            {
+                return uri.Scheme == Uri.UriSchemeHttp || uri.Scheme == Uri.UriSchemeHttps;
+            }
+
+            if (Path.IsPathRooted(value))
+            {
+                return false;
+            }
+
+            return AllowedExtensions.Contains(Path.GetExtension(value));
         }
     }
 }

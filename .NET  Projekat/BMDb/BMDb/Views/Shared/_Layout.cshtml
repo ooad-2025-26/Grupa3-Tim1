@@ -4,6 +4,7 @@
 @inject SignInManager<Osoba> SignInManager
 @inject UserManager<Osoba> UserManager
 @inject IOglasService OglasService
+@inject IMediaImageService MediaImageService
 @{
     var aktivniOglas = await OglasService.DohvatiAktivniOglasAsync();
     var showRegisterPopup = string.Equals(TempData["ShowRegisterPopup"] as string, "true", StringComparison.OrdinalIgnoreCase);
@@ -218,7 +219,10 @@
                     </ul>
 
                     <ul class="nav navbar-nav flex-child-menu menu-right">
-                        <li><a href="#">Pomoć</a></li>
+                        @if (User.IsInRole("Admin") || User.IsInRole("Moderator"))
+                        {
+                            <li><a asp-controller="Home" asp-action="AdminDashboard">Admin</a></li>
+                        }
 
                         @if (!SignInManager.IsSignedIn(User))
                         {
@@ -256,7 +260,7 @@
         <div class="container" style="margin-top:20px;margin-bottom:20px;">
             <div class="ads">
                 <a href="@aktivniOglas.Link" target="_blank" rel="noopener">
-                    <img src="@aktivniOglas.Slika" alt="Oglas">
+                    <img src="@MediaImageService.ResolvePosterUrl(aktivniOglas.Slika)" alt="Oglas">
                 </a>
             </div>
         </div>
@@ -307,13 +311,6 @@
                     </ul>
                 </div>
                 }
-                <div class="flex-child-ft item5">
-                    @if (SignInManager.IsSignedIn(User) && (User.IsInRole("Admin")))
-                    {
-                        <h4>Admin alati</h4>
-                        <a asp-controller="Home" asp-action="AdminDashboard" class="btn">Admin opcije <i class="ion-ios-arrow-forward"></i></a>
-                    }
-                </div>
             </div>
         </div>
         <div class="ft-copyright">
