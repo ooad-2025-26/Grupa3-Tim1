@@ -287,8 +287,6 @@ D:\Projekat\Grupa3-Tim1\.NET  Projekat\BMDb\BMDb\obj\Debug\net8.0\refint\BMDb.dl
 D:\Projekat\Grupa3-Tim1\.NET  Projekat\BMDb\BMDb\obj\Debug\net8.0\BMDb.pdb
 D:\Projekat\Grupa3-Tim1\.NET  Projekat\BMDb\BMDb\obj\Debug\net8.0\BMDb.genruntimeconfig.cache
 D:\Projekat\Grupa3-Tim1\.NET  Projekat\BMDb\BMDb\obj\Debug\net8.0\ref\BMDb.dll
-C:\Users\ajdin\Desktop\etf\OAD\projekat\Grupa3-Tim1\.NET  Projekat\BMDb\BMDb\bin\Debug\net8.0\appsettings.Development.json
-C:\Users\ajdin\Desktop\etf\OAD\projekat\Grupa3-Tim1\.NET  Projekat\BMDb\BMDb\bin\Debug\net8.0\appsettings.json
 C:\Users\ajdin\Desktop\etf\OAD\projekat\Grupa3-Tim1\.NET  Projekat\BMDb\BMDb\bin\Debug\net8.0\BMDb.staticwebassets.runtime.json
 C:\Users\ajdin\Desktop\etf\OAD\projekat\Grupa3-Tim1\.NET  Projekat\BMDb\BMDb\bin\Debug\net8.0\BMDb.staticwebassets.endpoints.json
 C:\Users\ajdin\Desktop\etf\OAD\projekat\Grupa3-Tim1\.NET  Projekat\BMDb\BMDb\bin\Debug\net8.0\BMDb.exe

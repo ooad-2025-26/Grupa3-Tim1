@@ -14,7 +14,7 @@
                         var filmZanrovi = zanrovi.TryGetValue(film.Id, out var itemZanrovi) ? itemZanrovi : new List<string>();
                         <div class="movie-item">
                             <div class="mv-img">
-                                <a asp-controller="Film" asp-action="Details" asp-route-id="@film.Id"><img src="@MediaImageService.ResolvePosterUrl(film.PosterLink)" alt="@film.Naziv" style="width: 285px; height: 437px; object-fit: cover;"></a>
+                                <a asp-controller="Film" asp-action="Details" asp-route-id="@film.Id"><img src="@MediaImageService.ResolvePosterUrl(film.PosterLink)" alt="@film.Naziv"></a>
                             </div>
                             <div class="title-in">
                                 <div class="cate">
