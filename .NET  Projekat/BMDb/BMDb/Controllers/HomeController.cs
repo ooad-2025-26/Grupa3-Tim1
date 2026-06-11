@@ -141,6 +141,30 @@ namespace BMDb.Controllers
             return View();
         }
 
+        public async Task<IActionResult> GlobalSearch(string? query)
+        {
+            var search = query?.Trim();
+            if (string.IsNullOrWhiteSpace(search))
+            {
+                return RedirectToAction("Index", "Film");
+            }
+
+            var filmMatchCount = await _context.Film
+                .AsNoTracking()
+                .CountAsync(x => x.Naziv.Contains(search) || x.Opis.Contains(search));
+
+            var serijaMatchCount = await _context.Serija
+                .AsNoTracking()
+                .CountAsync(x => x.Naziv.Contains(search) || x.Opis.Contains(search));
+
+            if (serijaMatchCount > filmMatchCount)
+            {
+                return RedirectToAction("Index", "Serija", new { search });
+            }
+
+            return RedirectToAction("Index", "Film", new { search });
+        }
+
         [Authorize(Roles = "Admin")]
         public IActionResult AdminDashboard() { return View(); }
 

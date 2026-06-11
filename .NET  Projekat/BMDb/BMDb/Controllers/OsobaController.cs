@@ -91,6 +91,41 @@ namespace BMDb.Controllers
             return RedirectToAction(nameof(Details));
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> UpdateAvatar(string? avatarPath)
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                return Unauthorized(new { success = false, message = "Korisnik nije prijavljen." });
+            }
+
+            var trimmedAvatarPath = avatarPath?.Trim() ?? string.Empty;
+            var validationError = ValidateAvatarPath(trimmedAvatarPath);
+            if (validationError != null)
+            {
+                return BadRequest(new { success = false, message = validationError });
+            }
+
+            user.Avatar = trimmedAvatarPath;
+            var updateResult = await _userManager.UpdateAsync(user);
+            if (!updateResult.Succeeded)
+            {
+                return BadRequest(new
+                {
+                    success = false,
+                    message = updateResult.Errors.FirstOrDefault()?.Description ?? "Avatar nije sacuvan. Pokusajte ponovo."
+                });
+            }
+
+            return Json(new
+            {
+                success = true,
+                avatarUrl = ResolveAvatarUrl(user.Avatar)
+            });
+        }
+
         [Authorize(Roles = "Admin,Moderator")]
         public IActionResult Index()
         {
@@ -138,6 +173,40 @@ namespace BMDb.Controllers
             return string.IsNullOrWhiteSpace(avatarPath)
                 ? "~/images/uploads/obicna.png"
                 : _mediaImageService.ResolvePosterUrl(avatarPath);
+        }
+
+        private static string? ValidateAvatarPath(string avatarPath)
+        {
+            if (string.IsNullOrWhiteSpace(avatarPath))
+            {
+                return "Unesite URL ili putanju avatar slike.";
+            }
+
+            if (avatarPath.Length > 500)
+            {
+                return "Putanja avatar slike ne smije biti duza od 500 znakova.";
+            }
+
+            if (avatarPath.Contains("..") || avatarPath.IndexOfAny(Path.GetInvalidPathChars()) >= 0)
+            {
+                return "Putanja avatar slike nije validna.";
+            }
+
+            if (Uri.TryCreate(avatarPath, UriKind.Absolute, out var absoluteUri))
+            {
+                return absoluteUri.Scheme == Uri.UriSchemeHttp || absoluteUri.Scheme == Uri.UriSchemeHttps
+                    ? null
+                    : "Avatar URL mora poceti sa http:// ili https://.";
+            }
+
+            if (avatarPath.StartsWith("/", StringComparison.Ordinal) ||
+                avatarPath.StartsWith("~/", StringComparison.Ordinal) ||
+                !Path.IsPathRooted(avatarPath))
+            {
+                return null;
+            }
+
+            return "Putanja avatar slike nije validna.";
         }
 
         private async Task ReplacePreferredGenresAsync(string userId, int[] selectedZanrIds)

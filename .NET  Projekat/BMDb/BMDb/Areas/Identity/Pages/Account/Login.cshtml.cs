@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication;
@@ -128,13 +129,37 @@ namespace BMDb.Areas.Identity.Pages.Account
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-                    return Page();
+                    ModelState.AddModelError(string.Empty, "Neispravan email ili lozinka.");
                 }
             }
 
-            // If we got this far, something failed, redisplay form
-            return Page();
+            return RedirectToLoginPopup(returnUrl);
+        }
+
+        private IActionResult RedirectToLoginPopup(string returnUrl)
+        {
+            var errors = ModelState.Values
+                .SelectMany(x => x.Errors)
+                .Select(x => string.IsNullOrWhiteSpace(x.ErrorMessage) ? "Prijava nije uspjela. Provjerite unesene podatke." : x.ErrorMessage)
+                .Distinct()
+                .ToList();
+
+            if (!errors.Any())
+            {
+                errors.Add("Prijava nije uspjela. Provjerite unesene podatke.");
+            }
+
+            TempData["ShowLoginPopup"] = "true";
+            TempData["LoginErrors"] = JsonSerializer.Serialize(errors);
+            TempData["LoginInput.Email"] = Input?.Email ?? string.Empty;
+            TempData["LoginInput.RememberMe"] = Input?.RememberMe == true ? "true" : "false";
+
+            return LocalRedirect(GetSafeReturnUrl(returnUrl));
+        }
+
+        private string GetSafeReturnUrl(string returnUrl)
+        {
+            return Url.IsLocalUrl(returnUrl) ? returnUrl : Url.Content("~/Home/Glavna");
         }
     }
 }

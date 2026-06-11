@@ -7,6 +7,14 @@
 @inject IMediaImageService MediaImageService
 @{
     var aktivniOglas = await OglasService.DohvatiAktivniOglasAsync();
+    var currentReturnUrl = $"{Context.Request.PathBase}{Context.Request.Path}{Context.Request.QueryString}";
+    var showLoginPopup = string.Equals(TempData["ShowLoginPopup"] as string, "true", StringComparison.OrdinalIgnoreCase);
+    var loginErrorsJson = TempData["LoginErrors"] as string;
+    var loginErrors = string.IsNullOrWhiteSpace(loginErrorsJson)
+        ? new List<string>()
+        : JsonSerializer.Deserialize<List<string>>(loginErrorsJson) ?? new List<string>();
+    var loginInputEmail = TempData["LoginInput.Email"] as string ?? string.Empty;
+    var loginRememberMe = string.Equals(TempData["LoginInput.RememberMe"] as string, "true", StringComparison.OrdinalIgnoreCase);
     var showRegisterPopup = string.Equals(TempData["ShowRegisterPopup"] as string, "true", StringComparison.OrdinalIgnoreCase);
     var registerErrorsJson = TempData["RegisterErrors"] as string;
     var registerErrors = string.IsNullOrWhiteSpace(registerErrorsJson)
@@ -56,13 +64,25 @@
     <!--login form popup-->
     <div class="login-wrapper" id="login-content">
         <div class="login-content">
-            <a href="#" class="close">x</a>
+            <a href="#" class="close" role="button" aria-label="Zatvori">&times;</a>
             <h3>PRIJAVA</h3>
-            <form asp-area="Identity" asp-page="/Account/Login" method="post">
+            <form asp-area="Identity" asp-page="/Account/Login" asp-route-returnUrl="@currentReturnUrl" method="post">
+                @if (loginErrors.Any())
+                {
+                    <div class="bmd-register-errors" role="alert">
+                        <ul>
+                            @foreach (var error in loginErrors)
+                            {
+                                <li>@error</li>
+                            }
+                        </ul>
+                    </div>
+                }
+
                 <div class="row">
                     <label for="username">
                         Korisničko ime:
-                        <input type="text" name="Input.Email" id="username" required="required" />
+                        <input type="text" name="Input.Email" id="username" value="@loginInputEmail" required="required" />
                     </label>
                 </div>
 
@@ -75,7 +95,7 @@
                 <div class="row">
                     <div class="remember">
                         <div>
-                            <input type="checkbox" name="Input.RememberMe" value="true"><span>Zapamti me</span>
+                            <input type="checkbox" name="Input.RememberMe" value="true" checked="@loginRememberMe"><span>Zapamti me</span>
                         </div>
                         <a href="#">Zaboravili ste lozinku?</a>
                     </div>
@@ -97,7 +117,7 @@
     <!--signup form popup-->
     <div class="login-wrapper" id="signup-content">
         <div class="login-content">
-            <a href="#" class="close">x</a>
+            <a href="#" class="close" role="button" aria-label="Zatvori">&times;</a>
             <h3>REGISTRACIJA</h3>
             <form asp-area="Identity" asp-page="/Account/Register" method="post">
                 @if (registerErrors.Any())
@@ -245,8 +265,8 @@
             </nav>
 
             <!-- top search form -->
-            <form asp-controller="Entertainment" asp-action="Search" method="get" class="top-search">
-                <input type="text" name="search" value="@ViewData["Search"]" placeholder="Pretražite filmove i TV serije koji vas zanimaju">
+            <form asp-controller="Home" asp-action="GlobalSearch" method="get" class="top-search">
+                <input type="text" name="query" value="@Context.Request.Query["search"]" placeholder="Pretražite filmove i TV serije koji vas zanimaju">
             </form>
         </div>
     </header>
@@ -331,6 +351,14 @@
         <script>
             $(function () {
                 $("#signup-content").parents(".overlay").addClass("openform");
+            });
+        </script>
+    }
+    @if (showLoginPopup)
+    {
+        <script>
+            $(function () {
+                $("#login-content").parents(".overlay").addClass("openform");
             });
         </script>
     }

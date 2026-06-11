@@ -7124,8 +7124,12 @@ p.ceb-single {
   opacity: 1;
   padding: 4px 10px 6px 10px;
   font-size: 16px;
-  display: none;
+  display: block;
   margin-bottom: 0;
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 2;
 }
 @media (max-width: 767px) {
   .overlay .close {
@@ -7133,6 +7137,7 @@ p.ceb-single {
   }
 }
 .overlay .login-content {
+  position: relative;
   width: 430px;
   padding: 50px;
   border: 1px solid #e1e1e1;
@@ -8634,6 +8639,11 @@ footer.full-width-ft .ft-copyright {
 
 .bmd-profile-modal-actions {
     text-align: right;
+}
+
+.bmd-profile-modal-actions button.redbtn {
+    border: none;
+    cursor: pointer;
 }
 
 .user-pro select[multiple] {

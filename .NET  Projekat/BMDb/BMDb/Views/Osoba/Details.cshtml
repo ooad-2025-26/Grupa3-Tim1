@@ -22,7 +22,7 @@
             <div class="col-md-3 col-sm-12 col-xs-12">
                 <div class="user-information">
                     <div class="user-img">
-                        <a href="#avatar-modal"><img class="bmd-avatar" src="@Model.AvatarUrl" alt=""><br></a>
+                        <a href="#avatar-modal"><img id="bmd-profile-avatar" class="bmd-avatar" src="@Model.AvatarUrl" alt=""><br></a>
                         <a href="#avatar-modal" class="redbtn">Uredi avatar</a>
                     </div>
                     <div class="user-fav">
@@ -129,8 +129,9 @@
                                     <input asp-for="AvatarPath" placeholder="/images/uploads/user-img.png">
                                     <span asp-validation-for="AvatarPath" class="text-danger"></span>
                                 </div>
+                                <div id="bmd-avatar-error" class="text-danger" role="alert" style="display:none;"></div>
                                 <div class="bmd-profile-modal-actions">
-                                    <a href="#!" class="redbtn">Zatvori</a>
+                                    <button type="button" id="bmd-save-avatar" class="redbtn">Sačuvaj</button>
                                 </div>
                             </div>
                         </div>
@@ -142,6 +143,60 @@
 </div>
 
 <script>
+    (function () {
+        var saveButton = document.getElementById('bmd-save-avatar');
+        var avatarInput = document.getElementById('AvatarPath');
+        var errorBox = document.getElementById('bmd-avatar-error');
+        var tokenInput = document.querySelector('input[name="__RequestVerificationToken"]');
+
+        if (!saveButton || !avatarInput || !errorBox || !tokenInput) {
+            return;
+        }
+
+        function showAvatarError(message) {
+            errorBox.textContent = message || 'Avatar nije sacuvan. Pokusajte ponovo.';
+            errorBox.style.display = 'block';
+        }
+
+        saveButton.addEventListener('click', function () {
+            errorBox.style.display = 'none';
+            saveButton.disabled = true;
+
+            var formData = new FormData();
+            formData.append('avatarPath', avatarInput.value || '');
+            formData.append('__RequestVerificationToken', tokenInput.value);
+
+            fetch('@Url.Action("UpdateAvatar", "Osoba")', {
+                method: 'POST',
+                body: formData,
+                credentials: 'same-origin',
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            })
+                .then(function (response) {
+                    return response.json().then(function (data) {
+                        if (!response.ok || !data.success) {
+                            throw new Error(data.message || 'Avatar nije sacuvan. Pokusajte ponovo.');
+                        }
+                        return data;
+                    });
+                })
+                .then(function (data) {
+                    Array.prototype.forEach.call(document.querySelectorAll('.bmd-avatar'), function (image) {
+                        image.src = data.avatarUrl;
+                    });
+                    window.location.hash = '!';
+                })
+                .catch(function (error) {
+                    showAvatarError(error.message);
+                })
+                .finally(function () {
+                    saveButton.disabled = false;
+                });
+        });
+    })();
+
     (function () {
         var container = document.getElementById('bmd-selected-genres');
         var select = document.getElementById('bmd-genre-select');
