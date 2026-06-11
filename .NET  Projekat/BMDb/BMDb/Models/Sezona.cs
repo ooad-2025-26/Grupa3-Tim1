@@ -10,7 +10,7 @@ namespace BMDb.Models
         public int RedniBrojSezone { get; set; }
         public int BrojEpizoda { get; set; }
         public int DatumPremijere   { get; set; }
-        public int PosterSezone { get; set; }
+        public string PosterSezone { get; set; } = string.Empty;
 
         public Sezona() { } 
     }

@@ -56,7 +56,7 @@
                             <tr>
                                 <td><img src="@item.PosterUrl" alt="@item.Title" width="50"></td>
                                 <td><strong>@item.Title</strong></td>
-                                <td>@(item.Genres.Count > 0 ? string.Join(", ", item.Genres) : "-")</td>
+                                <td>@(item.Genres.Count > 0 ? string.Join(", ", item.Genres.Take(2)) : "-")</td>
                                 <td>@(item.Year?.ToString() ?? "-")</td>
                                 <td class="status-objavljeno">@(item.ControllerName == "Serija" ? "Serija" : "Film")</td>
                                 <td>

@@ -200,6 +200,32 @@ namespace BMDb.Controllers
                 })
                 .ToListAsync();
 
+            var genres = await (
+                    from ez in _context.EntertainmentZanr.AsNoTracking()
+                    join z in _context.Zanr.AsNoTracking() on ez.ZanrId equals z.Id
+                    where entertainmentIds.Contains(ez.EntertainmentId)
+                    select new { ez.EntertainmentId, z.Naziv }
+                )
+                .ToListAsync();
+
+            var genresByItem = genres
+                .GroupBy(x => x.EntertainmentId)
+                .ToDictionary(
+                    x => x.Key,
+                    x => (IReadOnlyList<string>)x
+                        .Select(g => g.Naziv)
+                        .Where(g => !string.IsNullOrWhiteSpace(g))
+                        .Distinct()
+                        .OrderBy(g => g)
+                        .ToList());
+
+            foreach (var item in items)
+            {
+                item.Genres = genresByItem.TryGetValue(item.EntertainmentId, out var itemGenres)
+                    ? itemGenres
+                    : Array.Empty<string>();
+            }
+
             return items;
         }
     }

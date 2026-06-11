@@ -66,6 +66,12 @@
                                 </div>
                                 <div class="mv-item-infor">
                                     <h6><a asp-controller="@item.ControllerName" asp-action="Details" asp-route-id="@item.EntertainmentId">@item.Naziv</a></h6>
+                                    <div class="bmd-genre-badges">
+                                        @foreach (var zanr in item.Genres.Take(2))
+                                        {
+                                            <span class="bmd-genre-badge @BMDb.Services.GenreBadgeHelper.CssClass(zanr)">@zanr</span>
+                                        }
+                                    </div>
                                     <p class="rate"><i class="ion-android-star"></i><span>@item.ProsjecnaOcjena.ToString("0.0")</span> /10</p>
                                 </div>
                             </div>

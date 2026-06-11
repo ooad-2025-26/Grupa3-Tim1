@@ -108,7 +108,7 @@ namespace BMDb.Controllers
             int[] redniBrojeviSezona,
             int[] brojeviEpizodaSezona,
             int[] datumiPremijereSezona,
-            int[] posteriSezona)
+            string[] posteriSezona)
         {
             if (ModelState.IsValid)
             {
@@ -203,7 +203,7 @@ namespace BMDb.Controllers
             int[] redniBrojeviSezona,
             int[] brojeviEpizodaSezona,
             int[] datumiPremijereSezona,
-            int[] posteriSezona)
+            string[] posteriSezona)
         {
             var existingSerija = await _context.Serija.FindAsync(id);
             if (existingSerija == null)
@@ -418,7 +418,7 @@ namespace BMDb.Controllers
                         .ToList());
         }
 
-        private void AddSeasonData(int serijaId, int[] redniBrojevi, int[] brojeviEpizoda, int[] datumiPremijere, int[] posteri)
+        private void AddSeasonData(int serijaId, int[] redniBrojevi, int[] brojeviEpizoda, int[] datumiPremijere, string[] posteri)
         {
             for (var i = 0; i < redniBrojevi.Length; i++)
             {
@@ -433,19 +433,19 @@ namespace BMDb.Controllers
                     RedniBrojSezone = redniBrojevi[i],
                     BrojEpizoda = i < brojeviEpizoda.Length ? brojeviEpizoda[i] : 0,
                     DatumPremijere = i < datumiPremijere.Length ? datumiPremijere[i] : 0,
-                    PosterSezone = i < posteri.Length ? posteri[i] : 0
+                    PosterSezone = i < posteri.Length ? posteri[i]?.Trim() ?? string.Empty : string.Empty
                 });
             }
         }
 
-        private async Task ReplaceSeasonDataAsync(int serijaId, int[] redniBrojevi, int[] brojeviEpizoda, int[] datumiPremijere, int[] posteri)
+        private async Task ReplaceSeasonDataAsync(int serijaId, int[] redniBrojevi, int[] brojeviEpizoda, int[] datumiPremijere, string[] posteri)
         {
             var existing = await _context.Sezona.Where(x => x.IdSerije == serijaId).ToListAsync();
             _context.Sezona.RemoveRange(existing);
             AddSeasonData(serijaId, redniBrojevi, brojeviEpizoda, datumiPremijere, posteri);
         }
 
-        private static Task<List<Sezona>> BuildSeasonPreviewAsync(int[] redniBrojevi, int[] brojeviEpizoda, int[] datumiPremijere, int[] posteri)
+        private static Task<List<Sezona>> BuildSeasonPreviewAsync(int[] redniBrojevi, int[] brojeviEpizoda, int[] datumiPremijere, string[] posteri)
         {
             var sezone = new List<Sezona>();
             for (var i = 0; i < redniBrojevi.Length; i++)
@@ -455,7 +455,7 @@ namespace BMDb.Controllers
                     RedniBrojSezone = redniBrojevi[i],
                     BrojEpizoda = i < brojeviEpizoda.Length ? brojeviEpizoda[i] : 0,
                     DatumPremijere = i < datumiPremijere.Length ? datumiPremijere[i] : 0,
-                    PosterSezone = i < posteri.Length ? posteri[i] : 0
+                    PosterSezone = i < posteri.Length ? posteri[i]?.Trim() ?? string.Empty : string.Empty
                 });
             }
 

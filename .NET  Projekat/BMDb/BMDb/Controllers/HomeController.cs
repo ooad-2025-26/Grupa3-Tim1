@@ -19,6 +19,7 @@ namespace BMDb.Controllers
         private readonly ITrailerServis _trailerServis;
         private readonly IUserKeyService _userKeyService;
         private readonly UserManager<Osoba> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IMediaImageService _mediaImageService;
 
         public HomeController(
@@ -28,6 +29,7 @@ namespace BMDb.Controllers
             ITrailerServis trailerServis,
             IUserKeyService userKeyService,
             UserManager<Osoba> userManager,
+            RoleManager<IdentityRole> roleManager,
             IMediaImageService mediaImageService)
         {
             _logger = logger;
@@ -36,6 +38,7 @@ namespace BMDb.Controllers
             _trailerServis = trailerServis;
             _userKeyService = userKeyService;
             _userManager = userManager;
+            _roleManager = roleManager;
             _mediaImageService = mediaImageService;
         }
 
@@ -215,6 +218,12 @@ namespace BMDb.Controllers
         [Authorize(Roles = "Admin,Moderator")]
         public async Task<IActionResult> Korisnici()
         {
+            var availableRoles = await _roleManager.Roles
+                .Select(x => x.Name ?? string.Empty)
+                .Where(x => x == "Admin" || x == "Moderator" || x == "Korisnik" || x == "VerifikovaniRecenzent")
+                .OrderBy(x => x)
+                .ToListAsync();
+
             var users = await _userManager.Users
                 .OrderBy(x => x.Ime)
                 .ThenBy(x => x.Prezime)
@@ -230,11 +239,58 @@ namespace BMDb.Controllers
                     Id = user.Id,
                     FullName = string.Join(" ", new[] { user.Ime, user.Prezime }.Where(x => !string.IsNullOrWhiteSpace(x))),
                     Email = user.Email ?? string.Empty,
-                    Roles = roles.ToList()
+                    Roles = roles.ToList(),
+                    AvailableRoles = availableRoles
                 });
             }
 
             return View("~/Views/Osoba/Index.cshtml", model);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ChangeUserRole(string id, string role)
+        {
+            var allowedRoles = new[] { "Admin", "Moderator", "Korisnik", "VerifikovaniRecenzent" };
+            if (string.IsNullOrWhiteSpace(id) || !allowedRoles.Contains(role))
+            {
+                return BadRequest();
+            }
+
+            if (id == User.FindFirstValue(ClaimTypes.NameIdentifier))
+            {
+                TempData["AdminUserError"] = "Ne mozete promijeniti vlastitu ulogu.";
+                return RedirectToAction(nameof(Korisnici));
+            }
+
+            var user = await _userManager.FindByIdAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            if (!await _roleManager.RoleExistsAsync(role))
+            {
+                TempData["AdminUserError"] = "Odabrana uloga ne postoji.";
+                return RedirectToAction(nameof(Korisnici));
+            }
+
+            var currentRoles = await _userManager.GetRolesAsync(user);
+            var removeResult = await _userManager.RemoveFromRolesAsync(user, currentRoles);
+            if (!removeResult.Succeeded)
+            {
+                TempData["AdminUserError"] = string.Join(" ", removeResult.Errors.Select(x => x.Description));
+                return RedirectToAction(nameof(Korisnici));
+            }
+
+            var addResult = await _userManager.AddToRoleAsync(user, role);
+            if (!addResult.Succeeded)
+            {
+                TempData["AdminUserError"] = string.Join(" ", addResult.Errors.Select(x => x.Description));
+            }
+
+            return RedirectToAction(nameof(Korisnici));
         }
 
         [HttpPost]

@@ -122,14 +122,14 @@
                 var redniBroj = existing.redniBroj || i;
                 var brojEpizoda = existing.brojEpizoda || 0;
                 var datumPremijere = existing.datumPremijere || 0;
-                var posterSezone = existing.posterSezone || 0;
+                var posterSezone = existing.posterSezone || '';
                 var row = document.createElement('div');
                 row.className = 'row';
                 row.innerHTML =
                     '<div class="col-md-3"><input name="redniBrojeviSezona" type="number" value="' + redniBroj + '" placeholder="Redni broj"></div>' +
                     '<div class="col-md-3"><input name="brojeviEpizodaSezona" type="number" value="' + brojEpizoda + '" placeholder="Broj epizoda"></div>' +
                     '<div class="col-md-3"><input name="datumiPremijereSezona" type="number" value="' + datumPremijere + '" placeholder="Godina premijere"></div>' +
-                    '<div class="col-md-3"><input name="posteriSezona" type="number" value="' + posterSezone + '" placeholder="Poster sezone"></div>';
+                    '<div class="col-md-3"><input name="posteriSezona" type="text" value="' + posterSezone + '" placeholder="Poster sezone"></div>';
                 container.appendChild(row);
             }
         }

@@ -47,7 +47,7 @@
                                 <div class="mv-item-infor">
                                     <h6><a asp-controller="Serija" asp-action="Details" asp-route-id="@serija.Id">@serija.Naziv <span>(@serija.GodinaIzlaska)</span></a></h6>
                                     <div class="bmd-genre-badges">
-                                        @foreach (var zanr in serijaZanrovi)
+                                        @foreach (var zanr in serijaZanrovi.Take(2))
                                         {
                                             <span class="bmd-genre-badge @BMDb.Services.GenreBadgeHelper.CssClass(zanr.Naziv)">@zanr.Naziv</span>
                                         }

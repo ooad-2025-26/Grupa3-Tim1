@@ -13,6 +13,9 @@
         .table-custom th, .table-custom td { padding: 15px; border: 1px solid #1c3d5d; text-align: left; }
         .action-btn { padding: 5px 12px; border-radius: 3px; border: none; cursor: pointer; }
         .btn-del { background: #dd163b; color: white; }
+        .btn-edit { background: #fbb124; color: black; }
+        .role-form { display: inline-flex; gap: 8px; align-items: center; margin-right: 8px; }
+        .role-form select { background: #020d18; border: 1px solid #1c3d5d; color: white; padding: 6px; }
     </style>
 }
 
@@ -46,6 +49,19 @@
                         <td>@user.Email</td>
                         <td>@rolesText</td>
                         <td>
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <form class="role-form" asp-controller="Home" asp-action="ChangeUserRole" asp-route-id="@user.Id" method="post">
+                                    @Html.AntiForgeryToken()
+                                    <select name="role">
+                                        @foreach (var role in user.AvailableRoles)
+                                        {
+                                            <option value="@role" selected="@(role == user.SelectedRole)">@role</option>
+                                        }
+                                    </select>
+                                    <button type="submit" class="action-btn btn-edit">Spasi ulogu</button>
+                                </form>
+                            }
                             @if (!moderatorCannotDelete)
                             {
                                 <form asp-controller="Home" asp-action="DeleteUser" asp-route-id="@user.Id" method="post" style="display:inline;">

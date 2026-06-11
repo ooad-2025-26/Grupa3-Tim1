@@ -189,7 +189,11 @@
                                         {
                                             <div class="mv-user-review-item">
                                                 <h3>Sezona @sezona.RedniBrojSezone</h3>
-                                                <p>@sezona.BrojEpizoda epizoda | Premijera: @sezona.DatumPremijere | Poster: @sezona.PosterSezone</p>
+                                                <p>@sezona.BrojEpizoda epizoda | Premijera: @sezona.DatumPremijere</p>
+                                                @if (!string.IsNullOrWhiteSpace(sezona.PosterSezone))
+                                                {
+                                                    <img src="@MediaImageService.ResolvePosterUrl(sezona.PosterSezone)" alt="Sezona @sezona.RedniBrojSezone" style="max-width:120px;">
+                                                }
                                             </div>
                                         }
                                     </div>

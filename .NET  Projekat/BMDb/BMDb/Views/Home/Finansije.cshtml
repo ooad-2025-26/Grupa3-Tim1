@@ -34,6 +34,9 @@
             color: #2ecc71;
             font-weight: bold;
         }
+        .action-btn { padding: 5px 12px; border-radius: 3px; cursor: pointer; border: none; margin-right: 5px; transition: 0.3s; display: inline-block; }
+        .btn-del { background: #dd163b; color: white; }
+        .btn-edit { background: #fbb124; color: black; }
     </style>
 }
 
@@ -67,13 +70,14 @@
                             <th>Prihod po prikazu</th>
                             <th>Ukupni prihod</th>
                             <th>Status</th>
+                            <th>Akcije</th>
                         </tr>
                     </thead>
                     <tbody>
                         @if (!Model.Any())
                         {
                             <tr>
-                                <td colspan="6">Nema reklama u bazi.</td>
+                                <td colspan="7">Nema reklama u bazi.</td>
                             </tr>
                         }
                         else
@@ -87,6 +91,13 @@
                                     <td>@oglas.Prihod.ToString("0.00") KM</td>
                                     <td>@oglas.UkupniPrihod.ToString("0.00") KM</td>
                                     <td class="@(oglas.Aktivan ? "trending-up" : string.Empty)">@(oglas.Aktivan ? "Aktivan" : "Neaktivan")</td>
+                                    <td>
+                                        <a class="action-btn btn-edit" asp-controller="Oglas" asp-action="Edit" asp-route-id="@oglas.Id">Uredi</a>
+                                        <form asp-controller="Oglas" asp-action="Delete" asp-route-id="@oglas.Id" asp-route-returnTo="Finansije" method="post" style="display:inline;">
+                                            @Html.AntiForgeryToken()
+                                            <button type="submit" class="action-btn btn-del">Obriši</button>
+                                        </form>
+                                    </td>
                                 </tr>
                             }
                         }

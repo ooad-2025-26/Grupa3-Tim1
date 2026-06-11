@@ -63,7 +63,7 @@ namespace BMDb.Controllers
                 oglas.brojanjeOglasa = 0;
                 _context.Add(oglas);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Glavna", "Home");
             }
             return View(oglas);
         }
@@ -96,11 +96,20 @@ namespace BMDb.Controllers
                 return NotFound();
             }
 
+            var existingOglas = await _context.Oglas.FindAsync(id);
+            if (existingOglas == null)
+            {
+                return NotFound();
+            }
+
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _context.Update(oglas);
+                    existingOglas.Slika = oglas.Slika;
+                    existingOglas.Link = oglas.Link;
+                    existingOglas.Aktivan = oglas.Aktivan;
+                    existingOglas.Prihod = oglas.Prihod;
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -114,7 +123,7 @@ namespace BMDb.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Finansije", "Home");
             }
             return View(oglas);
         }
@@ -140,7 +149,7 @@ namespace BMDb.Controllers
         // POST: Oglas/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(int id, string? returnTo)
         {
             var oglas = await _context.Oglas.FindAsync(id);
             if (oglas != null)
@@ -149,7 +158,9 @@ namespace BMDb.Controllers
             }
 
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return returnTo == "Finansije"
+                ? RedirectToAction("Finansije", "Home")
+                : RedirectToAction(nameof(Index));
         }
 
         private bool OglasExists(int id)

@@ -15,6 +15,7 @@ namespace BMDb.ViewModels
         public int Trajanje { get; set; }
         public string PosterLink { get; set; } = string.Empty;
         public string ControllerName { get; set; } = "Film";
+        public IReadOnlyList<string> Genres { get; set; } = Array.Empty<string>();
     }
 
     public class ProfileReviewViewModel
