@@ -16,7 +16,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BMDb")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+783b4cc78c4af2771fe0c81934558a28251ed767")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9d6488a00aa225de930d17cc690dc13e5603fcfb")]
 [assembly: System.Reflection.AssemblyProductAttribute("BMDb")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BMDb")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
