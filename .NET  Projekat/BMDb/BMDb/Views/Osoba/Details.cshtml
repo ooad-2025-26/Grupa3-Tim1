@@ -7,7 +7,7 @@
                 <div class="hero-ct">
                     <h1 style="position: relative; left: -85px;">Profil korisnika</h1>
                     <ul class="breadcumb">
-                        <li class="active"><a asp-controller="Home" asp-action="Glavna">Pocetna</a></li>
+                        <li class="active"><a asp-controller="Home" asp-action="Glavna">Početna</a></li>
                         <li><span class="ion-ios-arrow-right"></span> Profil</li>
                     </ul>
                 </div>
@@ -29,7 +29,7 @@
                         <p>Detalji racuna</p>
                         <ul>
                             <li class="active"><a asp-controller="Osoba" asp-action="Details">Profil</a></li>
-                            <li><a asp-controller="GledatCu" asp-action="Index">Gledat cu</a></li>
+                            <li><a asp-controller="GledatCu" asp-action="Index">Gledat ću</a></li>
                             <li><a asp-controller="GledaoSam" asp-action="Index">Gledao sam</a></li>
                             <li><a asp-controller="Recenzija" asp-action="Index">Recenzije</a></li>
                         </ul>
@@ -116,7 +116,7 @@
 
                         <div class="row">
                             <div class="col-md-2">
-                                <input class="submit" type="submit" value="Sacuvaj">
+                                <input class="submit" type="submit" value="Sačuvaj">
                             </div>
                         </div>
 
@@ -154,7 +154,7 @@
         }
 
         function showAvatarError(message) {
-            errorBox.textContent = message || 'Avatar nije sacuvan. Pokusajte ponovo.';
+            errorBox.textContent = message || 'Avatar nije sačuvan. Pokusajte ponovo.';
             errorBox.style.display = 'block';
         }
 
@@ -177,7 +177,7 @@
                 .then(function (response) {
                     return response.json().then(function (data) {
                         if (!response.ok || !data.success) {
-                            throw new Error(data.message || 'Avatar nije sacuvan. Pokusajte ponovo.');
+                            throw new Error(data.message || 'Avatar nije sačuvan. Pokusajte ponovo.');
                         }
                         return data;
                     });
