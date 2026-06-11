@@ -151,7 +151,12 @@
 						            		</div>
 						            		<div class="sb-it">
 						            			<h6>Zanrovi:</h6>
-						            			<p>@string.Join(", ", zanrovi.Select(x => x.Naziv))</p>
+						            			<div class="bmd-genre-badges">
+													@foreach (var zanr in zanrovi)
+													{
+														<span class="bmd-genre-badge @BMDb.Services.GenreBadgeHelper.CssClass(zanr.Naziv)">@zanr.Naziv</span>
+													}
+												</div>
 						            		</div>
 						            		<div class="sb-it">
 						            			<h6>Datum izlaska:</h6>

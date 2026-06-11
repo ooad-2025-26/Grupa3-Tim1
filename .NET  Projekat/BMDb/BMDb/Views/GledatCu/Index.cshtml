@@ -58,7 +58,9 @@
                         @foreach (var item in Model)
                         {
                             <div class="movie-item-style-2 movie-item-style-1 style-3">
-                                <img src="@MediaImageService.ResolvePosterUrl(item.PosterLink)" alt="">
+                                <a class="bmd-poster-link" asp-controller="@item.ControllerName" asp-action="Details" asp-route-id="@item.EntertainmentId">
+                                    <img src="@MediaImageService.ResolvePosterUrl(item.PosterLink)" alt="">
+                                </a>
                                 <div class="hvr-inner">
                                     <a asp-controller="@item.ControllerName" asp-action="Details" asp-route-id="@item.EntertainmentId"> Pročitaj više <i class="ion-android-arrow-dropright"></i> </a>
                                 </div>

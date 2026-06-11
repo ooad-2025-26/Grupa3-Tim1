@@ -21,9 +21,23 @@ namespace BMDb.Controllers
             _context = context;
         }
 
+        public async Task<IActionResult> Search(string? search)
+        {
+            var items = await BuildEntertainmentListAsync(search);
+            ViewData["Search"] = search;
+            return View(items);
+        }
+
         // GET: Entertainment
         [Authorize(Roles = "Admin,Moderator")]
         public async Task<IActionResult> Index(string? search)
+        {
+            var items = await BuildEntertainmentListAsync(search);
+            ViewData["Search"] = search;
+            return View(items);
+        }
+
+        private async Task<List<EntertainmentListItemViewModel>> BuildEntertainmentListAsync(string? search)
         {
             var filmovi = await _context.Film
                 .Select(x => new EntertainmentListItemViewModel
@@ -61,8 +75,7 @@ namespace BMDb.Controllers
                     x.GodinaIzlaska.ToString().Contains(normalizedSearch, StringComparison.OrdinalIgnoreCase));
             }
 
-            ViewData["Search"] = search;
-            return View(items.OrderBy(x => x.Naziv).ToList());
+            return items.OrderBy(x => x.Naziv).ToList();
         }
 
         // GET: Entertainment/Details/5

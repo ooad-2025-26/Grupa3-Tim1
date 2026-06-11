@@ -4098,6 +4098,7 @@ ul {
   width: 100%;
   height: 100%;
   content: "";
+  pointer-events: none;
 }
 .movie-items .movie-item img {
   width: 100%;
@@ -4110,15 +4111,18 @@ ul {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin-left: 30px;
-  margin-bottom: 20px;
+  width: calc(100% - 40px);
+  min-height: 92px;
+  margin-left: 20px;
+  margin-bottom: 18px;
   bottom: 0;
   left: 0;
   position: absolute;
 }
 @media (max-width: 767px) {
   .movie-items .movie-item .title-in {
-    margin-left: 60px;
+    width: calc(100% - 40px);
+    margin-left: 20px;
   }
 }
 .movie-items .movie-item .title-in h6 a {
@@ -4128,9 +4132,18 @@ ul {
   font-weight: bold;
   text-transform: uppercase;
 }
+.movie-items .movie-item .title-in h6 {
+  min-height: 34px;
+  margin-bottom: 4px;
+}
+.movie-items .movie-item .title-in .cate {
+  min-height: 22px;
+  margin-bottom: 8px;
+}
 .movie-items .movie-item .title-in p {
   font-size: 12px;
   color: #ffffff;
+  margin-bottom: 0;
 }
 .movie-items .movie-item .title-in p i {
   color: #f5b50a;
@@ -4229,6 +4242,36 @@ ul {
 .cate .orange {
   background-color: #ec5a1a;
 }
+.bmd-genre-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin: 6px 0 8px;
+}
+.bmd-genre-badge,
+.cate span.bmd-genre-badge {
+  display: inline-block;
+  padding: 3px 6px;
+  border-radius: 3px;
+  color: #ffffff;
+  font-family: 'Dosis', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+.bmd-genre-badge a,
+.cate span.bmd-genre-badge a {
+  color: #ffffff;
+}
+.bmd-genre-0 { background-color: #1692bb; }
+.bmd-genre-1 { background-color: #a856d6; }
+.bmd-genre-2 { background-color: #a6bb16; }
+.bmd-genre-3 { background-color: #ec5a1a; }
+.bmd-genre-4 { background-color: #d6406a; }
+.bmd-genre-5 { background-color: #2f9d78; }
+.bmd-genre-6 { background-color: #bd8b18; }
+.bmd-genre-7 { background-color: #4f73d9; }
 .movie_list .movie-item-style-2 img,
 .movie_single .movie-item-style-2 img,
 .userfav_list .movie-item-style-2 img {
@@ -4337,6 +4380,33 @@ ul {
 .movie-item-style-1 img {
   margin-right: 0;
   margin-bottom: 15px;
+}
+.bmd-poster-link {
+  display: block;
+  color: inherit;
+}
+.movie-item-style-1 > .bmd-poster-link,
+.grid-fav .movie-item-style-2 > .bmd-poster-link {
+  width: 170px;
+  height: 261px;
+  margin-bottom: 15px;
+}
+.user-fav-list .movie-item-style-2 > .bmd-poster-link,
+.userrate.movie-item-style-2 > .bmd-poster-link {
+  flex: 0 0 170px;
+  width: 170px;
+  height: 261px;
+  margin-right: 30px;
+}
+.movie-item-style-1 > .bmd-poster-link img,
+.grid-fav .movie-item-style-2 > .bmd-poster-link img,
+.user-fav-list .movie-item-style-2 > .bmd-poster-link img,
+.userrate.movie-item-style-2 > .bmd-poster-link img {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  object-fit: cover;
+  object-position: center;
 }
 .movie-item-style-1 .hvr-inner {
   position: absolute;
@@ -4936,6 +5006,12 @@ ul {
   width: 72px;
   height: 110px;
   max-height: none;
+}
+
+.trailers .trailer-img > a {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
 .table-custom td > img {

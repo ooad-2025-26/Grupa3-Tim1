@@ -34,13 +34,24 @@
                         @foreach (var serija in Model.Items)
                         {
                             var poster = MediaImageService.ResolvePosterUrl(serija.PosterLink);
+                            var serijaZanrovi = Model.ItemZanrovi.TryGetValue(serija.Id, out var itemZanrovi)
+                                ? itemZanrovi
+                                : Array.Empty<BMDb.Models.Zanr>();
                             <div class="movie-item-style-2 movie-item-style-1">
-                                <img src="@poster" alt="@serija.Naziv">
+                                <a class="bmd-poster-link" asp-controller="Serija" asp-action="Details" asp-route-id="@serija.Id">
+                                    <img src="@poster" alt="@serija.Naziv">
+                                </a>
                                 <div class="hvr-inner">
                                     <a asp-controller="Serija" asp-action="Details" asp-route-id="@serija.Id">Vidi više <i class="ion-android-arrow-dropright"></i></a>
                                 </div>
                                 <div class="mv-item-infor">
                                     <h6><a asp-controller="Serija" asp-action="Details" asp-route-id="@serija.Id">@serija.Naziv <span>(@serija.GodinaIzlaska)</span></a></h6>
+                                    <div class="bmd-genre-badges">
+                                        @foreach (var zanr in serijaZanrovi)
+                                        {
+                                            <span class="bmd-genre-badge @BMDb.Services.GenreBadgeHelper.CssClass(zanr.Naziv)">@zanr.Naziv</span>
+                                        }
+                                    </div>
                                     <p class="rate"><i class="ion-android-star"></i><span>@serija.ProsjecnaOcjena.ToString("0.0")</span> /10</p>
                                 </div>
                             </div>

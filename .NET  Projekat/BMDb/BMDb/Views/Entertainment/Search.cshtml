@@ -1,0 +1,48 @@
+@model IEnumerable<BMDb.ViewModels.EntertainmentListItemViewModel>
+@inject BMDb.Services.IMediaImageService MediaImageService
+
+<div class="hero common-hero">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="hero-ct">
+                    <h1>Pretraga</h1>
+                    <ul class="breadcumb">
+                        <li><a asp-controller="Home" asp-action="Glavna">Početna</a></li>
+                        <li> <span class="ion-ios-arrow-right"></span> Rezultati</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="page-single movie_list">
+    <div class="container">
+        <div class="row ipad-width2">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="topbar-filter">
+                    <p>Pronađeno <span>@Model.Count() rezultata</span></p>
+                </div>
+
+                @foreach (var item in Model)
+                {
+                    var poster = MediaImageService.ResolvePosterUrl(item.PosterLink);
+                    <div class="movie-item-style-2 movie-item-style-1">
+                        <a class="bmd-poster-link" asp-controller="@item.ControllerName" asp-action="Details" asp-route-id="@item.Id">
+                            <img src="@poster" alt="@item.Naziv">
+                        </a>
+                        <div class="hvr-inner">
+                            <a asp-controller="@item.ControllerName" asp-action="Details" asp-route-id="@item.Id">Vidi više <i class="ion-android-arrow-dropright"></i></a>
+                        </div>
+                        <div class="mv-item-infor">
+                            <h6><a asp-controller="@item.ControllerName" asp-action="Details" asp-route-id="@item.Id">@item.Naziv <span>(@item.GodinaIzlaska)</span></a></h6>
+                            <p class="rate"><i class="ion-android-star"></i><span>@item.Ocjena.ToString("0.0")</span> /10</p>
+                            <p class="describe">@item.Tip</p>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

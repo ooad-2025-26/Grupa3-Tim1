@@ -55,10 +55,12 @@ namespace BMDb.Controllers
                 .WithSort(sort)
                 .Build();
 
+            var items = await _mediaSearchService.SearchAsync(_context.Film, filter);
             var model = new MediaIndexViewModel<Film>
             {
-                Items = await _mediaSearchService.SearchAsync(_context.Film, filter),
+                Items = items,
                 Zanrovi = await _context.Zanr.OrderBy(x => x.Naziv).ToListAsync(),
+                ItemZanrovi = await LoadItemGenresAsync(items.Select(x => x.Id).ToList()),
                 Filter = filter
             };
 
@@ -382,6 +384,33 @@ namespace BMDb.Controllers
                 .Where(x => x.EntertainmentId == entertainmentId)
                 .Select(x => x.ZanrId)
                 .ToArrayAsync();
+        }
+
+        private async Task<Dictionary<int, IReadOnlyList<Zanr>>> LoadItemGenresAsync(IReadOnlyList<int> entertainmentIds)
+        {
+            if (entertainmentIds.Count == 0)
+            {
+                return [];
+            }
+
+            var rows = await (
+                    from ez in _context.EntertainmentZanr.AsNoTracking()
+                    join z in _context.Zanr.AsNoTracking() on ez.ZanrId equals z.Id
+                    where entertainmentIds.Contains(ez.EntertainmentId)
+                    select new { ez.EntertainmentId, Zanr = z }
+                )
+                .ToListAsync();
+
+            return rows
+                .GroupBy(x => x.EntertainmentId)
+                .ToDictionary(
+                    x => x.Key,
+                    x => (IReadOnlyList<Zanr>)x
+                        .Select(g => g.Zanr)
+                        .GroupBy(g => g.Id)
+                        .Select(g => g.First())
+                        .OrderBy(g => g.Naziv)
+                        .ToList());
         }
 
         private static IEnumerable<string> SplitLines(string? value)

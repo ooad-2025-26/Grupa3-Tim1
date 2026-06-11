@@ -245,11 +245,9 @@
             </nav>
 
             <!-- top search form -->
-            <div class="top-search">
-                <input type="text" placeholder="Pretražite filmove i TV serije koji vas zanimaju
-
-">
-            </div>
+            <form asp-controller="Entertainment" asp-action="Search" method="get" class="top-search">
+                <input type="text" name="search" value="@ViewData["Search"]" placeholder="Pretražite filmove i TV serije koji vas zanimaju">
+            </form>
         </div>
     </header>
     <!-- END | Header -->

@@ -1,9 +1,5 @@
 ﻿@model BMDb.ViewModels.HomeGlavnaViewModel
 
-@{
-    var genreClasses = new[] { "blue", "yell", "green", "orange" };
-}
-
 <div class="slider movie-items" style="background: url('/images/uploads/slider-bg.jpg') no-repeat center center; background-size: cover;">
 	<div class="container">
 		<div class="row">
@@ -25,7 +21,7 @@
 							<div class="cate">
 								@for (var i = 0; i < item.Genres.Take(2).Count(); i++)
 								{
-									<span class="@genreClasses[i % genreClasses.Length]"><a href="#">@item.Genres[i]</a></span>
+									<span class="bmd-genre-badge @BMDb.Services.GenreBadgeHelper.CssClass(item.Genres[i])"><a href="#">@item.Genres[i]</a></span>
 								}
 							</div>
 							<h6><a asp-controller="@item.ControllerName" asp-action="Details" asp-route-id="@item.Id">@item.Title</a></h6>
@@ -59,12 +55,18 @@
 									<div class="slide-it">
 										<div class="movie-item">
 											<div class="mv-img">
-												<img src="@item.PosterUrl" alt="@item.Title">
+												<a asp-controller="Film" asp-action="Details" asp-route-id="@item.Id"><img src="@item.PosterUrl" alt="@item.Title"></a>
 											</div>
 											<div class="hvr-inner">
 												<a asp-controller="Film" asp-action="Details" asp-route-id="@item.Id"> Vidi više <i class="ion-android-arrow-dropright"></i> </a>
 											</div>
 											<div class="title-in">
+												<div class="cate">
+													@foreach (var zanr in item.Genres.Take(2))
+													{
+														<span class="bmd-genre-badge @BMDb.Services.GenreBadgeHelper.CssClass(zanr)"><a href="#">@zanr</a></span>
+													}
+												</div>
 												<h6><a asp-controller="Film" asp-action="Details" asp-route-id="@item.Id">@item.Title</a></h6>
 												<p><i class="ion-android-star"></i><span>@item.Rating.ToString("0.0")</span> /10</p>
 											</div>
@@ -82,12 +84,18 @@
 									<div class="slide-it">
 										<div class="movie-item">
 											<div class="mv-img">
-												<img src="@item.PosterUrl" alt="@item.Title">
+												<a asp-controller="Serija" asp-action="Details" asp-route-id="@item.Id"><img src="@item.PosterUrl" alt="@item.Title"></a>
 											</div>
 											<div class="hvr-inner">
 												<a asp-controller="Serija" asp-action="Details" asp-route-id="@item.Id"> Vidi više <i class="ion-android-arrow-dropright"></i> </a>
 											</div>
 											<div class="title-in">
+												<div class="cate">
+													@foreach (var zanr in item.Genres.Take(2))
+													{
+														<span class="bmd-genre-badge @BMDb.Services.GenreBadgeHelper.CssClass(zanr)"><a href="#">@zanr</a></span>
+													}
+												</div>
 												<h6><a asp-controller="Serija" asp-action="Details" asp-route-id="@item.Id">@item.Title</a></h6>
 												<p><i class="ion-android-star"></i><span>@item.Rating.ToString("0.0")</span> /10</p>
 											</div>
@@ -116,12 +124,18 @@
 										<div class="slide-it">
 											<div class="movie-item">
 												<div class="mv-img">
-													<img src="@item.PosterUrl" alt="@item.Title">
+													<a asp-controller="@item.ControllerName" asp-action="Details" asp-route-id="@item.Id"><img src="@item.PosterUrl" alt="@item.Title"></a>
 												</div>
 												<div class="hvr-inner">
 													<a asp-controller="@item.ControllerName" asp-action="Details" asp-route-id="@item.Id"> Vidi više <i class="ion-android-arrow-dropright"></i> </a>
 												</div>
 												<div class="title-in">
+													<div class="cate">
+														@foreach (var zanr in item.Genres.Take(2))
+														{
+															<span class="bmd-genre-badge @BMDb.Services.GenreBadgeHelper.CssClass(zanr)"><a href="#">@zanr</a></span>
+														}
+													</div>
 													<h6><a asp-controller="@item.ControllerName" asp-action="Details" asp-route-id="@item.Id">@item.Title</a></h6>
 													<p><i class="ion-android-star"></i><span>@item.Rating.ToString("0.0")</span> /10</p>
 												</div>
@@ -158,7 +172,7 @@
                         {
                             <div class="item">
                                 <div class="trailer-img">
-                                    <img src="@item.PosterUrl" alt="@item.Title" width="100" height="56">
+                                    <a asp-controller="Film" asp-action="Details" asp-route-id="@item.Id"><img src="@item.PosterUrl" alt="@item.Title" width="100" height="56"></a>
                                 </div>
                                 <div class="trailer-infor">
                                     <h4 class="desc"><a asp-controller="Film" asp-action="Details" asp-route-id="@item.Id">@item.Title</a></h4>

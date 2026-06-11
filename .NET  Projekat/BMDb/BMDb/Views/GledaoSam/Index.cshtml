@@ -60,7 +60,9 @@
                         @foreach (var item in Model)
                         {
                             <div class="movie-item-style-2">
-                                <img src="@MediaImageService.ResolvePosterUrl(item.PosterLink)" alt="">
+                                <a class="bmd-poster-link" asp-controller="@item.ControllerName" asp-action="Details" asp-route-id="@item.EntertainmentId">
+                                    <img src="@MediaImageService.ResolvePosterUrl(item.PosterLink)" alt="">
+                                </a>
                                 <div class="mv-item-infor">
                                     <h6><a asp-controller="@item.ControllerName" asp-action="Details" asp-route-id="@item.EntertainmentId">@item.Naziv <span>(@item.GodinaIzlaska)</span></a></h6>
                                     <p class="rate"><i class="ion-android-star"></i><span>@item.ProsjecnaOcjena.ToString("0.0")</span> /10</p>

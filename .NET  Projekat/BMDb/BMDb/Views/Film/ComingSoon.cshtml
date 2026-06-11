@@ -20,7 +20,7 @@
                                 <div class="cate">
                                     @foreach (var zanr in filmZanrovi.Take(2))
                                     {
-                                        <span class="blue"><a href="#">@zanr</a></span>
+                                        <span class="bmd-genre-badge @BMDb.Services.GenreBadgeHelper.CssClass(zanr)"><a href="#">@zanr</a></span>
                                     }
                                 </div>
                                 <h6><a asp-controller="Film" asp-action="Details" asp-route-id="@film.Id">@film.Naziv</a></h6>
