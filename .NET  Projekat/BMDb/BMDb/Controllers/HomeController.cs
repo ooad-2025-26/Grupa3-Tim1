@@ -246,7 +246,12 @@ namespace BMDb.Controllers
                 .GroupBy(x => x.EntertainmentId)
                 .ToDictionary(
                     g => g.Key,
-                    g => (IReadOnlyList<string>)g.Select(x => x.Naziv).Where(x => !string.IsNullOrWhiteSpace(x)).Distinct().ToList());
+                    g => (IReadOnlyList<string>)g
+                        .Select(x => x.Naziv)
+                        .Where(x => !string.IsNullOrWhiteSpace(x))
+                        .Distinct()
+                        .OrderBy(x => x)
+                        .ToList());
         }
 
         private HomeMediaItemViewModel MapMediaItem(

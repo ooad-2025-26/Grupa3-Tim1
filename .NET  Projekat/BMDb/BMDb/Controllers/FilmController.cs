@@ -114,7 +114,12 @@ namespace BMDb.Controllers
                 .GroupBy(x => x.EntertainmentId)
                 .ToDictionary(
                     x => x.Key,
-                    x => x.Select(z => z.Naziv).Where(z => !string.IsNullOrWhiteSpace(z)).Distinct().ToList());
+                    x => x
+                        .Select(z => z.Naziv)
+                        .Where(z => !string.IsNullOrWhiteSpace(z))
+                        .Distinct()
+                        .OrderBy(z => z)
+                        .ToList());
 
             return View(filmovi);
         }

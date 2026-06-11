@@ -11,6 +11,7 @@
         public string YoutubeLink { get; set; }
         public int Trajanje { get; set; }
         public string PosterLink { get; set; }
+        public ICollection<EntertainmentZanr> EntertainmentZanrovi { get; set; } = new List<EntertainmentZanr>();
 
         public Entertainment() { }
     }

@@ -1,5 +1,4 @@
 using BMDb.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using System.ComponentModel.DataAnnotations;
 
@@ -39,6 +38,11 @@ namespace BMDb.ViewModels
         [ValidateNever]
         public IReadOnlyList<string> PreferiraniZanrovi { get; set; } = Array.Empty<string>();
 
+        [ValidateNever]
+        public IReadOnlyList<Zanr> SviZanrovi { get; set; } = Array.Empty<Zanr>();
+
+        public int[] SelectedZanrIds { get; set; } = Array.Empty<int>();
+
         [StringLength(100)]
         public string? Ime { get; set; }
 
@@ -56,7 +60,8 @@ namespace BMDb.ViewModels
 
         public bool NotifikacijeUkljucene { get; set; }
 
-        public IFormFile? AvatarUpload { get; set; }
+        [StringLength(500)]
+        public string? AvatarPath { get; set; }
 
         public string AvatarUrl { get; set; } = string.Empty;
     }

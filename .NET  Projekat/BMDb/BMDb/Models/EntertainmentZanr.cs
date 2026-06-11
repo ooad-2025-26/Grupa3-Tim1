@@ -8,6 +8,8 @@ namespace BMDb.Models
         public int IDVeze { get; set; }
         public int EntertainmentId { get; set; }
         public int ZanrId { get; set; }
+        public Entertainment? Entertainment { get; set; }
+        public Zanr? Zanr { get; set; }
 
         public EntertainmentZanr() { }
     }

@@ -1,4 +1,3 @@
-﻿
 @model BMDb.ViewModels.ProfileDetailsViewModel
 
     <div class="hero user-hero">
@@ -23,8 +22,8 @@
                 <div class="col-md-3 col-sm-12 col-xs-12">
                     <div class="user-information">
                         <div class="user-img">
-                            <a href="#"><img src="@Model.AvatarUrl" alt=""><br></a>
-                            <label for="AvatarUpload" class="redbtn" style="cursor:pointer;">Uredi avatar</label>
+                            <a href="#avatar-modal"><img class="bmd-avatar" src="@Model.AvatarUrl" alt=""><br></a>
+                            <a href="#avatar-modal" class="redbtn">Uredi avatar</a>
                         </div>
                         <div class="user-fav">
                             <p>Detalji računa</p>
@@ -39,7 +38,7 @@
                 </div>
                 <div class="col-md-9 col-sm-12 col-xs-12">
                     <div class="form-style-1 user-pro">
-                        <form asp-controller="Osoba" asp-action="Details" method="post" enctype="multipart/form-data" class="user">
+                        <form asp-controller="Osoba" asp-action="Details" method="post" class="user">
                             @Html.AntiForgeryToken()
                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                             @if (TempData["StatusPoruka"] != null)
@@ -49,13 +48,13 @@
                             <h4>01. Detalji profila</h4>
                             <div class="row">
                                 <div class="col-md-6 form-it">
-                                    <label>Korisničko ime</label>
-                                    <input type="text" value="@Model.User.UserName" readonly>
+                                    <label asp-for="Nadimak">Nadimak</label>
+                                    <input asp-for="Nadimak" placeholder="Nadimak">
+                                    <span asp-validation-for="Nadimak" class="text-danger"></span>
                                 </div>
                                 <div class="col-md-6 form-it">
                                     <label asp-for="Email">Email adresa</label>
-                                    <input asp-for="Email" type="email" placeholder="email@primjer.ba">
-                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                    <input asp-for="Email" type="email" readonly>
                                 </div>
                             </div>
                             <div class="row">
@@ -72,47 +71,35 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-6 form-it">
-                                    <label asp-for="Nadimak">Nadimak</label>
-                                    <input asp-for="Nadimak" placeholder="Nadimak">
-                                    <span asp-validation-for="Nadimak" class="text-danger"></span>
-                                </div>
-                                <div class="col-md-6 form-it">
                                     <label asp-for="PhoneNumber">Telefon</label>
                                     <input asp-for="PhoneNumber" placeholder="+387...">
                                     <span asp-validation-for="PhoneNumber" class="text-danger"></span>
                                 </div>
-                            </div>
-                            <div class="row">
                                 <div class="col-md-6 form-it">
                                     <label asp-for="NotifikacijeUkljucene">
                                         <input asp-for="NotifikacijeUkljucene" type="checkbox" style="width:auto; margin-right:8px;">
                                         Notifikacije uključene
                                     </label>
                                 </div>
-                                <div class="col-md-6 form-it">
-                                    <label asp-for="AvatarUpload">Avatar slika</label>
-                                    <input asp-for="AvatarUpload" id="AvatarUpload" type="file" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp">
-                                    <span asp-validation-for="AvatarUpload" class="text-danger"></span>
-                                </div>
                             </div>
 
                             <h4 style="margin-top: 40px;">02. Preferirani žanrovi</h4>
                             <div class="row">
                                 <div class="col-md-12 form-it">
-                                    <label>Vaši omiljeni žanrovi:</label>
-                                    <div class="cate">
-                                        @if (Model.PreferiraniZanrovi.Any())
+                                    <label for="SelectedZanrIds">Vaši omiljeni žanrovi:</label>
+                                    <select id="SelectedZanrIds" name="SelectedZanrIds" multiple>
+                                        @foreach (var zanr in Model.SviZanrovi)
                                         {
-                                            foreach (var zanr in Model.PreferiraniZanrovi)
+                                            if (Model.SelectedZanrIds.Contains(zanr.Id))
                                             {
-                                                <span class="blue"><a asp-controller="Film" asp-action="Index">@zanr</a></span>
+                                                <option value="@zanr.Id" selected>@zanr.Naziv</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="@zanr.Id">@zanr.Naziv</option>
                                             }
                                         }
-                                        else
-                                        {
-                                            <span class="blue"><a asp-controller="Film" asp-action="Index">Nema odabranih žanrova</a></span>
-                                        }
-                                    </div>
+                                    </select>
                                 </div>
                             </div>
 
@@ -121,10 +108,24 @@
                                     <input class="submit" type="submit" value="Sačuvaj">
                                 </div>
                             </div>
+
+                            <div id="avatar-modal" class="bmd-modal-overlay bmd-profile-modal">
+                                <div class="bmd-modal-content bmd-profile-modal-content">
+                                    <a href="#!" class="bmd-close-btn">&times;</a>
+                                    <h4>Avatar slika</h4>
+                                    <div class="form-it">
+                                        <label asp-for="AvatarPath">URL ili putanja slike</label>
+                                        <input asp-for="AvatarPath" placeholder="/images/uploads/user-img.png">
+                                        <span asp-validation-for="AvatarPath" class="text-danger"></span>
+                                    </div>
+                                    <div class="bmd-profile-modal-actions">
+                                        <a href="#!" class="redbtn">Zatvori</a>
+                                    </div>
+                                </div>
+                            </div>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-

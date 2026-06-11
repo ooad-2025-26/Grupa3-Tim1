@@ -5923,6 +5923,20 @@ ul {
 .user-information .user-img img {
   margin-bottom: 30px;
 }
+.bmd-avatar,
+.user-information .user-img img,
+.movie-single .movie-single-ct .tab.review .mv-user-review-item .user-infor img.bmd-avatar {
+  width: 120px;
+  height: 120px;
+  min-width: 120px;
+  min-height: 120px;
+  max-width: 120px;
+  max-height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
+  display: inline-block;
+}
 .user-information ul {
   padding: 0 25px;
 }
@@ -8445,6 +8459,52 @@ footer.full-width-ft .ft-copyright {
 
 .bmd-close-btn:hover {
     color: #002395; 
+}
+
+.bmd-profile-modal .bmd-profile-modal-content {
+    max-width: 460px;
+    background-color: #0b1a2a;
+    border: 3px solid #0f2133;
+    padding: 24px;
+}
+
+.bmd-profile-modal .bmd-profile-modal-content h4 {
+    margin-bottom: 18px;
+}
+
+.bmd-profile-modal .form-it {
+    margin-bottom: 18px;
+}
+
+.bmd-profile-modal .form-it label {
+    font-family: 'Dosis', sans-serif;
+    font-size: 14px;
+    color: #abb7c4;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.bmd-profile-modal .form-it input {
+    width: 100%;
+    height: 40px;
+    color: #abb7c4;
+    background-color: #233a50;
+    border: none;
+    border-radius: 3px;
+}
+
+.bmd-profile-modal-actions {
+    text-align: right;
+}
+
+.user-pro select[multiple] {
+    height: 150px;
+    background-image: none;
+}
+
+.user-pro input[readonly] {
+    opacity: 0.8;
+    cursor: default;
 }
 
 .series-it img {

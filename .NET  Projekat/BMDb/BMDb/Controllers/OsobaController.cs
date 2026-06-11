@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using BMDb.Data; 
-using BMDb.Models; 
+using BMDb.Data;
+using BMDb.Models;
 using BMDb.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using BMDb.Services;
@@ -14,19 +14,15 @@ namespace BMDb.Controllers
     {
         private readonly UserManager<Osoba> _userManager;
         private readonly ApplicationDbContext _context;
-        private readonly IWebHostEnvironment _environment;
         private readonly IMediaImageService _mediaImageService;
-
 
         public OsobaController(
             UserManager<Osoba> userManager,
             ApplicationDbContext context,
-            IWebHostEnvironment environment,
             IMediaImageService mediaImageService)
         {
             _userManager = userManager;
             _context = context;
-            _environment = environment;
             _mediaImageService = mediaImageService;
         }
 
@@ -51,20 +47,17 @@ namespace BMDb.Controllers
                 return Challenge();
             }
 
-            if (model.AvatarUpload != null && !IsAllowedAvatarFile(model.AvatarUpload.FileName))
-            {
-                ModelState.AddModelError(nameof(model.AvatarUpload), "Dozvoljeni formati su .jpg, .jpeg, .png i .webp.");
-            }
-
             if (!ModelState.IsValid)
             {
                 var invalidModel = await BuildProfileDetailsViewModelAsync(user);
                 invalidModel.Ime = model.Ime;
                 invalidModel.Prezime = model.Prezime;
                 invalidModel.Nadimak = model.Nadimak;
-                invalidModel.Email = model.Email;
                 invalidModel.PhoneNumber = model.PhoneNumber;
                 invalidModel.NotifikacijeUkljucene = model.NotifikacijeUkljucene;
+                invalidModel.AvatarPath = model.AvatarPath;
+                invalidModel.AvatarUrl = ResolveAvatarUrl(model.AvatarPath);
+                invalidModel.SelectedZanrIds = model.SelectedZanrIds;
                 return View(invalidModel);
             }
 
@@ -72,16 +65,7 @@ namespace BMDb.Controllers
             user.Prezime = model.Prezime?.Trim() ?? string.Empty;
             user.Nadimak = model.Nadimak?.Trim() ?? string.Empty;
             user.NotifikacijeUkljucene = model.NotifikacijeUkljucene;
-
-            if (!string.Equals(user.Email, model.Email, StringComparison.OrdinalIgnoreCase))
-            {
-                var emailResult = await _userManager.SetEmailAsync(user, model.Email?.Trim());
-                if (!emailResult.Succeeded)
-                {
-                    AddIdentityErrors(emailResult);
-                    return View(await BuildProfileDetailsViewModelAsync(user));
-                }
-            }
+            user.Avatar = model.AvatarPath?.Trim() ?? string.Empty;
 
             if (!string.Equals(user.PhoneNumber, model.PhoneNumber, StringComparison.OrdinalIgnoreCase))
             {
@@ -93,11 +77,6 @@ namespace BMDb.Controllers
                 }
             }
 
-            if (model.AvatarUpload != null && model.AvatarUpload.Length > 0)
-            {
-                user.Avatar = await SaveAvatarAsync(user.Id, model.AvatarUpload);
-            }
-
             var updateResult = await _userManager.UpdateAsync(user);
             if (!updateResult.Succeeded)
             {
@@ -105,7 +84,10 @@ namespace BMDb.Controllers
                 return View(await BuildProfileDetailsViewModelAsync(user));
             }
 
-            TempData["StatusPoruka"] = "Profil je uspješno ažuriran.";
+            await ReplacePreferredGenresAsync(user.Id, model.SelectedZanrIds);
+            await _context.SaveChangesAsync();
+
+            TempData["StatusPoruka"] = "Profil je uspjesno azuriran.";
             return RedirectToAction(nameof(Details));
         }
 
@@ -117,12 +99,22 @@ namespace BMDb.Controllers
 
         private async Task<ProfileDetailsViewModel> BuildProfileDetailsViewModelAsync(Osoba user)
         {
-            var zanrovi = await (
+            var odabraniZanrovi = await (
                 from oz in _context.OsobaZanr.AsNoTracking()
                 join z in _context.Zanr.AsNoTracking() on oz.ZanrId equals z.Id
                 where oz.OsobaId == user.Id
-                select z.Naziv
-            ).ToListAsync();
+                select new { z.Id, z.Naziv }
+            )
+            .Where(x => !string.IsNullOrWhiteSpace(x.Naziv))
+            .Distinct()
+            .OrderBy(x => x.Naziv)
+            .ToListAsync();
+
+            var sviZanrovi = await _context.Zanr
+                .AsNoTracking()
+                .Where(x => !string.IsNullOrWhiteSpace(x.Naziv))
+                .OrderBy(x => x.Naziv)
+                .ToListAsync();
 
             return new ProfileDetailsViewModel
             {
@@ -133,35 +125,42 @@ namespace BMDb.Controllers
                 Email = user.Email,
                 PhoneNumber = user.PhoneNumber,
                 NotifikacijeUkljucene = user.NotifikacijeUkljucene,
-                AvatarUrl = string.IsNullOrWhiteSpace(user.Avatar)
-                    ? "/images/uploads/user-img.png"
-                    : _mediaImageService.ResolvePosterUrl(user.Avatar),
-                PreferiraniZanrovi = zanrovi
-                    .Where(x => !string.IsNullOrWhiteSpace(x))
-                    .Distinct()
-                    .ToList()
+                AvatarPath = user.Avatar,
+                AvatarUrl = ResolveAvatarUrl(user.Avatar),
+                PreferiraniZanrovi = odabraniZanrovi.Select(x => x.Naziv).ToList(),
+                SviZanrovi = sviZanrovi,
+                SelectedZanrIds = odabraniZanrovi.Select(x => x.Id).Distinct().ToArray()
             };
         }
 
-        private static bool IsAllowedAvatarFile(string fileName)
+        private string ResolveAvatarUrl(string? avatarPath)
         {
-            var extension = Path.GetExtension(fileName).ToLowerInvariant();
-            return extension is ".jpg" or ".jpeg" or ".png" or ".webp";
+            return string.IsNullOrWhiteSpace(avatarPath)
+                ? "/images/uploads/user-img.png"
+                : _mediaImageService.ResolvePosterUrl(avatarPath);
         }
 
-        private async Task<string> SaveAvatarAsync(string userId, IFormFile avatar)
+        private async Task ReplacePreferredGenresAsync(string userId, int[] selectedZanrIds)
         {
-            var uploadsPath = Path.Combine(_environment.WebRootPath, "images", "uploads");
-            Directory.CreateDirectory(uploadsPath);
+            var existing = await _context.OsobaZanr
+                .Where(x => x.OsobaId == userId)
+                .ToListAsync();
 
-            var extension = Path.GetExtension(avatar.FileName).ToLowerInvariant();
-            var fileName = $"avatar-{userId}-{Guid.NewGuid():N}{extension}";
-            var physicalPath = Path.Combine(uploadsPath, fileName);
+            _context.OsobaZanr.RemoveRange(existing);
 
-            await using var stream = System.IO.File.Create(physicalPath);
-            await avatar.CopyToAsync(stream);
+            var validZanrIds = await _context.Zanr
+                .Where(x => selectedZanrIds.Contains(x.Id))
+                .Select(x => x.Id)
+                .ToListAsync();
 
-            return $"/images/uploads/{fileName}";
+            foreach (var zanrId in validZanrIds.Distinct())
+            {
+                _context.OsobaZanr.Add(new OsobaZanr
+                {
+                    OsobaId = userId,
+                    ZanrId = zanrId
+                });
+            }
         }
 
         private void AddIdentityErrors(IdentityResult result)

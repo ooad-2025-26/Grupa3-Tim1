@@ -49,6 +49,30 @@ namespace BMDb.Data
             modelBuilder.Entity<Uloga>().ToTable("Uloga");
             modelBuilder.Entity<Zanr>().ToTable("Zanr");
             modelBuilder.Entity<OsobaZanr>().ToTable("OsobaZanr");
+
+            modelBuilder.Entity<EntertainmentZanr>()
+                .HasOne(x => x.Entertainment)
+                .WithMany(x => x.EntertainmentZanrovi)
+                .HasForeignKey(x => x.EntertainmentId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<EntertainmentZanr>()
+                .HasOne(x => x.Zanr)
+                .WithMany(x => x.EntertainmentZanrovi)
+                .HasForeignKey(x => x.ZanrId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<OsobaZanr>()
+                .HasOne(x => x.Osoba)
+                .WithMany()
+                .HasForeignKey(x => x.OsobaId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<OsobaZanr>()
+                .HasOne(x => x.Zanr)
+                .WithMany(x => x.OsobaZanrovi)
+                .HasForeignKey(x => x.ZanrId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

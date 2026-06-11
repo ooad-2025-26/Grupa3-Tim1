@@ -1,4 +1,5 @@
 using BMDb.Data;
+using BMDb.Models;
 using BMDb.ViewModels;
 using Microsoft.EntityFrameworkCore;
 
@@ -28,11 +29,20 @@ namespace BMDb.Services
 
             var uloge = await _context.Uloga.Where(x => x.EntertainmentId == id).ToListAsync();
             var glumacIds = uloge.Select(x => x.GlumacId).Distinct().ToList();
-            var zanrIds = await _context.EntertainmentZanr
+            var zanrovi = (await _context.EntertainmentZanr
+                .AsNoTracking()
                 .Where(x => x.EntertainmentId == id)
-                .Select(x => x.ZanrId)
+                .Join(
+                    _context.Zanr.AsNoTracking(),
+                    ez => ez.ZanrId,
+                    z => z.Id,
+                    (ez, z) => new { z.Id, z.Naziv })
+                .Where(x => !string.IsNullOrWhiteSpace(x.Naziv))
                 .Distinct()
-                .ToListAsync();
+                .OrderBy(x => x.Naziv)
+                .ToListAsync())
+                .Select(x => new Zanr { Id = x.Id, Naziv = x.Naziv })
+                .ToList();
 
             return new MediaDetailsViewModel
             {
@@ -42,7 +52,7 @@ namespace BMDb.Services
                 Sezone = await _context.Sezona.Where(x => x.IdSerije == id).OrderBy(x => x.RedniBrojSezone).ToListAsync(),
                 Uloge = uloge.OrderBy(x => x.Id).ToList(),
                 Glumci = await _context.Glumac.Where(x => glumacIds.Contains(x.Id)).OrderBy(x => x.Ime).ThenBy(x => x.Prezime).ToListAsync(),
-                Zanrovi = await _context.Zanr.Where(x => zanrIds.Contains(x.Id)).OrderBy(x => x.Naziv).ToListAsync(),
+                Zanrovi = zanrovi,
                 Galerija = await _context.GalerijaSlika.Where(x => x.EntertainmentId == id).OrderBy(x => x.Id).ToListAsync(),
                 JeGledao = osobaId > 0 && await _watchlistService.JeGledaoAsync(osobaId, id),
                 JePlanirano = osobaId > 0 && await _watchlistService.JePlaniranoAsync(osobaId, id)

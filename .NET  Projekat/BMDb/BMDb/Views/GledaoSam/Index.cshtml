@@ -1,6 +1,14 @@
 ﻿
 @model IReadOnlyList<BMDb.ViewModels.ProfileMediaItemViewModel>
+@using Microsoft.AspNetCore.Identity
 @inject BMDb.Services.IMediaImageService MediaImageService
+@inject UserManager<Osoba> UserManager
+@{
+    var currentUser = await UserManager.GetUserAsync(User);
+    var avatarUrl = string.IsNullOrWhiteSpace(currentUser?.Avatar)
+        ? "/images/uploads/user-img.png"
+        : MediaImageService.ResolvePosterUrl(currentUser.Avatar);
+}
 
     <div class="hero user-hero">
         <div class="container">
@@ -24,8 +32,8 @@
                 <div class="col-md-3 col-sm-12 col-xs-12">
                     <div class="user-information">
                         <div class="user-img">
-                            <a asp-controller="Osoba" asp-action="Details"><img src="/images/uploads/user-img.png" alt=""><br></a>
-                            <a asp-area="Identity" asp-page="/Account/Manage/Index" class="redbtn">Promijeni avatar</a>
+                            <a asp-controller="Osoba" asp-action="Details"><img class="bmd-avatar" src="@avatarUrl" alt=""><br></a>
+                            <a asp-controller="Osoba" asp-action="Details" class="redbtn">Promijeni avatar</a>
                         </div>
                         <div class="user-fav">
                             <p>Detalji računa</p>
