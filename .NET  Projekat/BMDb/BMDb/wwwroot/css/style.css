@@ -4953,6 +4953,34 @@ ul {
     height: 261px;
   }
 }
+
+/* BMDb news image normalization */
+.blog-item-style-3 > img,
+.blog-detail-ct > img {
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  object-position: center;
+}
+
+.blog-item-style-3 > img {
+  flex: 0 0 35%;
+  width: 35%;
+  height: auto;
+}
+
+.blog-detail-ct > img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+@media (max-width: 767px) {
+  .blog-item-style-3 > img {
+    width: 100%;
+    max-width: none;
+    margin-left: 0;
+  }
+}
 .trailers .videos {
   display: flex;
   flex-direction: row;

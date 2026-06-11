@@ -574,4 +574,15 @@ C:\Users\ajdin\Desktop\etf\OAD\projekat\Grupa3-Tim1\.NET  Projekat\BMDb\BMDb\obj
 C:\Users\ajdin\Desktop\etf\OAD\projekat\Grupa3-Tim1\.NET  Projekat\BMDb\BMDb\obj\Debug\net8.0\BMDb.pdb
 C:\Users\ajdin\Desktop\etf\OAD\projekat\Grupa3-Tim1\.NET  Projekat\BMDb\BMDb\obj\Debug\net8.0\BMDb.genruntimeconfig.cache
 C:\Users\ajdin\Desktop\etf\OAD\projekat\Grupa3-Tim1\.NET  Projekat\BMDb\BMDb\obj\Debug\net8.0\ref\BMDb.dll
+C:\Users\ajdin\Desktop\etf\OAD\projekat\Grupa3-Tim1\.NET  Projekat\BMDb\BMDb\bin\Debug\net8.0\appsettings.Development.json
+C:\Users\ajdin\Desktop\etf\OAD\projekat\Grupa3-Tim1\.NET  Projekat\BMDb\BMDb\bin\Debug\net8.0\appsettings.json
+C:\Users\ajdin\Desktop\etf\OAD\projekat\Grupa3-Tim1\.NET  Projekat\BMDb\build-check\appsettings.Development.json
+C:\Users\ajdin\Desktop\etf\OAD\projekat\Grupa3-Tim1\.NET  Projekat\BMDb\build-check\appsettings.json
+C:\Users\ajdin\Desktop\etf\OAD\projekat\Grupa3-Tim1\.NET  Projekat\BMDb\build-check\BMDb.staticwebassets.runtime.json
+C:\Users\ajdin\Desktop\etf\OAD\projekat\Grupa3-Tim1\.NET  Projekat\BMDb\build-check\BMDb.staticwebassets.endpoints.json
+C:\Users\ajdin\Desktop\etf\OAD\projekat\Grupa3-Tim1\.NET  Projekat\BMDb\build-check\BMDb.exe
+C:\Users\ajdin\Desktop\etf\OAD\projekat\Grupa3-Tim1\.NET  Projekat\BMDb\build-check\BMDb.deps.json
+C:\Users\ajdin\Desktop\etf\OAD\projekat\Grupa3-Tim1\.NET  Projekat\BMDb\build-check\BMDb.runtimeconfig.json
+C:\Users\ajdin\Desktop\etf\OAD\projekat\Grupa3-Tim1\.NET  Projekat\BMDb\build-check\BMDb.dll
+C:\Users\ajdin\Desktop\etf\OAD\projekat\Grupa3-Tim1\.NET  Projekat\BMDb\build-check\BMDb.pdb
 C:\Users\ajdin\Desktop\etf\OAD\projekat\Grupa3-Tim1\.NET  Projekat\BMDb\BMDb\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
