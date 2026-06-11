@@ -7040,6 +7040,26 @@ p.ceb-single {
     margin-bottom: 15px;
   }
 }
+.overlay .login-content .bmd-register-errors {
+  border: 1px solid #dd4b39;
+  background-color: #fff4f2;
+  color: #222222;
+  font-family: 'Nunito', sans-serif;
+  font-size: 13px;
+  line-height: 1.5;
+  margin-bottom: 20px;
+  padding: 12px 14px;
+}
+.overlay .login-content .bmd-register-errors ul {
+  margin: 0;
+  padding-left: 18px;
+}
+.overlay .login-content .bmd-register-errors li {
+  margin-bottom: 4px;
+}
+.overlay .login-content .bmd-register-errors li:last-child {
+  margin-bottom: 0;
+}
 .overlay .login-content .remember {
   display: -webkit-flex;
   display: -moz-box;

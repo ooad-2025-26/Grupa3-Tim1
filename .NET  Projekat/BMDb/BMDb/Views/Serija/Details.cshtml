@@ -5,6 +5,9 @@
     var poster = MediaImageService.ResolvePosterUrl(Model.Entertainment.PosterLink);
     var trailer = Model.TrailerEmbedUrl ?? string.Empty;
     var recenzije = Model.Recenzije ?? Array.Empty<BMDb.Models.Recenzija>();
+    var regularRecenzije = Model.RegularRecenzije ?? Array.Empty<BMDb.Models.Recenzija>();
+    var verifikovaneRecenzije = Model.VerifikovaneRecenzije ?? Array.Empty<BMDb.Models.Recenzija>();
+    var recenzenti = Model.Recenzenti ?? new Dictionary<int, BMDb.ViewModels.ReviewAuthorViewModel>();
     var galerija = Model.Galerija ?? Array.Empty<BMDb.Models.GalerijaSlika>();
     var uloge = Model.Uloge ?? Array.Empty<BMDb.Models.Uloga>();
     var glumci = Model.Glumci ?? Array.Empty<BMDb.Models.Glumac>();
@@ -96,6 +99,7 @@
                                 <li class="active"><a href="#overview">Pregled</a></li>
                                 <li><a href="#seasons"> Sezone</a></li>
                                 <li><a href="#reviews"> Recenzije</a></li>
+                                <li><a href="#verified-reviews"> Verifikovane Recenzije</a></li>
                                 <li><a href="#media"> Galerija</a></li>
                             </ul>
                             <div class="tab-content">
@@ -197,17 +201,55 @@
                                                     <button type="submit" class="redbtn">Napisi recenziju</button>
                                                 </form>
                                             }
+                                            else if (Model.JeVecRecenzirao)
+                                            {
+                                                <p style="color:#fbb124;">Vec ste napisali recenziju za ovaj naslov.</p>
+                                            }
                                         </div>
                                         <div class="topbar-filter">
-                                            <p>Pronadeno <span>@recenzije.Count recenzija</span> ukupno</p>
+                                            <p>Pronadeno <span>@regularRecenzije.Count recenzija</span> ukupno</p>
                                         </div>
-                                        @foreach (var recenzija in recenzije)
+                                        @foreach (var recenzija in regularRecenzije)
                                         {
+                                            var autor = recenzenti.TryGetValue(recenzija.OsobaId, out var pronadjeniAutor) ? pronadjeniAutor : null;
+                                            var autorIme = autor?.DisplayName ?? "Korisnik";
+                                            var autorAvatar = MediaImageService.ResolvePosterUrl(autor?.Avatar);
                                             <div class="mv-user-review-item">
                                                 <div class="user-infor">
-                                                    <img class="bmd-avatar" src="/images/uploads/userava1.jpg" alt="">
+                                                    <img class="bmd-avatar" src="@autorAvatar" alt="@autorIme">
                                                     <div>
                                                         <h3>Ocjena @recenzija.Ocjena/10</h3>
+                                                        <p class="time">@autorIme</p>
+                                                        <div class="no-star">
+                                                            @for (var i = 1; i <= 10; i++)
+                                                            {
+                                                                <i class="@(i <= recenzija.Ocjena ? "ion-android-star" : "ion-android-star last")"></i>
+                                                            }
+                                                        </div>
+                                                        <p class="time">@recenzija.DatumObjave.ToLocalTime().ToString("dd.MM.yyyy.")</p>
+                                                    </div>
+                                                </div>
+                                                <p>@recenzija.Komentar</p>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                                <div id="verified-reviews" class="tab review">
+                                    <div class="row">
+                                        <div class="topbar-filter">
+                                            <p>Pronadeno <span>@verifikovaneRecenzije.Count recenzija</span> ukupno</p>
+                                        </div>
+                                        @foreach (var recenzija in verifikovaneRecenzije)
+                                        {
+                                            var autor = recenzenti.TryGetValue(recenzija.OsobaId, out var pronadjeniAutor) ? pronadjeniAutor : null;
+                                            var autorIme = autor?.DisplayName ?? "Korisnik";
+                                            var autorAvatar = MediaImageService.ResolvePosterUrl(autor?.Avatar);
+                                            <div class="mv-user-review-item">
+                                                <div class="user-infor">
+                                                    <img class="bmd-avatar" src="@autorAvatar" alt="@autorIme">
+                                                    <div>
+                                                        <h3>Ocjena @recenzija.Ocjena/10</h3>
+                                                        <p class="time">@autorIme</p>
                                                         <div class="no-star">
                                                             @for (var i = 1; i <= 10; i++)
                                                             {

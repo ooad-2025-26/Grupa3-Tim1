@@ -13,24 +13,29 @@ namespace BMDb.Services
     public class RecenzijaService : IRecenzijaService
     {
         private readonly ApplicationDbContext _context;
-        private readonly IWatchlistService _watchlistService;
 
         public RecenzijaService(ApplicationDbContext context, IWatchlistService watchlistService)
         {
             _context = context;
-            _watchlistService = watchlistService;
         }
 
         public async Task<(bool Success, string Message)> DodajRecenzijuAsync(int osobaId, int entertainmentId, int ocjena, string? komentar)
         {
-            if (ocjena < 1 || ocjena > 10)
+            if (osobaId <= 0)
             {
-                return (false, "Ocjena mora biti između 1 i 10.");
+                return (false, "Morate biti prijavljeni da biste napisali recenziju.");
             }
 
-            if (!await _watchlistService.JeGledaoAsync(osobaId, entertainmentId))
+            if (ocjena < 1 || ocjena > 10)
             {
-                return (false, "Sadržaj mora biti označen kao 'Gledao sam' prije ocjenjivanja.");
+                return (false, "Ocjena mora biti izmedju 1 i 10.");
+            }
+
+            var vecPostoji = await _context.Recenzija
+                .AnyAsync(x => x.OsobaId == osobaId && x.EntertainmentId == entertainmentId);
+            if (vecPostoji)
+            {
+                return (false, "Vec ste napisali recenziju za ovaj sadrzaj.");
             }
 
             _context.Recenzija.Add(new Recenzija
@@ -44,7 +49,7 @@ namespace BMDb.Services
 
             await _context.SaveChangesAsync();
             await AzurirajProsjecnuOcjenuAsync(entertainmentId);
-            return (true, "Recenzija je sačuvana.");
+            return (true, "Recenzija je sacuvana.");
         }
 
         public async Task AzurirajProsjecnuOcjenuAsync(int entertainmentId)

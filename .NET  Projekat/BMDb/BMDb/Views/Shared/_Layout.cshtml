@@ -1,10 +1,20 @@
 @using Microsoft.AspNetCore.Identity
 @using BMDb.Services
+@using System.Text.Json
 @inject SignInManager<Osoba> SignInManager
 @inject UserManager<Osoba> UserManager
 @inject IOglasService OglasService
 @{
     var aktivniOglas = await OglasService.DohvatiAktivniOglasAsync();
+    var showRegisterPopup = string.Equals(TempData["ShowRegisterPopup"] as string, "true", StringComparison.OrdinalIgnoreCase);
+    var registerErrorsJson = TempData["RegisterErrors"] as string;
+    var registerErrors = string.IsNullOrWhiteSpace(registerErrorsJson)
+        ? new List<string>()
+        : JsonSerializer.Deserialize<List<string>>(registerErrorsJson) ?? new List<string>();
+    var registerInputIme = TempData["RegisterInput.Ime"] as string ?? string.Empty;
+    var registerInputPrezime = TempData["RegisterInput.Prezime"] as string ?? string.Empty;
+    var registerInputNadimak = TempData["RegisterInput.Nadimak"] as string ?? string.Empty;
+    var registerInputEmail = TempData["RegisterInput.Email"] as string ?? string.Empty;
 }
 
 <!DOCTYPE html>
@@ -89,32 +99,43 @@
             <a href="#" class="close">x</a>
             <h3>REGISTRACIJA</h3>
             <form asp-area="Identity" asp-page="/Account/Register" method="post">
+                @if (registerErrors.Any())
+                {
+                    <div class="bmd-register-errors" role="alert">
+                        <ul>
+                            @foreach (var error in registerErrors)
+                            {
+                                <li>@error</li>
+                            }
+                        </ul>
+                    </div>
+                }
 
                 <div class="row">
                     <label for="ime">
                         Ime:
-                        <input type="text" name="Input.Ime" id="ime" required="required" />
+                        <input type="text" name="Input.Ime" id="ime" value="@registerInputIme" required="required" />
                     </label>
                 </div>
 
                 <div class="row">
                     <label for="prezime">
                         Prezime:
-                        <input type="text" name="Input.Prezime" id="prezime" required="required" />
+                        <input type="text" name="Input.Prezime" id="prezime" value="@registerInputPrezime" required="required" />
                     </label>
                 </div>
 
                 <div class="row">
                     <label for="nadimak">
                         Nadimak:
-                        <input type="text" name="Input.Nadimak" id="nadimak" required="required" />
+                        <input type="text" name="Input.Nadimak" id="nadimak" value="@registerInputNadimak" required="required" />
                     </label>
                 </div>
 
                 <div class="row">
                     <label for="email-2">
                         Vaš e-mail:
-                        <input type="email" name="Input.Email" id="email-2" required="required" />
+                        <input type="email" name="Input.Email" id="email-2" value="@registerInputEmail" required="required" />
                     </label>
                 </div>
 
@@ -310,6 +331,14 @@
     <script src="~/js/plugins.js"></script>
     <script src="~/js/plugins2.js"></script>
     <script src="~/js/custom.js"></script>
+    @if (showRegisterPopup)
+    {
+        <script>
+            $(function () {
+                $("#signup-content").parents(".overlay").addClass("openform");
+            });
+        </script>
+    }
     @await RenderSectionAsync("Scripts", required: false)
     <!-- force skok na vrh-->
     <script>

@@ -102,21 +102,24 @@ namespace BMDb.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Ocjena,Komentar,DatumObjave,OsobaId,EntertainmentId")] Recenzija recenzija)
+        public async Task<IActionResult> Create([Bind("Ocjena,Komentar,EntertainmentId")] Recenzija recenzija)
         {
             if (ModelState.IsValid)
             {
-                recenzija.Komentar ??= string.Empty;
-                if (recenzija.DatumObjave == default)
+                var result = await _recenzijaService.DodajRecenzijuAsync(
+                    _userKeyService.GetCurrentUserKey(User),
+                    recenzija.EntertainmentId,
+                    recenzija.Ocjena,
+                    recenzija.Komentar);
+
+                if (result.Success)
                 {
-                    recenzija.DatumObjave = DateTime.UtcNow;
+                    return RedirectToAction(nameof(Index));
                 }
 
-                _context.Add(recenzija);
-                await _context.SaveChangesAsync();
-                await _recenzijaService.AzurirajProsjecnuOcjenuAsync(recenzija.EntertainmentId);
-                return RedirectToAction(nameof(Index));
+                ModelState.AddModelError(string.Empty, result.Message);
             }
+
             return View(recenzija);
         }
 
