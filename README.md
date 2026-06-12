@@ -20,18 +20,37 @@
 
 
 
+<p>Link na kojem se aplikacija nalazi: <a href="https://grupa3-tim1.onrender.com">https://grupa3-tim1.onrender.com</a></p>
+<p>Pristupni podaci za registrovane korisnike:</p>
 
-Link na kojem se aplikacija nalazi: https://grupa3-tim1.onrender.com
-
-Pristupni podaci za registrovane korisnike:
-
-Email: korisnik@gmail.com Sifra: 12345678 Role: Verifikovani Recenzent
-
-Email dolcegabana@gmail.com Sifra: 12345678 Role: Moderator
-
-Email: mujo@gmail.com Sifra: 12345678 Role: Korisnik
-
-Email: mujomujic54@gmail.com Sifra: mujomujo Role: Admin
-
-Email: sultan@gmail.com Sifra: 123456 Role: Verifikovani Recenzent
-
+<table style="width: 100%; border-collapse: collapse; margin: 20px 0; font-family: sans-serif; box-shadow: 0 4px 8px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden;">
+  <thead>
+    <tr style="background-color: #111827; color: #ffffff; text-align: left; font-weight: bold;">
+      <th style="padding: 12px 15px; border: 1px solid #374151;">E-mail</th>
+      <th style="padding: 12px 15px; border: 1px solid #374151;">Šifra</th>
+      <th style="padding: 12px 15px; border: 1px solid #374151;">Uloga (Role)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background-color: #f9fafb; border-bottom: 1px solid #e5e7eb;">
+      <td style="padding: 12px 15px; border: 1px solid #e5e7eb; font-weight: 500;">korisnik@gmail.com</td>
+      <td style="padding: 12px 15px; border: 1px solid #e5e7eb; font-family: monospace;">12345678</td>
+      <td style="padding: 12px 15px; border: 1px solid #e5e7eb;"><span style="background-color: #e0f2fe; color: #0369a1; padding: 4px 8px; border-radius: 4px; font-size: 0.85em; font-weight: bold;">Verifikovani Recenzent</span></td>
+    </tr>
+    <tr style="background-color: #ffffff; border-bottom: 1px solid #e5e7eb;">
+      <td style="padding: 12px 15px; border: 1px solid #e5e7eb; font-weight: 500;">dolcegabana@gmail.com</td>
+      <td style="padding: 12px 15px; border: 1px solid #e5e7eb; font-family: monospace;">12345678</td>
+      <td style="padding: 12px 15px; border: 1px solid #e5e7eb;"><span style="background-color: #fef3c7; color: #d97706; padding: 4px 8px; border-radius: 4px; font-size: 0.85em; font-weight: bold;">Moderator</span></td>
+    </tr>
+    <tr style="background-color: #f9fafb; border-bottom: 1px solid #e5e7eb;">
+      <td style="padding: 12px 15px; border: 1px solid #e5e7eb; font-weight: 500;">mujo@gmail.com</td>
+      <td style="padding: 12px 15px; border: 1px solid #e5e7eb; font-family: monospace;">12345678</td>
+      <td style="padding: 12px 15px; border: 1px solid #e5e7eb;"><span style="background-color: #f3f4f6; color: #374151; padding: 4px 8px; border-radius: 4px; font-size: 0.85em; font-weight: bold;">Korisnik</span></td>
+    </tr>
+    <tr style="background-color: #ffffff;">
+      <td style="padding: 12px 15px; border: 1px solid #e5e7eb; font-weight: 500;">mujomujic54@gmail.com</td>
+      <td style="padding: 12px 15px; border: 1px solid #e5e7eb; font-family: monospace;">mujomujo</td>
+      <td style="padding: 12px 15px; border: 1px solid #e5e7eb;"><span style="background-color: #fee2e2; color: #dc2626; padding: 4px 8px; border-radius: 4px; font-size: 0.85em; font-weight: bold;">Admin</span></td>
+    </tr>
+  </tbody>
+</table>
