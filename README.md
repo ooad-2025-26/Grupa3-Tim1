@@ -20,9 +20,9 @@
 
 
 
+<p>Link na kojem se aplikacija nalazi: <a href="https://grupa3-tim1.onrender.com">https://grupa3-tim1.onrender.com</a></p>
+<p>Pristupni podaci za registrovane korisnike:</p>
 
-Link na kojem se aplikacija nalazi: https://grupa3-tim1.onrender.com
-Pristupni podaci za registrovane korisnike: 
 <table style="width: 100%; border-collapse: collapse; margin: 20px 0; font-family: sans-serif; box-shadow: 0 4px 8px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden;">
   <thead>
     <tr style="background-color: #111827; color: #ffffff; text-align: left; font-weight: bold;">
@@ -54,4 +54,3 @@ Pristupni podaci za registrovane korisnike:
     </tr>
   </tbody>
 </table>
-
