@@ -11,8 +11,8 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY [".NET-Projekat/BMDb/BMDb.csproj", "BMDb/"]
-RUN dotnet restore ".NET-Projekat/BMDb/BMDb.csproj"
+COPY ["*/BMDb/BMDb.csproj", "BMDb/"]
+RUN dotnet restore "*/BMDb/BMDb.csproj"
 COPY . .
 WORKDIR "/src/v"
 RUN dotnet build "./BMDb.csproj" -c $BUILD_CONFIGURATION -o /app/build
