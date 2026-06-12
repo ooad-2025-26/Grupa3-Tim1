@@ -1,39 +1,30 @@
-# See https://aka.ms/customizecontainer to learn how to customize your debug container and how Visual Studio uses this Dockerfile to build your images for faster debugging.
-
-# This stage is used when running from VS in fast mode (Default for Debug configuration)
+# Runtime image
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 WORKDIR /app
 EXPOSE 8080
 EXPOSE 8081
 
-
-# This stage is used to build the service project
+# Build stage
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 
-# 1. Kopiramo sve datoteke s repozitorija u kontejner
+# Kopiraj .csproj i restore (iskoristi Docker cache)
+COPY ["BMDb/BMDb.csproj", "BMDb/"]
+RUN dotnet restore "BMDb/BMDb.csproj"
+
+# Kopiraj sve i build
 COPY . .
-
-# 2. Ulazimo unutar .NET-Projekat/BMDb foldera gdje se nalazi tvoj .csproj
-WORKDIR "/src/.NET-Projekat/BMDb"
-
-# 3. Pokrećemo restore izravno nad projektom
-RUN dotnet restore "BMDb.csproj"
-
-# 4. Pokrećemo build
+WORKDIR "/src/BMDb"
 RUN dotnet build "BMDb.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
-
-# This stage is used to publish the service project to be copied to the final stage
+# Publish stage
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-
-# Pošto je prošli korak (build) završio u ispravnom folderu, publish radimo izravno nad BMDb.csproj
+WORKDIR "/src/BMDb"
 RUN dotnet publish "BMDb.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
-
-# This stage is used in production or when running from VS in regular mode (Default when not using the Debug configuration)
+# Final stage
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
