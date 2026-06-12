@@ -24,9 +24,14 @@
 Link na kojem se aplikacija nalazi: https://grupa3-tim1.onrender.com
 
 Pristupni podaci za registrovane korisnike:
+
 Email: korisnik@gmail.com Sifra: 12345678 Role: Verifikovani Recenzent
+
 Email dolcegabana@gmail.com Sifra: 12345678 Role: Moderator
+
 Email: mujo@gmail.com Sifra: 12345678 Role: Korisnik
+
 Email: mujomujic54@gmail.com Sifra: mujomujo Role: Admin
+
 Email: sultan@gmail.com Sifra: 123456 Role: Verifikovani Recenzent
 
