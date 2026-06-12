@@ -1,30 +1,28 @@
-# Runtime image
+# See https://aka.ms/customizecontainer to learn how to customize your debug container and how Visual Studio uses this Dockerfile to build your images for faster debugging.
+
+# This stage is used when running from VS in fast mode (Default for Debug configuration)
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 WORKDIR /app
 EXPOSE 8080
 EXPOSE 8081
 
-# Build stage
+
+# This stage is used to build the service project
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-
-# Kopiraj .csproj i restore (iskoristi Docker cache)
-COPY ["BMDb/BMDb.csproj", "BMDb/"]
+COPY ["*/BMDb/BMDb.csproj", "BMDb/"]
 RUN dotnet restore "BMDb/BMDb.csproj"
-
-# Kopiraj sve i build
 COPY . .
-WORKDIR "/src/BMDb"
-RUN dotnet build "BMDb.csproj" -c $BUILD_CONFIGURATION -o /app/build
+WORKDIR "/src/v"
+RUN dotnet build "./BMDb.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
-# Publish stage
+# This stage is used to publish the service project to be copied to the final stage
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-WORKDIR "/src/BMDb"
-RUN dotnet publish "BMDb.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "./BMDb.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
-# Final stage
+# This stage is used in production or when running from VS in regular mode (Default when not using the Debug configuration)
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
